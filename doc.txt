@@ -1,0 +1,7 @@
+PROJECT DOCUMENTATION - This file holds informations about key components of this project
+
+The LivingEntity class: 
+Is an abstract class with the caracteristics of a living character (player, enemies).
+It has values for health, mana.
+It can attack, take damage and move.
+

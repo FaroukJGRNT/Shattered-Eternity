@@ -38,7 +38,7 @@ func handle_sliding():
 	if abs(position.x - slide_start) < SLIDE_DIST:
 		velocity.x = slide_direction * SLIDE_SPEED
 	else:
-		velocity.x = slide_direction * SLIDE_SPEED / 4
+		velocity.x = slide_direction * SLIDE_SPEED / 5
 		
 	if Input.is_action_just_pressed("jump"):
 		print("Slide Jump!")

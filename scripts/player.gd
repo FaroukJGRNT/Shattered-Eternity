@@ -2,11 +2,11 @@ extends LivingEntity
 class_name Player
 
 # Movement variables
-@export var RUN_SPEED = 300.0
+@export var RUN_SPEED = 400.0
 @export var AERIAL_SPEED = 150.0
 @export var SLIDE_SPEED = 1000.0
 @export var JUMP_VELOCITY = -300.0
-@export var SLIDE_DIST = 200.0
+@export var SLIDE_DIST = 100.0
 
 # Stats
 func _init() -> void:
@@ -38,7 +38,7 @@ func handle_sliding():
 	if abs(position.x - slide_start) < SLIDE_DIST:
 		velocity.x = slide_direction * SLIDE_SPEED
 	else:
-		velocity.x = slide_direction * SLIDE_SPEED / 3
+		velocity.x = slide_direction * SLIDE_SPEED / 4
 		
 	if Input.is_action_just_pressed("jump"):
 		print("Slide Jump!")

@@ -55,7 +55,7 @@ func initiate_ground_actions():
 			velocity.x = AERIAL_SPEED
 		state = State.TRANSITIONNING
 		new_state = State.GOING_UP
-	if Input.is_action_just_pressed("down"):
+	if Input.is_action_just_pressed("dash"):
 		if direction != 0:
 			slide_direction = direction
 		else:

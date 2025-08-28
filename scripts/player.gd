@@ -1,10 +1,19 @@
 extends LivingEntity
+class_name Player
 
+# Movement variables
 @export var RUN_SPEED = 300.0
 @export var AERIAL_SPEED = 150.0
 @export var SLIDE_SPEED = 1000.0
 @export var JUMP_VELOCITY = -300.0
 @export var SLIDE_DIST = 200.0
+
+# Stats
+func _init() -> void:
+	max_life = 10000
+	life = max_life 
+	attack = 100
+	defense = 10
 
 enum State {
 	IDLE,
@@ -23,6 +32,7 @@ var attack_again = false
 var new_state
 var slide_direction 
 var slide_start
+var facing := 1
 
 func handle_sliding():
 	if abs(position.x - slide_start) < SLIDE_DIST:
@@ -61,7 +71,6 @@ func initiate_ground_actions():
 
 func _physics_process(delta: float) -> void:
 	handle_animation()
-	
 
 	direction = Input.get_axis("left", "right")
 	# Do nothing during a transition
@@ -123,8 +132,7 @@ func handle_horizontal_movement(speed):
 	move_and_slide()
 
 func direct_sprite():
-	# flip the sprite to the right direction
-	if direction < 0:
+	if direction <  0:
 		$AnimatedSprite2D.flip_h = true
 	if direction > 0:
 		$AnimatedSprite2D.flip_h = false

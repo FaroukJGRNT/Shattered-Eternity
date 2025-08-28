@@ -1,6 +1,8 @@
 extends LivingEntity
 
-const SPEED = 150.0
+@export var SPEED = 150.0
+@export var ATTACK_RANGE = 40
+
 
 enum Activity {
 	CHILLIN,
@@ -19,6 +21,12 @@ var target
 var direction
 var can_attack = true
 
+# Stats
+func _init() -> void:
+	max_life = 300
+	life = max_life
+	attack = 30
+
 func _physics_process(delta: float) -> void:
 	if state == State.ATTACK:
 		return
@@ -28,8 +36,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		state = State.IDLE
 		
-	if target and abs(target.position.x - position.x) <= 30 and can_attack:
-		print("ATTACKING")
+	if target and abs(target.position.x - position.x) <= ATTACK_RANGE and can_attack:
 		state = State.ATTACK
 		
 	# Add the gravity.
@@ -42,8 +49,12 @@ func _physics_process(delta: float) -> void:
 	# make sure he faces the right direction
 	if velocity.x <  0:
 		$AnimatedSprite2D.flip_h = true
+		$HitBox.scale.x = -1
+		$HitBox.scale.y = 1
 	if velocity.x > 0:
 		$AnimatedSprite2D.flip_h = false
+		$HitBox.scale.x = 1
+		$HitBox.scale.y = 1
 		
 	# play the correct animation
 	if state == State.IDLE:

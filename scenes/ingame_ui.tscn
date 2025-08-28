@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://lcalun41bn55"]
+
+[ext_resource type="Script" uid="uid://ckkbj12ajssly" path="res://scripts/ingame_ui.gd" id="1_v3yap"]
+[ext_resource type="Texture2D" uid="uid://cekn42u0pp1e3" path="res://assets/sprites/ui/ValueBar_128x16.png" id="2_h2rwu"]
+[ext_resource type="Texture2D" uid="uid://djgtlpka5r4sy" path="res://assets/sprites/ui/ValueRed_120x8.png" id="3_hifx3"]
+
+[node name="IngameUI" type="CanvasLayer"]
+script = ExtResource("1_v3yap")
+
+[node name="LifeBar" type="TextureProgressBar" parent="."]
+offset_left = 53.0
+offset_top = 53.0
+offset_right = 264.0
+offset_bottom = 76.0
+value = 44.0
+nine_patch_stretch = true
+texture_over = ExtResource("2_h2rwu")
+texture_progress = ExtResource("3_hifx3")

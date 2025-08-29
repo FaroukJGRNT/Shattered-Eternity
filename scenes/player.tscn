@@ -298,7 +298,7 @@ script = ExtResource("1_le0q1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox")]
 position = Vector2(4, -17)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"slide"
+animation = &"attack2"
 autoplay = "idle"
 script = ExtResource("5_fjrip")
 hurtbox = NodePath("../PlayerHurtBox")
@@ -308,6 +308,7 @@ position = Vector2(3, -11)
 shape = SubResource("CapsuleShape2D_gl8cc")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(80, -90)
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 script = ExtResource("6_fjrip")

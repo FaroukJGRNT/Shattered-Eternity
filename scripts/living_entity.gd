@@ -7,7 +7,6 @@ class_name LivingEntity
 @export var defense = 0
 
 func take_damage(damage:int):
-	print("Took ", damage)
 	var total_dmg = damage - defense
 	if total_dmg <= 0:
 		total_dmg = 0

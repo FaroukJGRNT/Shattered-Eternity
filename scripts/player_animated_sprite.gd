@@ -11,3 +11,12 @@ func _on_frame_changed() -> void:
 			_:
 				hitbox.monitoring = false
 				hitbox.active = false
+	if animation == "slide":
+		print("I Frames")
+		match frame:
+			0, 1, 2: # frames où le joueur est invulnereable
+				hurtbox.monitoring = false
+				hurtbox.disabled = true
+			_:
+				hurtbox.monitoring = true
+				hurtbox.disabled = false

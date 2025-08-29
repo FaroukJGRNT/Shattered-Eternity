@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://q4ktia7n8bhl" path="res://assets/sprites/Environments/StoneGroundTileset.png" id="1_qfnet"]
 [ext_resource type="Texture2D" uid="uid://c80p2f3u1k3th" path="res://assets/sprites/Environments/Sky-2.png" id="2_i7141"]
 [ext_resource type="Texture2D" uid="uid://gc8ri8xyh8cp" path="res://assets/sprites/Environments/Sky-1.png" id="3_4mrxx"]
-[ext_resource type="Script" uid="uid://4gd1kpn0ol6e" path="res://scripts/CloudLayer.gd" id="3_i7141"]
+[ext_resource type="Script" path="res://scripts/CloudLayer.gd" id="3_i7141"]
 [ext_resource type="Texture2D" uid="uid://cm83c54ow6gjm" path="res://assets/sprites/Environments/StoneForestBackground-3.png" id="4_7r4gi"]
 [ext_resource type="Texture2D" uid="uid://cj0oerumt5grg" path="res://assets/sprites/Environments/StoneForestBackground-2.png" id="5_w7kh3"]
 [ext_resource type="Texture2D" uid="uid://c6ej4cdimfbtg" path="res://assets/sprites/Environments/StoneForestBackground-1.png" id="6_e3hyu"]

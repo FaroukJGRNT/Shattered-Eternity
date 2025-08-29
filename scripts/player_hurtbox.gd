@@ -13,11 +13,10 @@ func _process(delta: float) -> void:
 			timer = 1.0
 
 func on_area_entered(area: Area2D) -> void:
-	print("Hit detected, disabled is", disabled)
 	if area == null:
 		return
 
-	# HitBox
+ 	# HitBox
 	if area is HitBox:
 		if not owner.has_method("take_damage"):
 			return

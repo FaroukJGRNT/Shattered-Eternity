@@ -12,13 +12,13 @@
 position = Vector2(345, 1273)
 
 [node name="World" parent="." instance=ExtResource("2_ppgk2")]
-position = Vector2(284, 28)
+position = Vector2(-162, 317)
 
 [node name="Player" parent="." instance=ExtResource("2_7lnj0")]
-position = Vector2(708, -185)
+position = Vector2(203, 268)
 
 [node name="Enemy" parent="." instance=ExtResource("3_4lhks")]
-position = Vector2(1071, -183)
+position = Vector2(1490, -19)
 scale = Vector2(1.5, 1.5)
 
 [node name="IngameUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_mx8sn")]

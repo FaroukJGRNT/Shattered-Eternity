@@ -67,7 +67,6 @@ func handle_sliding():
 			return
 	velocity.y = 0
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		print("Slide Jump!")
 		velocity.y = JUMP_VELOCITY
 		state = State.GOING_UP
 	move_and_slide()

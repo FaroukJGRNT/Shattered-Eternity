@@ -1,0 +1,2 @@
+- Utiliser une state machine pour rendre le code du joueur plus clair
+- Perfectionner l'utilisation des principes OOP (surtout au niveau des hitboxes et hurtboxes) et rendre le code le plus propre et modulaire possible

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=50 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Texture2D" uid="uid://c5c31j6vdbo6o" path="res://assets/sprites/player/_Attack.png" id="1_pbkv8"]
@@ -10,10 +10,12 @@
 [ext_resource type="Script" uid="uid://b0ho1164k7d2r" path="res://scripts/player_hurtbox.gd" id="7_fjrip"]
 [ext_resource type="Script" uid="uid://c2d1c1s8ewmy8" path="res://scripts/state_machine.gd" id="8_smehm"]
 [ext_resource type="Script" uid="uid://bhwwkf6nsih7b" path="res://scripts/running.gd" id="10_f1ej7"]
+[ext_resource type="Script" uid="uid://xfxlbnbnctxe" path="res://scripts/transitioning.gd" id="10_oprun"]
 [ext_resource type="Script" uid="uid://byfnqgco86sa8" path="res://scripts/idle.gd" id="10_y4r1p"]
 [ext_resource type="Script" uid="uid://vm8alccqpkvj" path="res://scripts/airborne.gd" id="12_oprun"]
 [ext_resource type="Script" uid="uid://fccd3vjnoyb2" path="res://scripts/dashing.gd" id="13_a8ls1"]
 [ext_resource type="Script" uid="uid://hc5fh8qvtij2" path="res://scripts/hit.gd" id="14_qfm1y"]
+[ext_resource type="Script" uid="uid://crwioajtyd7qn" path="res://scripts/landing.gd" id="16_a8ls1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xuwet"]
 atlas = ExtResource("1_pbkv8")
@@ -247,7 +249,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"landing",
-"speed": 12.0
+"speed": 19.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -305,9 +307,10 @@ script = ExtResource("1_le0q1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox")]
 position = Vector2(4, -17)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"run"
+animation = &"landing"
 autoplay = "idle"
-frame_progress = 0.267009
+frame = 2
+frame_progress = 1.0
 script = ExtResource("5_fjrip")
 hurtbox = NodePath("../PlayerHurtBox")
 
@@ -316,7 +319,7 @@ position = Vector2(3, -11)
 shape = SubResource("CapsuleShape2D_gl8cc")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(80, -90)
+offset = Vector2(27, -37)
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 script = ExtResource("6_fjrip")
@@ -333,11 +336,14 @@ script = ExtResource("8_smehm")
 AnimPlayer = NodePath("../AnimatedSprite2D")
 player = NodePath("..")
 
-[node name="Running" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("10_f1ej7")
+[node name="JumpStart" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("10_oprun")
 
 [node name="Idle" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("10_y4r1p")
+
+[node name="Running" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("10_f1ej7")
 
 [node name="Airborne" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("12_oprun")
@@ -347,6 +353,9 @@ script = ExtResource("13_a8ls1")
 
 [node name="Hit" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("14_qfm1y")
+
+[node name="Landing" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("16_a8ls1")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="PlayerStateMachine" method="_on_animated_sprite_2d_animation_finished"]

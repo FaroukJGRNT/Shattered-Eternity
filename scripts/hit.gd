@@ -2,8 +2,9 @@ extends PlayerState
 
 func enter():
 	player.velocity.y = -250
+	player.move_and_slide()
 	AnimPlayer.play("hit")
-
+ 
 func update(delta):
 	player.velocity.x = player.facing * -250
 	if player.is_on_floor():

@@ -4,10 +4,17 @@ func enter():
 	AnimPlayer.play("wallsliding")
 
 func update(delta):
-	player.handle_horizontal_movement(player.AERIAL_SPEED)
-	player.handle_vertical_movement(delta)
-	if not player.is_on_wall():
+	if Input.is_action_just_pressed("jump"):
+		player.velocity.y = player.JUMP_VELOCITY
+		player.velocity.x = -800 * player.facing
+		player.move_and_slide()
 		transitioned.emit("airborne")
+		player.direction *= -1
+		player.facing *= -1
+		return
+	player.handle_vertical_movement(delta)
+	if player.is_on_floor():
+		transitioned.emit("idle")
 
 func exit():
 	pass

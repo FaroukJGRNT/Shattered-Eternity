@@ -7,6 +7,7 @@ class_name Player
 @export var SLIDE_SPEED = 800.0
 @export var JUMP_VELOCITY = -300.0
 @export var SLIDE_DIST = 120.0
+@export var WALL_SLIDE_SPEED = 50.0
 var direction = 0
 var facing := 1
 var dash_cooldown := 1.0
@@ -44,7 +45,8 @@ func _physics_process(delta: float) -> void:
 	 	current_state.name == "Hit" or\
 		current_state.name == "Dashing" or\
 		current_state.name == "JumpStart" or\
-		current_state.name == "Landing": 
+		current_state.name == "Landing" or\
+		current_state.name == "WallSliding" : 
 		return
 
 	# Get the horizontal input and direct the sprite
@@ -102,7 +104,7 @@ func direct_sprite():
 	if direction > 0:
 		$AnimatedSprite2D.flip_h = false
 		$PlayerHurtBox.scale.x = 1
-		facing = 1
+		facing =  1
 
 
 func get_horizontal_input():

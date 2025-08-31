@@ -1,0 +1,28 @@
+###Systeme de mana:
+Le joueur et les ennemis manient le mana pour se battre et se defendre.
+Le joueur a trois armes de mana entre lesquelles il peut alterner :
+
+Epee:
+Degats moyens corps a corps, rapide, utile pour rester evasif.
+Attaque chargee: Estoc
+
+Lance:
+Degats bas au corps a cors, mais meilleure portee, vitesse pas ouf
+Attaque chargee: Lancer
+
+Marteau:
+Degats stupides au corps a corps mais assez lent.
+Attaque chargee: BONK.
+
+###Flow du combat:
+Attaque normale:
+Rien de special, mais peut etre paré par la garde
+Permet aussi d'interrompre une brise garde
+
+Garde:
+Permet de bloquer les attaques normales
+Appuyer sur le bouton au bon timimg permet de faire une parade
+
+Brise-garde:
+Attaque speciale permettant de detruire une garde. Mais
+une animation de brise garde vous rend vulnerable a une attaque

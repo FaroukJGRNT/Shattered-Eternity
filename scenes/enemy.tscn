@@ -1,10 +1,14 @@
-[gd_scene load_steps=33 format=3 uid="uid://c20oww0mmtpx7"]
+[gd_scene load_steps=37 format=3 uid="uid://c20oww0mmtpx7"]
 
 [ext_resource type="Texture2D" uid="uid://rye6avf45wqu" path="res://assets/sprites/enemy/Skeleton enemy.png" id="1_1qe2k"]
 [ext_resource type="Script" uid="uid://cthv4yog3disp" path="res://scripts/enemy.gd" id="1_rfxxo"]
 [ext_resource type="Script" uid="uid://cudcd7wg184ea" path="res://scripts/animated_sprite_2d.gd" id="3_5uy6h"]
 [ext_resource type="Script" uid="uid://yeff8at8yhdy" path="res://scenes/hit_box.gd" id="3_f85vv"]
 [ext_resource type="Script" uid="uid://busr7orlkflil" path="res://scripts/hurtbox.gd" id="5_c4w8v"]
+[ext_resource type="Script" uid="uid://do8u78sktsj4a" path="res://scripts/enemy_state_machine.gd" id="6_xwavj"]
+[ext_resource type="Script" uid="uid://d2m4obxg6e5yd" path="res://scripts/wander.gd" id="7_nenq2"]
+[ext_resource type="Script" uid="uid://c8urd27cvwunp" path="res://scripts/attack.gd" id="8_ipns3"]
+[ext_resource type="Script" uid="uid://cd5872fhow6ho" path="res://scripts/chase.gd" id="8_md484"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcxc1"]
 atlas = ExtResource("1_1qe2k")
@@ -235,7 +239,22 @@ metadata/_custom_type_script = "uid://busr7orlkflil"
 position = Vector2(-2.33333, 0)
 shape = SubResource("CapsuleShape2D_gl8cc")
 
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("AnimPlayer", "enemy")]
+script = ExtResource("6_xwavj")
+AnimPlayer = NodePath("../AnimatedSprite2D")
+enemy = NodePath("..")
+
+[node name="Wander" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("7_nenq2")
+
+[node name="Attack" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("8_ipns3")
+
+[node name="Chase" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("8_md484")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="EnemyStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="HitBox" method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]

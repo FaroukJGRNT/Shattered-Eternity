@@ -1,25 +1,15 @@
 extends LivingEntity
+class_name Enemy
 
 @export var SPEED = 150.0
 @export var ATTACK_RANGE = 40
+@export var wander_distance = 200
+@export var max_aggro_distance = 1000
 
-
-enum Activity {
-	CHILLIN,
-	ATAK
-}
-
-enum State {
-	IDLE,
-	RUNNING,
-	ATTACK
-}
-
-var state = State.IDLE
-var activity = Activity.CHILLIN
 var target
 var direction
 var can_attack = true
+var facing = 1
 
 # Stats
 func _init() -> void:
@@ -28,60 +18,31 @@ func _init() -> void:
 	attack = 30
 
 func _physics_process(delta: float) -> void:
-	if state == State.ATTACK:
+	if $EnemyStateMachine.get_current_state().name == "Attack":
 		return
 	
-	if velocity.x != 0:
-		state = State.RUNNING
-	else:
-		state = State.IDLE
-		
-	if target and abs(target.position.x - position.x) <= ATTACK_RANGE and can_attack:
-		state = State.ATTACK
-		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	if activity == Activity.ATAK:
-		direction = (target.position - position).normalized()
-		velocity.x = SPEED * direction.x
 
 	# make sure he faces the right direction
-	if velocity.x <  0:
+	if velocity.x < 0:
 		$AnimatedSprite2D.flip_h = true
 		$HitBox.scale.x = -1
 		$HitBox.scale.y = 1
+		facing = -1
 	if velocity.x > 0:
 		$AnimatedSprite2D.flip_h = false
 		$HitBox.scale.x = 1
 		$HitBox.scale.y = 1
-		
-	# play the correct animation
-	if state == State.IDLE:
-		$AnimatedSprite2D.play("idle")
-	if state == State.RUNNING:
-		$AnimatedSprite2D.play("run")
-	if state == State.ATTACK:
-		$AnimatedSprite2D.play("attack")
-		
-	move_and_slide()
+		facing = 1
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		activity = Activity.ATAK
 		target = body
-
+		$EnemyStateMachine.on_state_transition("chase")
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		activity = Activity.CHILLIN
-		velocity = Vector2(0, 0)
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if state == State.ATTACK:
-		state = State.IDLE
-		$AttackCoolDown.start()
-		can_attack = false
-
-func _on_attack_cool_down_timeout() -> void:
-	can_attack = true
+		$EnemyStateMachine.on_state_transition("wander")
+		$EnemyStateMachine/Wander.wait_cooldown = 5.0

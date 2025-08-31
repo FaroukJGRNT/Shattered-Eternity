@@ -26,3 +26,10 @@ Appuyer sur le bouton au bon timimg permet de faire une parade
 Brise-garde:
 Attaque speciale permettant de detruire une garde. Mais
 une animation de brise garde vous rend vulnerable a une attaque
+
+### Elements:
+Les elements seront une des pieces maitresses pour la rejouabilite et
+le cote rogue like. Les competences ou moves speciaux trouves au cours de
+la run seront tous d'un element donne. Chaque element peut infliger
+un type de malus. Les combinaisons de malus donnent d'autres malus encore
+meilleurs. Ca va etre trop bien.

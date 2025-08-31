@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=53 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Texture2D" uid="uid://c5c31j6vdbo6o" path="res://assets/sprites/player/_Attack.png" id="1_pbkv8"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://d3cewxe44visj" path="res://scripts/player_animated_sprite.gd" id="5_fjrip"]
 [ext_resource type="Texture2D" uid="uid://3u4ys4db0mdo" path="res://assets/sprites/player/NewCharacterSheet.png" id="5_ur7pv"]
 [ext_resource type="Script" uid="uid://dmd5wtaolc7f2" path="res://scenes/camera_2d.gd" id="6_fjrip"]
+[ext_resource type="Texture2D" uid="uid://bt0y08ue1qnfa" path="res://assets/sprites/player/wall_hang.png" id="6_fulsm"]
 [ext_resource type="Script" uid="uid://b0ho1164k7d2r" path="res://scripts/player_hurtbox.gd" id="7_fjrip"]
 [ext_resource type="Script" uid="uid://c2d1c1s8ewmy8" path="res://scripts/state_machine.gd" id="8_smehm"]
 [ext_resource type="Script" uid="uid://bhwwkf6nsih7b" path="res://scripts/running.gd" id="10_f1ej7"]
@@ -16,6 +17,7 @@
 [ext_resource type="Script" uid="uid://fccd3vjnoyb2" path="res://scripts/dashing.gd" id="13_a8ls1"]
 [ext_resource type="Script" uid="uid://hc5fh8qvtij2" path="res://scripts/hit.gd" id="14_qfm1y"]
 [ext_resource type="Script" uid="uid://crwioajtyd7qn" path="res://scripts/landing.gd" id="16_a8ls1"]
+[ext_resource type="Script" uid="uid://cxj685gd2bpvs" path="res://scripts/wall_sliding.gd" id="17_qfm1y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xuwet"]
 atlas = ExtResource("1_pbkv8")
@@ -140,6 +142,10 @@ region = Rect2(288, 256, 96, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lw85x"]
 atlas = ExtResource("3_5h808")
 region = Rect2(384, 256, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r5pv"]
+atlas = ExtResource("6_fulsm")
+region = Rect2(0, 0, 96, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3v2ag"]
 animations = [{
@@ -296,9 +302,18 @@ animations = [{
 "loop": false,
 "name": &"slide",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5pv")
+}],
+"loop": true,
+"name": &"wallsliding",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gl8cc"]
+radius = 13.0
 height = 48.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
@@ -307,10 +322,8 @@ script = ExtResource("1_le0q1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox")]
 position = Vector2(4, -17)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"landing"
+animation = &"wallsliding"
 autoplay = "idle"
-frame = 2
-frame_progress = 1.0
 script = ExtResource("5_fjrip")
 hurtbox = NodePath("../PlayerHurtBox")
 
@@ -356,6 +369,9 @@ script = ExtResource("14_qfm1y")
 
 [node name="Landing" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("16_a8ls1")
+
+[node name="WallSliding" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("17_qfm1y")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="PlayerStateMachine" method="_on_animated_sprite_2d_animation_finished"]

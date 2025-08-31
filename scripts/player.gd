@@ -76,7 +76,12 @@ func _physics_process(delta: float) -> void:
 
 func handle_vertical_movement(delta):
 	# Apply the gravity
-	velocity.y += get_gravity().y * delta
+	velocity.y += (get_gravity().y * delta)
+	var friction = 0
+	if is_on_wall():
+		friction = 15
+	if velocity.y >= 0:
+		velocity.y -= friction
 	move_and_slide()
 
 func handle_horizontal_movement(speed):
@@ -98,6 +103,7 @@ func direct_sprite():
 		$AnimatedSprite2D.flip_h = false
 		$PlayerHurtBox.scale.x = 1
 		facing = 1
+
 
 func get_horizontal_input():
 	direction = Input.get_axis("left", "right")

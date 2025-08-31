@@ -2,6 +2,9 @@ extends AnimatedSprite2D
 @export var hitbox : Area2D
 @export var hurtbox : Area2D
 
+func _process(delta: float) -> void:
+	pass
+
 func _on_frame_changed() -> void:
 	# default reset
 	hurtbox.disabled = false

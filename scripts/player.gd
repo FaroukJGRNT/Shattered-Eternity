@@ -14,6 +14,14 @@ var dash_cooldown := 1.0
 var on_dash_cooldown := false
 var aerial_dash_used := false
 
+enum Weapons {
+	SPEAR,
+	SWORD,
+	HAMMER
+}
+
+var current_weapon = Weapons.SWORD
+
 # Stats
 func _init() -> void:
 	max_life = 10000
@@ -46,7 +54,8 @@ func _physics_process(delta: float) -> void:
 		current_state.name == "Dashing" or\
 		current_state.name == "JumpStart" or\
 		current_state.name == "Landing" or\
-		current_state.name == "WallSliding" : 
+		current_state.name == "WallSliding" or\
+		"Attack" in current_state.name:
 		return
 
 	# Get the horizontal input and direct the sprite
@@ -127,4 +136,10 @@ func initiate_ground_actions():
 		change_state("jumpstart")
 	initiate_slide()
 	if Input.is_action_just_pressed("attack"):
-		pass
+		match current_weapon:
+			Weapons.SWORD:
+				change_state("swordattack1")
+			Weapons.SPEAR:
+				change_state("spearattack1")
+			Weapons.HAMMER:
+				change_state("hammerattack1")

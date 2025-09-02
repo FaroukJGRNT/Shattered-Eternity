@@ -35,5 +35,15 @@ un type de malus. Les combinaisons de malus donnent d'autres malus encore
 meilleurs. Ca va etre trop bien.
 
 ### Decors:
-on doit utiliser des effets de brouillard, luciole, lunmieres et autres pour rendre
+on doit utiliser des effets de brouillard, luciole, lumieres et autres pour rendre
 le jeu plus bau
+
+### Details de combats
+Chaque coup bloque legerement la camera pour mieux ressentir l'impact
+et balance des petites particlules
+Chaque coup fait sortir un label montrant les degats infligés
+La couleur du texte changera selon l'element et selon si le coup est crit ou pas
+En plus d'une barre de vie, les ennemis ont une barre de stagger qui
+aumente lorsque vous faites une parade parfaite, utilisez une brise garde reussie
+ou bien lorsquils prennent des degats. Elle se remplit lorsqu'ils ne font rien.
+Si elle se remplit, l'ennemi entre dans l'etat vulnerable

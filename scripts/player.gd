@@ -7,6 +7,7 @@ class_name Player
 @export var SLIDE_SPEED = 800.0
 @export var JUMP_VELOCITY = -300.0
 @export var SLIDE_DIST = 120.0
+@export var BACKSLIDE_DIST = 80.0
 @export var WALL_SLIDE_SPEED = 50.0
 var direction = 0
 var facing := 1
@@ -26,7 +27,7 @@ var current_weapon = Weapons.SWORD
 func _init() -> void:
 	max_life = 10000
 	life = max_life 
-	attack = 100
+	attack = 10
 	defense = 10
 
 func take_damage(damage:int):
@@ -35,6 +36,9 @@ func take_damage(damage:int):
 		total_dmg = 0
 	life -= total_dmg
 	change_state("hit")
+	$AnimatedSprite2D.material.set_shader_parameter("enabled", true)
+	$HitFlash.start()
+	$Camera2D.trigger_shake(8, 8)
 	if life <= 0:
 		life = 0
 		die()
@@ -52,6 +56,7 @@ func _physics_process(delta: float) -> void:
 	if current_state == null or\
 	 	current_state.name == "Hit" or\
 		current_state.name == "Dashing" or\
+		current_state.name == "BackDashing" or\
 		current_state.name == "JumpStart" or\
 		current_state.name == "Landing" or\
 		current_state.name == "WallSliding" or\
@@ -109,10 +114,12 @@ func direct_sprite():
 	if direction <  0:
 		$AnimatedSprite2D.flip_h = true
 		$PlayerHurtBox.scale.x = -1
+		$HitBoxes.scale.x = -1
 		facing = -1
 	if direction > 0:
 		$AnimatedSprite2D.flip_h = false
 		$PlayerHurtBox.scale.x = 1
+		$HitBoxes.scale.x = 1
 		facing =  1
 
 
@@ -123,7 +130,10 @@ func get_horizontal_input():
 func initiate_slide():
 	if Input.is_action_just_pressed("dash"):
 		if is_on_floor() and not on_dash_cooldown:
-			change_state("dashing")
+			if direction == 0:
+				change_state("backdashing")
+			else:
+				change_state("dashing")
 			on_dash_cooldown = true
 			dash_cooldown = 1.0
 		elif not is_on_floor() and not aerial_dash_used:
@@ -143,3 +153,7 @@ func initiate_ground_actions():
 				change_state("spearattack1")
 			Weapons.HAMMER:
 				change_state("hammerattack1")
+
+
+func _on_hit_flash_timeout() -> void:
+	$AnimatedSprite2D.material.set_shader_parameter("enabled", false)

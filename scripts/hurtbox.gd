@@ -1,7 +1,7 @@
 extends Area2D
 class_name HurtBox
 
-func _ready() -> void:
+func _ready () -> void:
 	# Enemy hurtboxes need to be detected by the player
 	if owner.is_in_group("Enemy"):
 		collision_layer = 2
@@ -18,6 +18,10 @@ func on_area_entered(area: Area2D) -> void:
 		if not owner.has_method("take_damage"):
 			return
 		if area.active and _owner_in_targeted_groups(owner, area.targeted_groups):
+			var cam = get_tree().get_first_node_in_group("Camera")
+			if cam:
+				cam.trigger_shake(area.cam_shake_value, 10
+				)
 			owner.take_damage(area.damage)
 
 func _owner_in_targeted_groups(owner: Node, groups: Array) -> bool:

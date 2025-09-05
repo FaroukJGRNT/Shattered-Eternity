@@ -21,5 +21,17 @@ position = Vector2(203, 268)
 position = Vector2(1490, -19)
 scale = Vector2(1.5, 1.5)
 
+[node name="Enemy2" parent="." instance=ExtResource("3_4lhks")]
+position = Vector2(2175, 134)
+scale = Vector2(1.5, 1.5)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_4lhks")]
+position = Vector2(1912, 175)
+scale = Vector2(1.5, 1.5)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_4lhks")]
+position = Vector2(1161, 50)
+scale = Vector2(1.5, 1.5)
+
 [node name="IngameUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_mx8sn")]
 player = NodePath("../Player")

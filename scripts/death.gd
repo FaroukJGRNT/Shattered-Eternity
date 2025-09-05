@@ -1,16 +1,14 @@
-extends PlayerState
+extends EnemyState
 
 func enter():
-	AnimPlayer.play("sword_attack_3")
+	AnimPlayer.play("death")
 
 func update(delta):
-	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= 2:
-		transitioned.emit("backdashing")
-
+	pass
 func exit():
 	pass
 
 # this function will be executed every time an animation ends,
 # since most states end accordingly to an animation
 func on_animation_end():
-	transitioned.emit("idle")
+	owner.queue_free()

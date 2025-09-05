@@ -16,7 +16,7 @@ func take_damage(damage:int):
 		die()
 
 func deal_damage(motion_value:int):
-	var total_dmg = motion_value * attack
+	var total_dmg = motion_value + attack
 	return total_dmg
 
 func die():

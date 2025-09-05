@@ -1,2 +1,3 @@
-- Utiliser une state machine pour rendre le code du joueur plus clair
-- Perfectionner l'utilisation des principes OOP (surtout au niveau des hitboxes et hurtboxes) et rendre le code le plus propre et modulaire possible
+- Implementer le backdash en idle et a la fin d'une attaque
+- Implementer la hitbox des attaques
+- Implementer tous les effets du hit (tremblement, affichage des degats, particules)

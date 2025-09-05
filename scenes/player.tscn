@@ -1,6 +1,7 @@
-[gd_scene load_steps=65 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=78 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
+[ext_resource type="Shader" uid="uid://dbau474f0ay52" path="res://shaders/hit_flash.tres" id="2_wqfne"]
 [ext_resource type="Texture2D" uid="uid://bm7w2ao6eeavq" path="res://assets/sprites/player/SimpleCharacter2-Sheet.png" id="3_5h808"]
 [ext_resource type="Texture2D" uid="uid://1avtm7xpuo52" path="res://assets/sprites/player/LightCombo.png" id="4_31cv2"]
 [ext_resource type="Script" uid="uid://d3cewxe44visj" path="res://scripts/player_animated_sprite.gd" id="5_fjrip"]
@@ -12,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bhwwkf6nsih7b" path="res://scripts/running.gd" id="10_f1ej7"]
 [ext_resource type="Script" uid="uid://xfxlbnbnctxe" path="res://scripts/transitioning.gd" id="10_oprun"]
 [ext_resource type="Script" uid="uid://byfnqgco86sa8" path="res://scripts/idle.gd" id="10_y4r1p"]
+[ext_resource type="Script" uid="uid://ckexsujqyx8s4" path="res://scripts/back_dashing.gd" id="11_wnwbv"]
 [ext_resource type="Script" uid="uid://vm8alccqpkvj" path="res://scripts/airborne.gd" id="12_oprun"]
 [ext_resource type="Script" uid="uid://fccd3vjnoyb2" path="res://scripts/dashing.gd" id="13_a8ls1"]
 [ext_resource type="Script" uid="uid://hc5fh8qvtij2" path="res://scripts/hit.gd" id="14_qfm1y"]
@@ -25,7 +27,35 @@
 [ext_resource type="Script" uid="uid://l6hkc1wejp0v" path="res://scripts/spear_attack_1.gd" id="24_dt7fs"]
 [ext_resource type="Script" uid="uid://87fon7oonykv" path="res://scripts/spear_attack_2.gd" id="25_wqfne"]
 [ext_resource type="Script" uid="uid://cnsa5ctu04hlv" path="res://scripts/spear_attack_3.gd" id="26_wnwbv"]
+[ext_resource type="Script" uid="uid://dvlh30aw70670" path="res://scripts/sword_attack_2hb.gd" id="27_dt7fs"]
 [ext_resource type="Script" uid="uid://dkdttuu6b5t17" path="res://scripts/spear_attack_4.gd" id="27_gl8cc"]
+[ext_resource type="Script" uid="uid://d22loysvpsktm" path="res://scripts/sword_attack_1hb.gd" id="28_wqfne"]
+[ext_resource type="Script" uid="uid://c70ru4iory364" path="res://scripts/sword_attack_3hb.gd" id="29_wnwbv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wnwbv"]
+shader = ExtResource("2_wqfne")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cs1tg"]
+atlas = ExtResource("5_ur7pv")
+region = Rect2(0, 192, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dvfe"]
+atlas = ExtResource("5_ur7pv")
+region = Rect2(96, 192, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_giy8y"]
+atlas = ExtResource("5_ur7pv")
+region = Rect2(192, 192, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdfoy"]
+atlas = ExtResource("5_ur7pv")
+region = Rect2(288, 192, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhpqf"]
+atlas = ExtResource("5_ur7pv")
+region = Rect2(384, 192, 96, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1a0tx"]
 atlas = ExtResource("3_5h808")
@@ -175,6 +205,26 @@ region = Rect2(0, 0, 96, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_cs1tg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dvfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_giy8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdfoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhpqf")
+}],
+"loop": false,
+"name": &"backdash",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_1a0tx")
 }],
 "loop": true,
@@ -305,7 +355,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_attack_1",
-"speed": 12.0
+"speed": 13.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -322,7 +372,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_attack_2",
-"speed": 11.0
+"speed": 13.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -342,7 +392,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_attack_3",
-"speed": 12.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -357,22 +407,37 @@ animations = [{
 radius = 7.0
 height = 48.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_487ah"]
+radius = 25.9493
+height = 97.8007
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md1ol"]
+radius = 34.9423
+height = 76.3027
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 128
+collision_mask = 128
 script = ExtResource("1_le0q1")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("s_hitbox1", "s_hitbox2", "s_hitbox3", "hurtbox")]
+material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(4, -17)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
 animation = &"sword_attack_3"
 autoplay = "idle"
 script = ExtResource("5_fjrip")
+s_hitbox1 = NodePath("../HitBoxes/SwordAttack1")
+s_hitbox2 = NodePath("../HitBoxes/SwordAttack2")
+s_hitbox3 = NodePath("../HitBoxes/SwordAttack3")
 hurtbox = NodePath("../PlayerHurtBox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, -11)
 shape = SubResource("CapsuleShape2D_gl8cc")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
+position = Vector2(0, -13)
 offset = Vector2(27, -37)
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
@@ -389,6 +454,9 @@ shape = SubResource("CapsuleShape2D_gl8cc")
 script = ExtResource("8_smehm")
 AnimPlayer = NodePath("../AnimatedSprite2D")
 player = NodePath("..")
+
+[node name="BackDashing" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("11_wnwbv")
 
 [node name="JumpStart" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("10_oprun")
@@ -441,6 +509,46 @@ script = ExtResource("26_wnwbv")
 [node name="SpearAttack4" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("27_gl8cc")
 
+[node name="HitBoxes" type="Node2D" parent="."]
+
+[node name="SwordAttack2" type="Area2D" parent="HitBoxes"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("27_dt7fs")
+metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAttack2"]
+position = Vector2(42, -8)
+rotation = 1.53589
+shape = SubResource("CapsuleShape2D_487ah")
+
+[node name="SwordAttack1" type="Area2D" parent="HitBoxes"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("28_wqfne")
+metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAttack1"]
+position = Vector2(42, -13)
+rotation = 1.53589
+shape = SubResource("CapsuleShape2D_487ah")
+
+[node name="SwordAttack3" type="Area2D" parent="HitBoxes"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("29_wnwbv")
+metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAttack3"]
+position = Vector2(55, -9)
+rotation = 3.15905
+shape = SubResource("CapsuleShape2D_md1ol")
+
+[node name="HitFlash" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="PlayerStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
+[connection signal="timeout" from="HitFlash" to="." method="_on_hit_flash_timeout"]

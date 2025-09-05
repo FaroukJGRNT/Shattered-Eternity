@@ -24,6 +24,7 @@ window/size/viewport_height=525
 
 Player=""
 Enemy=""
+Camera=""
 
 [input]
 

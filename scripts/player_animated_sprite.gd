@@ -1,5 +1,7 @@
 extends AnimatedSprite2D
-@export var hitbox : Area2D
+@export var s_hitbox1 : Area2D
+@export var s_hitbox2 : Area2D
+@export var s_hitbox3 : Area2D
 @export var hurtbox : Area2D
 
 func _process(delta: float) -> void:
@@ -9,15 +11,37 @@ func _on_frame_changed() -> void:
 	# default reset
 	hurtbox.disabled = false
 	hurtbox.monitoring = true
+	s_hitbox1.active = false
+	s_hitbox2.active = false
+	s_hitbox3.active = false
+	s_hitbox1.monitoring = false
+	s_hitbox2.monitoring = false
+	s_hitbox3.monitoring = false
 #
-	if animation == "attack":
+	if animation == "sword_attack_1":
 		match frame:
-			4, 5: # frames où l’arme doit toucher
-				hitbox.monitoring = true
-				hitbox.active = true
+			2: # frames où l’arme doit toucher
+				s_hitbox1.monitoring = true
+				s_hitbox1.active = true
 			_:
-				hitbox.monitoring = false
-				hitbox.active = false
+				s_hitbox1.monitoring = false
+				s_hitbox1.active = false
+	if animation == "sword_attack_2":
+		match frame:
+			1: # frames où l’arme doit toucher
+				s_hitbox2.monitoring = true
+				s_hitbox2.active = true
+			_:
+				s_hitbox2.monitoring = false
+				s_hitbox2.active = false
+	if animation == "sword_attack_3":
+		match frame:
+			1: # frames où l’arme doit toucher
+				s_hitbox3.monitoring = true
+				s_hitbox3.active = true
+			_:
+				s_hitbox3.monitoring = false
+				s_hitbox3.active = false
 	if animation == "slide":
 		match frame:
 			0, 1, 2: # frames où le joueur est invulnerable

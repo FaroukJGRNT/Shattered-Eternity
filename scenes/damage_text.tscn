@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dohiocu5g8qle"]
+
+[ext_resource type="FontFile" uid="uid://yafdbk1pp8yk" path="res://assets/fonts/ticketing/TICKETING/Ticketing.ttf" id="1_0x2rp"]
+[ext_resource type="Script" uid="uid://djtoibg8awpfj" path="res://scripts/damage_text.gd" id="2_6p0u7"]
+
+[node name="DamageText" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0.990217, 1, 0.572566, 1)
+theme_override_colors/font_shadow_color = Color(0.351563, 0.351563, 0.351563, 1)
+theme_override_colors/font_outline_color = Color(1, 0.462745, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_0x2rp")
+theme_override_font_sizes/font_size = 0
+text = "-109"
+script = ExtResource("2_6p0u7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

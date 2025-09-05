@@ -4,7 +4,8 @@ func enter():
 	AnimPlayer.play("spear_attack_4")
 
 func update(delta):
-	pass
+	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= 3:
+		transitioned.emit("backdashing")
 
 func exit():
 	pass

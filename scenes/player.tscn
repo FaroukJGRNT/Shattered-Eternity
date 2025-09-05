@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=85 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Shader" uid="uid://dbau474f0ay52" path="res://shaders/hit_flash.tres" id="2_wqfne"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" uid="uid://dkdttuu6b5t17" path="res://scripts/spear_attack_4.gd" id="27_gl8cc"]
 [ext_resource type="Script" uid="uid://d22loysvpsktm" path="res://scripts/sword_attack_1hb.gd" id="28_wqfne"]
 [ext_resource type="Script" uid="uid://c70ru4iory364" path="res://scripts/sword_attack_3hb.gd" id="29_wnwbv"]
+[ext_resource type="Script" uid="uid://dlb8mkkslpv3y" path="res://scripts/ally_hitbox.gd" id="32_gl8cc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wnwbv"]
 shader = ExtResource("2_wqfne")
@@ -415,6 +416,30 @@ height = 97.8007
 radius = 34.9423
 height = 76.3027
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bj30b"]
+radius = 16.0
+height = 105.57
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jc3p3"]
+radius = 29.544
+height = 88.1977
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hax0n"]
+radius = 9.82329
+height = 67.894
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t4otl"]
+radius = 9.82329
+height = 67.894
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2b1d"]
+radius = 9.82329
+height = 67.894
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cs1tg"]
+radius = 9.82329
+height = 67.894
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 128
 collision_mask = 128
@@ -512,6 +537,7 @@ script = ExtResource("27_gl8cc")
 [node name="HitBoxes" type="Node2D" parent="."]
 
 [node name="SwordAttack2" type="Area2D" parent="HitBoxes"]
+visible = false
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("27_dt7fs")
@@ -523,6 +549,7 @@ rotation = 1.53589
 shape = SubResource("CapsuleShape2D_487ah")
 
 [node name="SwordAttack1" type="Area2D" parent="HitBoxes"]
+visible = false
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("28_wqfne")
@@ -534,6 +561,7 @@ rotation = 1.53589
 shape = SubResource("CapsuleShape2D_487ah")
 
 [node name="SwordAttack3" type="Area2D" parent="HitBoxes"]
+visible = false
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("29_wnwbv")
@@ -543,6 +571,64 @@ metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 position = Vector2(55, -9)
 rotation = 3.15905
 shape = SubResource("CapsuleShape2D_md1ol")
+
+[node name="HammerAttack1" type="Area2D" parent="HitBoxes"]
+script = ExtResource("32_gl8cc")
+metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerAttack1"]
+position = Vector2(36, -29)
+rotation = -3.54651
+shape = SubResource("CapsuleShape2D_bj30b")
+
+[node name="HammerAttack2" type="Area2D" parent="HitBoxes"]
+script = ExtResource("32_gl8cc")
+metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerAttack2"]
+position = Vector2(45, -22)
+rotation = -3.19744
+shape = SubResource("CapsuleShape2D_jc3p3")
+
+[node name="SpearAttack1" type="Area2D" parent="HitBoxes"]
+position = Vector2(-13, -2)
+script = ExtResource("32_gl8cc")
+metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAttack1"]
+position = Vector2(82, -24)
+rotation = -4.93405
+shape = SubResource("CapsuleShape2D_hax0n")
+
+[node name="SpearAttack2" type="Area2D" parent="HitBoxes"]
+position = Vector2(-13, -2)
+script = ExtResource("32_gl8cc")
+metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAttack2"]
+position = Vector2(88, -10)
+rotation = -4.77697
+shape = SubResource("CapsuleShape2D_t4otl")
+
+[node name="SpearAttack3" type="Area2D" parent="HitBoxes"]
+position = Vector2(-13, -2)
+script = ExtResource("32_gl8cc")
+metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAttack3"]
+position = Vector2(91, 3)
+rotation = -4.60243
+shape = SubResource("CapsuleShape2D_j2b1d")
+
+[node name="SpearAttack4" type="Area2D" parent="HitBoxes"]
+position = Vector2(-13, -2)
+script = ExtResource("32_gl8cc")
+metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAttack4"]
+position = Vector2(92, -13)
+rotation = -4.72461
+shape = SubResource("CapsuleShape2D_cs1tg")
 
 [node name="HitFlash" type="Timer" parent="."]
 wait_time = 0.2

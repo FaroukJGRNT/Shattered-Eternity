@@ -1,6 +1,11 @@
 extends Area2D
 class_name HurtBox
 
+func frame_freeze(timeScale, duration):
+	Engine.time_scale = timeScale
+	await(get_tree().create_timer(duration, true, false, true).timeout)
+	Engine.time_scale = 1
+
 func _ready () -> void:
 	# Enemy hurtboxes need to be detected by the player
 	if owner.is_in_group("Enemy"):
@@ -20,8 +25,8 @@ func on_area_entered(area: Area2D) -> void:
 		if area.active and _owner_in_targeted_groups(owner, area.targeted_groups):
 			var cam = get_tree().get_first_node_in_group("Camera")
 			if cam:
-				cam.trigger_shake(area.cam_shake_value, 10
-				)
+				cam.trigger_shake(area.cam_shake_value, 10)
+			frame_freeze(area.hitstop_scale, area.hitstop_time)
 			owner.take_damage(area.damage)
 
 func _owner_in_targeted_groups(owner: Node, groups: Array) -> bool:

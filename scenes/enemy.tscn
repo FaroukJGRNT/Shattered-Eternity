@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://c20oww0mmtpx7"]
+[gd_scene load_steps=61 format=3 uid="uid://c20oww0mmtpx7"]
 
 [ext_resource type="Texture2D" uid="uid://rye6avf45wqu" path="res://assets/sprites/enemy/Skeleton enemy.png" id="1_1qe2k"]
 [ext_resource type="Script" uid="uid://cthv4yog3disp" path="res://scripts/enemy.gd" id="1_rfxxo"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://cekn42u0pp1e3" path="res://assets/sprites/ui/ValueBar_128x16.png" id="10_w8i8w"]
 [ext_resource type="Texture2D" uid="uid://djgtlpka5r4sy" path="res://assets/sprites/ui/ValueRed_120x8.png" id="11_otmr2"]
 [ext_resource type="Script" uid="uid://bt0hiyjxpl4to" path="res://scenes/damage_bar.gd" id="14_j0cyh"]
+[ext_resource type="Script" uid="uid://hdehtxs642ig" path="res://scenes/life_bar.gd" id="14_s1ycm"]
+[ext_resource type="Script" uid="uid://bhibvqhjjgufw" path="res://scripts/hit_listener.gd" id="16_shcg2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wtq4b"]
 resource_local_to_scene = true
@@ -388,9 +390,11 @@ texture_over = ExtResource("10_w8i8w")
 texture_progress = ExtResource("11_otmr2")
 texture_progress_offset = Vector2(1, 0)
 tint_under = Color(0.0267215, 0.0267215, 0.0267215, 1)
+script = ExtResource("14_s1ycm")
 
 [node name="DamageBar" type="ProgressBar" parent="LifeBar" node_paths=PackedStringArray("life_bar")]
 show_behind_parent = true
+layout_mode = 0
 offset_right = 128.0
 offset_bottom = 27.0
 scale = Vector2(1, 0.5)
@@ -405,7 +409,13 @@ life_bar = NodePath("..")
 wait_time = 0.4
 one_shot = true
 
+[node name="HitListener" type="Node2D" parent="." node_paths=PackedStringArray("AnimPlayer", "LifeBar")]
+script = ExtResource("16_shcg2")
+AnimPlayer = NodePath("../AnimatedSprite2D")
+LifeBar = NodePath("../LifeBar")
+
 [connection signal="damage_taken" from="." to="LifeBar/DamageBar" method="_on_enemy_damage_taken"]
+[connection signal="damage_taken" from="." to="HitListener" method="_on_enemy_damage_taken"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="EnemyStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]

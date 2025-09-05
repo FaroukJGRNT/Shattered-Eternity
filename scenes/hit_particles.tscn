@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://debp2xmgfvvsi"]
+
+[sub_resource type="Curve" id="Curve_gu2vf"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(0.226908, 0.778198), 0.0, 0.0, 0, 0, Vector2(0.395582, -117.51), 0.0, 0.0, 0, 0, Vector2(0.548193, -161.09), 0.0, 0.0, 0, 0, Vector2(1, -200), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_mpbbw"]
+curve = SubResource("Curve_gu2vf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4pfba"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+linear_accel_curve = SubResource("CurveTexture_mpbbw")
+
+[node name="HitParticles" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_4pfba")

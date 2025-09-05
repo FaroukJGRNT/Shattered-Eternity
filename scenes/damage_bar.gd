@@ -2,11 +2,10 @@ extends ProgressBar
 
 @export var life_bar : TextureProgressBar
 
-func _on_enemy_damage_taken() -> void:
+func update_bar(dmg) -> void:
 	max_value = life_bar.max_value
-	value = life_bar.value
+	value = life_bar.value + dmg
 	$Timer.start()
-
 
 func _on_timer_timeout() -> void:
 	# Crée un tween

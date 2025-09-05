@@ -34,6 +34,25 @@ la run seront tous d'un element donne. Chaque element peut infliger
 un type de malus. Les combinaisons de malus donnent d'autres malus encore
 meilleurs. Ca va etre trop bien.
 
+La foudre bat le feu, le feu bat la glace et la glace bat la foudre
+Le statut brulé inflige des degats continus
+Le statut electrocuté reduit la defense et l'attaque
+le statut gele realentit l'ennemi
+
+Foudre + feu :
+Feu + Glace : Choc thermique
+Foudre + Glace : 
+Foudre + Glace : 
+
+Chaque element a son type de particules sous hit
+
+Le joueur aura 3 skills:
+Chacun fait apparaitre une aureole d'element derriere sa tete
+et infuse ses attaques d'un certain element
+Arts du mana: Feu  
+Arts du mana: Foudre  
+Arts du mana: Glace  
+
 ### Decors:
 on doit utiliser des effets de brouillard, luciole, lumieres et autres pour rendre
 le jeu plus bau
@@ -41,6 +60,7 @@ le jeu plus bau
 ### Details de combats
 Chaque coup bloque legerement la camera pour mieux ressentir l'impact
 et balance des petites particlules
+Les coups normaux balancent des particules bleues, les charges envoient des particules roses
 Chaque coup fait sortir un label montrant les degats infligés
 La couleur du texte changera selon l'element et selon si le coup est crit ou pas
 En plus d'une barre de vie, les ennemis ont une barre de stagger qui

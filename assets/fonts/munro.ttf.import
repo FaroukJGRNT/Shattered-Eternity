@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dve1217dt332m"
-path="res://.godot/imported/Ticketing.otf-ba5e057c8db10b47a6b6eec386bad4c2.fontdata"
+uid="uid://c22hpqiolc8ba"
+path="res://.godot/imported/munro.ttf-0e6c0581031e711789a78efdad817739.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/ticketing/TICKETING/Ticketing.otf"
-dest_files=["res://.godot/imported/Ticketing.otf-ba5e057c8db10b47a6b6eec386bad4c2.fontdata"]
+source_file="res://assets/fonts/munro.ttf"
+dest_files=["res://.godot/imported/munro.ttf-0e6c0581031e711789a78efdad817739.fontdata"]
 
 [params]
 

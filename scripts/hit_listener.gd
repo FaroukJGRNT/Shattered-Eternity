@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 @export var AnimPlayer : AnimatedSprite2D
 @onready var player : Player = get_tree().get_first_node_in_group("Player")
@@ -18,8 +18,8 @@ func _on_enemy_damage_taken(dmg) -> void:
 	shader_duration = 0.2
 	# Damage show
 	var dmg_text = damage_label.instantiate()
-	dmg_text.position = Vector2(owner.position.x + (player.facing * 20), owner.position.y)
-	dmg_text.direction = Vector2(player.facing, randi_range(-0.5, 0.5))
+	dmg_text.position = Vector2(position.x + (player.facing * 5), position.y - 20)
+	dmg_text.direction = Vector2(player.facing, randf_range(-0.6, 0.6))
 	add_child(dmg_text)
 	# Lifebar update
 	LifeBar.update_health_bar(dmg)

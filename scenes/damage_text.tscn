@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dohiocu5g8qle"]
 
-[ext_resource type="FontFile" uid="uid://yafdbk1pp8yk" path="res://assets/fonts/ticketing/TICKETING/Ticketing.ttf" id="1_0x2rp"]
+[ext_resource type="FontFile" uid="uid://c22hpqiolc8ba" path="res://assets/fonts/munro.ttf" id="1_6p0u7"]
 [ext_resource type="Script" uid="uid://djtoibg8awpfj" path="res://scripts/damage_text.gd" id="2_6p0u7"]
 
 [node name="DamageText" type="Label"]
@@ -16,7 +16,7 @@ theme_override_colors/font_outline_color = Color(1, 0.462745, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 2
-theme_override_fonts/font = ExtResource("1_0x2rp")
+theme_override_fonts/font = ExtResource("1_6p0u7")
 theme_override_font_sizes/font_size = 0
 text = "-109"
 script = ExtResource("2_6p0u7")

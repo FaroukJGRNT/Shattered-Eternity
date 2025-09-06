@@ -6,12 +6,17 @@ extends Node2D
 var shader_duration = 0.2
 var shader_on_cooldown = false
 var damage_label : PackedScene = preload("res://scenes/damage_text.tscn") 
-
+var crit_label : PackedScene = preload("res://scenes/crit_text.tscn") 
+var frozen_label : PackedScene = preload("res://scenes/frozen_text.tscn") 
+var burn_label : PackedScene = preload("res://scenes/burn_text.tscn") 
+var elec_label : PackedScene = preload("res://scenes/elec_text.tscn") 
 
 func _on_enemy_damage_taken(dmg) -> void:
 	# Screen shake and frame freeze is handled directly by the hitboxes and hutboxes	
 	# Hit Particles
-	
+	$GPUParticles2D.direction.x = player.facing
+	$GPUParticles2D.emitting = true
+	$GPUParticles2D.restart()
 	# Hit flash
 	AnimPlayer.material.set_shader_parameter("enabled", true)
 	shader_on_cooldown = true
@@ -19,8 +24,9 @@ func _on_enemy_damage_taken(dmg) -> void:
 	# Damage show
 	var dmg_text = damage_label.instantiate()
 	dmg_text.position = Vector2(position.x + (player.facing * 5), position.y - 20)
-	dmg_text.direction = Vector2(player.facing, randf_range(-0.6, 0.6))
+	dmg_text.direction = player.facing
 	add_child(dmg_text)
+
 	# Lifebar update
 	LifeBar.update_health_bar(dmg)
 	

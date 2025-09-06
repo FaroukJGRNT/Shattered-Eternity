@@ -39,19 +39,19 @@ Le statut brulé inflige des degats continus
 Le statut electrocuté reduit la defense et l'attaque
 le statut gele realentit l'ennemi
 
-Foudre + feu :
-Feu + Glace : Choc thermique
-Foudre + Glace : 
-Foudre + Glace : 
+Foudre + feu : Plasmo-Surcharge
+Feu + Glace : Choc Thermique
+Foudre + Glace : Cryo-Chargé
 
 Chaque element a son type de particules sous hit
 
 Le joueur aura 3 skills:
 Chacun fait apparaitre une aureole d'element derriere sa tete
 et infuse ses attaques d'un certain element
+Faudrait un effet de kanji qui s'affiche pendant un bref moment a l'affichage
 Arts du mana: Feu  
 Arts du mana: Foudre  
-Arts du mana: Glace  
+Arts du mana: Glace 
 
 ### Decors:
 on doit utiliser des effets de brouillard, luciole, lumieres et autres pour rendre

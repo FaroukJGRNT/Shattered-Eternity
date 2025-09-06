@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://c20oww0mmtpx7"]
+[gd_scene load_steps=64 format=3 uid="uid://c20oww0mmtpx7"]
 
 [ext_resource type="Texture2D" uid="uid://rye6avf45wqu" path="res://assets/sprites/enemy/Skeleton enemy.png" id="1_1qe2k"]
 [ext_resource type="Script" uid="uid://cthv4yog3disp" path="res://scripts/enemy.gd" id="1_rfxxo"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bt0hiyjxpl4to" path="res://scenes/damage_bar.gd" id="14_j0cyh"]
 [ext_resource type="Script" uid="uid://hdehtxs642ig" path="res://scenes/life_bar.gd" id="14_s1ycm"]
 [ext_resource type="Script" uid="uid://bhibvqhjjgufw" path="res://scripts/hit_listener.gd" id="16_shcg2"]
+[ext_resource type="Script" uid="uid://d1sjbpcwpbklk" path="res://scripts/gpu_particles_2d.gd" id="17_shcg2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wtq4b"]
 resource_local_to_scene = true
@@ -313,7 +314,16 @@ height = 40.7366
 bg_color = Color(0.171637, 0.171637, 0.171637, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0wcc"]
-bg_color = Color(0.984314, 0.847059, 0, 1)
+bg_color = Color(1, 0.866667, 0.341176, 1)
+
+[sub_resource type="Curve" id="Curve_s1ycm"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(0.302691, -200), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_shcg2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_rfxxo")
@@ -413,6 +423,27 @@ one_shot = true
 script = ExtResource("16_shcg2")
 AnimPlayer = NodePath("../AnimatedSprite2D")
 LifeBar = NodePath("../LifeBar")
+
+[node name="GPUParticles2D" type="CPUParticles2D" parent="HitListener"]
+emitting = false
+amount = 18
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 52.05
+gravity = Vector2(0, 0)
+initial_velocity_min = 52.55
+initial_velocity_max = 257.02
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+linear_accel_curve = SubResource("Curve_s1ycm")
+angle_min = 30.0
+angle_max = 60.0
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_shcg2")
+script = ExtResource("17_shcg2")
 
 [connection signal="damage_taken" from="." to="LifeBar/DamageBar" method="_on_enemy_damage_taken"]
 [connection signal="damage_taken" from="." to="HitListener" method="_on_enemy_damage_taken"]

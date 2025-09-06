@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx5hja1blf4gx"]
+
+[ext_resource type="FontFile" uid="uid://c22hpqiolc8ba" path="res://assets/fonts/munro.ttf" id="1_njxpq"]
+[ext_resource type="Script" uid="uid://bhg5tdy8ctnuy" path="res://scripts/crit_text.gd" id="2_4r8q3"]
+
+[node name="FrozenText" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+theme_override_colors/font_color = Color(0.576351, 0.807215, 0.991619, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("1_njxpq")
+theme_override_font_sizes/font_size = 0
+text = "FROZEN !"
+script = ExtResource("2_4r8q3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

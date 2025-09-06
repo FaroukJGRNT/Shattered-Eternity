@@ -1,10 +1,17 @@
 extends CharacterBody2D
 class_name LivingEntity
 
-@export var max_life: int
-@export var life: int
-@export var attack = 0
-@export var defense = 0
+@export var max_life: int = 0
+@export var life: int = 0
+@export var attack : int = 0
+@export var defense : int = 0
+
+@export var thunder_res := 0
+@export var fire_res := 0
+@export var ice_res := 0
+
+@export var max_mana := 0
+@export var mana := 0
 
 func take_damage(damage:int):
 	var total_dmg = damage - defense

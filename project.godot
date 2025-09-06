@@ -23,7 +23,6 @@ DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 window/size/viewport_width=860
 window/size/viewport_height=525
-window/size/mode=3
 
 [editor_plugins]
 

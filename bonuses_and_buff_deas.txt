@@ -24,3 +24,6 @@ Recuperez de la vie a chaque fois que vous recupererz de l'almana
 
 Lecher sa lame:
 Receperez de la vie a chaque fois que vous infligez des degats
+
+Sans limites:
+Vos attaques chargees font 300% de degats, mais vous coutent 10% de votre vie

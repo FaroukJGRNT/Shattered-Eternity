@@ -25,16 +25,16 @@ var current_weapon = Weapons.SWORD
 
 # Stats
 func _init() -> void:
-	max_life = 10000
+	max_life = 200
 	life = max_life 
-	attack = 10
-	defense = 10
+	attack = 80
+	defense = 2
+	thunder_res = 10.0
+	fire_res = 10.0
+	ice_res = 10.0
 
-func take_damage(damage:int):
-	var total_dmg = damage - defense
-	if total_dmg <= 0:
-		total_dmg = 0
-	life -= total_dmg
+func take_damage(damage:DamageContainer):
+	super.take_damage(damage)
 	change_state("hit")
 	$AnimatedSprite2D.material.set_shader_parameter("enabled", true)
 	$HitFlash.start()

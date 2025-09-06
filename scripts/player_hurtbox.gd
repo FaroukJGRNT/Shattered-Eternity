@@ -21,11 +21,11 @@ func on_area_entered(area: Area2D) -> void:
 		if not owner.has_method("take_damage"):
 			return
 		if disabled == false and area.active and not on_cooldown and _owner_in_targeted_groups(owner, area.targeted_groups):
-			owner.take_damage(area.damage)
+			owner.take_damage(area.generate_damage())
 			on_cooldown = true
 
 	# HurtBox
 	elif area is HurtBox:
 		if area.owner.is_in_group("Enemy") and disabled == false:
-			owner.take_damage(10)
+			owner.take_damage(area.owner.deal_damage(5))
 			on_cooldown = true

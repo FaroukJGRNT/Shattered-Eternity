@@ -17,19 +17,24 @@ var facing = 1
 func _init() -> void:
 	max_life = 300
 	life = max_life
-	attack = 30
-	defense = 10
+	attack = 60
+	defense = 5
+	thunder_res = 10.0
+	fire_res = 10.0
+	ice_res = 10.0
 
 func _ready() -> void:
 	pass 
-func take_damage(dmg:int):
-	super.take_damage(dmg)
+func take_damage(dmg:DamageContainer):
+	dmg = super.take_damage(dmg)
 	damage_taken.emit(dmg)
 
 func die():
 	Engine.time_scale = 1
 	$Area2D.monitoring = false
-	if HurtBox:
+	if $CollisionShape2D:
+		$CollisionShape2D.queue_free()
+	if $HurtBox:
 		$HurtBox.queue_free()
 	$LifeBar.visible = false
 	$EnemyStateMachine.on_state_transition("death")

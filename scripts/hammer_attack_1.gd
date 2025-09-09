@@ -3,10 +3,12 @@ extends PlayerState
 var attack_again := false
 
 func enter():
+	attack_again = false
 	AnimPlayer.play("hammer_attack_1")
 
 func update(delta):
-	if Input.is_action_just_pressed("attack"):
+	player.handle_horizontal_movement(player.RUN_SPEED / 8)
+	if Input.is_action_just_pressed("attack") and AnimPlayer.frame >= 6:
 		attack_again = true
 
 func exit():
@@ -18,4 +20,5 @@ func on_animation_end():
 	if attack_again:
 		transitioned.emit("hammerattack2")
 	else:
-		transitioned.emit("idle")
+		AnimPlayer.play("hammer_recovery_1")
+		transitioned.emit("heavyattackrecovery")

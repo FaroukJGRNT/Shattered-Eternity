@@ -3,6 +3,20 @@ class_name LivingEntity
 
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
 
+@export var status_vbox: VBoxContainer
+
+var FreezeBar: PackedScene = preload("res://scenes/freeze_bar.tscn")
+var BurnBar: PackedScene = preload("res://scenes/burn_bar.tscn")
+var ThunderBar: PackedScene = preload("res://scenes/thunder_bar.tscn")
+
+var status_bars : Dictionary = {
+	"fire": BurnBar,
+	"thunder": ThunderBar,
+	"ice": FreezeBar
+}  # {"fire": ProgressBar, "ice": ProgressBar, ...}
+
+var active_status_bars : Dictionary = {}
+
 @export var max_life: int = 0
 @export var life: int = 0
 @export var attack: int = 0
@@ -42,7 +56,7 @@ var accum_factor = {
 	"ice": 0.1
 }
 
-@export var accum_decay_rate := 5.0  # points par seconde
+@export var accum_decay_rate := 0.5  # points par seconde
 
 # --- Cooldowns pour chaque statut (en secondes) ---
 @export var burn_cooldown_time := 3.0
@@ -53,7 +67,7 @@ var accum_factor = {
 var burn_tick_timer := 0.0
 
 # --- Effets des statuts ---
-@export var burn_damage_per_second := max_life * 2 / 100
+@export var burn_damage_per_second := int(max((max_life * 2 / 100), 1))
 @export var shock_attack_reduction := 0.5  # -50%
 @export var shock_defense_reduction := 0.75 # -75%
 @export var freeze_speed_reduction := 0.5  # -50% vitesse
@@ -71,16 +85,20 @@ var base_speed := 0.0
 var frozen_label : PackedScene = preload("res://scenes/frozen_text.tscn") 
 var burn_label : PackedScene = preload("res://scenes/burn_text.tscn") 
 var elec_label : PackedScene = preload("res://scenes/elec_text.tscn") 
+var damage_label : PackedScene = preload("res://scenes/damage_text.tscn") 
 
 func _ready():
 	burn_damage_per_second = max_life * 0.02
 	base_attack = attack
 	base_defense = defense
 
+var pulse_timer := 0.0  # à mettre dans la classe
+
 func _process(delta):
 	# Vider les barres d'accumulation progressivement
 	for key in accum.keys():
 		accum[key] = max(accum[key] - accum_decay_rate * delta, 0)
+	_update_accum_bars()
 
 	# Appliquer les statuts actifs
 	var to_remove = []
@@ -99,6 +117,19 @@ func _process(delta):
 	# Nettoyer les statuts expirés
 	for status in to_remove:
 		_remove_status(status)
+
+	# --- Pulsation avec delta ---
+	pulse_timer += delta
+	var t = sin(pulse_timer * 5.0) * 0.5 + 0.5  # multiplier pour ajuster la vitesse du pulse
+
+	if "burn" in status_effects:
+		anim_player.modulate = Color(1, 0.5, 0, 1) * t + Color(1,1,1,1) * (1-t)
+	elif "freeze" in status_effects:
+		anim_player.modulate = Color(0.5, 0.8, 1, 1) * t + Color(1,1,1,1) * (1-t)
+	elif "shock" in status_effects:
+		anim_player.modulate = Color(1, 1, 0, 1) * t + Color(1,1,1,1) * (1-t)
+	else:
+		anim_player.modulate = Color(1,1,1,1)
 
 func take_damage(damage: DamageContainer):
 	# Appliquer les résistances directement sur le DamageContainer
@@ -188,6 +219,13 @@ func _apply_burn(delta):
 	if burn_tick_timer >= burn_tick_interval:
 		burn_tick_timer = 0.0
 		life -= burn_damage_per_second
+		var dmg_text_instance = damage_label.instantiate()
+		dmg_text_instance.position = owner.position
+		dmg_text_instance.position.y -= 20
+		dmg_text_instance.direction = randi_range(0, 1) 
+		dmg_text_instance.add_theme_color_override("font_color", Color.ORANGE)
+		dmg_text_instance.text = str(int(burn_damage_per_second))  # affiche la valeur
+		add_child(dmg_text_instance)
 		if life <= 0:
 			life = 0
 			die()
@@ -224,3 +262,36 @@ func _show_status_label(status_name: String):
 	if label:
 		label.position = Vector2(0, -40) # un peu au-dessus du perso
 		add_child(label)
+
+func _update_accum_bars():
+	var index := 0
+	for elem in accum.keys():
+		var value = accum[elem]
+
+		if value > 0:
+			# Créer la barre si elle n'existe pas encore
+			if not active_status_bars.has(elem):
+				var bar = status_bars[elem].instantiate()
+				add_child(bar)
+				active_status_bars[elem] = bar
+
+			# Mettre à jour la barre
+			var bar_node = active_status_bars[elem]
+			bar_node.value = accum[elem]
+			match elem:
+				"fire":
+					bar_node.max_value = fire_res
+				"ice":
+					bar_node.max_value = ice_res
+				"thunder":
+					bar_node.max_value = thunder_res
+
+			# Positionner la barre comme dans un VBox
+			bar_node.position = Vector2(-20, -40 - index * 12)  # -40 au-dessus du perso, puis -12px par barre
+			index += 1
+
+		else:
+			# Si la valeur est 0 et la barre existe → on la supprime
+			if active_status_bars.has(elem):
+				active_status_bars[elem].queue_free()
+				active_status_bars.erase(elem)

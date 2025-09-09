@@ -7,7 +7,8 @@ func enter():
 	chase_start = enemy.position.x
 
 func update(delta):
-	if abs(enemy.position.x - enemy.target.position.x) <= enemy.ATTACK_RANGE:
+	if abs(enemy.position.x - enemy.target.position.x) <= enemy.ATTACK_RANGE and\
+	(enemy.position.x - enemy.target.position.x) * enemy.direction.x < 0:
 		transitioned.emit("attack")
 		return
 	AnimPlayer.play("run")

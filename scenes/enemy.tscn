@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cthv4yog3disp" path="res://scripts/enemy.gd" id="1_rfxxo"]
 [ext_resource type="Shader" uid="uid://dbau474f0ay52" path="res://shaders/hit_flash.tres" id="1_wtq4b"]
 [ext_resource type="Script" uid="uid://cudcd7wg184ea" path="res://scripts/animated_sprite_2d.gd" id="3_5uy6h"]
-[ext_resource type="Script" uid="uid://yeff8at8yhdy" path="res://scenes/hit_box.gd" id="3_f85vv"]
+[ext_resource type="Script" uid="uid://yeff8at8yhdy" path="res://scripts/hit_box.gd" id="3_f85vv"]
 [ext_resource type="Script" uid="uid://cv64de5dddrge" path="res://scripts/enemy_hurt_box.gd" id="5_w8i8w"]
 [ext_resource type="Script" uid="uid://do8u78sktsj4a" path="res://scripts/enemy_state_machine.gd" id="6_xwavj"]
 [ext_resource type="Script" uid="uid://d2m4obxg6e5yd" path="res://scripts/wander.gd" id="7_nenq2"]
@@ -13,8 +13,8 @@
 [ext_resource type="Script" uid="uid://4t8fggq603ue" path="res://scripts/death.gd" id="10_otmr2"]
 [ext_resource type="Texture2D" uid="uid://cekn42u0pp1e3" path="res://assets/sprites/ui/ValueBar_128x16.png" id="10_w8i8w"]
 [ext_resource type="Texture2D" uid="uid://djgtlpka5r4sy" path="res://assets/sprites/ui/ValueRed_120x8.png" id="11_otmr2"]
-[ext_resource type="Script" uid="uid://bt0hiyjxpl4to" path="res://scenes/damage_bar.gd" id="14_j0cyh"]
-[ext_resource type="Script" uid="uid://hdehtxs642ig" path="res://scenes/life_bar.gd" id="14_s1ycm"]
+[ext_resource type="Script" uid="uid://bt0hiyjxpl4to" path="res://scripts/damage_bar.gd" id="14_j0cyh"]
+[ext_resource type="Script" uid="uid://hdehtxs642ig" path="res://scripts/life_bar.gd" id="14_s1ycm"]
 [ext_resource type="Script" uid="uid://bhibvqhjjgufw" path="res://scripts/hit_listener.gd" id="16_shcg2"]
 [ext_resource type="Script" uid="uid://d1sjbpcwpbklk" path="res://scripts/gpu_particles_2d.gd" id="17_shcg2"]
 
@@ -325,8 +325,9 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("status_vbox") groups=["Enemy"]]
 script = ExtResource("1_rfxxo")
+status_vbox = NodePath("")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hitbox")]
 material = SubResource("ShaderMaterial_wtq4b")
@@ -350,6 +351,7 @@ collision_layer = 128
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-5, 6)
 shape = SubResource("CircleShape2D_124ph")
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -452,8 +454,8 @@ script = ExtResource("17_shcg2")
 [connection signal="animation_finished" from="AnimatedSprite2D" to="EnemyStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="HitBox" method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="timeout" from="AttackCoolDown" to="." method="_on_sliding_timer_timeout"]
 [connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]
+[connection signal="timeout" from="AttackCoolDown" to="." method="_on_sliding_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="LifeBar/DamageBar/Timer" to="LifeBar/DamageBar" method="_on_timer_timeout"]

@@ -4,7 +4,8 @@ func enter():
 	AnimPlayer.play("hammer_attack_2")
 
 func update(delta):
-	pass
+	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= 4 :
+		transitioned.emit("backdashing")
 
 func exit():
 	pass

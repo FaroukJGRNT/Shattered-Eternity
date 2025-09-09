@@ -39,8 +39,8 @@ Le statut brulé inflige des degats continus
 Le statut electrocuté reduit la defense et l'attaque
 le statut gele realentit l'ennemi
 
-Foudre + feu : Plasmo-Surcharge
-Feu + Glace : Choc Thermique
+Foudre + feu : Plasma-Surcharge : La barre de posture se remplit plus vite
+Feu + Glace : Choc Thermique : baisse toutes les defenses elementaires
 Foudre + Glace : Cryo-Chargé
 
 Chaque element a son type de particules sous hit
@@ -48,7 +48,7 @@ Chaque element a son type de particules sous hit
 Le joueur aura 3 skills:
 Chacun fait apparaitre une aureole d'element derriere sa tete
 et infuse ses attaques d'un certain element
-Faudrait un effet de kanji qui s'affiche pendant un bref moment a l'affichage
+Faudrait un effet de rune qui s'affiche pendant un bref moment
 Arts du mana: Feu  
 Arts du mana: Foudre  
 Arts du mana: Glace 
@@ -67,3 +67,15 @@ En plus d'une barre de vie, les ennemis ont une barre de stagger qui
 aumente lorsque vous faites une parade parfaite, utilisez une brise garde reussie
 ou bien lorsquils prennent des degats. Elle se remplit lorsqu'ils ne font rien.
 Si elle se remplit, l'ennemi entre dans l'etat vulnerable
+
+### Idees de levels:
+Il nous faut une zone montagneuse et enneigee
+Des collines ou y'a de le foudre
+un endroit sous terrain avec du feu, la mine du village
+
+### Idees de persos:
+Un scientifique qui cherche a comprendre ce qui se passe dans le monde
+actuellement. Il est adepte de la foudre. Je le vois bien blond
+aux yeux bleus avec des lunettes rondes et une cape blanche
+Un gang de bandits qu'on rencontrera un peu partout. Ils ont des haches,
+s'habillent en noir, et leur chef sera un perso interessant, hopefully

@@ -19,9 +19,9 @@ func _init() -> void:
 	life = max_life
 	attack = 60
 	defense = 5
-	thunder_res = 10.0
-	fire_res = 10.0
-	ice_res = 10.0
+	thunder_res = 3.0
+	fire_res = 3.0
+	ice_res = 3.0
 
 func _ready() -> void:
 	pass 

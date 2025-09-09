@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://kcqiffrku2p2"]
+
+[ext_resource type="Script" uid="uid://5cy8xw71qe0h" path="res://scripts/freeze_bar.gd" id="1_7ba18"]
+[ext_resource type="Texture2D" uid="uid://v4o85f0li7e2" path="res://assets/sprites/ui/small container.png" id="1_ftvvs"]
+[ext_resource type="Texture2D" uid="uid://ckr5x43vmw0o6" path="res://assets/sprites/ui/ice.png" id="2_7ba18"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lifxi"]
+load_path = "res://.godot/imported/status_bar_over.png-6663a6231b7884a12ceea9e25110d9ba.ctex"
+
+[sub_resource type="Gradient" id="Gradient_7ba18"]
+offsets = PackedFloat32Array(0, 0.542056)
+colors = PackedColorArray(0, 1, 1, 1, 0.933333, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ftvvs"]
+gradient = SubResource("Gradient_7ba18")
+width = 140
+
+[node name="TextureProgressBar" type="TextureProgressBar"]
+z_index = 2
+offset_right = 212.0
+offset_bottom = 40.0
+scale = Vector2(0.35, 0.35)
+step = 0.05
+value = 79.0
+nine_patch_stretch = true
+texture_over = SubResource("CompressedTexture2D_lifxi")
+script = ExtResource("1_7ba18")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 27.0
+offset_top = 16.0
+offset_right = 185.0
+offset_bottom = 24.0
+step = 0.05
+value = 44.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_ftvvs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(18, 19)
+texture = ExtResource("1_ftvvs")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+
+[node name="Icon" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(0, 1)
+texture = ExtResource("2_7ba18")

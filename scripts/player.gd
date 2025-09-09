@@ -21,14 +21,14 @@ enum Weapons {
 	HAMMER
 }
 
-var current_weapon = Weapons.SWORD
+var current_weapon = Weapons.HAMMER
 
 # Stats
 func _init() -> void:
 	max_life = 200
 	life = max_life 
 	attack = 80
-	defense = 2
+	defense = 2	
 	thunder_res = 10.0
 	fire_res = 10.0
 	ice_res = 10.0
@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 		current_state.name == "JumpStart" or\
 		current_state.name == "Landing" or\
 		current_state.name == "WallSliding" or\
-		"Attack" in current_state.name:
+		"Attack" in current_state.name and current_state.name != "AttackRecovery":
 		return
 
 	# Get the horizontal input and direct the sprite
@@ -80,13 +80,17 @@ func _physics_process(delta: float) -> void:
 		if direction != 0:
 			change_state("running")
 		else:
-			change_state("idle")
-
-
+			if "Recovery" not in current_state.name:
+				change_state("idle")
 	# Updating the player state mid air
 	else:
 		change_state("airborne")
 
+	if Input.is_action_just_pressed("change_weapon"):
+		$VFXPlayer.visible = true
+		$VFXPlayer.rotation = randf_range(0, 180)
+		$VFXPlayer.play("weapon_change")
+		current_weapon = (current_weapon + 1) % 3
 
 #------ Utility functions ------#
 
@@ -122,7 +126,6 @@ func direct_sprite():
 		$HitBoxes.scale.x = 1
 		facing =  1
 
-
 func get_horizontal_input():
 	direction = Input.get_axis("left", "right")
 
@@ -150,10 +153,14 @@ func initiate_ground_actions():
 			Weapons.SWORD:
 				change_state("swordattack1")
 			Weapons.SPEAR:
-				change_state("spearattack1")
+				pass
 			Weapons.HAMMER:
 				change_state("hammerattack1")
 
 
 func _on_hit_flash_timeout() -> void:
 	$AnimatedSprite2D.material.set_shader_parameter("enabled", false)
+
+
+func _on_vfx_player_animation_finished() -> void:
+	$VFXPlayer.visible = false

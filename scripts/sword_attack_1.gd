@@ -21,4 +21,5 @@ func on_animation_end():
 	if attack_again:
 		transitioned.emit("swordattack2")
 	else:
-		transitioned.emit("idle")
+		AnimPlayer.play("sword_recovery_1")
+		transitioned.emit("attackrecovery")

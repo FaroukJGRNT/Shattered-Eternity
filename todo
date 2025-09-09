@@ -1,3 +1,4 @@
-- Implementer le backdash en idle et a la fin d'une attaque
-- Implementer la hitbox des attaques
-- Implementer tous les effets du hit (tremblement, affichage des degats, particules)
+- Implementer le changement d'arme
+- Implementer les visuels des effets de statut
+- Implementer les attaques chargees
+- Trouver des vfx

@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=135 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Shader" uid="uid://dbau474f0ay52" path="res://shaders/hit_flash.tres" id="2_wqfne"]
@@ -180,6 +180,10 @@ region = Rect2(96, 64, 96, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_irpag"]
 atlas = ExtResource("5_ur7pv")
 region = Rect2(96, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jx8is"]
+atlas = ExtResource("4_fdfoy")
+region = Rect2(960, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bpsgo"]
 atlas = ExtResource("5_ur7pv")
@@ -485,6 +489,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_jx8is")
+}],
+"loop": true,
+"name": &"jump_peak",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_bpsgo")
 }],
 "loop": false,
@@ -751,10 +763,9 @@ script = ExtResource("1_le0q1")
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(4, -17)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"landing"
+animation = &"jump_peak"
 autoplay = "idle"
-frame = 2
-frame_progress = 1.0
+frame_progress = 0.0879071
 script = ExtResource("5_fjrip")
 s_hitbox1 = NodePath("../HitBoxes/SwordAttack1")
 s_hitbox2 = NodePath("../HitBoxes/SwordAttack2")

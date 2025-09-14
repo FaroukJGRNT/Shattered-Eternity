@@ -1,24 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://lcalun41bn55"]
+[gd_scene load_steps=7 format=3 uid="uid://lcalun41bn55"]
 
 [ext_resource type="Script" uid="uid://ckkbj12ajssly" path="res://scripts/ingame_ui.gd" id="1_v3yap"]
-[ext_resource type="Texture2D" uid="uid://chvkbbpq7m37j" path="res://assets/sprites/ui/health_bar_over.png" id="2_h2rwu"]
+[ext_resource type="Texture2D" uid="uid://jn6qnqfr4t2q" path="res://assets/sprites/ui/health_bar_middle.png" id="2_i42rf"]
+[ext_resource type="Script" uid="uid://cfl4j06jb061c" path="res://scripts/player_life_bar.gd" id="3_cm6yq"]
+[ext_resource type="Texture2D" uid="uid://djgtlpka5r4sy" path="res://assets/sprites/ui/ValueRed_120x8.png" id="4_f6424"]
+[ext_resource type="Texture2D" uid="uid://b5c04ekcshet0" path="res://assets/sprites/ui/health_bar_left.png" id="5_uyn70"]
+[ext_resource type="Texture2D" uid="uid://5goleerlvdew" path="res://assets/sprites/ui/health_bar_right.png" id="6_yrj12"]
 
 [node name="IngameUI" type="CanvasLayer"]
 script = ExtResource("1_v3yap")
 
 [node name="LifeBar" type="TextureProgressBar" parent="."]
-clip_children = 2
 z_index = 10
-offset_left = 20.0
-offset_top = 17.0
-offset_right = 160.0
-offset_bottom = 49.0
+offset_left = 21.0
+offset_top = 18.0
+offset_right = 121.0
+offset_bottom = 36.0
 value = 44.0
-texture_over = ExtResource("2_h2rwu")
+texture_over = ExtResource("2_i42rf")
+script = ExtResource("3_cm6yq")
 
-[node name="TextureRect" type="TextureRect" parent="LifeBar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="LifeBar"]
+show_behind_parent = true
 layout_mode = 0
-offset_left = 17.0
-offset_top = 10.0
-offset_right = 42.0
-offset_bottom = 22.0
+offset_top = 4.0
+offset_right = 100.0
+offset_bottom = 12.0
+value = 41.0
+nine_patch_stretch = true
+texture_progress = ExtResource("4_f6424")
+
+[node name="HealthBarLeft" type="Sprite2D" parent="LifeBar"]
+position = Vector2(-1, 8)
+texture = ExtResource("5_uyn70")
+
+[node name="HealthBarRight" type="Sprite2D" parent="LifeBar"]
+position = Vector2(100, 8)
+texture = ExtResource("6_yrj12")

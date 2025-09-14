@@ -1,32 +1,30 @@
 extends PlayerState
 
 var frames = 0
+var old_direction = 0
 
 func enter():
+	old_direction = player.direction
 	player.velocity.x =  0
 	AnimPlayer.play("wallsliding")
 
 func update(delta):
+	if old_direction == 1:
+		AnimPlayer.flip_h = true
+	if old_direction == -1:
+		AnimPlayer.flip_h = false
 	if Input.is_action_just_pressed("jump"):
-		player.velocity.y = player.JUMP_VELOCITY
-		player.velocity.x = -500 * player.facing
-		player.direction *= -1
-		player.direct_sprite()
-		player.move_and_slide()
-		transitioned.emit("airborne")
-		#player.direction *= -1
-		#player.facing *= -1
+		transitioned.emit("walljumping")
 		return
 	player.handle_vertical_movement(delta)
 	if player.is_on_floor():
 		transitioned.emit("idle")
 	if not player.is_on_wall():
 		frames += 1
-		if frames > 5:
+		if frames > 30:
 			transitioned.emit("airborne")
 	else:
 		frames = 0
-		
 
 func exit():
 	pass

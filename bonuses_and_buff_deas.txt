@@ -7,7 +7,13 @@ idem pour la glace
 
 Feu tenace:
 Augmente la duree de l'etat brulure inflige aux ennemis de 20%
-La foudre frappe deux fois au meme endroit:
+La foudre frappe deux fois au Incedie:
+Augmente tous les dgts de feu de 20%
+Orage:
+idem pour la foudre
+Blizzard:
+idem pour la glace
+meme endroit:
 idem pour la foudre
 Givre eternel:
 idem pour la glace
@@ -23,7 +29,16 @@ Devoreur d'Almana:
 Recuperez de la vie a chaque fois que vous recupererz de l'almana
 
 Lecher sa lame:
-Receperez de la vie a chaque fois que vous infligez des degats
+Recuperez de la vie a chaque fois que vous infligez des degats
 
 Sans limites:
 Vos attaques chargees font 300% de degats, mais vous coutent 10% de votre vie
+
+Eveil des flammes:
+Le malus de statut Brulure est remplace par le malus
+Archi-Brulre
+Eveil des glaces:
+-
+Eveil des eclairs:
+-
+

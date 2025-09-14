@@ -18,7 +18,19 @@ position = Vector2(-162, 317)
 position = Vector2(203, 268)
 
 [node name="Enemy" parent="." instance=ExtResource("3_4lhks")]
-position = Vector2(1490, -19)
+position = Vector2(1675, 132)
+scale = Vector2(1.5, 1.5)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_4lhks")]
+position = Vector2(1287, 201)
+scale = Vector2(1.5, 1.5)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_4lhks")]
+position = Vector2(2246, 146)
+scale = Vector2(1.5, 1.5)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_4lhks")]
+position = Vector2(859, 98)
 scale = Vector2(1.5, 1.5)
 
 [node name="IngameUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_mx8sn")]

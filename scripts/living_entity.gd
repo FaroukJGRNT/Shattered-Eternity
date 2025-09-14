@@ -210,7 +210,6 @@ func die():
 	pass
 
 func apply_status(status_name: String):
-	print("Status applied:", status_name)
 	status_effects[status_name] = status_duration
 	_show_status_label(status_name)
 
@@ -287,7 +286,7 @@ func _update_accum_bars():
 					bar_node.max_value = thunder_res
 
 			# Positionner la barre comme dans un VBox
-			bar_node.position = Vector2(-20, -40 - index * 12)  # -40 au-dessus du perso, puis -12px par barre
+			bar_node.position = Vector2(-20, -40 - index * 8)  # -40 au-dessus du perso, puis -12px par barre
 			index += 1
 
 		else:

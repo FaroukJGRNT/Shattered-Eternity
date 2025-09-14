@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://c20oww0mmtpx7"]
+[gd_scene load_steps=65 format=3 uid="uid://c20oww0mmtpx7"]
 
 [ext_resource type="Texture2D" uid="uid://rye6avf45wqu" path="res://assets/sprites/enemy/Skeleton enemy.png" id="1_1qe2k"]
 [ext_resource type="Script" uid="uid://cthv4yog3disp" path="res://scripts/enemy.gd" id="1_rfxxo"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://4t8fggq603ue" path="res://scripts/death.gd" id="10_otmr2"]
 [ext_resource type="Texture2D" uid="uid://cekn42u0pp1e3" path="res://assets/sprites/ui/ValueBar_128x16.png" id="10_w8i8w"]
 [ext_resource type="Texture2D" uid="uid://djgtlpka5r4sy" path="res://assets/sprites/ui/ValueRed_120x8.png" id="11_otmr2"]
+[ext_resource type="Script" uid="uid://ccygvk7yr0eni" path="res://scripts/staggered.gd" id="12_ile5s"]
 [ext_resource type="Script" uid="uid://bt0hiyjxpl4to" path="res://scripts/damage_bar.gd" id="14_j0cyh"]
 [ext_resource type="Script" uid="uid://hdehtxs642ig" path="res://scripts/life_bar.gd" id="14_s1ycm"]
 [ext_resource type="Script" uid="uid://bhibvqhjjgufw" path="res://scripts/hit_listener.gd" id="16_shcg2"]
@@ -325,9 +326,8 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("status_vbox") groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_rfxxo")
-status_vbox = NodePath("")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hitbox")]
 material = SubResource("ShaderMaterial_wtq4b")
@@ -387,6 +387,9 @@ script = ExtResource("8_md484")
 
 [node name="Death" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("10_otmr2")
+
+[node name="Staggered" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("12_ile5s")
 
 [node name="LifeBar" type="TextureProgressBar" parent="."]
 z_index = 1
@@ -454,8 +457,8 @@ script = ExtResource("17_shcg2")
 [connection signal="animation_finished" from="AnimatedSprite2D" to="EnemyStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="HitBox" method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]
 [connection signal="timeout" from="AttackCoolDown" to="." method="_on_sliding_timer_timeout"]
+[connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="LifeBar/DamageBar/Timer" to="LifeBar/DamageBar" method="_on_timer_timeout"]

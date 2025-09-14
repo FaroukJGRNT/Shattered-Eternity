@@ -4,7 +4,10 @@ func enter():
 	AnimPlayer.play("landing")
 
 func update(delta):
-	player.handle_horizontal_movement(player.RUN_SPEED/2)
+	player.get_horizontal_input()
+	if player.direction != 0 and AnimPlayer.frame >= 2:
+		transitioned.emit("idle")
+	player.handle_horizontal_movement(player.RUN_SPEED/1.75)
 	player.direct_sprite()
 	player.initiate_ground_actions()
 

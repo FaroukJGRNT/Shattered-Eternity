@@ -103,3 +103,4 @@ Il nous faut une battle de danse
 Il nous faut des "Appels" des invocations que certains persos te donnent et que tu peux utiliser
 pour utiliser leur competence speciale
 Jouer avec le zoom de la cam quand hurt ou bien quand coup mechant
+Ajouter du weapon spin sur les attaques chargees

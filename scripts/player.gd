@@ -61,6 +61,7 @@ func _physics_process(delta: float) -> void:
 		current_state.name == "Landing" or\
 		current_state.name == "WallSliding" or\
 		current_state.name == "WallJumping" or\
+		"Charg" in current_state.name or\
 		"Attack" in current_state.name and current_state.name != "AttackRecovery":
 		return
 

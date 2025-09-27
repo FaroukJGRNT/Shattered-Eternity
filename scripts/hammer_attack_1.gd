@@ -10,6 +10,8 @@ func update(delta):
 	player.handle_horizontal_movement(player.RUN_SPEED / 8)
 	if Input.is_action_just_pressed("attack") and AnimPlayer.frame >= 6:
 		attack_again = true
+	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= 7:
+		transitioned.emit("backdashing")
 
 func exit():
 	pass

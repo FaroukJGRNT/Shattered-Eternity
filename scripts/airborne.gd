@@ -6,6 +6,7 @@ func enter():
 func update(delta):
 	if player.is_on_wall():
 		transitioned.emit("wallsliding")
+		return
 	# Change animation to fall when descending
 	if abs(player.velocity.y) < 100:
 		AnimPlayer.play("jump_peak")

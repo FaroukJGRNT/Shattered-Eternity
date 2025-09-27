@@ -36,6 +36,7 @@ func die():
 		$CollisionShape2D.queue_free()
 	if $HurtBox:
 		$HurtBox.queue_free()
+		$HitBox.queue_free()
 	$LifeBar.visible = false
 	$EnemyStateMachine.on_state_transition("death")
 

@@ -6,6 +6,8 @@ func enter():
 func update(delta):
 	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= 4 :
 		transitioned.emit("backdashing")
+	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= 4:
+		transitioned.emit("backdashing")
 
 func exit():
 	pass

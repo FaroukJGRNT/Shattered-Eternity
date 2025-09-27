@@ -42,3 +42,10 @@ Eveil des glaces:
 Eveil des eclairs:
 -
 
+
+MAJOR SKILLS:
+Chaque run devrait commencer avec un major skill.
+Quelque chose comme la possibilite d'invoquer des ennemis battus ou bien
+un boost qui duplique tous les projectiles.
+Un skill si majeur qu'il va forcer le joueur a orienter le build dans un sens pour toute la run
+ 

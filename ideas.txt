@@ -21,7 +21,13 @@ Permet aussi d'interrompre une brise garde
 
 Garde:
 Permet de bloquer les attaques normales
-Appuyer sur le bouton au bon timimg permet de faire une parade
+Appuyer sur le bouton au bon timimg permet d'enchainer avec une parade
+Parade a la l'epee: Slash rapide qui vous met derriere l'ennemi
+Parade au marteau: mechant coup de pied qui repousse l'ennemi
+Parade a la lance: Slashs rapides qui vous font reculer
+
+PARADES SUCCESSIVES
+Parer plusieurs coups a la suite permet d'augmenter la puissance de la parade a suivre
 
 Brise-garde:
 Attaque speciale permettant de detruire une garde. Mais
@@ -79,3 +85,21 @@ actuellement. Il est adepte de la foudre. Je le vois bien blond
 aux yeux bleus avec des lunettes rondes et une cape blanche
 Un gang de bandits qu'on rencontrera un peu partout. Ils ont des haches,
 s'habillent en noir, et leur chef sera un perso interessant, hopefully
+
+Une fée. Les fees seraient des etres qui  ont quitte l'humanite depuis un moment deja
+a cause de leur mauvaise utilisation du mana. Mais autrefois
+elles aidaient les humains. On en trouvera une dans le jeu qui sentira que
+quelque chose cloche chez le joueur
+
+Un berserker qui sera aussi un boss. Juste un perso style et sympa a affronter
+avec qui le joueur pourra s'entrainer
+Je pense a un skill qui ajoutera un niveau aux attaques chargees
+Avec la lance, des lances additionnelles apparaitront au moment de les Lancer
+Avec le marteau, le premier coup horizontal est suivi d'un mechant coup vertical
+Avec l'epee on peut enchainer avec le slash rapide horizontal qui vous fait passer derriere l'ennemi
+
+# IDEES RANDOM
+Il nous faut une battle de danse
+Il nous faut des "Appels" des invocations que certains persos te donnent et que tu peux utiliser
+pour utiliser leur competence speciale
+Jouer avec le zoom de la cam quand hurt ou bien quand coup mechant

@@ -146,7 +146,7 @@ func initiate_ground_actions():
 			Weapons.SWORD:
 				change_state("swordattack1")
 			Weapons.SPEAR:
-				pass
+				change_state("spearattack1")
 			Weapons.HAMMER:
 				change_state("hammerattack1")
 

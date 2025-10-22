@@ -9,11 +9,10 @@ class_name Player
 @export var SLIDE_DIST = 120.0
 @export var BACKSLIDE_DIST = 80.0
 @export var WALL_SLIDE_SPEED = 50.0
-var direction = 0
-var facing := 1
 var dash_cooldown := 1.0
 var on_dash_cooldown := false
 var aerial_dash_used := false
+var hit_direction := 1
 
 enum Weapons {
 	SPEAR,
@@ -21,48 +20,39 @@ enum Weapons {
 	HAMMER
 }
 
-var current_weapon = Weapons.HAMMER
+var direction
+var current_weapon = Weapons.SWORD
 
 # Stats
 func _init() -> void:
 	max_life = 200
-	life = max_life 
+	life = max_life
 	attack = 80
-	defense = 2	
+	defense = 2
 	thunder_res = 10.0
 	fire_res = 10.0
 	ice_res = 10.0
 
 func take_damage(damage:DamageContainer):
 	super.take_damage(damage)
+	hit_direction = damage.facing
 	change_state("hit")
-	$AnimatedSprite2D.material.set_shader_parameter("enabled", true)
-	$HitFlash.start()
-	$Camera2D.trigger_shake(8, 8)
-	if life <= 0:
-		life = 0
-		die()
 
 func change_state(new_state):
 	$PlayerStateMachine.on_state_transition(new_state)
 
-func _physics_process(delta: float) -> void:
+func run_cooldowns(delta):
 	if on_dash_cooldown:
 		dash_cooldown -= delta
 	if dash_cooldown <= 0:
 		on_dash_cooldown = false
+
+func _physics_process(delta: float) -> void:
+	run_cooldowns(delta)
+
  	#------ Do nothing when in a blocking state ------#
-	var current_state = $PlayerStateMachine.get_current_state()
-	if current_state == null or\
-	 	current_state.name == "Hit" or\
-		current_state.name == "Dashing" or\
-		current_state.name == "BackDashing" or\
-		current_state.name == "JumpStart" or\
-		current_state.name == "Landing" or\
-		current_state.name == "WallSliding" or\
-		current_state.name == "WallJumping" or\
-		"Charg" in current_state.name or\
-		"Attack" in current_state.name and current_state.name != "AttackRecovery":
+	var current_state : PlayerState = $PlayerStateMachine.get_current_state()
+	if current_state.is_state_blocking:
 		return
 
 	# Get the horizontal input and direct the sprite
@@ -90,9 +80,11 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("change_weapon"):
 		$VFXPlayer.visible = true
-		$VFXPlayer.rotation = randf_range(0, 180)
+		if $VFXPlayer.is_playing():
+			$VFXPlayer.stop()
+		$VFXPlayer.rotation = randf_range(0, 360)
 		$VFXPlayer.play("weapon_change")
-		current_weapon = (current_weapon + 1) % 3
+		current_weapon = (int(current_weapon) + 1) % 3
 
 #------ Utility functions ------#
 
@@ -110,7 +102,7 @@ func handle_horizontal_movement(speed):
 	# Get the input direction and
 	# handle the movement/deceleration
 	if direction:
-		velocity.x = direction * speed
+		velocity.x = direction * speed * global_speed_scale
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	move_and_slide()
@@ -131,7 +123,6 @@ func direct_sprite():
 func get_horizontal_input():
 	direction = Input.get_axis("left", "right")
 
-
 func initiate_slide():
 	if Input.is_action_just_pressed("dash"):
 		if is_on_floor() and not on_dash_cooldown:
@@ -147,7 +138,7 @@ func initiate_slide():
 
 func initiate_ground_actions():
 	# Initiating a jump or a slide or an attack
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		change_state("jumpstart")
 	initiate_slide()
 	if Input.is_action_just_pressed("attack"):
@@ -159,10 +150,11 @@ func initiate_ground_actions():
 			Weapons.HAMMER:
 				change_state("hammerattack1")
 
-
-func _on_hit_flash_timeout() -> void:
-	$AnimatedSprite2D.material.set_shader_parameter("enabled", false)
-
-
 func _on_vfx_player_animation_finished() -> void:
 	$VFXPlayer.visible = false
+	$VFXPlayer.position = Vector2(0, 0)
+
+func on_attack_charged() -> void:
+	$VFXPlayer.visible = true
+	$VFXPlayer.position = Vector2(-20 * direction, -20)
+	$VFXPlayer.play("full_charge")

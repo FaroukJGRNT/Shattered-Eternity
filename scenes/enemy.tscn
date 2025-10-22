@@ -305,10 +305,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_124ph"]
 radius = 148.964
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgtw1"]
-radius = 12.0284
-height = 40.7366
-
 [sub_resource type="Theme" id="Theme_wtq4b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0cyh"]
@@ -326,16 +322,22 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgtw1"]
+radius = 12.0284
+height = 40.7366
+
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_rfxxo")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
 material = SubResource("ShaderMaterial_wtq4b")
 sprite_frames = SubResource("SpriteFrames_3v2ag")
 animation = &"attack"
 autoplay = "idle"
 script = ExtResource("3_5uy6h")
-hitbox = NodePath("../HitBox")
+hurtbox = NodePath("../HurtBox")
+hitboxes = NodePath("../HitBoxes")
+state_machine = NodePath("../EnemyStateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
@@ -354,14 +356,6 @@ collision_mask = 128
 position = Vector2(-5, 6)
 shape = SubResource("CircleShape2D_124ph")
 
-[node name="HitBox" type="Area2D" parent="."]
-script = ExtResource("3_f85vv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(10, -10)
-rotation = 1.82038
-shape = SubResource("CapsuleShape2D_wgtw1")
-
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 2
 script = ExtResource("5_w8i8w")
@@ -379,8 +373,12 @@ enemy = NodePath("..")
 [node name="Wander" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("7_nenq2")
 
-[node name="Attack" type="Node" parent="EnemyStateMachine"]
+[node name="Attack" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("8_ipns3")
+anim_name = "attack"
+active_frames = Array[int]([4])
+hitbox = NodePath("../../HitBoxes/HitBox")
+attack_cooldown = 1.5
 
 [node name="Chase" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("8_md484")
@@ -421,13 +419,10 @@ show_percentage = false
 script = ExtResource("14_j0cyh")
 life_bar = NodePath("..")
 
-[node name="Timer" type="Timer" parent="LifeBar/DamageBar"]
-wait_time = 0.4
-one_shot = true
-
-[node name="HitListener" type="Node2D" parent="." node_paths=PackedStringArray("AnimPlayer", "LifeBar")]
+[node name="HitListener" type="Node2D" parent="." node_paths=PackedStringArray("AnimPlayer", "VFXPlayer", "LifeBar")]
 script = ExtResource("16_shcg2")
 AnimPlayer = NodePath("../AnimatedSprite2D")
+VFXPlayer = NodePath("HitVFXPlayer")
 LifeBar = NodePath("../LifeBar")
 
 [node name="GPUParticles2D" type="CPUParticles2D" parent="HitListener"]
@@ -451,14 +446,25 @@ scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_shcg2")
 script = ExtResource("17_shcg2")
 
+[node name="HitVFXPlayer" type="AnimatedSprite2D" parent="HitListener"]
+
+[node name="HitBoxes" type="Node2D" parent="."]
+
+[node name="HitBox" type="Area2D" parent="HitBoxes"]
+script = ExtResource("3_f85vv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HitBox"]
+position = Vector2(10, -10)
+rotation = 1.82038
+shape = SubResource("CapsuleShape2D_wgtw1")
+
 [connection signal="damage_taken" from="." to="LifeBar/DamageBar" method="_on_enemy_damage_taken"]
 [connection signal="damage_taken" from="." to="HitListener" method="_on_enemy_damage_taken"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="EnemyStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
-[connection signal="frame_changed" from="AnimatedSprite2D" to="HitBox" method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="HitBoxes/HitBox" method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="AttackCoolDown" to="." method="_on_sliding_timer_timeout"]
+[connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="timeout" from="LifeBar/DamageBar/Timer" to="LifeBar/DamageBar" method="_on_timer_timeout"]

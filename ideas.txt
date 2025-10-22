@@ -78,6 +78,9 @@ Si elle se remplit, l'ennemi entre dans l'etat vulnerable
 Il nous faut une zone montagneuse et enneigee
 Des collines ou y'a de le foudre
 un endroit sous terrain avec du feu, la mine du village
+Un ancien champ de bataille ou plein de chevaliers sont morts
+Leurs carcasses possedees pas l'almana continuiront de se battre
+Ils seront les ennemis les plus funs du jeu
 
 ### Idees de persos:
 Un scientifique qui cherche a comprendre ce qui se passe dans le monde

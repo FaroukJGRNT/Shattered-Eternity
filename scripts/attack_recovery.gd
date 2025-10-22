@@ -2,6 +2,7 @@ extends PlayerState
 
 func enter():
 	pass
+
 func update(delta):
 	player.initiate_ground_actions()
 	player.handle_horizontal_movement(player.RUN_SPEED)

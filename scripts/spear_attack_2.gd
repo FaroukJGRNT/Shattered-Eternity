@@ -2,6 +2,9 @@ extends PlayerState
 
 var attack_again := false
 
+func _ready() -> void:
+	is_state_blocking = true
+
 func enter():
 	AnimPlayer.play("spear_attack_2")
 

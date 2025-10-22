@@ -1,5 +1,8 @@
 extends PlayerState
 
+func _ready() -> void:
+	is_state_blocking = true
+
 func enter():
 	player.velocity.y = player.JUMP_VELOCITY
 	AnimPlayer.play("walljumping")

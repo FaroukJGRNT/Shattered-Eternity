@@ -1,25 +1,19 @@
-extends PlayerState
+extends AttackState
 
-var attack_again := false
+var charge_timer := 0.0
 
 func enter():
-	attack_again = false
-	AnimPlayer.play("sword_attack_1")
+	super.enter()
+	charge_timer = 0.0
 
 func update(delta):
-	if Input.is_action_just_pressed("attack"):
-		attack_again = true
-	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= 3:
-		transitioned.emit("backdashing")
-
-func exit():
-	pass
-
-# this function will be executed every time an animation ends,
-# since most states end accordingly to an animation
-func on_animation_end():
-	if attack_again:
-		transitioned.emit("swordattack2")
+	super.update(delta)
+	# Handle charged attack
+	if Input.is_action_pressed("attack"):
+		charge_timer += delta
 	else:
-		AnimPlayer.play("sword_recovery_1")
-		transitioned.emit("attackrecovery")
+		charge_timer = 0.0
+
+	if charge_timer >= 0.20:
+		transitioned.emit("swordcharging")
+		return

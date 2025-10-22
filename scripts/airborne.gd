@@ -1,16 +1,17 @@
 extends PlayerState
 
 func enter():
-	AnimPlayer.play("fall")
+	AnimPlayer.play("jump")
 	
 func update(delta):
 	if player.is_on_wall():
 		transitioned.emit("wallsliding")
 		return
-	# Change animation to fall when descending
+	# Jump peak
 	if abs(player.velocity.y) < 100:
 		AnimPlayer.play("jump_peak")
-	else:
+	# Change animation to fall when descending
+	if player.velocity.y > 100:
 		AnimPlayer.play("fall")
 	player.initiate_slide()
 	player.handle_vertical_movement(delta)

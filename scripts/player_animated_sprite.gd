@@ -1,88 +1,29 @@
 extends AnimatedSprite2D
-@export var s_hitbox1 : Area2D
-@export var s_hitbox2 : Area2D
-@export var s_hitbox3 : Area2D
 
-@export var s_hitbox4 : Area2D
-@export var s_hitbox5 : Area2D
-@export var s_hitbox6 : Area2D
-
-@export var hurtbox : Area2D
+@export var state_machine : PlayerStateMachine
+@export var hitboxes : Node2D
+@export var hurtbox : HurtBox
 
 func _process(delta: float) -> void:
 	pass
 
 func _on_frame_changed() -> void:
+	if owner.dead:
+		return
 	# default reset
-	hurtbox.disabled = false
 	hurtbox.monitoring = true
-	s_hitbox1.active = false
-	s_hitbox2.active = false
-	s_hitbox3.active = false
-	s_hitbox4.active = false
-	s_hitbox5.active = false
-	s_hitbox6.active = false
-	s_hitbox1.monitoring = false
-	s_hitbox2.monitoring = false
-	s_hitbox3.monitoring = false
-	s_hitbox4.monitoring = false
-	s_hitbox5.monitoring = false
-	s_hitbox6.monitoring = false
-	if animation == "sword_attack_1":
-		match frame:
-			2: # frames où l’arme doit toucher
-				s_hitbox1.monitoring = true
-				s_hitbox1.active = true
-			_:
-				s_hitbox1.monitoring = false
-				s_hitbox1.active = false
-	if animation == "sword_attack_2":
-		match frame:
-			1: # frames où l’arme doit toucher
-				s_hitbox2.monitoring = true
-				s_hitbox2.active = true
-			_:
-				s_hitbox2.monitoring = false
-				s_hitbox2.active = false
-	if animation == "sword_attack_3":
-		match frame:
-			1: # frames où l’arme doit toucher
-				s_hitbox3.monitoring = true
-				s_hitbox3.active = true
-			_:
-				s_hitbox3.monitoring = false
-				s_hitbox3.active = false
-
-	if animation == "hammer_attack_1":
-		match frame:
-			6: # frames où l’arme doit toucher
-				s_hitbox4.monitoring = true
-				s_hitbox4.active = true
-			_:
-				s_hitbox4.monitoring = false
-				s_hitbox4.active = false
-	if animation == "hammer_attack_2":
-		match frame:
-			2, 3: # frames où l’arme doit toucher
-				s_hitbox5.monitoring = true
-				s_hitbox5.active = true
-			_:
-				s_hitbox5.monitoring = false
-				s_hitbox5.active = false
-	if animation == "hammer_charged_attack":
-		match frame:
-			1: # frames où l’arme doit toucher
-				s_hitbox6.monitoring = true
-				s_hitbox6.active = true
-			_:
-				s_hitbox6.monitoring = false
-				s_hitbox6.active = false
-
-	if animation == "slide":
-		match frame:
-			0, 1, 2: # frames où le joueur est invulnerable
-				hurtbox.monitoring = false
-				hurtbox.disabled = true
-			_:
-				hurtbox.monitoring = true
-				hurtbox.disabled = false
+	hurtbox.disabled = false
+	
+	for hitbox in hitboxes.get_children():
+		hitbox.monitoring = false
+		hitbox.active = false
+	
+	var current_state = state_machine.get_current_state()
+	if current_state is AttackState:
+		if frame in current_state.active_frames:
+			current_state.hitbox.active = true
+			current_state.hitbox.monitoring = true
+	if current_state is EvadeState:
+		if frame in current_state.active_frames:
+			hurtbox.disabled = true
+			hurtbox.monitoring = true

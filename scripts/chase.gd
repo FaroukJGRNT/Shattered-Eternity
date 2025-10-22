@@ -14,7 +14,7 @@ func update(delta):
 	AnimPlayer.play("run")
 	# Move in direction of the target
 	enemy.direction = (enemy.target.position - enemy.position).normalized()
-	enemy.velocity.x = enemy.SPEED * enemy.direction.x
+	enemy.velocity.x = enemy.SPEED  * enemy.global_speed_scale * enemy.direction.x
 	last_frame_pos = enemy.position.x
 	enemy.move_and_slide()
 

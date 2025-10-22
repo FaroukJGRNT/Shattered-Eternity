@@ -1,4 +1,4 @@
-extends PlayerState
+extends AttackState
 
 func enter():
 	AnimPlayer.play("sword_attack_3")

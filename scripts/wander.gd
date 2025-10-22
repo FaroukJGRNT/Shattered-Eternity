@@ -26,7 +26,7 @@ func update(delta):
 			waiting = true
 			wait_cooldown = 2.0
 		AnimPlayer.play("run")
-		enemy.velocity.x = enemy.SPEED / 2 * enemy.facing
+		enemy.velocity.x = enemy.SPEED * enemy.global_speed_scale  / 2 * enemy.facing
 		last_frame_pos = enemy.position.x
 		enemy.move_and_slide()
 		if abs(walk_start - enemy.position.x) >= enemy.wander_distance:

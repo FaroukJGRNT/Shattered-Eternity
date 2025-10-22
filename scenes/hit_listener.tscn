@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1jvepjfv877g"]
+
+[ext_resource type="Script" uid="uid://bhibvqhjjgufw" path="res://scripts/hit_listener.gd" id="1_x1s5f"]
+[ext_resource type="Script" uid="uid://d1sjbpcwpbklk" path="res://scripts/gpu_particles_2d.gd" id="2_vjopg"]
+
+[sub_resource type="Curve" id="Curve_s1ycm"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(0.302691, -200), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_shcg2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="HitListener" type="Node2D"]
+script = ExtResource("1_x1s5f")
+
+[node name="GPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 18
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 52.05
+gravity = Vector2(0, 0)
+initial_velocity_min = 52.55
+initial_velocity_max = 257.02
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+linear_accel_curve = SubResource("Curve_s1ycm")
+angle_min = 30.0
+angle_max = 60.0
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_shcg2")
+script = ExtResource("2_vjopg")
+
+[node name="HitVFXPlayer" type="AnimatedSprite2D" parent="."]

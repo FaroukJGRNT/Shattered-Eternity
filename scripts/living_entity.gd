@@ -1,9 +1,16 @@
 extends CharacterBody2D
 class_name LivingEntity
 
+var facing : int = 1
+
+signal damage_taken
+
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var status_vbox: VBoxContainer
+
+var global_speed_scale := 1.0
+var dead := false
 
 var FreezeBar: PackedScene = preload("res://scenes/freeze_bar.tscn")
 var BurnBar: PackedScene = preload("res://scenes/burn_bar.tscn")
@@ -67,19 +74,14 @@ var accum_factor = {
 var burn_tick_timer := 0.0
 
 # --- Effets des statuts ---
-@export var burn_damage_per_second := int(max((max_life * 2 / 100), 1))
+@export var burn_damage_per_second := 0
 @export var shock_attack_reduction := 0.5  # -50%
 @export var shock_defense_reduction := 0.75 # -75%
 @export var freeze_speed_reduction := 0.5  # -50% vitesse
 @export var status_duration := 7.0         # durée générique des statuts
 
 # Statuts actifs : { "burn": temps_restant, ... }
-var status_effects = {}
-
-# Sauvegarde des stats de base pour restaurer après statut
-var base_attack := 0
-var base_defense := 0
-var base_speed := 0.0
+var active_status_effects = {}
 
 # --- Labels spécifiques pour chaque statut ---
 var frozen_label : PackedScene = preload("res://scenes/frozen_text.tscn") 
@@ -87,14 +89,13 @@ var burn_label : PackedScene = preload("res://scenes/burn_text.tscn")
 var elec_label : PackedScene = preload("res://scenes/elec_text.tscn") 
 var damage_label : PackedScene = preload("res://scenes/damage_text.tscn") 
 
-func _ready():
-	burn_damage_per_second = max_life * 0.02
-	base_attack = attack
-	base_defense = defense
-
 var pulse_timer := 0.0  # à mettre dans la classe
 
+func _ready():
+	pass
 func _process(delta):
+	# Because max life is dynamic...
+	burn_damage_per_second = max_life * 0.02
 	# Vider les barres d'accumulation progressivement
 	for key in accum.keys():
 		accum[key] = max(accum[key] - accum_decay_rate * delta, 0)
@@ -102,31 +103,32 @@ func _process(delta):
 
 	# Appliquer les statuts actifs
 	var to_remove = []
-	for status in status_effects.keys():
-		status_effects[status] -= delta
+	for status in active_status_effects.keys():
+		active_status_effects[status] -= delta
+		# Burn is the only status that works over time, other ones are just set
 		if status == "burn":
 			_apply_burn(delta)
-		elif status == "shock":
-			_apply_shock()
-		elif status == "freeze":
-			_apply_freeze()
+		#elif status == "shock":
+			#_apply_shock()
+		#elif status == "freeze":
+			#_apply_freeze()
 		
-		if status_effects[status] <= 0:
+		if active_status_effects[status] <= 0:
 			to_remove.append(status)
 	
 	# Nettoyer les statuts expirés
 	for status in to_remove:
 		_remove_status(status)
 
-	# --- Pulsation avec delta ---
+	# --- Pulsation (effet couleur indiquant le malus de statut) avec delta ---
 	pulse_timer += delta
 	var t = sin(pulse_timer * 5.0) * 0.5 + 0.5  # multiplier pour ajuster la vitesse du pulse
 
-	if "burn" in status_effects:
+	if "burn" in active_status_effects:
 		anim_player.modulate = Color(1, 0.5, 0, 1) * t + Color(1,1,1,1) * (1-t)
-	elif "freeze" in status_effects:
+	elif "freeze" in active_status_effects:
 		anim_player.modulate = Color(0.5, 0.8, 1, 1) * t + Color(1,1,1,1) * (1-t)
-	elif "shock" in status_effects:
+	elif "shock" in active_status_effects:
 		anim_player.modulate = Color(1, 1, 0, 1) * t + Color(1,1,1,1) * (1-t)
 	else:
 		anim_player.modulate = Color(1,1,1,1)
@@ -141,9 +143,12 @@ func take_damage(damage: DamageContainer):
 		damage.phys_dmg *= 3
 
 	# --- Accumulation d'éléments réduite ---
-	accum["fire"] += damage.fire_dmg * accum_factor["fire"]
-	accum["thunder"] += damage.thunder_dmg * accum_factor["thunder"]
-	accum["ice"] += damage.ice_dmg * accum_factor["ice"]
+	if "burn" not in active_status_effects:
+		accum["fire"] += damage.fire_dmg * accum_factor["fire"]
+	if "shock" not in active_status_effects:
+		accum["thunder"] += damage.thunder_dmg * accum_factor["thunder"]
+	if "freeze" not in active_status_effects:
+		accum["ice"] += damage.ice_dmg * accum_factor["ice"]
 
 	# Vérifier si l'accumulation dépasse la résistance et déclencher un statut
 	if accum["fire"] >= fire_res:
@@ -163,14 +168,18 @@ func take_damage(damage: DamageContainer):
 
 	# Appliquer à la vie
 	life -= damage.total_dmg
-	if life <= 0:
+	if life <= 0 and not dead:
+		dead = true
 		life = 0
 		die()
 
+	damage_taken.emit(damage)
 	return damage
 
 func deal_damage(motion_value: int, attack_type: String = "") -> DamageContainer:
 	var dmg = DamageContainer.new()
+	
+	dmg.facing = facing
 
 	# Calcul de base
 	var base_power = motion_value / 100.0
@@ -210,8 +219,13 @@ func die():
 	pass
 
 func apply_status(status_name: String):
-	status_effects[status_name] = status_duration
-	_show_status_label(status_name)
+	if status_name not in active_status_effects:
+		active_status_effects[status_name] = status_duration
+		_show_status_label(status_name)
+		if status_name == "shock":
+			_apply_shock()
+		elif status_name == "freeze":
+			_apply_freeze()
 
 func _apply_burn(delta):
 	burn_tick_timer += delta
@@ -230,11 +244,12 @@ func _apply_burn(delta):
 			die()
 
 func _apply_shock():
-	attack = base_attack * (1.0 - shock_attack_reduction)
-	defense = base_defense * (1.0 - shock_defense_reduction)
+	attack *= (1.0 - shock_attack_reduction)
+	defense *= (1.0 - shock_defense_reduction)
 
 func _apply_freeze():
 	anim_player.speed_scale = freeze_speed_reduction
+	global_speed_scale *= 0.75
 
 func _remove_status(status_name: String):
 	print("Status ended:", status_name)
@@ -242,12 +257,13 @@ func _remove_status(status_name: String):
 		"burn":
 			burn_tick_timer = 0.0
 		"shock":
-			attack = base_attack
-			defense = base_defense
+			attack *= 2 
+			defense *= 2
 		"freeze":
+			global_speed_scale = 1.0
 			if anim_player:
 				anim_player.speed_scale = 1.0  # remettre normal
-	status_effects.erase(status_name)
+	active_status_effects.erase(status_name)
 
 func _show_status_label(status_name: String):
 	var label: Node = null

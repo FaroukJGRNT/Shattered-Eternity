@@ -3,6 +3,9 @@ extends PlayerState
 var frames = 0
 var old_direction = 0
 
+func _ready() -> void:
+	is_state_blocking = true
+
 func enter():
 	old_direction = player.direction
 	player.velocity.x =  0

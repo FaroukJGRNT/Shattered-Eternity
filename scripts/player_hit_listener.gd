@@ -2,7 +2,7 @@ extends Node2D
 
 @export var AnimPlayer : AnimatedSprite2D
 @export var VFXPlayer : AnimatedSprite2D
-@export var LifeBar : TextureProgressBar
+#@export var LifeBar : TextureProgressBar
 var shader_duration = 0.2
 var shader_on_cooldown = false
 var damage_label : PackedScene = preload("res://scenes/damage_text.tscn")
@@ -11,7 +11,14 @@ var frozen_label : PackedScene = preload("res://scenes/frozen_text.tscn")
 var burn_label : PackedScene = preload("res://scenes/burn_text.tscn")
 var elec_label : PackedScene = preload("res://scenes/elec_text.tscn")
 
-func _on_enemy_damage_taken(dmg: DamageContainer) -> void:
+func _process(delta: float) -> void:
+	if shader_on_cooldown:
+		shader_duration -= delta
+		if shader_duration <= 0:
+			shader_on_cooldown = false
+			AnimPlayer.material.set_shader_parameter("enabled", false)
+
+func _on_player_damage_taken(dmg : DamageContainer) -> void:
 	# Particles
 	$GPUParticles2D.direction.x = dmg.facing
 	$GPUParticles2D.emitting = true
@@ -63,13 +70,5 @@ func _on_enemy_damage_taken(dmg: DamageContainer) -> void:
 		# On ne change pas le texte, le crit_label a son propre style
 		add_child(crit_text_instance)
 
-	#Lifebar update
-	print("Health bar update: ", dmg.total_dmg)
-	LifeBar.update_health_bar(dmg.total_dmg)
-
-func _process(delta: float) -> void:
-	if shader_on_cooldown:
-		shader_duration -= delta
-		if shader_duration <= 0:
-			shader_on_cooldown = false
-			AnimPlayer.material.set_shader_parameter("enabled", false)
+	 #Lifebar update
+	#LifeBar.update_health_bar(dmg.total_dmg)

@@ -1,7 +1,10 @@
-extends PlayerState
+extends EvadeState
 
 var slide_direction
 var slide_start
+
+func _ready() -> void:
+	is_state_blocking = true
 
 func enter():
 	slide_direction = player.facing
@@ -12,9 +15,9 @@ func update(delta):
 	if player.is_on_wall() and not player.is_on_floor():
 		transitioned.emit("wallsliding") 
 	if abs(player.position.x - slide_start) < player.SLIDE_DIST:
-		player.velocity.x = slide_direction * player.SLIDE_SPEED
+		player.velocity.x = slide_direction * player.SLIDE_SPEED * player.global_speed_scale
 	else:
-		player.velocity.x = slide_direction * player.SLIDE_SPEED / 5
+		player.velocity.x = slide_direction * player.SLIDE_SPEED * player.global_speed_scale / 5
 		if not player.is_on_floor():
 			transitioned.emit("airborne")
 			return

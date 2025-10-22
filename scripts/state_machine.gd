@@ -1,4 +1,5 @@
 extends Node
+class_name PlayerStateMachine
 
 @export var AnimPlayer : AnimatedSprite2D
 @export var player : Player
@@ -15,6 +16,8 @@ func _ready() -> void:
 			child.transitioned.connect(on_state_transition)
 			child.AnimPlayer = AnimPlayer
 			child.player = player
+			if child is ChargingState:
+				child.connect("attack_charged", player.on_attack_charged, )
 	current_state = states["idle"]
 
 func _process(delta: float) -> void:
@@ -27,11 +30,8 @@ func on_state_transition(new_state_name):
 		current_state = states[new_state_name.to_lower()]
 		current_state.enter()
 
-
 func get_current_state():
 	return current_state
 
-
 func _on_animated_sprite_2d_animation_finished() -> void:
 	current_state.on_animation_end()
-	

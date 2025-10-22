@@ -1,5 +1,8 @@
 extends EnemyState
 
+func _ready() -> void:
+	is_state_blocking = true
+
 func enter():
 	AnimPlayer.play("death")
 

@@ -8,3 +8,5 @@ var phys_dmg := 0
 
 var is_crit := false
 var total_dmg := 0
+
+var facing := 1

@@ -4,6 +4,8 @@ class_name State
 signal transitioned
 var AnimPlayer : AnimatedSprite2D
 
+var is_state_blocking = false
+
 func enter():
 	pass
 	

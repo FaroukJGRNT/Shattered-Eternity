@@ -1,4 +1,5 @@
 extends Node
+class_name EnemyStateMachine
 
 @export var AnimPlayer : AnimatedSprite2D
 @export var enemy : Enemy

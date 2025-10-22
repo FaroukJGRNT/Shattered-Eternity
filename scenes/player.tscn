@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=174 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Shader" uid="uid://dbau474f0ay52" path="res://shaders/hit_flash.tres" id="2_wqfne"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bhwwkf6nsih7b" path="res://scripts/running.gd" id="10_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://6ojgiwtfkegc" path="res://assets/sprites/player/WallSliding.png" id="10_giy8y"]
 [ext_resource type="Script" uid="uid://xfxlbnbnctxe" path="res://scripts/transitioning.gd" id="10_oprun"]
+[ext_resource type="Texture2D" uid="uid://b7kwlh7pwuyli" path="res://assets/sprites/player/LightAttack-Charged.png" id="10_u2ulf"]
 [ext_resource type="Script" uid="uid://byfnqgco86sa8" path="res://scripts/idle.gd" id="10_y4r1p"]
 [ext_resource type="Script" uid="uid://ckexsujqyx8s4" path="res://scripts/back_dashing.gd" id="11_wnwbv"]
 [ext_resource type="Script" uid="uid://vm8alccqpkvj" path="res://scripts/airborne.gd" id="12_oprun"]
@@ -46,7 +47,13 @@
 [ext_resource type="Script" uid="uid://b677sjxow23sd" path="res://scenes/hammer_charged.gd" id="38_mx1m4"]
 [ext_resource type="Script" uid="uid://bud1sa3svu083" path="res://scenes/hammer_charged_attack.gd" id="39_4gjji"]
 [ext_resource type="Texture2D" uid="uid://c5vrac0gopda3" path="res://assets/sprites/vfx/Slash Sprite Sheet.png" id="41_2dvfe"]
+[ext_resource type="Script" uid="uid://dhyynv5lhc8ds" path="res://scripts/sword_charging.gd" id="41_2gdjj"]
+[ext_resource type="Script" uid="uid://d0v2g66xb3ssk" path="res://scripts/sword_charged_attack.gd" id="42_sc3ue"]
 [ext_resource type="Script" uid="uid://jfrayapet34r" path="res://scripts/hammer_charged_attack_hb.gd" id="46_mx1m4"]
+[ext_resource type="Texture2D" uid="uid://cjaju3hb2vfdg" path="res://assets/sprites/player/SparkleEffect.png" id="47_4gjji"]
+[ext_resource type="Script" uid="uid://w1mns8jibm28" path="res://scripts/sword_charged.gd" id="50_sc3ue"]
+[ext_resource type="Script" uid="uid://d1sjbpcwpbklk" path="res://scripts/gpu_particles_2d.gd" id="54_apa73"]
+[ext_resource type="Script" uid="uid://x51ik5jddhvf" path="res://scripts/player_hit_listener.gd" id="54_ha2mi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wnwbv"]
 shader = ExtResource("2_wqfne")
@@ -352,6 +359,46 @@ region = Rect2(2880, 0, 240, 192)
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2b1d"]
 atlas = ExtResource("4_31cv2")
 region = Rect2(3120, 0, 240, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yjfb"]
+atlas = ExtResource("10_u2ulf")
+region = Rect2(1440, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnnjp"]
+atlas = ExtResource("10_u2ulf")
+region = Rect2(1920, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqna8"]
+atlas = ExtResource("10_u2ulf")
+region = Rect2(2400, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7gmo"]
+atlas = ExtResource("10_u2ulf")
+region = Rect2(2880, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kft7l"]
+atlas = ExtResource("10_u2ulf")
+region = Rect2(3360, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s4os"]
+atlas = ExtResource("10_u2ulf")
+region = Rect2(3840, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2em0j"]
+atlas = ExtResource("10_u2ulf")
+region = Rect2(4320, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qe2k6"]
+atlas = ExtResource("10_u2ulf")
+region = Rect2(4800, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edwuo"]
+atlas = ExtResource("10_u2ulf")
+region = Rect2(480, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5eiju"]
+atlas = ExtResource("10_u2ulf")
+region = Rect2(960, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fuw3a"]
 atlas = ExtResource("8_2dvfe")
@@ -718,6 +765,51 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_2yjfb")
+}],
+"loop": true,
+"name": &"sword_charged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnnjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqna8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7gmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kft7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s4os")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2em0j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qe2k6")
+}],
+"loop": false,
+"name": &"sword_charged_attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edwuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5eiju")
+}],
+"loop": false,
+"name": &"sword_charging",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fuw3a")
 }, {
 "duration": 1.0,
@@ -804,6 +896,21 @@ height = 67.894
 radius = 42.9935
 height = 195.935
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_edwuo"]
+radius = 53.0377
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmsq4"]
+atlas = ExtResource("47_4gjji")
+region = Rect2(0, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vs2b"]
+atlas = ExtResource("47_4gjji")
+region = Rect2(480, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reqs7"]
+atlas = ExtResource("47_4gjji")
+region = Rect2(960, 0, 480, 384)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_vdulj"]
 atlas = ExtResource("41_2dvfe")
 region = Rect2(0, 128, 64, 64)
@@ -832,6 +939,20 @@ region = Rect2(0, 448, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_qmsq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vs2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_reqs7")
+}],
+"loop": false,
+"name": &"full_charge",
+"speed": 13.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vdulj")
 }, {
 "duration": 1.0,
@@ -854,25 +975,29 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="Curve" id="Curve_74r1k"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(0.302691, -200), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8svfe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 128
 collision_mask = 128
 script = ExtResource("1_le0q1")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("s_hitbox1", "s_hitbox2", "s_hitbox3", "s_hitbox4", "s_hitbox5", "s_hitbox6", "hurtbox")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("state_machine", "hitboxes", "hurtbox")]
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(4, -17)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"hammer_charged_attack"
+animation = &"sword_recovery_1"
 autoplay = "idle"
-frame = 1
 script = ExtResource("5_fjrip")
-s_hitbox1 = NodePath("../HitBoxes/SwordAttack1")
-s_hitbox2 = NodePath("../HitBoxes/SwordAttack2")
-s_hitbox3 = NodePath("../HitBoxes/SwordAttack3")
-s_hitbox4 = NodePath("../HitBoxes/HammerAttack1")
-s_hitbox5 = NodePath("../HitBoxes/HammerAttack2")
-s_hitbox6 = NodePath("../HitBoxes/HammerChargedAttack")
+state_machine = NodePath("../PlayerStateMachine")
+hitboxes = NodePath("../HitBoxes")
 hurtbox = NodePath("../PlayerHurtBox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -920,6 +1045,7 @@ script = ExtResource("12_oprun")
 
 [node name="Dashing" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("13_a8ls1")
+active_frames = Array[int]([0, 1, 2])
 
 [node name="Hit" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("14_qfm1y")
@@ -930,23 +1056,51 @@ script = ExtResource("16_a8ls1")
 [node name="WallSliding" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("17_qfm1y")
 
-[node name="SwordAttack1" type="Node" parent="PlayerStateMachine"]
+[node name="SwordAttack1" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("20_i4ail")
+dash_cancel_frame = 3
+recovery_state_name = "sword_recovery_1"
+anim_name = "sword_attack_1"
+active_frames = Array[int]([2])
+hitbox = NodePath("../../HitBoxes/SwordAttack1")
+next_combo_state_name = "swordattack2"
 
-[node name="SwordAttack2" type="Node" parent="PlayerStateMachine"]
+[node name="SwordAttack2" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("19_60mlk")
+dash_cancel_frame = 2
+recovery_state_name = "sword_recovery_2"
+anim_name = "sword_attack_2"
+active_frames = Array[int]([1])
+hitbox = NodePath("../../HitBoxes/SwordAttack2")
+next_combo_state_name = "swordattack3"
 
-[node name="SwordAttack3" type="Node" parent="PlayerStateMachine"]
+[node name="SwordAttack3" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("21_i4ail")
+dash_cancel_frame = 2
+recovery_state_name = "idle"
+anim_name = "sword_attack_3"
+active_frames = Array[int]([1])
+hitbox = NodePath("../../HitBoxes/SwordAttack3")
 
-[node name="HammerAttack1" type="Node" parent="PlayerStateMachine"]
+[node name="HammerAttack1" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("22_31cv2")
+dash_cancel_frame = 7
+recovery_state_name = "hammer_recovery_1"
+anim_name = "hammer_attack_1"
+active_frames = Array[int]([6])
+hitbox = NodePath("../../HitBoxes/HammerAttack1")
+next_combo_state_name = "hammerattack2"
 
 [node name="HeavyAttackRecovery" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("28_fdfoy")
 
-[node name="HammerAttack2" type="Node" parent="PlayerStateMachine"]
+[node name="HammerAttack2" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("23_pf23h")
+dash_cancel_frame = 4
+recovery_state_name = "idle"
+anim_name = "hammer_attack_2"
+active_frames = Array[int]([2, 3])
+hitbox = NodePath("../../HitBoxes/HammerAttack2")
 
 [node name="SpearAttack1" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("24_dt7fs")
@@ -965,9 +1119,35 @@ script = ExtResource("34_hhpqf")
 
 [node name="HammerCharging" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("38_mx1m4")
+charge_time = 1.2
+charge_animation = "hammer_charging"
+charge_end_animation = "hammer_charged"
+cancel_animation = "hammer_recovery_1"
+attack_state = "hammerchargedattack"
 
-[node name="HammerChargedAttack" type="Node" parent="PlayerStateMachine"]
+[node name="HammerChargedAttack" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("39_4gjji")
+dash_cancel_frame = 4
+recovery_state_name = "idle"
+anim_name = "hammer_charged_attack"
+active_frames = Array[int]([1])
+hitbox = NodePath("../../HitBoxes/HammerChargedAttack")
+
+[node name="SwordCharging" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("41_2gdjj")
+charge_time = 0.8
+charge_animation = "sword_charging"
+charge_end_animation = "sword_charged"
+cancel_animation = "sword_recovery_1"
+attack_state = "swordchargedattack"
+
+[node name="SwordChargedAttack" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
+script = ExtResource("42_sc3ue")
+dash_cancel_frame = 5
+recovery_state_name = "idle"
+anim_name = "sword_charged_attack"
+active_frames = Array[int]([1, 2, 3])
+hitbox = NodePath("../../HitBoxes/SwordCharged")
 
 [node name="HitBoxes" type="Node2D" parent="."]
 
@@ -1081,20 +1261,53 @@ position = Vector2(40, -1)
 rotation = 1.58825
 shape = SubResource("CapsuleShape2D_4gjji")
 
-[node name="HitFlash" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
+[node name="SwordCharged" type="Area2D" parent="HitBoxes"]
+script = ExtResource("50_sc3ue")
+metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordCharged"]
+position = Vector2(62, -24)
+shape = SubResource("CircleShape2D_edwuo")
 
 [node name="VFXPlayer" type="AnimatedSprite2D" parent="."]
+visible = false
 modulate = Color(0, 1, 1, 0.913725)
 position = Vector2(5, -14)
 sprite_frames = SubResource("SpriteFrames_jlll7")
-animation = &"weapon_change"
-frame = 5
+animation = &"full_charge"
+frame = 2
 frame_progress = 1.0
 
+[node name="HitListener" type="Node2D" parent="." node_paths=PackedStringArray("AnimPlayer", "VFXPlayer")]
+script = ExtResource("54_ha2mi")
+AnimPlayer = NodePath("../AnimatedSprite2D")
+VFXPlayer = NodePath("../VFXPlayer")
+
+[node name="GPUParticles2D" type="CPUParticles2D" parent="HitListener"]
+emitting = false
+amount = 18
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 52.05
+gravity = Vector2(0, 0)
+initial_velocity_min = 52.55
+initial_velocity_max = 257.02
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+linear_accel_curve = SubResource("Curve_74r1k")
+angle_min = 30.0
+angle_max = 60.0
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_8svfe")
+script = ExtResource("54_apa73")
+
+[node name="HitVFXPlayer" type="AnimatedSprite2D" parent="HitListener"]
+
+[connection signal="damage_taken" from="." to="HitListener" method="_on_player_damage_taken"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="PlayerStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
-[connection signal="timeout" from="HitFlash" to="." method="_on_hit_flash_timeout"]
 [connection signal="animation_finished" from="VFXPlayer" to="." method="_on_vfx_player_animation_finished"]

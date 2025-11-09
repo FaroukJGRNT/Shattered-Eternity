@@ -107,3 +107,52 @@ Il nous faut des "Appels" des invocations que certains persos te donnent et que 
 pour utiliser leur competence speciale
 Jouer avec le zoom de la cam quand hurt ou bien quand coup mechant
 Ajouter du weapon spin sur les attaques chargees
+
+
+
+
+# IDEES GAME-DESIGN
+
+--> Le joueur ne doit pas se sentir obligé d'utiliser le dash à répétition pour explorer plus vite. Après un dash (ou un dash spécial à créer) le joueur court beaucoup plus vite (Silksong) par exemple
+
+--> Le jeu est créé de telle sorte que chaque quête que l'on commence nous mène à une aventure complète (Situation initiale, élément perturbateur, suite d'action, plot twist, situation finale (triste, heureuse, drôle)) qui dure environ 12 min (qui consomme donc la moitié du temps de run du joueur. il ne pourra donc effectuer que deux aventures par run) Donner une illustration à la fin de chaque aventure (pour aider les youtubeurs avec leurs miniatures)
+
+--> Trouver une raison soft d'affronter les ennemis sur le chemin (généralement l'XP mais ce n'est pas forcément possible dans notre jeu)
+
+--> Après chaque boss le joueur doit ressentir un accomplissement Il faudrait donc lui faire vivre une scène (cinématique/musique/événement/suite de scénario/paysage etc) unique 
+
+--> Le boss doit pousser le joueur à maîtriser toutes ses capacités (celles du joueur qu'il a apprises pendant toute sa partie) à la perfection 
+
+--> Avant le tout premier combat, le PNJ que le joueur rencontre avant la salle du boss explique au joueur que les attaques du boss sont imprégnées d'une magie qui annule l'immortalité Il dit au joueur que s'il perd contre le boss c'est donc définitif.
+
+
+
+# IDEES WORLD-BUILDING/DESIGN
+
+--> Les arrières plans des zones doivent contenir les paysages et éléments d'autres zones pour donner l'impression qu'on s'y rend vraiment 
+
+--> Les étoiles apparaîtront peu à peu dans le ciel la nuit (modifier la transparence) et il y aura parfois (mais relativement rarement des étoiles filantes)
+
+--> La nuit, les silhouettes en arrière-plan sont plus noires et moins contrastées
+
+--> Ajouter du bloom aux lumières et des particules au jeu (notamment celles qui apparaissent de plus en plus au cours de chaque run au fur et à mesure que le boss prend le contrôle du monde du jeu)
+
+--> Porter une attention particulière à chaque zone du jeu (en ajoutant des assets particulier et/ou des effets précis) pour rendre chaque endroit du jeu complètement différent en terme de feeling des autres et digne d'un fond d'écran. Avoir même des moments et des parties de zones avec des paysages juste magnifiques. Si le joueur s'arrête à ces endroits la caméra recule lentement et cadre le plan de manière magnifique.
+
+--> Avoir une zone où il pleut tout le temps (parce que la pluie c'est classe)(il doit y avoir une raison quand même) et une zone qui était juste le lieu de vie d'un ancien géant (Il y aura des armes géantes, un casque geant etc dans le décor et en assets etc)
+
+
+
+# IDEES GAMEPLAY
+
+--> La seule méthode de soin in-game est liée à la résonance. Après les actions parfaites (parade, esquive parfaite etc) on regagne un peu de PV. Cette fonctionnalité n'est disponible qu'à partir du premier niveau de résonance et la quantité de PV regagnés augmente avec les niveaux de résonance.
+Il y a aussi des objets dispersés dans le monde qui génèrent du "mana pur" permettant de se soigner.
+
+--> Si le joueur arrive à placer trois coups en restant en l'air, il recharge son double saut (le nombre de coups diminue avec les niveaux de résonance)
+
+
+
+# QUESTIONNEMENTS GAMEPLAY
+
+--> Qu'est ce qu'on garde et qu'est ce qu'on ne garde pas entre les boucles (buffs d'attaque, de défense, de PV etc, nouvelles armes, nouvelles compétences liées aux éléments feu, glace, foudre, nouvelles compétences liées aux armes....)(Le joueur doit pouvoir s'orienter vers un build particulier à chaque boucle en concentrant ses actions vers ce build et en négligeant les autres. Il ne doit donc pas garder les éléments qui servent son build par exemple entre les boucles et ces éléments doivent être accessibles hors narration parce qu'on ne veut pas l'obliger à revivre une même histoire deux fois et moins péniblement que les autres. Sauf que les histoires/aventures qu'il vit doivent avoir des récompenses thématiques à la clé)
+

@@ -16,6 +16,8 @@ var active := false
 # The groups targeted by the hitbox
 var targeted_groups : Array[String] = []
 
+var is_parried := false
+
 func _init() -> void:
 	monitoring = false
 	# Hitboxes look for hurtboxes on layer 2

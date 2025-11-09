@@ -24,12 +24,18 @@ func on_area_entered(area: Area2D) -> void:
 	if area is HitBox:
 		if not owner.has_method("take_damage"):
 			return
+
 		if area.active and _owner_in_targeted_groups(owner, area.targeted_groups):
+			if area.is_parried:
+				area.is_parried = false
+				print("Successfully parried")
+				return
 			var cam = get_tree().get_first_node_in_group("Camera")
 			if cam:
 				cam.trigger_shake(area.cam_shake_value, 10)
 			frame_freeze(area.hitstop_scale, area.hitstop_time)
 			owner.take_damage(area.generate_damage())
+			print("Took damage")
 
 func _owner_in_targeted_groups(owner: Node, groups: Array) -> bool:
 	for g in groups:

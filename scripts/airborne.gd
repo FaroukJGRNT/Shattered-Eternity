@@ -8,9 +8,9 @@ func enter():
 	coyote_time = 0.12
 
 func update(delta):
-	if %RayCast2D.is_colliding():
-		transitioned.emit("wallsliding")
-		return
+	#if %RayCast2D.is_colliding():
+		#transitioned.emit("wallsliding")
+		#return
 
 	# Jump peak
 	coyote_time -= delta

@@ -101,6 +101,8 @@ func handle_vertical_movement(gravity):
 		velocity.y -= friction
 	if velocity.y > 350:
 		velocity.y = 350
+	if velocity.y < -350:
+		velocity.y = -350
 	move_and_slide()
 
 func handle_horizontal_movement(speed):

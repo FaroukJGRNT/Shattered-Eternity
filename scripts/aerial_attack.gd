@@ -1,14 +1,19 @@
 extends AttackState
 class_name AerialAttack
 
+@export var horizontal_friction := 0.0
+@export var vertital_friction := 0.0
+
 func enter():
 	super.enter()
-	player.velocity.x = 0
-	player.velocity.y = 5
+	#player.velocity.x = 0
+	#player.velocity.y = 5
+	player.friction = vertital_friction
 
 func update(delta):
 	super.update(delta)
 	player.handle_vertical_movement(player.get_gravity().y * delta)
+	player.handle_horizontal_movement(player.AERIAL_SPEED - horizontal_friction)
 	if player.is_on_floor():
 		transitioned.emit("landing")
 

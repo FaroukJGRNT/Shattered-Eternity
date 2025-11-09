@@ -1002,7 +1002,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_aerial_1",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1022,7 +1022,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_aerial_2",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1317,7 +1317,7 @@ script = ExtResource("1_le0q1")
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(4, -17)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"fall"
+animation = &"spear_aerial"
 autoplay = "idle"
 script = ExtResource("5_fjrip")
 state_machine = NodePath("../PlayerStateMachine")
@@ -1487,14 +1487,18 @@ hitbox = NodePath("../../HitBoxes/SwordCharged")
 
 [node name="SpearAerial" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("47_51ujp")
+horizontal_friction = 50.0
+vertital_friction = 12.0
 dash_cancel_frame = 10
 recovery_state_name = "airborne"
 anim_name = "spear_aerial"
 active_frames = Array[int]([1, 2, 3])
-hitbox = NodePath("../../HitBoxes/SpearAttack3")
+hitbox = NodePath("../../HitBoxes/SpearAerial")
 
 [node name="SwordAerial1" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("48_fuw3a")
+horizontal_friction = 40.0
+vertital_friction = 6.0
 dash_cancel_frame = 10
 recovery_state_name = "airborne"
 anim_name = "sword_aerial_1"
@@ -1504,6 +1508,8 @@ next_combo_state_name = "swordaerial2"
 
 [node name="SwordAerial2" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("49_8txt3")
+horizontal_friction = 40.0
+vertital_friction = 6.0
 dash_cancel_frame = 10
 recovery_state_name = "airborne"
 anim_name = "sword_aerial_2"
@@ -1626,7 +1632,6 @@ position = Vector2(62, -24)
 shape = SubResource("CircleShape2D_edwuo")
 
 [node name="SpearAerial" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("58_tk41t")
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
@@ -1645,6 +1650,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_46bxm")
 
 [node name="SwordAerial2" type="Area2D" parent="HitBoxes"]
+visible = false
 script = ExtResource("60_8txt3")
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 

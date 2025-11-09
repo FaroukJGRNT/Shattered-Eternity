@@ -156,3 +156,10 @@ Il y a aussi des objets dispersés dans le monde qui génèrent du "mana pur" pe
 
 --> Qu'est ce qu'on garde et qu'est ce qu'on ne garde pas entre les boucles (buffs d'attaque, de défense, de PV etc, nouvelles armes, nouvelles compétences liées aux éléments feu, glace, foudre, nouvelles compétences liées aux armes....)(Le joueur doit pouvoir s'orienter vers un build particulier à chaque boucle en concentrant ses actions vers ce build et en négligeant les autres. Il ne doit donc pas garder les éléments qui servent son build par exemple entre les boucles et ces éléments doivent être accessibles hors narration parce qu'on ne veut pas l'obliger à revivre une même histoire deux fois et moins péniblement que les autres. Sauf que les histoires/aventures qu'il vit doivent avoir des récompenses thématiques à la clé)
 
+
+
+# ELEMENTS D'HISTOIRE
+Le mana positif utilise par AAAAA a la propriete de rompre le cycle de l'immortalite
+et de la renaissance. Les villageois s'en sont rendu compte et ont pris peur que ce pouvoir
+empeche toute renaissance. C'est pourquoi ils sont banni AAA mais ont vu le personnage principal
+en heros, car son almana a le pouvoir de faire renaitre.

@@ -14,7 +14,7 @@ func update(delta):
 	player.velocity.x = player.hit_direction * 250
 	if player.is_on_floor():
 		transitioned.emit("idle")
-	player.handle_vertical_movement(delta)
+	player.handle_vertical_movement(player.get_gravity().y * delta)
 
 func exit():
 	pass

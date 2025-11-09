@@ -13,6 +13,10 @@ var dash_cooldown := 1.0
 var on_dash_cooldown := false
 var aerial_dash_used := false
 var hit_direction := 1
+var aerial_attack_used := false
+var friction = 0
+var allowed_jumps := 1
+var acceleration = 65
 
 enum Weapons {
 	SPEAR,
@@ -63,7 +67,9 @@ func _physics_process(delta: float) -> void:
 
 	# on the ground
 	if is_on_floor():
+		allowed_jumps = 1
 		aerial_dash_used = false
+		aerial_attack_used = false
 		# Determine if the player just landed
 		if $PlayerStateMachine.current_state.name == "Airborne":
 			change_state("landing")
@@ -88,21 +94,22 @@ func _physics_process(delta: float) -> void:
 
 #------ Utility functions ------#
 
-func handle_vertical_movement(delta):
+func handle_vertical_movement(gravity):
 	# Apply the gravity
-	velocity.y += (get_gravity().y * delta)
-	var friction = 0
-	if is_on_wall():
-		friction = 15
+	velocity.y += gravity
 	if velocity.y >= 0:
 		velocity.y -= friction
+	if velocity.y > 350:
+		velocity.y = 350
 	move_and_slide()
 
 func handle_horizontal_movement(speed):
 	# Get the input direction and
 	# handle the movement/deceleration
-	if direction:
-		velocity.x = direction * speed * global_speed_scale
+	if direction > 0:
+		velocity.x = min(velocity.x + acceleration, (direction * speed * global_speed_scale))
+	elif direction < 0:
+		velocity.x = max(velocity.x - acceleration, (direction * speed * global_speed_scale))
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	move_and_slide()
@@ -113,12 +120,14 @@ func direct_sprite():
 		$AnimatedSprite2D.flip_h = true
 		$PlayerHurtBox.scale.x = -1
 		$HitBoxes.scale.x = -1
+		$RayCast2D.scale.x = -1
 		facing = -1
 	if direction > 0:
 		$AnimatedSprite2D.flip_h = false
 		$PlayerHurtBox.scale.x = 1
 		$HitBoxes.scale.x = 1
-		facing =  1
+		$RayCast2D.scale.x = 1
+		facing = 1
 
 func get_horizontal_input():
 	direction = Input.get_axis("left", "right")
@@ -139,6 +148,7 @@ func initiate_slide():
 func initiate_ground_actions():
 	# Initiating a jump or a slide or an attack
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		allowed_jumps = 0
 		change_state("jumpstart")
 	initiate_slide()
 	if Input.is_action_just_pressed("attack"):

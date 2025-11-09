@@ -17,3 +17,5 @@ func update(delta):
 	if charge_timer >= 0.20:
 		transitioned.emit("swordcharging")
 		return
+	if AnimPlayer.frame < 2:
+		player.handle_horizontal_movement(player.RUN_SPEED / 6)

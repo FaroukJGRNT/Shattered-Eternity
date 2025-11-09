@@ -64,7 +64,6 @@ func _on_enemy_damage_taken(dmg: DamageContainer) -> void:
 		add_child(crit_text_instance)
 
 	#Lifebar update
-	print("Health bar update: ", dmg.total_dmg)
 	LifeBar.update_health_bar(dmg.total_dmg)
 
 func _process(delta: float) -> void:

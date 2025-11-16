@@ -1,0 +1,5 @@
+Idees de sorts:
+Les sorts sont des competences speciales qui utilisent les mana
+-Sorts de dashs elementaires
+-Simples projectiles elementaires
+-Explosions elementaires en colonnes

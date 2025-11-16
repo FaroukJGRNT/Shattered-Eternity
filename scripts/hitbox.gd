@@ -15,6 +15,10 @@ var hitstop_scale := 1.0
 var active := false
 # The groups targeted by the hitbox
 var targeted_groups : Array[String] = []
+# The direction of the hit
+var facing := 1
+
+var is_parried := false
 
 func _init() -> void:
 	monitoring = false
@@ -23,6 +27,6 @@ func _init() -> void:
 	# Hitboxes don't need to be in a mask 
 	collision_mask = 0
 
-func generate_damage():
+func generate_damage() -> DamageContainer:
 	# Let the owner generate the damage based on its stats
 	return owner.deal_damage(motion_value, atk_type)

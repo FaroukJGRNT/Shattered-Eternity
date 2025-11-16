@@ -123,12 +123,14 @@ func direct_sprite():
 		$PlayerHurtBox.scale.x = -1
 		$HitBoxes.scale.x = -1
 		$RayCast2D.scale.x = -1
+		$ShieldHurtBox.scale.x = -1
 		facing = -1
 	if direction > 0:
 		$AnimatedSprite2D.flip_h = false
 		$PlayerHurtBox.scale.x = 1
 		$HitBoxes.scale.x = 1
 		$RayCast2D.scale.x = 1
+		$ShieldHurtBox.scale.x = 1
 		facing = 1
 
 func get_horizontal_input():
@@ -161,6 +163,8 @@ func initiate_ground_actions():
 				change_state("spearattack1")
 			Weapons.HAMMER:
 				change_state("hammerattack1")
+	if Input.is_action_just_pressed("guard"):
+		change_state("guard")
 
 func _on_vfx_player_animation_finished() -> void:
 	$VFXPlayer.visible = false

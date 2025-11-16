@@ -3,10 +3,15 @@ class_name HurtBox
 
 var disabled := false
 
-func frame_freeze(timeScale, duration):
-	Engine.time_scale = timeScale
-	await(get_tree().create_timer(duration, true, false, true).timeout)
-	Engine.time_scale = 1
+func frame_freeze(scale: float = 0.1, duration: float = 0.1) -> void:
+	# On ralentit le temps
+	Engine.time_scale = scale
+
+	var real_time_timer := get_tree().create_timer(duration)
+
+	await real_time_timer.timeout
+	# On remet le jeu à la vitesse normale
+	Engine.time_scale = 1.0
 
 func _ready () -> void:
 	# Enemy hurtboxes need to be detected by the player
@@ -33,6 +38,7 @@ func on_area_entered(area: Area2D) -> void:
 			var cam = get_tree().get_first_node_in_group("Camera")
 			if cam:
 				cam.trigger_shake(area.cam_shake_value, 10)
+			print(area.hitstop_scale, area.hitstop_time)
 			frame_freeze(area.hitstop_scale, area.hitstop_time)
 			owner.take_damage(area.generate_damage())
 			print("Took damage")

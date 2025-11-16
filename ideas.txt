@@ -125,6 +125,8 @@ Ajouter du weapon spin sur les attaques chargees
 
 --> Avant le tout premier combat, le PNJ que le joueur rencontre avant la salle du boss explique au joueur que les attaques du boss sont imprégnées d'une magie qui annule l'immortalité Il dit au joueur que s'il perd contre le boss c'est donc définitif.
 
+--> Idée de boss : Un personnage qui peut insufler (trouver comment) des âmes dans des trucs (Il se balade sur un destrier squelette, il peut invoquer des squelettes mais plot twist il peut aussi insufler une âme dans des objets inanimés)(Idée de phase 2 : Il perd son destrier, il insuffle une âme à son arme et elle forme une sorte de boss duo en synergie avec lui)
+
 
 
 # IDEES WORLD-BUILDING/DESIGN

@@ -21,15 +21,16 @@ func update(delta):
 			transitioned.emit("jumpstart")
 			return
 
+	# when at peak height, reduce gravity, add horizontal speed
 	if abs(player.velocity.y) < 50:
 		added_horiz_speed = 25.0
-		AnimPlayer.play("jump_peak")
+		#AnimPlayer.play("jump_peak")
 		player.handle_vertical_movement((player.get_gravity().y) / 1.5 * delta)
 	else:
 		player.handle_vertical_movement(player.get_gravity().y * delta)
 		added_horiz_speed = 0.0
 	# Change animation to fall when descending
-	if player.velocity.y > 50:
+	if player.velocity.y > 0:
 		AnimPlayer.play("fall")
 	player.initiate_slide()
 	player.handle_horizontal_movement(player.AERIAL_SPEED + added_horiz_speed)

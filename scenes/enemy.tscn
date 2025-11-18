@@ -520,7 +520,7 @@ script = ExtResource("20_2pwtc")
 [connection signal="animation_finished" from="AnimatedSprite2D" to="EnemyStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="HitBoxes/HitBox" method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="timeout" from="AttackCoolDown" to="." method="_on_sliding_timer_timeout"]
 [connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]
+[connection signal="timeout" from="AttackCoolDown" to="." method="_on_sliding_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

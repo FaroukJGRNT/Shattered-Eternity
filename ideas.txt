@@ -123,9 +123,15 @@ Ajouter du weapon spin sur les attaques chargees
 
 # IDEES GAME-DESIGN
 
+--> A chaque début de run le joueur apparaît dans une zone différente du monde (uniquement à partir de la quatrième boucle parce que la première est l'introduction et la deuxième et la troisième doivent mettre en évidence le fait que les évènements se répètent)
+AVANTAGES : Cela permet de créer un sentiment de surprise et de renouvellement au début de chaque run (!!!surtout si les zones sont aussi différentes les unes des autres que souhaitées!!!surtout si le point de spawn est aléatoire parmi une liste donnée de points!!!); Cela permet d'orienter le build du joueur plus aisément puisque chaque zone à un thème et une récompense précise; Cela oblige le joueur à découvrir tout ce que le jeu a à lui offrir; Cela s'explique par le fait que les boucles temporelles dégradent le monde au point que même le point de spawn du joueur "bug" à un certain niveau
+PROBLEMES : Compliqué voire impossible de gérer l'orientation et le scenario du joueur durent ses runs (tous les personnages, toutes les récompenses et toutes les aventures doivent donc être paramétrées de manière à fonctionner dans quasi n'importe quel ordre et ce peu importe la run); Compliqué de faire croître la difficulté non seulement au fil des runs mais aussi au sein d'une même run et donc compliqué de rendre une récompense plus difficile d'accès qu'une autre (Piste de solution : Les ennemis ont quasiment la même puissance dans toutes les zones et la même difficulté de patterns Ils deviennent juste de plus en plus forts au fur et à mesure que la journée avance et que le boss final prend le contrôle sur le monde (la difficulté augmente ainsi pendant la run))
+
 --> Le joueur ne doit pas se sentir obligé d'utiliser le dash à répétition pour explorer plus vite. Après un dash (ou un dash spécial à créer) le joueur court beaucoup plus vite (Silksong) par exemple
 
---> Le jeu est créé de telle sorte que chaque quête que l'on commence nous mène à une aventure complète (Situation initiale, élément perturbateur, suite d'action, plot twist, situation finale (triste, heureuse, drôle)) qui dure environ 12 min (qui consomme donc la moitié du temps de run du joueur. il ne pourra donc effectuer que deux aventures par run) Donner une illustration à la fin de chaque aventure (pour aider les youtubeurs avec leurs miniatures)
+--> Le jeu est créé de telle sorte que chaque quête que l'on commence nous mène à une aventure complète dans une zone précise (Situation initiale, élément perturbateur, suite d'action, plot twist, situation finale (triste, heureuse, drôle)) qui dure environ 12 min (qui consomme donc la moitié du temps de run du joueur. il ne pourra donc effectuer que deux aventures par run) Donner une illustration à la fin de chaque aventure (pour aider les youtubeurs avec leurs miniatures)
+
+--> Chaque zone a sa propre aventure complète (de l'élément déclencheur à la récompense) et des indices qui peuvent conduire vers cette aventure sont dispersées dans les autres zones éventuellement
 
 --> Trouver une raison soft d'affronter les ennemis sur le chemin (généralement l'XP mais ce n'est pas forcément possible dans notre jeu)
 

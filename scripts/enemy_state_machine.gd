@@ -32,4 +32,3 @@ func get_current_state():
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	current_state.on_animation_end()
- 

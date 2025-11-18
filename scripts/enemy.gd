@@ -34,6 +34,14 @@ func die():
 	$LifeBar.visible = false
 	$EnemyStateMachine.on_state_transition("death")
 
+func get_stunned():
+	if $EnemyStateMachine.current_state.name != "Death":
+		$EnemyStateMachine.on_state_transition("stun")
+
+func get_staggered():
+	if $EnemyStateMachine.current_state.name != "Death":
+		$EnemyStateMachine.on_state_transition("staggered")
+
 func _physics_process(delta: float) -> void:
 	var current_state : EnemyState = $EnemyStateMachine.get_current_state()
 

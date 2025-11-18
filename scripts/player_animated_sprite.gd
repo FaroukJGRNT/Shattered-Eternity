@@ -17,6 +17,7 @@ func _on_frame_changed() -> void:
 	for hitbox in hitboxes.get_children():
 		hitbox.monitoring = false
 		hitbox.active = false
+		hitbox.is_parried = false
 	
 	var current_state = state_machine.get_current_state()
 	if current_state is AttackState:

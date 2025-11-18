@@ -1,8 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://ttle72ap7uvs"]
+[gd_scene load_steps=5 format=3 uid="uid://ttle72ap7uvs"]
 
 [ext_resource type="Script" uid="uid://dmjgx4bvqnbpc" path="res://scripts/spearr_projectile.gd" id="1_eqoxf"]
+[ext_resource type="Texture2D" uid="uid://d2634c5nct7n2" path="res://assets/sprites/player/Spear.png" id="2_ns2n2"]
+[ext_resource type="Script" uid="uid://cbneo757v4wxn" path="res://scripts/spear_proj_hit_box.gd" id="3_vrhfa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0eh8n"]
+size = Vector2(4, 44)
 
 [node name="SpearProjectile" type="Node2D"]
+rotation = 1.5708
 script = ExtResource("1_eqoxf")
-is_destructible = null
-is_one_shot = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.000347137, 0.000114441)
+rotation = -1.5708
+texture = ExtResource("2_ns2n2")
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(0.000347137, 0.000114441)
+script = ExtResource("3_vrhfa")
+metadata/_custom_type_script = "uid://ca7lo8315oxt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_0eh8n")

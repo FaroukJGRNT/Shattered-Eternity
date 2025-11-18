@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://c20oww0mmtpx7"]
+[gd_scene load_steps=71 format=3 uid="uid://c20oww0mmtpx7"]
 
 [ext_resource type="Texture2D" uid="uid://rye6avf45wqu" path="res://assets/sprites/enemy/Skeleton enemy.png" id="1_1qe2k"]
 [ext_resource type="Script" uid="uid://cthv4yog3disp" path="res://scripts/enemy.gd" id="1_rfxxo"]
@@ -13,11 +13,13 @@
 [ext_resource type="Script" uid="uid://4t8fggq603ue" path="res://scripts/death.gd" id="10_otmr2"]
 [ext_resource type="Texture2D" uid="uid://cekn42u0pp1e3" path="res://assets/sprites/ui/ValueBar_128x16.png" id="10_w8i8w"]
 [ext_resource type="Texture2D" uid="uid://djgtlpka5r4sy" path="res://assets/sprites/ui/ValueRed_120x8.png" id="11_otmr2"]
+[ext_resource type="Script" uid="uid://dag5ny4lr14eq" path="res://scripts/stun.gd" id="12_1x4g4"]
 [ext_resource type="Script" uid="uid://ccygvk7yr0eni" path="res://scripts/staggered.gd" id="12_ile5s"]
 [ext_resource type="Script" uid="uid://bt0hiyjxpl4to" path="res://scripts/damage_bar.gd" id="14_j0cyh"]
 [ext_resource type="Script" uid="uid://hdehtxs642ig" path="res://scripts/life_bar.gd" id="14_s1ycm"]
 [ext_resource type="Script" uid="uid://bhibvqhjjgufw" path="res://scripts/hit_listener.gd" id="16_shcg2"]
 [ext_resource type="Script" uid="uid://d1sjbpcwpbklk" path="res://scripts/gpu_particles_2d.gd" id="17_shcg2"]
+[ext_resource type="Script" uid="uid://cqta3bldw5h6y" path="res://scripts/posture_bar.gd" id="20_2pwtc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wtq4b"]
 resource_local_to_scene = true
@@ -177,13 +179,13 @@ region = Rect2(192, 64, 64, 64)
 atlas = ExtResource("1_1qe2k")
 region = Rect2(256, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2mchx"]
-atlas = ExtResource("1_1qe2k")
-region = Rect2(0, 256, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3vcr"]
 atlas = ExtResource("1_1qe2k")
 region = Rect2(64, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mchx"]
+atlas = ExtResource("1_1qe2k")
+region = Rect2(0, 256, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3v2ag"]
 animations = [{
@@ -328,10 +330,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2mchx")
+"texture": SubResource("AtlasTexture_t3vcr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t3vcr")
+"texture": SubResource("AtlasTexture_2mchx")
 }],
 "loop": false,
 "name": &"stun",
@@ -369,8 +371,9 @@ script = ExtResource("1_rfxxo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
 material = SubResource("ShaderMaterial_wtq4b")
+position = Vector2(2, -2)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"attack"
+animation = &"stun"
 autoplay = "idle"
 script = ExtResource("3_5uy6h")
 hurtbox = NodePath("../HurtBox")
@@ -379,7 +382,7 @@ state_machine = NodePath("../EnemyStateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
-position = Vector2(-2, 0)
+position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_gl8cc")
 
 [node name="AttackCoolDown" type="Timer" parent="."]
@@ -387,6 +390,7 @@ wait_time = 0.8
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(2, -2)
 collision_layer = 128
 collision_mask = 128
 
@@ -395,6 +399,7 @@ position = Vector2(-5, 6)
 shape = SubResource("CircleShape2D_124ph")
 
 [node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(2, -2)
 collision_layer = 2
 script = ExtResource("5_w8i8w")
 metadata/_custom_type_script = "uid://busr7orlkflil"
@@ -427,12 +432,15 @@ script = ExtResource("10_otmr2")
 [node name="Staggered" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("12_ile5s")
 
+[node name="Stun" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("12_1x4g4")
+
 [node name="LifeBar" type="TextureProgressBar" parent="."]
 z_index = 1
-offset_left = -16.0
-offset_top = -30.0
-offset_right = 112.0
-offset_bottom = -14.0
+offset_left = -14.0
+offset_top = -32.0
+offset_right = 114.0
+offset_bottom = -16.0
 scale = Vector2(0.25, 0.25)
 size_flags_vertical = 0
 theme = SubResource("Theme_wtq4b")
@@ -458,6 +466,7 @@ script = ExtResource("14_j0cyh")
 life_bar = NodePath("..")
 
 [node name="HitListener" type="Node2D" parent="." node_paths=PackedStringArray("AnimPlayer", "VFXPlayer", "LifeBar")]
+position = Vector2(2, -2)
 script = ExtResource("16_shcg2")
 AnimPlayer = NodePath("../AnimatedSprite2D")
 VFXPlayer = NodePath("HitVFXPlayer")
@@ -487,6 +496,7 @@ script = ExtResource("17_shcg2")
 [node name="HitVFXPlayer" type="AnimatedSprite2D" parent="HitListener"]
 
 [node name="HitBoxes" type="Node2D" parent="."]
+position = Vector2(2, -2)
 
 [node name="HitBox" type="Area2D" parent="HitBoxes"]
 script = ExtResource("3_f85vv")
@@ -496,13 +506,21 @@ position = Vector2(10, -10)
 rotation = 1.82038
 shape = SubResource("CapsuleShape2D_wgtw1")
 
+[node name="PostureBar" type="ProgressBar" parent="."]
+offset_left = -14.0
+offset_top = -24.0
+offset_right = 17.0
+offset_bottom = -20.0
+show_percentage = false
+script = ExtResource("20_2pwtc")
+
 [connection signal="damage_taken" from="." to="LifeBar/DamageBar" method="_on_enemy_damage_taken"]
 [connection signal="damage_taken" from="." to="HitListener" method="_on_enemy_damage_taken"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="EnemyStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="HitBoxes/HitBox" method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]
 [connection signal="timeout" from="AttackCoolDown" to="." method="_on_sliding_timer_timeout"]
+[connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -40,6 +40,9 @@ var active_status_bars : Dictionary = {}
 @export var max_mana := 0
 @export var mana := 0
 
+@export var max_posture := 100
+@export var posture := 0
+
 enum ElemMode {
 	NONE,
 	FIRE,
@@ -93,10 +96,12 @@ var pulse_timer := 0.0  # à mettre dans la classe
 
 func _ready():
 	pass
+
 func _process(delta):
 	# Because max life is dynamic...
 	burn_damage_per_second = max_life * 0.02
 	# Vider les barres d'accumulation progressivement
+	#posture = max(posture - (accum_decay_rate/5 * delta), 0)
 	for key in accum.keys():
 		accum[key] = max(accum[key] - accum_decay_rate * delta, 0)
 	_update_accum_bars()
@@ -160,6 +165,10 @@ func take_damage(damage: DamageContainer):
 	if accum["ice"] >= ice_res:
 		apply_status("freeze")
 		accum["ice"] = 0
+
+	if posture >= max_posture:
+		posture = 0
+		get_staggered()
 
 	# Total des dégâts
 	damage.total_dmg = damage.fire_dmg + damage.thunder_dmg + damage.ice_dmg + damage.phys_dmg
@@ -310,3 +319,9 @@ func _update_accum_bars():
 			if active_status_bars.has(elem):
 				active_status_bars[elem].queue_free()
 				active_status_bars.erase(elem)
+
+func get_stunned():
+	pass
+
+func get_staggered():
+	pass

@@ -74,6 +74,8 @@ aumente lorsque vous faites une parade parfaite, utilisez une brise garde reussi
 ou bien lorsquils prennent des degats. Elle se remplit lorsqu'ils ne font rien.
 Si elle se remplit, l'ennemi entre dans l'etat vulnerable
 
+Les changements d'armes sont aussi des esquives
+
 ### Idees de levels:
 Il nous faut une zone montagneuse et enneigee
 Des collines ou y'a de le foudre
@@ -101,14 +103,22 @@ Avec la lance, des lances additionnelles apparaitront au moment de les Lancer
 Avec le marteau, le premier coup horizontal est suivi d'un mechant coup vertical
 Avec l'epee on peut enchainer avec le slash rapide horizontal qui vous fait passer derriere l'ennemi
 
+Un gars de l'est (un japonais avec un odachi) qui porte sur son dos un cercueil
+Ce sera un gars qui s'est ramene depuis tres loin dans le village parce qu'il a appris que
+la bas il se passait des trucs en rapport avec la renaissance
+Le cercueil dans son dos contiendra en fait le cadavre de sa bien aimee, qu'il essaie de ressusiter
+Eventuellement dans sa quete il arrivera a utiliser l'almana pour la ramener a la vie mais elle sera juste une sorte
+de zombie. Il sera devenu fou et il attaquera le joueur pour proteger le zombie. On va lui donner un moveset tellement style
+Il ne maitrisera pas le mana, mais il connaitra des arts qui permettent de renforcer le corps sans
+en utiliser. On pourra peut etre prendre une de ses competences.
+
 # IDEES RANDOM
 Il nous faut une battle de danse
 Il nous faut des "Appels" des invocations que certains persos te donnent et que tu peux utiliser
-pour utiliser leur competence speciale
+pour utiliser leur competence speciale. Ce serait bien si chaque personnage te donnait son appel
+a un niveau donne de sa quete
 Jouer avec le zoom de la cam quand hurt ou bien quand coup mechant
 Ajouter du weapon spin sur les attaques chargees
-
-
 
 
 # IDEES GAME-DESIGN

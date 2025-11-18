@@ -42,6 +42,9 @@ func take_damage(damage:DamageContainer):
 	hit_direction = damage.facing
 	change_state("hit")
 
+func get_stunned():
+	change_state("stun")
+
 func change_state(new_state):
 	$PlayerStateMachine.on_state_transition(new_state)
 

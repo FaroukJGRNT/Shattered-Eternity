@@ -40,7 +40,10 @@ func on_area_entered(area: Area2D) -> void:
 				cam.trigger_shake(area.cam_shake_value, 10)
 			print(area.hitstop_scale, area.hitstop_time)
 			frame_freeze(area.hitstop_scale, area.hitstop_time)
+			owner.posture += area.motion_value
 			owner.take_damage(area.generate_damage())
+			if area.can_stun:
+				owner.get_stunned()
 			print("Took damage")
 
 func _owner_in_targeted_groups(owner: Node, groups: Array) -> bool:

@@ -17,8 +17,14 @@ var active := false
 var targeted_groups : Array[String] = []
 # The direction of the hit
 var facing := 1
+# Can the hitbox inflict stun
+var can_stun := false
 
 var is_parried := false
+
+# For projectiles, since you cant generate damage from them, they're detached
+# from their owmer
+var premade_dmg : DamageContainer = null
 
 func _init() -> void:
 	monitoring = false
@@ -28,5 +34,9 @@ func _init() -> void:
 	collision_mask = 0
 
 func generate_damage() -> DamageContainer:
+	if premade_dmg != null:
+		print("returned premade")
+		print(premade_dmg.phys_dmg, premade_dmg.total_dmg)
+		return premade_dmg
 	# Let the owner generate the damage based on its stats
 	return owner.deal_damage(motion_value, atk_type)

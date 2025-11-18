@@ -8,10 +8,12 @@ func enter():
 
 func update(delta):
 	if Input.is_action_just_pressed("attack"):
+		print("COUNTER!!!")
 		match player.current_weapon:
 			player.Weapons.SWORD:
 				transitioned.emit("swordparry")
 			player.Weapons.HAMMER:
+				print("HAMMER PARRY")
 				transitioned.emit("hammerparry")
 			player.Weapons.SPEAR:
 				transitioned.emit("spearparry")

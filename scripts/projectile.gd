@@ -13,3 +13,8 @@ func move(delta):
 
 func on_hit():
 	pass
+
+func _process(delta: float) -> void:
+	move(delta)
+	if position.distance_to(get_tree().get_first_node_in_group("Player").position) > 2000:
+		queue_free()

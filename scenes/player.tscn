@@ -1138,7 +1138,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hammer_attack_2",
-"speed": 12.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1315,7 +1315,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"landing",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [],
 "loop": true,
@@ -1964,8 +1964,10 @@ script = ExtResource("1_le0q1")
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"jump_peak"
+animation = &"hammer_attack_2"
 autoplay = "idle"
+frame = 6
+frame_progress = 1.0
 script = ExtResource("5_fjrip")
 state_machine = NodePath("../PlayerStateMachine")
 hitboxes = NodePath("../HitBoxes")

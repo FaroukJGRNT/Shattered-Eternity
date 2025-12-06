@@ -88,10 +88,11 @@ Ils seront les ennemis les plus funs du jeu
 Un scientifique qui cherche a comprendre ce qui se passe dans le monde
 actuellement. Il est adepte de la foudre. Je le vois bien blond
 aux yeux bleus avec des lunettes rondes et une cape blanche
+
 Un gang de bandits qu'on rencontrera un peu partout. Ils ont des haches,
 s'habillent en noir, et leur chef sera un perso interessant, hopefully
 
-Une fée. Les fees seraient des etres qui  ont quitte l'humanite depuis un moment deja
+Une fée. Les fees seraient des etres qui ont quitte l'humanite depuis un moment deja
 a cause de leur mauvaise utilisation du mana. Mais autrefois
 elles aidaient les humains. On en trouvera une dans le jeu qui sentira que
 quelque chose cloche chez le joueur
@@ -111,6 +112,15 @@ Eventuellement dans sa quete il arrivera a utiliser l'almana pour la ramener a l
 de zombie. Il sera devenu fou et il attaquera le joueur pour proteger le zombie. On va lui donner un moveset tellement style
 Il ne maitrisera pas le mana, mais il connaitra des arts qui permettent de renforcer le corps sans
 en utiliser. On pourra peut etre prendre une de ses competences.
+
+On va faire un personnage féminin super bien 
+Elle aura un lien avec les fees
+Elle sera fortement liée avec la nature 
+Au début elle se montrera gentille avec le perso principal 
+Au fur et à mesure elle comprendra que quelque chose cloche avec lui
+Et à la fin on va l'affronter 
+Elle sera super forte, elle aura une sorte de magie féerique avec des papillons, des fleurs et tout
+
 
 # IDEES RANDOM
 Il nous faut une battle de danse
@@ -137,6 +147,7 @@ Ajouter du weapon spin sur les attaques chargees
 
 --> Idée de boss : Un personnage qui peut insufler (trouver comment) des âmes dans des trucs (Il se balade sur un destrier squelette, il peut invoquer des squelettes mais plot twist il peut aussi insufler une âme dans des objets inanimés)(Idée de phase 2 : Il perd son destrier, il insuffle une âme à son arme et elle forme une sorte de boss duo en synergie avec lui)
 
+--> TOUS LES CHARA DESIGNS DOIVENT ETRE UNIQUES. L'art style doit avoir qulque chose qui permet d'identifier le jeu direct, tout en restant beau
 
 
 # IDEES WORLD-BUILDING/DESIGN

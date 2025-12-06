@@ -8,7 +8,7 @@ func enter():
 
 func update(delta):
 	player.get_horizontal_input()
-	if player.direction != 0 and AnimPlayer.frame >= 2:
+	if player.direction != 0 and AnimPlayer.frame >= 1:
 		transitioned.emit("idle")
 	player.handle_horizontal_movement(player.RUN_SPEED/1.75)
 	player.direct_sprite()

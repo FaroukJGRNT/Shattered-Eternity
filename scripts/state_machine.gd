@@ -26,6 +26,7 @@ func _process(delta: float) -> void:
 		current_state.update(delta)
 
 func on_state_transition(new_state_name):
+
 	if states[new_state_name] != current_state:  
 		old_state = current_state
 		current_state.exit()

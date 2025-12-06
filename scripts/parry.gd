@@ -1,24 +1,35 @@
 extends PlayerState
 
+var attack_again := false
+var parry_state := "idle"
+
 func _ready() -> void:
 	is_state_blocking = true
 	
 func enter():
+	$"../../PlayerHurtBox".monitoring = false
+	$"../../PlayerHurtBox".disabled = true
+	parry_state = "idle"
+	attack_again = false
 	AnimPlayer.play("perfect_guard")
 
 func update(delta):
 	if Input.is_action_just_pressed("attack"):
-		print("COUNTER!!!")
+		attack_again = true
 		match player.current_weapon:
 			player.Weapons.SWORD:
-				transitioned.emit("swordparry")
+				parry_state = ("swordparry")
 			player.Weapons.HAMMER:
-				print("HAMMER PARRY")
-				transitioned.emit("hammerparry")
+				parry_state = ("hammerparry")
 			player.Weapons.SPEAR:
-				transitioned.emit("spearparry")
+				parry_state = ("spearparry")
+				
+	
+func exit():
+	$"../../PlayerHurtBox".monitoring = true
+	$"../../PlayerHurtBox".disabled = false
 
 # this function will be executed every time an animation ends,
 # since most states end accordingly to an animation
 func on_animation_end():
-	transitioned.emit("idle")
+	transitioned.emit(parry_state)

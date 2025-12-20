@@ -6,14 +6,8 @@ Blizzard:
 idem pour la glace
 
 Feu tenace:
-Augmente la duree de l'etat brulure inflige aux ennemis de 20%
-La foudre frappe deux fois au Incedie:
-Augmente tous les dgts de feu de 20%
-Orage:
-idem pour la foudre
-Blizzard:
-idem pour la glace
-meme endroit:
+Augmente la duree de l'etat brulure de 20%
+La foudre frappe deux fois au meme endroit:
 idem pour la foudre
 Givre eternel:
 idem pour la glace

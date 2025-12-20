@@ -9,6 +9,7 @@ class_name Enemy
 var target
 var direction
 var can_attack = true
+var hit_counter := 0
 
 # Stats
 func _init() -> void:
@@ -24,13 +25,20 @@ func _init() -> void:
 func _ready() -> void:
 	elem_mode = ElemMode.NONE
 
+func take_damage(damage: DamageContainer):
+	super.take_damage(damage)
+	hit_counter += 1
+	if (hit_counter >= 4):
+		facing = (damage.facing) * -1
+		$EnemyStateMachine.on_state_transition("guard")
+		hit_counter = 0
+	
 func die():
-	$Area2D.monitoring = false
-	$HurtBox.monitoring = false
-	$HurtBox.disabled = true
+	$Area2D.set_deferred("monitoring", false)
+	$HurtBox.desactivate()
 	for hitbox in $HitBoxes.get_children():
 		if hitbox is HitBox:
-			hitbox.monitoring = false
+			hitbox.desactivate()
 	$LifeBar.visible = false
 	$EnemyStateMachine.on_state_transition("death")
 
@@ -41,6 +49,9 @@ func get_stunned():
 func get_staggered():
 	if $EnemyStateMachine.current_state.name != "Death":
 		$EnemyStateMachine.on_state_transition("staggered")
+
+func get_state():
+	return $EnemyStateMachine.get_current_state().name.to_lower()
 
 func _physics_process(delta: float) -> void:
 	var current_state : EnemyState = $EnemyStateMachine.get_current_state()

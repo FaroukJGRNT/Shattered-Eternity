@@ -7,6 +7,12 @@ signal damage_taken
 
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
 
+@export var hurtbox : HurtBox
+
+@export var hitboxes : Node2D
+
+@export var state_machine : Node
+
 @export var status_vbox: VBoxContainer
 
 var global_speed_scale := 1.0
@@ -324,4 +330,7 @@ func get_stunned():
 	pass
 
 func get_staggered():
+	pass
+
+func get_state():
 	pass

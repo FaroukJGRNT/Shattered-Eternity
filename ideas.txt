@@ -84,6 +84,12 @@ Un ancien champ de bataille ou plein de chevaliers sont morts
 Leurs carcasses possedees pas l'almana continuiront de se battre
 Ils seront les ennemis les plus funs du jeu
 
+IL FAUT DES ELEMENTS DE GAMEPLAY QUI RENDRONT LES ZONES FUN A UTILISER ET LES ENVIRONNEMENTS INTERACTIFS
+Sur la colline avec de la foudre faudrait un moyen d'invoquer la foudre et s'en
+servir a notre avantage pour faire des degats aux ennemus
+Dans la zone avec de lave, ca pourrait encourager le joueur a pousser les ennemis avec
+les bonnes competences dans la lave
+
 ### Idees de persos:
 Un scientifique qui cherche a comprendre ce qui se passe dans le monde
 actuellement. Il est adepte de la foudre. Je le vois bien blond

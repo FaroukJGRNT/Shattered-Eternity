@@ -7,6 +7,7 @@ var current_state : PlayerState
 var transition_state : PlayerState
 var old_state : PlayerState
 var states : Dictionary = {}
+@onready var movie_player : AnimationPlayer = $"../AnimationPlayer"
 
 func _ready() -> void:
 	# Gather all different states in the dictionnary
@@ -16,6 +17,7 @@ func _ready() -> void:
 			child.transitioned.connect(on_state_transition)
 			child.AnimPlayer = AnimPlayer
 			child.player = player
+			child.movie_player = movie_player
 			if child is ChargingState:
 				child.connect("attack_charged", player.on_attack_charged, )
 	current_state = states["idle"]
@@ -26,7 +28,6 @@ func _process(delta: float) -> void:
 		current_state.update(delta)
 
 func on_state_transition(new_state_name):
-
 	if states[new_state_name] != current_state:  
 		old_state = current_state
 		current_state.exit()

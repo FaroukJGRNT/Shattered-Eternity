@@ -19,7 +19,6 @@ func _ready() -> void:
 func enter():
 	emitted = false
 	timer = charge_time
-	print("Timer set to ", charge_time)
 	AnimPlayer.play(charge_animation)
 
 func update(delta):

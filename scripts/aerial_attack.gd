@@ -4,6 +4,10 @@ class_name AerialAttack
 @export var horizontal_friction := 0.0
 @export var vertital_friction := 0.0
 
+# If the player lands before reaching this frame, he will continue with the groud attack instead
+@export var frame_teshold := -1
+@export var ground_attck := ""
+
 func enter():
 	super.enter()
 	#player.velocity.x = 0
@@ -13,9 +17,20 @@ func enter():
 func update(delta):
 	super.update(delta)
 	player.handle_vertical_movement(player.get_gravity().y * delta)
-	player.handle_horizontal_movement(player.AERIAL_SPEED - horizontal_friction)
+	player.get_horizontal_input()
+	if player.direction == player.facing:
+		player.handle_horizontal_movement(player.AERIAL_SPEED - horizontal_friction)
 	if player.is_on_floor():
-		transitioned.emit("landing")
+		# Case of unset variables
+		if frame_teshold == -1 or ground_attck == "": 
+			print("Unset variables")
+			transitioned.emit("landing")
+		# We check if we passed the treshold
+		if player.anim_player.frame < frame_teshold:
+			print("Transfering to g a")
+			transitioned.emit(ground_attck)
+		else:
+			transitioned.emit("landing")
 
 func exit():
 	super.exit()

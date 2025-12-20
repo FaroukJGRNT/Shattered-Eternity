@@ -1,4 +1,4 @@
-extends AttackState
+extends ParryAttackState
 
 var deceleration = 60
 

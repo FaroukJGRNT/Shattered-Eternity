@@ -55,8 +55,6 @@ func update(delta):
 		projectile.direction.x = player.facing
 		projectile.scale.x = player.facing
 		projectile.scale.y = player.facing
-		print(player.facing)
-		print(projectile.scale.x)
 		var results = get_closest_enemy()
 		var enemy = results[0]
 		var dist = results[1]

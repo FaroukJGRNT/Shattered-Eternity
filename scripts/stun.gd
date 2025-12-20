@@ -9,6 +9,7 @@ func _init() -> void:
 
 func enter():
 	super.enter()
+	AnimPlayer.play("stun")
 	timer = 1.0
 	push_back = -400.0 * enemy.facing
 	enemy.velocity.x = push_back

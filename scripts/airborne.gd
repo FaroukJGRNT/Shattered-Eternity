@@ -30,7 +30,7 @@ func update(delta):
 		player.handle_vertical_movement(player.get_gravity().y * delta)
 		added_horiz_speed = 0.0
 	# Change animation to fall when descending
-	if player.velocity.y > 0:
+	if player.velocity.y > 0 and AnimPlayer.animation != "fall":
 		AnimPlayer.play("fall")
 	player.initiate_slide()
 	player.handle_horizontal_movement(player.AERIAL_SPEED + added_horiz_speed)

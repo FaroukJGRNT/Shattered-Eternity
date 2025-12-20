@@ -1,4 +1,4 @@
-[gd_scene load_steps=327 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=325 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Shader" uid="uid://dbau474f0ay52" path="res://shaders/hit_flash.tres" id="2_wqfne"]
@@ -81,7 +81,7 @@
 [ext_resource type="Script" uid="uid://bioa4hgc0kbt7" path="res://scripts/sword_aerial_1_hb.gd" id="59_fuw3a"]
 [ext_resource type="Script" uid="uid://dw2ejkolwmr06" path="res://scripts/sword_aerial_2_hb.gd" id="60_8txt3"]
 [ext_resource type="Script" uid="uid://clxmwn43lb4wo" path="res://scripts/guard_break_state.gd" id="63_vx63k"]
-[ext_resource type="Script" uid="uid://b1aetpv3sbsl7" path="res://scripts/shield_hurt_box.gd" id="69_770dr"]
+[ext_resource type="Script" uid="uid://nkq76mulpq41" path="res://scripts/staggered_player.gd" id="65_lw0jh"]
 [ext_resource type="Script" uid="uid://16jb0f75kgfp" path="res://scripts/hammer_parry_hb.gd" id="75_vx63k"]
 [ext_resource type="Script" uid="uid://digaj2k75uibf" path="res://scripts/sword_parry_hb.gd" id="76_lw0jh"]
 [ext_resource type="Script" uid="uid://baintj7h5x6b4" path="res://scripts/guard_break.gd" id="79_lw0jh"]
@@ -110,10 +110,6 @@ region = Rect2(288, 192, 96, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hhpqf"]
 atlas = ExtResource("5_ur7pv")
 region = Rect2(384, 192, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p21yu"]
-atlas = ExtResource("4_fdfoy")
-region = Rect2(1440, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lw0jh"]
 atlas = ExtResource("5_vx63k")
@@ -453,15 +449,11 @@ region = Rect2(960, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3rsyo"]
 atlas = ExtResource("5_vx63k")
-region = Rect2(0, 192, 480, 96)
+region = Rect2(0, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5lhw1"]
 atlas = ExtResource("5_vx63k")
 region = Rect2(2880, 0, 480, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cwl8n"]
-atlas = ExtResource("5_vx63k")
-region = Rect2(3360, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_36p4m"]
 atlas = ExtResource("10_vdulj")
@@ -727,6 +719,10 @@ region = Rect2(0, 0, 480, 384)
 atlas = ExtResource("11_42b1b")
 region = Rect2(480, 0, 480, 384)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwl8n"]
+atlas = ExtResource("5_ur7pv")
+region = Rect2(288, 192, 96, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7iw1"]
 atlas = ExtResource("13_nubpm")
 region = Rect2(2400, 0, 480, 384)
@@ -955,9 +951,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p21yu")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_lw0jh")
 }, {
 "duration": 1.0,
@@ -1035,7 +1028,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"guard_break",
-"speed": 9.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1309,13 +1302,10 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5lhw1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cwl8n")
 }],
 "loop": false,
 "name": &"landing",
-"speed": 10.0
+"speed": 7.0
 }, {
 "frames": [],
 "loop": true,
@@ -1584,6 +1574,14 @@ animations = [{
 "loop": false,
 "name": &"spear_recovery_2",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwl8n")
+}],
+"loop": false,
+"name": &"staggered",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1952,22 +1950,21 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_36p4m"]
-size = Vector2(2, 57)
-
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine") groups=["Player"]]
 collision_layer = 128
 collision_mask = 128
 script = ExtResource("1_le0q1")
+hurtbox = NodePath("PlayerHurtBox")
+hitboxes = NodePath("HitBoxes")
+state_machine = NodePath("PlayerStateMachine")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("state_machine", "hitboxes", "hurtbox")]
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"hammer_attack_2"
+animation = &"sword_aerial_1"
 autoplay = "idle"
-frame = 6
-frame_progress = 1.0
+frame = 1
 script = ExtResource("5_fjrip")
 state_machine = NodePath("../PlayerStateMachine")
 hitboxes = NodePath("../HitBoxes")
@@ -2155,20 +2152,13 @@ anim_name = "sword_charged_attack"
 active_frames = Array[int]([1, 2, 3])
 hitbox = NodePath("../../HitBoxes/SwordCharged")
 
-[node name="SpearAerial" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
+[node name="SpearAerial" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("47_51ujp")
-horizontal_friction = 50.0
-vertital_friction = 12.0
-dash_cancel_frame = 10
-recovery_state_name = "airborne"
-anim_name = "spear_aerial"
-active_frames = Array[int]([1, 2, 3])
-hitbox = NodePath("../../HitBoxes/SpearAerial")
 
 [node name="SwordAerial1" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("48_fuw3a")
-horizontal_friction = 40.0
-vertital_friction = 6.0
+frame_teshold = 1
+ground_attck = "swordattack1"
 dash_cancel_frame = 10
 recovery_state_name = "airborne"
 anim_name = "sword_aerial_1"
@@ -2209,6 +2199,11 @@ recovery_state_name = "guard_break_end"
 anim_name = "guard_break"
 active_frames = Array[int]([8])
 hitbox = NodePath("../../HitBoxes/GuardBreak")
+movement_frames = Array[int]([4, 7])
+movement_velocity = Array[Vector2]([Vector2(10, 0), Vector2(36, 0)])
+
+[node name="Staggered" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("65_lw0jh")
 
 [node name="HitBoxes" type="Node2D" parent="."]
 
@@ -2328,6 +2323,7 @@ shape = SubResource("CircleShape2D_edwuo")
 [node name="SpearAerial" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("58_tk41t")
+up_value = 120
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAerial"]
@@ -2337,16 +2333,18 @@ shape = SubResource("CircleShape2D_i18u8")
 [node name="SwordAerial1" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("59_fuw3a")
+up_value = 200
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAerial1"]
-position = Vector2(27, -21)
+position = Vector2(23, -12)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_46bxm")
 
 [node name="SwordAerial2" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("60_8txt3")
+up_value = 200
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAerial2"]
@@ -2376,7 +2374,7 @@ script = ExtResource("79_lw0jh")
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/GuardBreak"]
-position = Vector2(34, -2)
+position = Vector2(14, -4)
 shape = SubResource("CircleShape2D_p6pc0")
 
 [node name="VFXPlayer" type="AnimatedSprite2D" parent="."]
@@ -2421,16 +2419,6 @@ script = ExtResource("54_apa73")
 unique_name_in_owner = true
 position = Vector2(-2, -8)
 target_position = Vector2(18, 0)
-
-[node name="ShieldHurtBox" type="Area2D" parent="."]
-position = Vector2(-2, 9)
-priority = 5
-script = ExtResource("69_770dr")
-metadata/_custom_type_script = "uid://busr7orlkflil"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldHurtBox"]
-position = Vector2(31, -11)
-shape = SubResource("RectangleShape2D_36p4m")
 
 [connection signal="damage_taken" from="." to="HitListener" method="_on_player_damage_taken"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

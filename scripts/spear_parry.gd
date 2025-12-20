@@ -1,1 +1,1 @@
-extends AttackState
+extends ParryAttackState

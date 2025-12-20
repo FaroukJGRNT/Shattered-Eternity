@@ -7,8 +7,7 @@ func _ready() -> void:
 	is_state_blocking = true
 	
 func enter():
-	$"../../PlayerHurtBox".monitoring = false
-	$"../../PlayerHurtBox".disabled = true
+	player.hurtbox.desactivate()
 	parry_state = "idle"
 	attack_again = false
 	AnimPlayer.play("perfect_guard")
@@ -26,8 +25,7 @@ func update(delta):
 				
 	
 func exit():
-	$"../../PlayerHurtBox".monitoring = true
-	$"../../PlayerHurtBox".disabled = false
+	player.hurtbox.activate()
 
 # this function will be executed every time an animation ends,
 # since most states end accordingly to an animation

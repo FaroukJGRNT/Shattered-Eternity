@@ -29,6 +29,7 @@ var current_weapon = Weapons.SWORD
 
 # Stats
 func _init() -> void:
+	position.x += 200
 	max_life = 200
 	life = max_life
 	attack = 80
@@ -40,10 +41,14 @@ func _init() -> void:
 func take_damage(damage:DamageContainer):
 	super.take_damage(damage)
 	hit_direction = damage.facing
-	change_state("hit")
+	if $PlayerStateMachine.get_current_state().name != "Staggered":
+		change_state("hit")
 
 func get_stunned():
-	change_state("stun")
+	change_state("staggered")
+
+func get_state():
+	return $PlayerStateMachine.get_current_state().name.to_lower()
 
 func change_state(new_state):
 	$PlayerStateMachine.on_state_transition(new_state)
@@ -54,6 +59,7 @@ func run_cooldowns(delta):
 	if dash_cooldown <= 0:
 		on_dash_cooldown = false
 
+# The process function makes sure the player is in the right state
 func _physics_process(delta: float) -> void:
 	run_cooldowns(delta)
 
@@ -70,6 +76,7 @@ func _physics_process(delta: float) -> void:
 
 	# on the ground
 	if is_on_floor():
+		# Reset abilities
 		allowed_jumps = 1
 		aerial_dash_used = false
 		aerial_attack_used = false
@@ -126,14 +133,12 @@ func direct_sprite():
 		$PlayerHurtBox.scale.x = -1
 		$HitBoxes.scale.x = -1
 		$RayCast2D.scale.x = -1
-		$ShieldHurtBox.scale.x = -1
 		facing = -1
 	if direction > 0:
 		$AnimatedSprite2D.flip_h = false
 		$PlayerHurtBox.scale.x = 1
 		$HitBoxes.scale.x = 1
 		$RayCast2D.scale.x = 1
-		$ShieldHurtBox.scale.x = 1
 		facing = 1
 
 func get_horizontal_input():

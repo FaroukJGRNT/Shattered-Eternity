@@ -8,6 +8,9 @@ class_name AttackState
 @export var active_frames : Array[int]
 @export var hitbox : HitBox
 
+@export var movement_frames : Array[int]
+@export var movement_velocity : Array[Vector2]
+
 var attack_again := false
 @export var next_combo_state_name : String = ""
 
@@ -21,6 +24,13 @@ func enter():
 	AnimPlayer.play(anim_name)
 
 func update(delta):
+	var index = 0
+	for frame in movement_frames:
+		if AnimPlayer.frame == frame:
+			player.velocity += (movement_velocity[index]) * player.facing
+			player.move_and_slide()
+		index += 1
+
 	if Input.is_action_just_pressed("attack"):
 		attack_again = true
 	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= dash_cancel_frame:

@@ -20,14 +20,17 @@ var facing := 1
 # Can the hitbox inflict stun
 var can_stun := false
 
-var is_parried := false
+var push_back := 0
+
+var is_guard_break := false
+var is_phys_atk := true
 
 # For projectiles, since you cant generate damage from them, they're detached
 # from their owmer
 var premade_dmg : DamageContainer = null
 
 func _init() -> void:
-	monitoring = false
+	desactivate()
 	# Hitboxes look for hurtboxes on layer 2
 	collision_layer = 2
 	# Hitboxes don't need to be in a mask 
@@ -40,3 +43,15 @@ func generate_damage() -> DamageContainer:
 		return premade_dmg
 	# Let the owner generate the damage based on its stats
 	return owner.deal_damage(motion_value, atk_type)
+
+func activate():
+	set_deferred("monitoring", true)
+	active = true
+
+func desactivate():
+	set_deferred("monitoring", false)
+	active = false
+
+# Is called whenever the hitbox deals damage to a hurtbox
+func on_hit():
+	pass

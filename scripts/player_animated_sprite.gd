@@ -11,20 +11,16 @@ func _on_frame_changed() -> void:
 	if owner.dead:
 		return
 	# default reset
-	hurtbox.monitoring = true
-	hurtbox.disabled = false
-	
+	hurtbox.activate()
+
 	for hitbox in hitboxes.get_children():
-		hitbox.monitoring = false
-		hitbox.active = false
-		hitbox.is_parried = false
-	
+		hitbox.desactivate()
+
 	var current_state = state_machine.get_current_state()
 	if current_state is AttackState:
 		if frame in current_state.active_frames:
-			current_state.hitbox.active = true
-			current_state.hitbox.monitoring = true
+			current_state.hitbox.activate()
+			current_state.hitbox.facing = owner.facing
 	if current_state is EvadeState:
 		if frame in current_state.active_frames:
-			hurtbox.disabled = true
-			hurtbox.monitoring = true
+			hurtbox.desactivate()

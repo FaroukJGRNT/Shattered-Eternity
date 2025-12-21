@@ -11,13 +11,14 @@ class_name AttackState
 @export var movement_frames : Array[int]
 @export var movement_velocity : Array[Vector2]
 
+@export var deceleration := 10
+
 var attack_again := false
 @export var next_combo_state_name : String = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	is_state_blocking = true
-
 
 func enter():
 	attack_again = false
@@ -35,6 +36,14 @@ func update(delta):
 		attack_again = true
 	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= dash_cancel_frame:
 		transitioned.emit("backdashing")
+
+	#if len(movement_frames) == 0:
+		#return
+	#if player.velocity.x != 0:
+		#if player.velocity.x > 0:
+			#player.velocity.x = min(0, player.velocity.x - deceleration)
+		#if player.velocity.x < 0:
+			#player.velocity.x = max(0, player.velocity.x + deceleration)
 
 func exit():
 	pass

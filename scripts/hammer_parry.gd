@@ -1,6 +1,6 @@
 extends ParryAttackState
 
-var deceleration = 10
+var deceleration_ = 10
 
 func enter():
 	super.enter()
@@ -11,7 +11,7 @@ func update(delta):
 	if AnimPlayer.frame == 4:
 		player.velocity.x = 250 * player.facing
 	if player.velocity.x > 0:
-		player.velocity.x -= deceleration
+		player.velocity.x -= deceleration_
 	if player.velocity.x < 0:
-		player.velocity.x += deceleration
+		player.velocity.x += deceleration_
 	player.move_and_slide()

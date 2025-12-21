@@ -164,17 +164,22 @@ func initiate_ground_actions():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		allowed_jumps = 0
 		change_state("jumpstart")
-	initiate_slide()
+		return
 	if Input.is_action_just_pressed("attack"):
 		match current_weapon:
 			Weapons.SWORD:
 				change_state("swordattack1")
+				return
 			Weapons.SPEAR:
 				change_state("spearattack1")
+				return
 			Weapons.HAMMER:
 				change_state("hammerattack1")
+				return
 	if Input.is_action_just_pressed("guard"):
 		change_state("guard")
+		return
+	initiate_slide()
 
 func _on_vfx_player_animation_finished() -> void:
 	$VFXPlayer.visible = false

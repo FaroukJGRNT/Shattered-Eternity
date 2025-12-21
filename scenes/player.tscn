@@ -1,4 +1,4 @@
-[gd_scene load_steps=339 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=353 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Shader" uid="uid://dbau474f0ay52" path="res://shaders/hit_flash.tres" id="2_wqfne"]
@@ -40,6 +40,7 @@
 [ext_resource type="Script" uid="uid://b2lg22d72kfsh" path="res://scripts/wall_jumping.gd" id="16_fdfoy"]
 [ext_resource type="Script" uid="uid://cxj685gd2bpvs" path="res://scripts/wall_sliding.gd" id="17_qfm1y"]
 [ext_resource type="Script" uid="uid://bhoiqxgbbk5rm" path="res://scripts/sword_attack_2.gd" id="19_60mlk"]
+[ext_resource type="Texture2D" uid="uid://6y0tadqelsly" path="res://assets/sprites/player/SpearAttack-Counter.png" id="19_cbf1i"]
 [ext_resource type="Script" uid="uid://cy15p8y2yuxsa" path="res://scripts/sword_attack_1.gd" id="20_i4ail"]
 [ext_resource type="Texture2D" uid="uid://dm5vguv2khllx" path="res://assets/sprites/player/LightAttack-Counter.png" id="20_irpag"]
 [ext_resource type="Script" uid="uid://btgj2uli02xcl" path="res://scripts/sword_attack_3.gd" id="21_i4ail"]
@@ -88,6 +89,7 @@
 [ext_resource type="Script" uid="uid://digaj2k75uibf" path="res://scripts/sword_parry_hb.gd" id="76_lw0jh"]
 [ext_resource type="Script" uid="uid://baintj7h5x6b4" path="res://scripts/guard_break.gd" id="79_lw0jh"]
 [ext_resource type="Script" uid="uid://mro2wgoqr73b" path="res://scripts/hammer_aerial_hb.gd" id="84_cbf1i"]
+[ext_resource type="Script" uid="uid://cem64osvvymxq" path="res://scripts/spear_parry_hb.gd" id="86_4vfid"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wnwbv"]
 shader = ExtResource("2_wqfne")
@@ -741,6 +743,50 @@ region = Rect2(2400, 0, 480, 384)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4cgac"]
 atlas = ExtResource("14_qjsmb")
 region = Rect2(2880, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tr32"]
+atlas = ExtResource("19_cbf1i")
+region = Rect2(480, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_calqp"]
+atlas = ExtResource("19_cbf1i")
+region = Rect2(960, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tnnx"]
+atlas = ExtResource("19_cbf1i")
+region = Rect2(1440, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q60f8"]
+atlas = ExtResource("19_cbf1i")
+region = Rect2(1920, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsoij"]
+atlas = ExtResource("19_cbf1i")
+region = Rect2(2400, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txvuj"]
+atlas = ExtResource("19_cbf1i")
+region = Rect2(2880, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_446j8"]
+atlas = ExtResource("19_cbf1i")
+region = Rect2(3360, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrd1h"]
+atlas = ExtResource("19_cbf1i")
+region = Rect2(3840, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_il6c1"]
+atlas = ExtResource("19_cbf1i")
+region = Rect2(4320, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqgeo"]
+atlas = ExtResource("19_cbf1i")
+region = Rect2(4800, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eacfl"]
+atlas = ExtResource("19_cbf1i")
+region = Rect2(5280, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqoq3"]
 atlas = ExtResource("10_2a3c5")
@@ -1625,6 +1671,44 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_4tr32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_calqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tnnx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q60f8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsoij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txvuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_446j8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrd1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_il6c1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqgeo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eacfl")
+}],
+"loop": false,
+"name": &"spear_parry",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_dqoq3")
 }, {
 "duration": 1.0,
@@ -1942,6 +2026,10 @@ radius = 21.0238
 radius = 25.0
 height = 120.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t4xi"]
+radius = 23.9729
+height = 172.011
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qmsq4"]
 atlas = ExtResource("47_4gjji")
 region = Rect2(0, 0, 480, 384)
@@ -2040,9 +2128,10 @@ hit_listener = NodePath("HitListener")
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"hammer_aerial"
+animation = &"spear_parry"
 autoplay = "idle"
-frame = 5
+frame = 10
+frame_progress = 1.0
 script = ExtResource("5_fjrip")
 state_machine = NodePath("../PlayerStateMachine")
 hitboxes = NodePath("../HitBoxes")
@@ -2080,8 +2169,14 @@ anim_name = "sword_parry"
 active_frames = Array[int]([3])
 hitbox = NodePath("../../HitBoxes/SwordParry")
 
-[node name="SpearParry" type="Node" parent="PlayerStateMachine"]
+[node name="SpearParry" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("29_bpsgo")
+dash_cancel_frame = 8
+anim_name = "spear_parry"
+active_frames = Array[int]([4])
+hitbox = NodePath("../../HitBoxes/SpearParry")
+movement_frames = Array[int]([4])
+movement_velocity = Array[Vector2]([Vector2(-400, 0)])
 
 [node name="HammerParry" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("30_jx8is")
@@ -2475,6 +2570,7 @@ position = Vector2(14, -4)
 shape = SubResource("CircleShape2D_p6pc0")
 
 [node name="HammerAerial" type="Area2D" parent="HitBoxes"]
+visible = false
 script = ExtResource("84_cbf1i")
 up_value = 50
 metadata/_custom_type_script = "uid://cahklyitgjl16"
@@ -2482,6 +2578,15 @@ metadata/_custom_type_script = "uid://cahklyitgjl16"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerAerial"]
 position = Vector2(52, -14)
 shape = SubResource("CapsuleShape2D_4tr32")
+
+[node name="SpearParry" type="Area2D" parent="HitBoxes"]
+script = ExtResource("86_4vfid")
+metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearParry"]
+position = Vector2(52, 10)
+rotation = 1.57952
+shape = SubResource("CapsuleShape2D_2t4xi")
 
 [node name="VFXPlayer" type="AnimatedSprite2D" parent="."]
 visible = false

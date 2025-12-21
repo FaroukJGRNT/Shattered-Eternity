@@ -11,7 +11,7 @@ func enter():
 	super.enter()
 	AnimPlayer.play("stun")
 	timer = 1.0
-	push_back = -400.0 * enemy.facing
+	push_back = (-400 * enemy.facing)
 	enemy.velocity.x = push_back
 	print("Enemy veloc: ", enemy.velocity.x)
 

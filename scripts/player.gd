@@ -9,6 +9,7 @@ class_name Player
 @export var SLIDE_DIST = 120.0
 @export var BACKSLIDE_DIST = 80.0
 @export var WALL_SLIDE_SPEED = 50.0
+@export var MAX_VERTICAL_VELOC = 300.0
 var dash_cooldown := 1.0
 var on_dash_cooldown := false
 var aerial_dash_used := false
@@ -38,11 +39,12 @@ func _init() -> void:
 	fire_res = 10.0
 	ice_res = 10.0
 
-func take_damage(damage:DamageContainer):
-	super.take_damage(damage)
+func take_damage(damage:DamageContainer) -> DamageContainer:
+	damage = super.take_damage(damage)
 	hit_direction = damage.facing
 	if $PlayerStateMachine.get_current_state().name != "Staggered":
 		change_state("hit")
+	return damage
 
 func get_stunned():
 	change_state("staggered")
@@ -109,10 +111,10 @@ func handle_vertical_movement(gravity):
 	velocity.y += gravity
 	if velocity.y >= 0:
 		velocity.y -= friction
-	if velocity.y > 350:
-		velocity.y = 350
-	if velocity.y < -350:
-		velocity.y = -350
+	if velocity.y > MAX_VERTICAL_VELOC:
+		velocity.y = MAX_VERTICAL_VELOC
+	if velocity.y < -MAX_VERTICAL_VELOC:
+		velocity.y = -MAX_VERTICAL_VELOC
 	move_and_slide()
 
 func handle_horizontal_movement(speed):

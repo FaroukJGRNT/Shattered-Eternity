@@ -1950,21 +1950,21 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine", "hit_listener") groups=["Player"]]
 collision_layer = 128
 collision_mask = 128
 script = ExtResource("1_le0q1")
 hurtbox = NodePath("PlayerHurtBox")
 hitboxes = NodePath("HitBoxes")
 state_machine = NodePath("PlayerStateMachine")
+hit_listener = NodePath("HitListener")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("state_machine", "hitboxes", "hurtbox")]
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"sword_aerial_1"
+animation = &"spear_aerial"
 autoplay = "idle"
-frame = 1
 script = ExtResource("5_fjrip")
 state_machine = NodePath("../PlayerStateMachine")
 hitboxes = NodePath("../HitBoxes")
@@ -2152,8 +2152,15 @@ anim_name = "sword_charged_attack"
 active_frames = Array[int]([1, 2, 3])
 hitbox = NodePath("../../HitBoxes/SwordCharged")
 
-[node name="SpearAerial" type="Node" parent="PlayerStateMachine"]
+[node name="SpearAerial" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("47_51ujp")
+vertital_friction = 5.0
+frame_teshold = 2
+ground_attck = "spearattack2"
+dash_cancel_frame = 20
+anim_name = "spear_aerial"
+active_frames = Array[int]([1, 2, 3])
+hitbox = NodePath("../../HitBoxes/SpearAerial")
 
 [node name="SwordAerial1" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("48_fuw3a")
@@ -2204,6 +2211,8 @@ movement_velocity = Array[Vector2]([Vector2(10, 0), Vector2(36, 0)])
 
 [node name="Staggered" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("65_lw0jh")
+
+[node name="HammerAerial" type="Node" parent="PlayerStateMachine"]
 
 [node name="HitBoxes" type="Node2D" parent="."]
 
@@ -2386,11 +2395,9 @@ animation = &"full_charge"
 frame = 2
 frame_progress = 1.0
 
-[node name="HitListener" type="Node2D" parent="." node_paths=PackedStringArray("AnimPlayer", "VFXPlayer")]
+[node name="HitListener" type="Node2D" parent="."]
 position = Vector2(-2, 9)
 script = ExtResource("54_ha2mi")
-AnimPlayer = NodePath("../AnimatedSprite2D")
-VFXPlayer = NodePath("../VFXPlayer")
 
 [node name="GPUParticles2D" type="CPUParticles2D" parent="HitListener"]
 emitting = false
@@ -2420,7 +2427,6 @@ unique_name_in_owner = true
 position = Vector2(-2, -8)
 target_position = Vector2(18, 0)
 
-[connection signal="damage_taken" from="." to="HitListener" method="_on_player_damage_taken"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="PlayerStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]

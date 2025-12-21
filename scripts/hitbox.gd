@@ -38,8 +38,6 @@ func _init() -> void:
 
 func generate_damage() -> DamageContainer:
 	if premade_dmg != null:
-		print("returned premade")
-		print(premade_dmg.phys_dmg, premade_dmg.total_dmg)
 		return premade_dmg
 	# Let the owner generate the damage based on its stats
 	return owner.deal_damage(motion_value, atk_type)

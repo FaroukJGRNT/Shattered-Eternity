@@ -25,13 +25,14 @@ func _init() -> void:
 func _ready() -> void:
 	elem_mode = ElemMode.NONE
 
-func take_damage(damage: DamageContainer):
-	super.take_damage(damage)
+func take_damage(damage: DamageContainer) -> DamageContainer:
+	damage = super.take_damage(damage)
 	hit_counter += 1
 	if (hit_counter >= 4):
 		facing = (damage.facing) * -1
 		$EnemyStateMachine.on_state_transition("guard")
 		hit_counter = 0
+	return damage
 	
 func die():
 	$Area2D.set_deferred("monitoring", false)

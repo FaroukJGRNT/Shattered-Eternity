@@ -3,8 +3,6 @@ class_name LivingEntity
 
 var facing : int = 1
 
-signal damage_taken
-
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var hurtbox : HurtBox
@@ -12,6 +10,8 @@ signal damage_taken
 @export var hitboxes : Node2D
 
 @export var state_machine : Node
+
+@export var hit_listener : HitListener
 
 @export var status_vbox: VBoxContainer
 
@@ -105,7 +105,7 @@ func _ready():
 
 func _process(delta):
 	# Because max life is dynamic...
-	burn_damage_per_second = max_life * 0.02
+	burn_damage_per_second = round(max_life * 0.02)
 	# Vider les barres d'accumulation progressivement
 	#posture = max(posture - (accum_decay_rate/5 * delta), 0)
 	for key in accum.keys():
@@ -144,12 +144,12 @@ func _process(delta):
 	else:
 		anim_player.modulate = Color(1,1,1,1)
 
-func take_damage(damage: DamageContainer):
+func take_damage(damage: DamageContainer) -> DamageContainer:
 	# Appliquer les résistances directement sur le DamageContainer
-	damage.fire_dmg *= (1.0 - fire_res / 100.0)
-	damage.thunder_dmg *= (1.0 - thunder_res / 100.0)
-	damage.ice_dmg *= (1.0 - ice_res / 100.0)
-	damage.phys_dmg *= (1.0 - defense / 100.0)
+	damage.fire_dmg *= round(1.0 - fire_res / 100.0)
+	damage.thunder_dmg *= round(1.0 - thunder_res / 100.0)
+	damage.ice_dmg *= round(1.0 - ice_res / 100.0)
+	damage.phys_dmg *= round(1.0 - defense / 100.0)
 	if damage.is_crit:
 		damage.phys_dmg *= 3
 
@@ -188,7 +188,6 @@ func take_damage(damage: DamageContainer):
 		life = 0
 		die()
 
-	damage_taken.emit(damage)
 	return damage
 
 func deal_damage(motion_value: int, attack_type: String = "") -> DamageContainer:
@@ -259,8 +258,8 @@ func _apply_burn(delta):
 			die()
 
 func _apply_shock():
-	attack *= (1.0 - shock_attack_reduction)
-	defense *= (1.0 - shock_defense_reduction)
+	attack *= round(1.0 - shock_attack_reduction)
+	defense *= round(1.0 - shock_defense_reduction)
 
 func _apply_freeze():
 	anim_player.speed_scale = freeze_speed_reduction

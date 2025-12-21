@@ -42,7 +42,7 @@ func update(delta):
 			player.Weapons.SWORD:
 				transitioned.emit("swordaerial1")
 			player.Weapons.HAMMER:
-				pass
+				transitioned.emit("hammeraerial")
 func exit():
 	pass
 

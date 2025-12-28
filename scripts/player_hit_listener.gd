@@ -1,6 +1,13 @@
 extends Node2D
 class_name HitListener
 
+@export var SMALL_PUSHBACK := 20
+@export var MEDIUM_PUSHBACK := 40
+@export var BIG_PUSHBACK := 60
+@export var SMALL_PUSHBACK_DURATION := 0.5
+@export var MEDIUM_PUSHBACK_DURATION := 1
+@export var BIG_PUSHBACK_DURATION := 1.5
+
 var daddy : LivingEntity
 
 func _ready() -> void:
@@ -62,12 +69,28 @@ func damage_taken(area : HitBox) -> void:
 	# GETTING GUARD BROKEN
 	if daddy.get_state() == "guard" and area.is_guard_break:
 		# TODO : Big posture damage to add
-		daddy.get_stunned()
+		match daddy.poise_type:
+			daddy.Poises.PLAYER:
+				daddy.get_staggered()
+			daddy.Poises.SMALL:
+				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+			daddy.Poises.MEDIUM:
+				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+			daddy.Poises.LARGE:
+				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 		daddy.velocity.x = area.motion_value * area.facing * 20
 	# GETTING INTERRUPTED
 	if daddy.get_state() == "guardbreak" and area.is_phys_atk:
 		# TODO : Big posture damage to add
-		daddy.get_stunned()
+		match daddy.poise_type:
+			daddy.Poises.PLAYER:
+				daddy.get_staggered()
+			daddy.Poises.SMALL:
+				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+			daddy.Poises.MEDIUM:
+				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+			daddy.Poises.LARGE:
+				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 		daddy.velocity.x = area.motion_value * area.facing * 20
 
 	daddy.posture += area.motion_value
@@ -76,11 +99,26 @@ func damage_taken(area : HitBox) -> void:
 
 	# Call the hitbox side effect
 	area.on_hit()
-
-	if area.can_stun:
-		daddy.get_stunned()
-		daddy.velocity.x = area.motion_value * area.facing * 20
-
+	
+	match daddy.poise_type:
+		daddy.Poises.PLAYER:
+			print("PLAYER GETTING HURT")
+			daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
+		daddy.Poises.SMALL:
+			match area.push_back:
+				area.Pushback.NORMAL:
+					daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
+				area.Pushback.STRONG:
+					daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+		daddy.Poises.MEDIUM:
+			match area.push_back:
+				area.Pushback.NORMAL:
+					pass
+				area.Pushback.STRONG:
+					daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
+		daddy.Poises.LARGE:
+			pass
+	
 	# Hit flash
 	daddy.anim_player.material.set_shader_parameter("enabled", true)
 	shader_on_cooldown = true

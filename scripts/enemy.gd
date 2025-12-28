@@ -13,6 +13,7 @@ var hit_counter := 0
 
 # Stats
 func _init() -> void:
+	poise_type = Poises.MEDIUM
 	max_life = 300
 	life = max_life
 	attack = 60
@@ -43,8 +44,10 @@ func die():
 	$LifeBar.visible = false
 	$EnemyStateMachine.on_state_transition("death")
 
-func get_stunned():
+func get_stunned(vel_x : float, duration : float):
 	if $EnemyStateMachine.current_state.name != "Death":
+		$EnemyStateMachine/Stun.push_back = vel_x
+		$EnemyStateMachine/Stun.timeout = duration
 		$EnemyStateMachine.on_state_transition("stun")
 
 func get_staggered():

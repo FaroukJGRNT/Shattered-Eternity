@@ -1,4 +1,4 @@
-[gd_scene load_steps=353 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=355 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Shader" uid="uid://dbau474f0ay52" path="res://shaders/hit_flash.tres" id="2_wqfne"]
@@ -62,9 +62,9 @@
 [ext_resource type="Script" uid="uid://bld55epwh3oa8" path="res://scripts/attack_recovery.gd" id="34_hhpqf"]
 [ext_resource type="Script" uid="uid://diaovl33jio2x" path="res://scripts/spear_attack_1_state.gd" id="37_2a3c5"]
 [ext_resource type="Script" uid="uid://waoro6kcfv75" path="res://scripts/spear_attack_2state.gd" id="38_42b1b"]
-[ext_resource type="Script" uid="uid://b677sjxow23sd" path="res://scenes/hammer_charged.gd" id="38_mx1m4"]
-[ext_resource type="Script" uid="uid://bud1sa3svu083" path="res://scenes/hammer_charged_attack.gd" id="39_4gjji"]
-[ext_resource type="Script" uid="uid://dejadl63h4eg" path="res://scenes/spear_attack_3state.gd" id="39_h7ic4"]
+[ext_resource type="Script" uid="uid://b677sjxow23sd" path="res://scripts/hammer_charged.gd" id="38_mx1m4"]
+[ext_resource type="Script" uid="uid://bud1sa3svu083" path="res://scripts/hammer_charged_attack.gd" id="39_4gjji"]
+[ext_resource type="Script" uid="uid://dejadl63h4eg" path="res://scripts/spear_attack_3state.gd" id="39_h7ic4"]
 [ext_resource type="Texture2D" uid="uid://c5vrac0gopda3" path="res://assets/sprites/vfx/Slash Sprite Sheet.png" id="41_2dvfe"]
 [ext_resource type="Script" uid="uid://dhyynv5lhc8ds" path="res://scripts/sword_charging.gd" id="41_2gdjj"]
 [ext_resource type="Script" uid="uid://d0v2g66xb3ssk" path="res://scripts/sword_charged_attack.gd" id="42_sc3ue"]
@@ -90,6 +90,8 @@
 [ext_resource type="Script" uid="uid://baintj7h5x6b4" path="res://scripts/guard_break.gd" id="79_lw0jh"]
 [ext_resource type="Script" uid="uid://mro2wgoqr73b" path="res://scripts/hammer_aerial_hb.gd" id="84_cbf1i"]
 [ext_resource type="Script" uid="uid://cem64osvvymxq" path="res://scripts/spear_parry_hb.gd" id="86_4vfid"]
+[ext_resource type="Script" uid="uid://b7k3ffwp05oxl" path="res://scripts/buff_manager.gd" id="91_4vfid"]
+[ext_resource type="Script" uid="uid://bpb8sud12vjj4" path="res://scripts/killed_enemy_atk_buff.gd" id="92_ljgr3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wnwbv"]
 shader = ExtResource("2_wqfne")
@@ -2115,7 +2117,7 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine", "hit_listener") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine", "hit_listener", "buff_manager") groups=["Player"]]
 collision_layer = 128
 collision_mask = 128
 script = ExtResource("1_le0q1")
@@ -2123,6 +2125,7 @@ hurtbox = NodePath("PlayerHurtBox")
 hitboxes = NodePath("HitBoxes")
 state_machine = NodePath("PlayerStateMachine")
 hit_listener = NodePath("HitListener")
+buff_manager = NodePath("BuffManager")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("state_machine", "hitboxes", "hurtbox")]
 material = SubResource("ShaderMaterial_wnwbv")
@@ -2628,6 +2631,13 @@ script = ExtResource("54_apa73")
 unique_name_in_owner = true
 position = Vector2(-2, -7)
 target_position = Vector2(18, 0)
+
+[node name="BuffManager" type="Node" parent="."]
+script = ExtResource("91_4vfid")
+
+[node name="KilledEnemyAtkBuff" type="Node" parent="BuffManager"]
+script = ExtResource("92_ljgr3")
+metadata/_custom_type_script = "uid://dioqaxwj02s7r"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="PlayerStateMachine" method="_on_animated_sprite_2d_animation_finished"]

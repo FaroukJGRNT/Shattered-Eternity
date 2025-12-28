@@ -10,3 +10,5 @@ var is_crit := false
 var total_dmg := 0
 
 var facing := 1
+# A reference to the daddy
+var daddy_ref : LivingEntity

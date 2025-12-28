@@ -17,10 +17,13 @@ var active := false
 var targeted_groups : Array[String] = []
 # The direction of the hit
 var facing := 1
-# Can the hitbox inflict stun
-var can_stun := false
 
-var push_back := 0
+enum Pushback {
+	NORMAL,
+	STRONG
+}
+
+var push_back : Pushback = Pushback.NORMAL
 
 var is_guard_break := false
 var is_phys_atk := true

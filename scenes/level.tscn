@@ -1,15 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://wt3ig72atatw"]
+[gd_scene load_steps=5 format=3 uid="uid://p4w0proattic"]
 
-[ext_resource type="PackedScene" uid="uid://e457axxbrw1u" path="res://scenes/platform.tscn" id="1_4xu6g"]
 [ext_resource type="PackedScene" uid="uid://c1imgcb2kat6k" path="res://scenes/player.tscn" id="2_7lnj0"]
 [ext_resource type="PackedScene" uid="uid://cc3gbjxlqvcli" path="res://scenes/world.tscn" id="2_ppgk2"]
 [ext_resource type="PackedScene" uid="uid://c20oww0mmtpx7" path="res://scenes/enemy.tscn" id="3_4lhks"]
 [ext_resource type="PackedScene" uid="uid://lcalun41bn55" path="res://scenes/ingame_ui.tscn" id="4_mx8sn"]
 
 [node name="Level" type="Node2D"]
-
-[node name="Platform" parent="." instance=ExtResource("1_4xu6g")]
-position = Vector2(345, 1273)
 
 [node name="World" parent="." instance=ExtResource("2_ppgk2")]
 position = Vector2(-162, 317)

@@ -1,0 +1,18 @@
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://bplwb375xct12"]
+
+[resource]
+resource_name = "icon_holder_res"
+bg_color = Color(2.50385e-05, 0.0105903, 0.113048, 0.811765)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.490196)
+shadow_size = 5
+shadow_offset = Vector2(3, 3)
+anti_aliasing = false

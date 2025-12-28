@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Shattered_Eternity"
-run/main_scene="res://scenes/level.tscn"
+run/main_scene="uid://p4w0proattic"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+ui_manager="*res://scripts/UIManager.gd"
 
 [display]
 
@@ -33,6 +34,7 @@ enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg")
 Player=""
 Enemy=""
 Camera=""
+UI=""
 
 [input]
 

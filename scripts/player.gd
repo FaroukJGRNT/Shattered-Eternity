@@ -30,6 +30,7 @@ var current_weapon = Weapons.SWORD
 
 # Stats
 func _init() -> void:
+	poise_type = Poises.PLAYER
 	position.x += 200
 	max_life = 200
 	life = max_life
@@ -39,14 +40,16 @@ func _init() -> void:
 	fire_res = 10.0
 	ice_res = 10.0
 
-func take_damage(damage:DamageContainer) -> DamageContainer:
-	damage = super.take_damage(damage)
-	hit_direction = damage.facing
-	if $PlayerStateMachine.get_current_state().name != "Staggered":
-		change_state("hit")
-	return damage
+func _ready() -> void:
+	super._ready()
+	ui_manager.show_modal(load("res://ui/molecules/base_modal.tscn"))
 
-func get_stunned():
+func get_stunned(vel_x : float, duration : float):
+	$PlayerStateMachine/Hit.hit_direction = sign(vel_x)
+	print(vel_x, " ", sign(vel_x))
+	change_state("hit")
+
+func get_staggered():
 	change_state("staggered")
 
 func get_state():

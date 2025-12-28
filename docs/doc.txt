@@ -1,0 +1,38 @@
+PROJECT DOCUMENTATION - This file holds informations about key components of this project
+
+The LivingEntity class: 
+Is an abstract class with the caracteristics of a living character (player, enemies).
+It has values for health, mana.
+It can attack, take damage.
+It is the most important class, the player and the enemies inherits from it.
+Basicaly the CORE CLASS of the game.
+
+The animated sprite:
+In the game, the animated sprite doesnt only run animations
+its in charge of enabling or disabling hitboxes or hurtboxes depending on
+which frame of which animation is currently on
+It needs to be publicly accessible so other components can easily
+check which frame of which animation is currently on
+
+The Hurtbox class:
+Extends area2D. Detects collision from a hitbox.
+Then, transfers info to the attached living entity's hitlistener
+
+The Hitbox class:
+Extends area2D. Can be activated by an animation player according
+to an attack animation to deal damage on a hurtbox
+It has a targeted_groups attribute containing all the groups to
+which the hitbox can deal damage.
+It comes with plenty of infos about the attack, like the motion value,
+the elemental type, etc
+
+The HitListener:
+A very important component of the combat System
+It spawns particles, shakes the screen, displays damage...
+It handles all the logic related to the hit being taken, even
+blocking the damage if the owner is blocking
+
+The Projectile class:
+A simple projectile class. Has a speed, a direction and a motion value for its damage
+and a hitbox.
+This one is tricy and not completed yet

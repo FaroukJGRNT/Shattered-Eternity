@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b5c04ekcshet0" path="res://assets/sprites/ui/health_bar_left.png" id="5_uyn70"]
 [ext_resource type="Texture2D" uid="uid://5goleerlvdew" path="res://assets/sprites/ui/health_bar_right.png" id="6_yrj12"]
 
-[node name="IngameUI" type="CanvasLayer"]
+[node name="IngameUI" type="CanvasLayer" groups=["UI"]]
 script = ExtResource("1_v3yap")
 
 [node name="LifeBar" type="TextureProgressBar" parent="."]

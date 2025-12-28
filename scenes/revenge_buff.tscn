@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cinkgb7ah0jdq"]
+
+[ext_resource type="Script" uid="uid://bexp3xnt7b0h" path="res://scripts/revenge_buff.gd" id="1_yjype"]
+
+[node name="RevengeBuff" type="Node"]
+script = ExtResource("1_yjype")

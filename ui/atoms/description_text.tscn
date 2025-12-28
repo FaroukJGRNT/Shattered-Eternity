@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5vd46yxc7dj8"]
+
+[ext_resource type="Theme" uid="uid://du6ww74nmnyne" path="res://themes/default.tres" id="1_rcl1j"]
+
+[node name="DescriptionText" type="Label"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -12.5
+offset_right = 72.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rcl1j")
+text = "Description Text"
+horizontal_alignment = 1
+vertical_alignment = 1

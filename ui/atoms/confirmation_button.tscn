@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0qty0xik6ghi"]
+
+[ext_resource type="Theme" uid="uid://du6ww74nmnyne" path="res://themes/default.tres" id="1_wit3f"]
+[ext_resource type="Script" uid="uid://dfq1glgjdxyj7" path="res://scripts/confirmation_button.gd" id="2_be3b2"]
+
+[node name="ConfirmationButton" type="Button"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -16.5
+offset_right = 60.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme = ExtResource("1_wit3f")
+text = "Confirm"
+script = ExtResource("2_be3b2")

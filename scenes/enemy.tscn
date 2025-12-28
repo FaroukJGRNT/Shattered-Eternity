@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://c20oww0mmtpx7"]
+[gd_scene load_steps=87 format=3 uid="uid://c20oww0mmtpx7"]
 
 [ext_resource type="Texture2D" uid="uid://rye6avf45wqu" path="res://assets/sprites/enemy/Skeleton enemy.png" id="1_1qe2k"]
 [ext_resource type="Script" uid="uid://cthv4yog3disp" path="res://scripts/enemy.gd" id="1_rfxxo"]
@@ -24,6 +24,8 @@
 [ext_resource type="Script" uid="uid://cqta3bldw5h6y" path="res://scripts/posture_bar.gd" id="20_2pwtc"]
 [ext_resource type="Script" uid="uid://xqsdqivjmm2b" path="res://scripts/guard_break_enemy_hb.gd" id="23_i4rgx"]
 [ext_resource type="Script" uid="uid://x51ik5jddhvf" path="res://scripts/player_hit_listener.gd" id="23_wjec0"]
+[ext_resource type="Script" uid="uid://b7k3ffwp05oxl" path="res://scripts/buff_manager.gd" id="25_2mchx"]
+[ext_resource type="Script" uid="uid://bpb8sud12vjj4" path="res://scripts/killed_enemy_atk_buff.gd" id="26_t3vcr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wtq4b"]
 resource_local_to_scene = true
@@ -623,11 +625,18 @@ script = ExtResource("17_shcg2")
 
 [node name="HitVFXPlayer" type="AnimatedSprite2D" parent="HitListener"]
 
+[node name="BuffManager" type="Node" parent="."]
+script = ExtResource("25_2mchx")
+
+[node name="KilledEnemyAtkBuff" type="Node" parent="BuffManager"]
+script = ExtResource("26_t3vcr")
+metadata/_custom_type_script = "uid://dioqaxwj02s7r"
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="EnemyStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="HitBoxes/HitBox" method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]
 [connection signal="timeout" from="AttackCoolDown" to="." method="_on_sliding_timer_timeout"]
+[connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

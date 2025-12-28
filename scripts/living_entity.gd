@@ -13,6 +13,8 @@ var facing : int = 1
 
 @export var hit_listener : HitListener
 
+@export var buff_manager : BuffManager
+
 @export var status_vbox: VBoxContainer
 
 var global_speed_scale := 1.0
@@ -34,6 +36,21 @@ var active_status_bars : Dictionary = {}
 @export var life: int = 0
 @export var attack: int = 0
 @export var defense: int = 0
+
+enum Poises {
+	PLAYER,
+	SMALL,
+	MEDIUM,
+	LARGE
+}
+
+enum Event {
+	ENEMY_KILLED,
+	HIT_TAKEN,
+	PARRY
+}
+
+var poise_type := Poises.MEDIUM
 
 @export var fire_atk := 0.0      # % de bonus dégâts feu
 @export var thunder_atk := 0.0   # % de bonus dégâts foudre
@@ -145,6 +162,7 @@ func _process(delta):
 		anim_player.modulate = Color(1,1,1,1)
 
 func take_damage(damage: DamageContainer) -> DamageContainer:
+	propagate_event(Event.HIT_TAKEN)
 	# Appliquer les résistances directement sur le DamageContainer
 	damage.fire_dmg *= round(1.0 - fire_res / 100.0)
 	damage.thunder_dmg *= round(1.0 - thunder_res / 100.0)
@@ -174,7 +192,8 @@ func take_damage(damage: DamageContainer) -> DamageContainer:
 
 	if posture >= max_posture:
 		posture = 0
-		get_staggered()
+		if poise_type != Poises.PLAYER:
+			get_staggered()
 
 	# Total des dégâts
 	damage.total_dmg = damage.fire_dmg + damage.thunder_dmg + damage.ice_dmg + damage.phys_dmg
@@ -186,13 +205,16 @@ func take_damage(damage: DamageContainer) -> DamageContainer:
 	if life <= 0 and not dead:
 		dead = true
 		life = 0
+		damage.daddy_ref.propagate_event(Event.ENEMY_KILLED)
 		die()
+		
 
 	return damage
 
 func deal_damage(motion_value: int, attack_type: String = "") -> DamageContainer:
 	var dmg = DamageContainer.new()
 	
+	dmg.daddy_ref = self
 	dmg.facing = facing
 
 	# Calcul de base
@@ -325,7 +347,7 @@ func _update_accum_bars():
 				active_status_bars[elem].queue_free()
 				active_status_bars.erase(elem)
 
-func get_stunned():
+func get_stunned(vel_x : float, duration : float):
 	pass
 
 func get_staggered():
@@ -333,3 +355,6 @@ func get_staggered():
 
 func get_state():
 	pass
+	
+func propagate_event(event : Event):
+	$BuffManager.propagate_event(event)

@@ -1,0 +1,216 @@
+###Systeme de mana:
+Le joueur et les ennemis manient le mana pour se battre et se defendre.
+Le joueur a trois armes de mana entre lesquelles il peut alterner :
+
+Epee:
+Degats moyens corps a corps, rapide, utile pour rester evasif.
+Attaque chargee: Estoc
+
+Lance:
+Degats bas au corps a cors, mais meilleure portee, vitesse pas ouf
+Attaque chargee: Lancer
+
+Marteau:
+Degats stupides au corps a corps mais assez lent.
+Attaque chargee: BONK.
+
+###Flow du combat:
+Attaque normale:
+Rien de special, mais peut etre paré par la garde
+Permet aussi d'interrompre une brise garde
+
+Garde:
+Permet de bloquer les attaques normales
+Appuyer sur le bouton au bon timimg permet d'enchainer avec une parade
+Parade a la l'epee: Slash rapide qui vous met derriere l'ennemi
+Parade au marteau: mechant coup de pied qui repousse l'ennemi
+Parade a la lance: Slashs rapides qui vous font reculer
+
+PARADES SUCCESSIVES
+Parer plusieurs coups a la suite permet d'augmenter la puissance de la parade a suivre
+
+Brise-garde:
+Attaque speciale permettant de detruire une garde. Mais
+une animation de brise garde vous rend vulnerable a une attaque
+
+### Elements:
+Les elements seront une des pieces maitresses pour la rejouabilite et
+le cote rogue like. Les competences ou moves speciaux trouves au cours de
+la run seront tous d'un element donne. Chaque element peut infliger
+un type de malus. Les combinaisons de malus donnent d'autres malus encore
+meilleurs. Ca va etre trop bien.
+
+La foudre bat le feu, le feu bat la glace et la glace bat la foudre
+Le statut brulé inflige des degats continus
+Le statut electrocuté reduit la defense et l'attaque
+le statut gele realentit l'ennemi
+
+Foudre + feu : Plasma-Surcharge : La barre de posture se remplit plus vite
+Feu + Glace : Choc Thermique : baisse toutes les defenses elementaires
+Foudre + Glace : Cryo-Chargé
+
+Chaque element a son type de particules sous hit
+
+Le joueur aura 3 skills:
+Chacun fait apparaitre une aureole d'element derriere sa tete
+et infuse ses attaques d'un certain element
+Faudrait un effet de rune qui s'affiche pendant un bref moment
+Arts du mana: Feu  
+Arts du mana: Foudre  
+Arts du mana: Glace 
+
+### Decors:
+on doit utiliser des effets de brouillard, luciole, lumieres et autres pour rendre
+le jeu plus bau
+
+### Details de combats
+Chaque coup bloque legerement la camera pour mieux ressentir l'impact
+et balance des petites particlules
+Les coups normaux balancent des particules bleues, les charges envoient des particules roses
+Chaque coup fait sortir un label montrant les degats infligés
+La couleur du texte changera selon l'element et selon si le coup est crit ou pas
+En plus d'une barre de vie, les ennemis ont une barre de stagger qui
+aumente lorsque vous faites une parade parfaite, utilisez une brise garde reussie
+ou bien lorsquils prennent des degats. Elle se remplit lorsqu'ils ne font rien.
+Si elle se remplit, l'ennemi entre dans l'etat vulnerable
+
+Les changements d'armes sont aussi des esquives
+
+### Idees de levels:
+Il nous faut une zone montagneuse et enneigee
+Des collines ou y'a de le foudre
+un endroit sous terrain avec du feu, la mine du village
+Un ancien champ de bataille ou plein de chevaliers sont morts
+Leurs carcasses possedees pas l'almana continuiront de se battre
+Ils seront les ennemis les plus funs du jeu
+
+IL FAUT DES ELEMENTS DE GAMEPLAY QUI RENDRONT LES ZONES FUN A UTILISER ET LES ENVIRONNEMENTS INTERACTIFS
+Sur la colline avec de la foudre faudrait un moyen d'invoquer la foudre et s'en
+servir a notre avantage pour faire des degats aux ennemus
+Dans la zone avec de lave, ca pourrait encourager le joueur a pousser les ennemis avec
+les bonnes competences dans la lave
+
+### Idees de persos:
+Un scientifique qui cherche a comprendre ce qui se passe dans le monde
+actuellement. Il est adepte de la foudre. Je le vois bien blond
+aux yeux bleus avec des lunettes rondes et une cape blanche
+
+Un gang de bandits qu'on rencontrera un peu partout. Ils ont des haches,
+s'habillent en noir, et leur chef sera un perso interessant, hopefully
+
+Une fée. Les fees seraient des etres qui ont quitte l'humanite depuis un moment deja
+a cause de leur mauvaise utilisation du mana. Mais autrefois
+elles aidaient les humains. On en trouvera une dans le jeu qui sentira que
+quelque chose cloche chez le joueur
+
+Un berserker qui sera aussi un boss. Juste un perso style et sympa a affronter
+avec qui le joueur pourra s'entrainer
+Je pense a un skill qui ajoutera un niveau aux attaques chargees
+Avec la lance, des lances additionnelles apparaitront au moment de les Lancer
+Avec le marteau, le premier coup horizontal est suivi d'un mechant coup vertical
+Avec l'epee on peut enchainer avec le slash rapide horizontal qui vous fait passer derriere l'ennemi
+
+Un gars de l'est (un japonais avec un odachi) qui porte sur son dos un cercueil
+Ce sera un gars qui s'est ramene depuis tres loin dans le village parce qu'il a appris que
+la bas il se passait des trucs en rapport avec la renaissance
+Le cercueil dans son dos contiendra en fait le cadavre de sa bien aimee, qu'il essaie de ressusiter
+Eventuellement dans sa quete il arrivera a utiliser l'almana pour la ramener a la vie mais elle sera juste une sorte
+de zombie. Il sera devenu fou et il attaquera le joueur pour proteger le zombie. On va lui donner un moveset tellement style
+Il ne maitrisera pas le mana, mais il connaitra des arts qui permettent de renforcer le corps sans
+en utiliser. On pourra peut etre prendre une de ses competences.
+
+On va faire un personnage féminin super bien 
+Elle aura un lien avec les fees
+Elle sera fortement liée avec la nature 
+Au début elle se montrera gentille avec le perso principal 
+Au fur et à mesure elle comprendra que quelque chose cloche avec lui
+Et à la fin on va l'affronter 
+Elle sera super forte, elle aura une sorte de magie féerique avec des papillons, des fleurs et tout
+
+
+# IDEES RANDOM
+Il nous faut une battle de danse
+Il nous faut des "Appels" des invocations que certains persos te donnent et que tu peux utiliser
+pour utiliser leur competence speciale. Ce serait bien si chaque personnage te donnait son appel
+a un niveau donne de sa quete
+Jouer avec le zoom de la cam quand hurt ou bien quand coup mechant
+Ajouter du weapon spin sur les attaques chargees
+
+
+# IDEES GAME-DESIGN
+
+--> A chaque début de run le joueur apparaît dans une zone différente du monde (uniquement à partir de la quatrième boucle parce que la première est l'introduction et la deuxième et la troisième doivent mettre en évidence le fait que les évènements se répètent)
+AVANTAGES : Cela permet de créer un sentiment de surprise et de renouvellement au début de chaque run (!!!surtout si les zones sont aussi différentes les unes des autres que souhaitées!!!surtout si le point de spawn est aléatoire parmi une liste donnée de points!!!); Cela permet d'orienter le build du joueur plus aisément puisque chaque zone à un thème et une récompense précise; Cela oblige le joueur à découvrir tout ce que le jeu a à lui offrir; Cela s'explique par le fait que les boucles temporelles dégradent le monde au point que même le point de spawn du joueur "bug" à un certain niveau
+PROBLEMES : Compliqué voire impossible de gérer l'orientation et le scenario du joueur durent ses runs (tous les personnages, toutes les récompenses et toutes les aventures doivent donc être paramétrées de manière à fonctionner dans quasi n'importe quel ordre et ce peu importe la run); Compliqué de faire croître la difficulté non seulement au fil des runs mais aussi au sein d'une même run et donc compliqué de rendre une récompense plus difficile d'accès qu'une autre (Piste de solution : Les ennemis ont quasiment la même puissance dans toutes les zones et la même difficulté de patterns Ils deviennent juste de plus en plus forts au fur et à mesure que la journée avance et que le boss final prend le contrôle sur le monde (la difficulté augmente ainsi pendant la run))
+
+--> Le joueur ne doit pas se sentir obligé d'utiliser le dash à répétition pour explorer plus vite. Après un dash (ou un dash spécial à créer) le joueur court beaucoup plus vite (Silksong) par exemple
+
+--> Le jeu est créé de telle sorte que chaque quête que l'on commence nous mène à une aventure complète dans une zone précise (Situation initiale, élément perturbateur, suite d'action, plot twist, situation finale (triste, heureuse, drôle)) qui dure environ 12 min (qui consomme donc la moitié du temps de run du joueur. il ne pourra donc effectuer que deux aventures par run) Donner une illustration à la fin de chaque aventure (pour aider les youtubeurs avec leurs miniatures)
+
+--> Chaque zone a sa propre aventure complète (de l'élément déclencheur à la récompense) et des indices qui peuvent conduire vers cette aventure sont dispersées dans les autres zones éventuellement
+
+--> Trouver une raison soft d'affronter les ennemis sur le chemin (généralement l'XP mais ce n'est pas forcément possible dans notre jeu)
+
+--> Après chaque boss le joueur doit ressentir un accomplissement Il faudrait donc lui faire vivre une scène (cinématique/musique/événement/suite de scénario/paysage etc) unique 
+
+--> Le boss doit pousser le joueur à maîtriser toutes ses capacités (celles du joueur qu'il a apprises pendant toute sa partie) à la perfection 
+
+--> Avant le tout premier combat, le PNJ que le joueur rencontre avant la salle du boss explique au joueur que les attaques du boss sont imprégnées d'une magie qui annule l'immortalité Il dit au joueur que s'il perd contre le boss c'est donc définitif.
+
+--> Idée de boss : Un personnage qui peut insufler (trouver comment) des âmes dans des trucs (Il se balade sur un destrier squelette, il peut invoquer des squelettes mais plot twist il peut aussi insufler une âme dans des objets inanimés)(Idée de phase 2 : Il perd son destrier, il insuffle une âme à son arme et elle forme une sorte de boss duo en synergie avec lui)
+
+--> TOUS LES CHARA DESIGNS DOIVENT ETRE UNIQUES. L'art style doit avoir qulque chose qui permet d'identifier le jeu direct, tout en restant beau
+
+
+# IDEES WORLD-BUILDING/DESIGN
+
+--> Les arrières plans des zones doivent contenir les paysages et éléments d'autres zones pour donner l'impression qu'on s'y rend vraiment 
+
+--> Les étoiles apparaîtront peu à peu dans le ciel la nuit (modifier la transparence) et il y aura parfois (mais relativement rarement des étoiles filantes)
+
+--> La nuit, les silhouettes en arrière-plan sont plus noires et moins contrastées
+
+--> Ajouter du bloom aux lumières et des particules au jeu (notamment celles qui apparaissent de plus en plus au cours de chaque run au fur et à mesure que le boss prend le contrôle du monde du jeu)
+
+--> Porter une attention particulière à chaque zone du jeu (en ajoutant des assets particulier et/ou des effets précis) pour rendre chaque endroit du jeu complètement différent en terme de feeling des autres et digne d'un fond d'écran. Avoir même des moments et des parties de zones avec des paysages juste magnifiques. Si le joueur s'arrête à ces endroits la caméra recule lentement et cadre le plan de manière magnifique.
+
+--> Avoir une zone où il pleut tout le temps (parce que la pluie c'est classe)(il doit y avoir une raison quand même) et une zone qui était juste le lieu de vie d'un ancien géant (Il y aura des armes géantes, un casque geant etc dans le décor et en assets etc)
+
+--> Le corbeau de blasphemous2. Tu entres dans l'ascenseur, fondu noir, bruitage, defondu. Pas besoin d'animation complexe
+
+# IDEES GAMEPLAY
+
+--> La seule méthode de soin in-game est liée à la résonance. Après les actions parfaites (parade, esquive parfaite etc) on regagne un peu de PV. Cette fonctionnalité n'est disponible qu'à partir du premier niveau de résonance et la quantité de PV regagnés augmente avec les niveaux de résonance.
+Il y a aussi des objets dispersés dans le monde qui génèrent du "mana pur" permettant de se soigner.
+
+--> Si le joueur arrive à placer trois coups en restant en l'air, il recharge son double saut (le nombre de coups diminue avec les niveaux de résonance)
+
+
+
+# QUESTIONNEMENTS GAMEPLAY
+
+--> Qu'est ce qu'on garde et qu'est ce qu'on ne garde pas entre les boucles (buffs d'attaque, de défense, de PV etc, nouvelles armes, nouvelles compétences liées aux éléments feu, glace, foudre, nouvelles compétences liées aux armes....)(Le joueur doit pouvoir s'orienter vers un build particulier à chaque boucle en concentrant ses actions vers ce build et en négligeant les autres. Il ne doit donc pas garder les éléments qui servent son build par exemple entre les boucles et ces éléments doivent être accessibles hors narration parce qu'on ne veut pas l'obliger à revivre une même histoire deux fois et moins péniblement que les autres. Sauf que les histoires/aventures qu'il vit doivent avoir des récompenses thématiques à la clé)
+
+
+
+# ELEMENTS D'HISTOIRE
+Le mana positif utilise par AAAAA a la propriete de rompre le cycle de l'immortalite
+et de la renaissance. Les villageois s'en sont rendu compte et ont pris peur que ce pouvoir
+empeche toute renaissance. C'est pourquoi ils sont banni AAA mais ont vu le personnage principal
+en heros, car son almana a le pouvoir de faire renaitre.
+
+En vrai si on veut des monstres, faudrait qu'on fasse en sorte que lalmana puisse malformer les êtres vivants, pas seulement les cadavres et les êtres inanimés
+Genre ça paraît simple de faire un golem almana ou bien un arbre almana
+Mais si on fait des chauves souris mutantes almana, ça passe un cap
+Et il faudrait expliquer ça, et envisager que ça s'applique aux humains
+Putain je viens d'avoir une idée
+Genre on bloquait pour trouver un moyen de faire en sorte que les villageois voient le perso principal comme le heros
+Maintenant je sais
+Disons que l'almana peut corrompre les humains
+Et ils se transformeraient en monstre après une longue agonie
+Notre joueur, comme son essence est l'almana,nil pourra absorber l'almana qui corrompt les gens
+Et les guerir
+Putain big brain
+Et comme ça on a une nouvelle mécanique, pour achever les ennemis
+On absorbe leur mana pour les tuer et ça nous rend plus fort (+XP ou bien soin)
+Je suis le GOAT du game design

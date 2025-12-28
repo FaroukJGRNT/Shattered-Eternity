@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://jav7v06rt7lp"]
+
+[ext_resource type="Script" uid="uid://2opelofadnl5" path="res://scripts/endurance_buff.gd" id="1_fufk1"]
+
+[node name="EnduranceBuff" type="Node"]
+script = ExtResource("1_fufk1")

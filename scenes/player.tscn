@@ -2117,10 +2117,11 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine", "hit_listener", "buff_manager") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_player", "hurtbox", "hitboxes", "state_machine", "hit_listener", "buff_manager") groups=["Player"]]
 collision_layer = 128
 collision_mask = 128
 script = ExtResource("1_le0q1")
+anim_player = NodePath("AnimatedSprite2D")
 hurtbox = NodePath("PlayerHurtBox")
 hitboxes = NodePath("HitBoxes")
 state_machine = NodePath("PlayerStateMachine")

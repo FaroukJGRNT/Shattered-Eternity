@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c1imgcb2kat6k" path="res://scenes/player.tscn" id="2_7lnj0"]
 [ext_resource type="PackedScene" uid="uid://cc3gbjxlqvcli" path="res://scenes/world.tscn" id="2_ppgk2"]
-[ext_resource type="PackedScene" uid="uid://c20oww0mmtpx7" path="res://scenes/enemy.tscn" id="3_4lhks"]
 [ext_resource type="PackedScene" uid="uid://lcalun41bn55" path="res://scenes/ingame_ui.tscn" id="4_mx8sn"]
+[ext_resource type="PackedScene" uid="uid://clq1ba7ljb4ob" path="res://scenes/flying_golem.tscn" id="4_ppgk2"]
 
 [node name="Level" type="Node2D"]
 
@@ -12,21 +12,8 @@ position = Vector2(-162, 317)
 
 [node name="Player" parent="." instance=ExtResource("2_7lnj0")]
 
-[node name="Enemy" parent="." instance=ExtResource("3_4lhks")]
-position = Vector2(1675, 132)
-scale = Vector2(1.5, 1.5)
-
-[node name="Enemy2" parent="." instance=ExtResource("3_4lhks")]
-position = Vector2(1287, 201)
-scale = Vector2(1.5, 1.5)
-
-[node name="Enemy3" parent="." instance=ExtResource("3_4lhks")]
-position = Vector2(2246, 146)
-scale = Vector2(1.5, 1.5)
-
-[node name="Enemy4" parent="." instance=ExtResource("3_4lhks")]
-position = Vector2(859, 98)
-scale = Vector2(1.5, 1.5)
-
 [node name="IngameUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_mx8sn")]
 player = NodePath("../Player")
+
+[node name="FlyingGolem" parent="." instance=ExtResource("4_ppgk2")]
+position = Vector2(1483, 232)

@@ -1,25 +1,21 @@
 extends EnemyState
 
-var chase_start = 0
-var last_frame_pos = 0
+func _init() -> void:
+	is_state_blocking = true
 
 func enter():
-	chase_start = enemy.position.x
+	AnimPlayer.play("walk")
 
 func update(delta):
-	if abs(enemy.position.x - enemy.target.position.x) <= enemy.ATTACK_RANGE and\
-	(enemy.position.x - enemy.target.position.x) * enemy.direction.x < 0:
-		transitioned.emit("attack")
+	# Check if close enough -> Then go to decide
+	if enemy.is_target_in_close_range():
+		transitioned.emit("decide")
 		return
-	AnimPlayer.play("run")
 	# Move in direction of the target
 	enemy.direction = (enemy.target.position - enemy.position).normalized()
-	enemy.velocity.x = enemy.SPEED  * enemy.global_speed_scale * enemy.direction.x
-	last_frame_pos = enemy.position.x
+	enemy.velocity.x = enemy.SPEED * enemy.global_speed_scale * enemy.direction.x
 	enemy.move_and_slide()
-
-	if abs(chase_start - enemy.position.x) >= enemy.max_aggro_distance:
-		transitioned.emit("wander")
+	enemy.direct_sprite()
 
 func exit():
 	pass

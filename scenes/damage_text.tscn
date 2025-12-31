@@ -12,11 +12,9 @@ grow_vertical = 2
 scale = Vector2(0.55, 0.55)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 7
 theme_override_fonts/font = ExtResource("1_6p0u7")
-theme_override_font_sizes/font_size = 0
+theme_override_font_sizes/font_size = 22
 text = "109"
 script = ExtResource("2_6p0u7")
 

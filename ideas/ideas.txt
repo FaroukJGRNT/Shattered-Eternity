@@ -82,7 +82,7 @@ Des collines ou y'a de le foudre
 un endroit sous terrain avec du feu, la mine du village
 Un ancien champ de bataille ou plein de chevaliers sont morts
 Leurs carcasses possedees pas l'almana continuiront de se battre
-Ils seront les ennemis les plus funs du jeu
+Ils seront les ennemis les plus funs du jeu. ET C'est la que je veux mettre un personnage ultra style
 
 IL FAUT DES ELEMENTS DE GAMEPLAY QUI RENDRONT LES ZONES FUN A UTILISER ET LES ENVIRONNEMENTS INTERACTIFS
 Sur la colline avec de la foudre faudrait un moyen d'invoquer la foudre et s'en
@@ -124,9 +124,22 @@ Elle aura un lien avec les fees
 Elle sera fortement liée avec la nature 
 Au début elle se montrera gentille avec le perso principal 
 Au fur et à mesure elle comprendra que quelque chose cloche avec lui
-Et à la fin on va l'affronter 
+Et à la fin on va l'affronter
 Elle sera super forte, elle aura une sorte de magie féerique avec des papillons, des fleurs et tout
 
+Un jeune gars qui utilise des guns de mana. Ses armes seront des bijoux de technologies tres rares, un heritage de son pere qui
+serait en fait un ingenieur ultra intelligent, l'inventeur des armes a mana. Mais ses armes ont ete utilisees dans une guerre
+et on fait des tonnes de morts, du coup il s'est suicide. Son fils du coup...Je sais pas encore pour quelle raison
+il se retrouverait pres du village lol. Mais il sera mefiant envers le mc au debut
+On pourrait aussi faire en sorte que son pere soit pas mort, mais ait disparu pour venir au village sous un autre nom.
+Du coup c'est en fait pour ca qu'il est venu au village, pour lowkey trouver son pere.
+Putain je suis un genie de game design.
+
+Un giga chad de paladin. Un grand soldat avec une grande masse, un bouclier et en armure. On le trouverait sur le champ de bataille
+en ruine. Il nous previendrait de ne pas s'aventurer plus loin, que c'est un endroit tres dangereux et qu'on est pas equipe pour survivre a ca
+On l'ecoute pas et on avance quand meme et on tombe sur ennemi qui tire un ultralaser d'almana
+Et la dans une cinematique, il sort de nulle part, pose son bouclier et nous protege du laser
+Du coup on affronte le boss avec lui, et des qu'il fera la laser faudra se mettre derriere le npc pour etre protege
 
 # IDEES RANDOM
 Il nous faut une battle de danse

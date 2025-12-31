@@ -13,7 +13,6 @@ class_name Player
 var dash_cooldown := 1.0
 var on_dash_cooldown := false
 var aerial_dash_used := false
-var hit_direction := 1
 var aerial_attack_used := false
 var friction = 0
 var allowed_jumps := 1
@@ -32,17 +31,13 @@ var current_weapon = Weapons.SWORD
 func _init() -> void:
 	poise_type = Poises.PLAYER
 	position.x += 200
-	max_life = 200
+	max_life = 100
 	life = max_life
-	attack = 80
-	defense = 2
+	attack = 50
+	defense = 5
 	thunder_res = 10.0
 	fire_res = 10.0
 	ice_res = 10.0
-
-func _ready() -> void:
-	super._ready()
-	ui_manager.show_modal(load("res://ui/molecules/base_modal.tscn"))
 
 func get_stunned(vel_x : float, duration : float):
 	$PlayerStateMachine/Hit.hit_direction = sign(vel_x)

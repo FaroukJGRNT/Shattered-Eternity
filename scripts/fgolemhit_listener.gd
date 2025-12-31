@@ -1,46 +1,4 @@
-extends Node2D
-class_name HitListener
-
-@export var SMALL_PUSHBACK := 20
-@export var MEDIUM_PUSHBACK := 40
-@export var BIG_PUSHBACK := 60
-@export var SMALL_PUSHBACK_DURATION := 0.5
-@export var MEDIUM_PUSHBACK_DURATION := 1
-@export var BIG_PUSHBACK_DURATION := 1.5
-
-@export var life_bar : TextureProgressBar
-
-var daddy : LivingEntity
-
-func _ready() -> void:
-	daddy = owner
-
-#@export var LifeBar : TextureProgressBar
-var shader_duration = 0.2
-var shader_on_cooldown = false
-var damage_label : PackedScene = preload("res://scenes/damage_text.tscn")
-var crit_label : PackedScene = preload("res://scenes/crit_text.tscn")
-var frozen_label : PackedScene = preload("res://scenes/frozen_text.tscn")
-var burn_label : PackedScene = preload("res://scenes/burn_text.tscn")
-var elec_label : PackedScene = preload("res://scenes/elec_text.tscn")
-
-# TODO : Ajouter des labels speciaux pour une parade, une brise garde, etc
-
-var dmg : DamageContainer = DamageContainer.new()
-
-func frame_freeze(frames := 1) -> void:
-	get_tree().paused = true
-	for i in frames:
-		await get_tree().process_frame
-	get_tree().paused = false
-
-func _process(delta: float) -> void:
-	# Handle hit shader cooldown
-	if shader_on_cooldown:
-		shader_duration -= delta
-		if shader_duration <= 0:
-			shader_on_cooldown = false
-			daddy.anim_player.material.set_shader_parameter("enabled", false)
+extends HitListener
 
 func damage_taken(area : HitBox) -> void:
 	# Screen shake
@@ -56,17 +14,6 @@ func damage_taken(area : HitBox) -> void:
 	$GPUParticles2D.emitting = true
 	$GPUParticles2D.restart()
 
-	# Verify the hit (GUARD)
-	# GUARD HANDLING
-	if daddy.get_state() == "guard":
-		if daddy.facing * area.facing == -1:
-			if daddy.anim_player.animation == "guard_start":
-				daddy.change_state("parry")
-				daddy.hurtbox.desactivate()
-				return
-			daddy.velocity.x = area.motion_value * area.facing * 20
-			return
-	
 	# Taking damage and side effects
 	# GETTING GUARD BROKEN
 	if daddy.get_state() == "guard" and area.is_guard_break:
@@ -83,14 +30,8 @@ func damage_taken(area : HitBox) -> void:
 		daddy.velocity.x = area.motion_value * area.facing * 20
 
 	# Verify the hit (GUARD)
-	# GUARD HANDLING
+	# GUARD HANDLINGd
 	if daddy.get_state() == "guard":
-		if daddy.facing * area.facing == -1:
-			if daddy.anim_player.animation == "guard_start":
-				daddy.change_state("parry")
-				daddy.hurtbox.desactivate()
-				return
-			daddy.velocity.x = area.motion_value * area.facing * 20
 			return
 
 	# GETTING INTERRUPTED
@@ -181,4 +122,4 @@ func damage_taken(area : HitBox) -> void:
 		daddy.add_child(crit_text_instance)
 
 	# Lifebar update
-	#LifeBar.update_health_bar(dmg.total_dmg)
+	life_bar.update_health_bar(dmg.total_dmg)

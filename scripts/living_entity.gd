@@ -3,7 +3,7 @@ class_name LivingEntity
 
 var facing : int = 1
 
-@onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
+@export var anim_player: AnimatedSprite2D
 
 @export var hurtbox : HurtBox
 
@@ -116,9 +116,6 @@ var elec_label : PackedScene = preload("res://scenes/elec_text.tscn")
 var damage_label : PackedScene = preload("res://scenes/damage_text.tscn") 
 
 var pulse_timer := 0.0  # à mettre dans la classe
-
-func _ready():
-	pass
 
 func _process(delta):
 	# Because max life is dynamic...

@@ -503,10 +503,8 @@ metadata/_custom_type_script = "uid://busr7orlkflil"
 position = Vector2(19.597, 0)
 shape = SubResource("CapsuleShape2D_wjec0")
 
-[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("AnimPlayer", "enemy")]
+[node name="EnemyStateMachine" type="Node" parent="."]
 script = ExtResource("6_xwavj")
-AnimPlayer = NodePath("../AnimatedSprite2D")
-enemy = NodePath("..")
 
 [node name="GuardBreak" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("8_wjec0")

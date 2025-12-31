@@ -1,6 +1,7 @@
 extends AllyHitBox
 
 func _ready() -> void:
+	is_guard_break = true
 	motion_value = 20
 	cam_shake_value = 10
 	hitstop_time = 0.03

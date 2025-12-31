@@ -8,3 +8,7 @@ func update_bar(dmg) -> void:
 	
 	var tween = create_tween()
 	tween.tween_property(self, "value", life_bar.value, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+func _ready() -> void:
+	max_value = owner.max_life
+	value = max_value

@@ -22,5 +22,5 @@ func update(delta):
 
 	timer -= delta
 	if timer <= 0:
-		transitioned.emit("chase")
+		transitioned.emit("decide")
 	enemy.move_and_slide()

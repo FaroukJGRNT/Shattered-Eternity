@@ -27,10 +27,10 @@ var hit_counter := 0
 # Stats initialization
 func _init() -> void:
 	poise_type = Poises.MEDIUM
-	max_life = 300
+	max_life = 500
 	life = max_life
-	attack = 60
-	defense = 30
+	attack = 12
+	defense = 20
 	thunder_res = 2.0
 	fire_res = 2.0
 	ice_res = 2.0
@@ -50,11 +50,10 @@ func _ready() -> void:
 # Formalities methods
 
 func die():
-	# Just for now lol
-	queue_free()
+	$FGolemStateMachine.on_state_transition("death")
 
 func get_stunned(vel_x : float, duration : float):
-	if $FGolemStateMachine.current_state.name != "Death":
+	if $FGolemStateMachine.current_state.name != "Death" and $FGolemStateMachine.current_state.name != "Staggered":
 		$FGolemStateMachine/Stun.push_back = vel_x
 		$FGolemStateMachine/Stun.timeout = duration
 		$FGolemStateMachine.on_state_transition("stun")
@@ -160,12 +159,16 @@ func direct_sprite():
 
 # TODO: Replace by calculating distance to the player
 func _on_area_2d_body_exited(body: Node2D) -> void:
+	if dead:
+		return
 	if body.is_in_group("Player"):
 		current_mode = Mode.CHILLIN
 		$FGolemStateMachine.on_state_transition("wander")
 		$FGolemStateMachine/Wander.wait_cooldown = 5.0
 
 func _on_aggro_range_body_entered(body: Node2D) -> void:
+	if dead:
+		return
 	if body.is_in_group("Player"):
 		print("Now aggro")
 		target = body

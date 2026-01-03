@@ -94,6 +94,9 @@ les bonnes competences dans la lave
 Un scientifique qui cherche a comprendre ce qui se passe dans le monde
 actuellement. Il est adepte de la foudre. Je le vois bien blond
 aux yeux bleus avec des lunettes rondes et une cape blanche
+Edit de zinzin : En fait son professeur etait un grand sage. Et il avait predit la prophetie en
+lisant les etoiles ou un machin du genre : Deux heros allaient se battre pour definir 
+l'avenir de la planete, et il lui a dit a peu pres ou ca allait se passer. Et du coup le voila
 
 Un gang de bandits qu'on rencontrera un peu partout. Ils ont des haches,
 s'habillent en noir, et leur chef sera un perso interessant, hopefully
@@ -109,6 +112,8 @@ Je pense a un skill qui ajoutera un niveau aux attaques chargees
 Avec la lance, des lances additionnelles apparaitront au moment de les Lancer
 Avec le marteau, le premier coup horizontal est suivi d'un mechant coup vertical
 Avec l'epee on peut enchainer avec le slash rapide horizontal qui vous fait passer derriere l'ennemi
+Il aura une enorme cicatrice sur le torse. Et 
+
 
 Un gars de l'est (un japonais avec un odachi) qui porte sur son dos un cercueil
 Ce sera un gars qui s'est ramene depuis tres loin dans le village parce qu'il a appris que
@@ -227,3 +232,8 @@ Putain big brain
 Et comme ça on a une nouvelle mécanique, pour achever les ennemis
 On absorbe leur mana pour les tuer et ça nous rend plus fort (+XP ou bien soin)
 Je suis le GOAT du game design
+
+Le monde aura vecu 2 guerres. D'abord une grande guerre contre les geants ya longtemps et ensuite une
+des humains entre eux. Le berserker sera un descendant des geants. Btw ils ont vraiment ete TOUS rayes de la surface de la terre
+Tous ces morts sont sans doute la raison de l'apocalypse de l'almana et tout.
+C'est une maniere pour la planete d'essayer de se debarasser des monstres que sont les humains

@@ -1,0 +1,123 @@
+[gd_scene load_steps=18 format=3 uid="uid://cdwm7e8ppfxcg"]
+
+[ext_resource type="Script" uid="uid://c08085pijg0n6" path="res://scripts/golem_ground_proj.gd" id="1_yhaq2"]
+[ext_resource type="Texture2D" uid="uid://cq7w0spfcdqbe" path="res://assets/sprites/stoneGolem(Air)/ShockWave-Start.png" id="2_0ekm7"]
+[ext_resource type="Script" uid="uid://bgxq2sxrcpmur" path="res://scripts/golem_wavehit_box.gd" id="2_yhaq2"]
+[ext_resource type="Texture2D" uid="uid://db1aigelrb182" path="res://assets/sprites/stoneGolem(Air)/ShockWave-Middle.png" id="3_bmo1f"]
+[ext_resource type="Texture2D" uid="uid://b5fhgn4ldchak" path="res://assets/sprites/stoneGolem(Air)/ShockWave-End.png" id="4_3jgak"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l103"]
+atlas = ExtResource("2_0ekm7")
+region = Rect2(0, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0dph"]
+atlas = ExtResource("2_0ekm7")
+region = Rect2(480, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8aufo"]
+atlas = ExtResource("2_0ekm7")
+region = Rect2(960, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78u41"]
+atlas = ExtResource("3_bmo1f")
+region = Rect2(0, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc4jj"]
+atlas = ExtResource("3_bmo1f")
+region = Rect2(480, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qycrp"]
+atlas = ExtResource("3_bmo1f")
+region = Rect2(960, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iys7y"]
+atlas = ExtResource("4_3jgak")
+region = Rect2(0, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n70eo"]
+atlas = ExtResource("4_3jgak")
+region = Rect2(480, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bn4r3"]
+atlas = ExtResource("4_3jgak")
+region = Rect2(960, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n743u"]
+atlas = ExtResource("4_3jgak")
+region = Rect2(1440, 0, 480, 384)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3jgak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0l103")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0dph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8aufo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78u41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc4jj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qycrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78u41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc4jj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qycrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iys7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n70eo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bn4r3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n743u")
+}],
+"loop": false,
+"name": &"go",
+"speed": 9.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7h4pb"]
+
+[node name="GolemGroundWave" type="Node2D" node_paths=PackedStringArray("hitbox", "anim_player")]
+script = ExtResource("1_yhaq2")
+is_one_shot = false
+is_anim_one_shot = true
+hitbox = NodePath("HitBox")
+anim_player = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-35, 11)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_3jgak")
+animation = &"go"
+autoplay = "go"
+frame = 3
+offset = Vector2(72, -38)
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+script = ExtResource("2_yhaq2")
+attack_type = 3
+is_phys_atk = false
+metadata/_custom_type_script = "uid://ca7lo8315oxt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-2, -3)
+shape = SubResource("CapsuleShape2D_7h4pb")

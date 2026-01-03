@@ -61,4 +61,3 @@ func update(delta):
 
 		if enemy != null and dist < MAX_RANGE:
 			projectile.set_target(enemy)
-		print(projectile.scale.x)

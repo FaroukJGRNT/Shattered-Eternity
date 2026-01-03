@@ -17,6 +17,7 @@ input_name = "color"
 
 [resource]
 resource_local_to_scene = true
+resource_name = "hitfl"
 code = "shader_type canvas_item;
 render_mode blend_mix;
 

@@ -7,7 +7,7 @@ func _ready() -> void:
 
 func update(delta):
 	if not Input.is_action_pressed("guard") and player.velocity.x == 0 and AnimPlayer.animation != "guard_start":
-		transitioned.emit("attackrecovery")
+		transitioned.emit("heavyattackrecovery")
 		AnimPlayer.play("guard_end")
 	if player.velocity.x > 0:
 		player.velocity.x = max(player.velocity.x - acceleration, 0)

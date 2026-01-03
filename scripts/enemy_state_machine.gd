@@ -9,6 +9,7 @@ var states : Dictionary = {}
 
 func _ready() -> void:
 	AnimPlayer.connect("animation_finished", _on_animated_sprite_2d_animation_finished)
+	AnimPlayer.connect("frame_changed", _on_animated_sprite_2d_frame_changed)
 	# Gather all different states in the dictionnary
 	for child in get_children():
 		if child is EnemyState:
@@ -39,3 +40,6 @@ func get_current_state():
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	current_state.on_animation_end()
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	current_state.on_frame_changed()

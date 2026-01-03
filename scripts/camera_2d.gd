@@ -1,9 +1,9 @@
 extends Camera2D
 
 var shake_str : float = 0.0
-var fade: float = 3.0
+var fade: float = 10.0
 
-func trigger_shake(max_shake: float, _fade: float):
+func trigger_shake(max_shake: float, _fade: float = fade):
 	shake_str = max_shake
 	fade =  _fade
 

@@ -1,5 +1,8 @@
 extends PlayerState
 
+func _init() -> void:
+	is_state_blocking = true
+
 func enter():
 	pass
 func update(delta):

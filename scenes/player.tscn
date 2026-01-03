@@ -1,7 +1,6 @@
-[gd_scene load_steps=355 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=359 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
-[ext_resource type="Shader" uid="uid://dbau474f0ay52" path="res://shaders/hit_flash.tres" id="2_wqfne"]
 [ext_resource type="Texture2D" uid="uid://bm7w2ao6eeavq" path="res://assets/sprites/player/SimpleCharacter2-Sheet.png" id="3_5h808"]
 [ext_resource type="Texture2D" uid="uid://1avtm7xpuo52" path="res://assets/sprites/player/LightCombo.png" id="4_31cv2"]
 [ext_resource type="Texture2D" uid="uid://ci5535xvtdwej" path="res://assets/sprites/player/NewJump.png" id="4_fdfoy"]
@@ -76,7 +75,6 @@
 [ext_resource type="Script" uid="uid://dnvv7d10vtg1q" path="res://scripts/guard.gd" id="50_8txt3"]
 [ext_resource type="Script" uid="uid://w1mns8jibm28" path="res://scripts/sword_charged.gd" id="50_sc3ue"]
 [ext_resource type="Script" uid="uid://d1sjbpcwpbklk" path="res://scripts/gpu_particles_2d.gd" id="54_apa73"]
-[ext_resource type="Script" uid="uid://x51ik5jddhvf" path="res://scripts/player_hit_listener.gd" id="54_ha2mi"]
 [ext_resource type="Script" uid="uid://dr0dhbjac2aq" path="res://scripts/spear_charging.gd" id="56_0yhus"]
 [ext_resource type="Script" uid="uid://c2mjrr6shm3dp" path="res://scripts/spear_charged_attack.gd" id="56_mwp2n"]
 [ext_resource type="Script" uid="uid://go8qinoe06g4" path="res://scripts/spear_aerial_hb.gd" id="58_tk41t"]
@@ -90,11 +88,88 @@
 [ext_resource type="Script" uid="uid://baintj7h5x6b4" path="res://scripts/guard_break.gd" id="79_lw0jh"]
 [ext_resource type="Script" uid="uid://mro2wgoqr73b" path="res://scripts/hammer_aerial_hb.gd" id="84_cbf1i"]
 [ext_resource type="Script" uid="uid://cem64osvvymxq" path="res://scripts/spear_parry_hb.gd" id="86_4vfid"]
+[ext_resource type="Script" uid="uid://djexu1m3ktun2" path="res://scripts/playerhit_listener.gd" id="88_4vfid"]
 [ext_resource type="Script" uid="uid://b7k3ffwp05oxl" path="res://scripts/buff_manager.gd" id="91_4vfid"]
 [ext_resource type="Script" uid="uid://bpb8sud12vjj4" path="res://scripts/killed_enemy_atk_buff.gd" id="92_ljgr3"]
 
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_26nec"]
+output_port_for_preview = 0
+parameter_name = "tint"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_4opve"]
+parameter_name = "enabled"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_m8fvu"]
+default_input_values = [0, 1.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_26nec"]
+input_name = "color"
+
+[sub_resource type="VisualShader" id="VisualShader_40cl6"]
+resource_local_to_scene = true
+resource_name = "hitfl"
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform bool enabled = false;
+uniform vec4 tint : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+
+void fragment() {
+// BooleanParameter:3
+	bool n_out3p0 = enabled;
+
+
+// ColorParameter:2
+	vec4 n_out2p0 = tint;
+
+
+// Input:5
+	vec4 n_out5p0 = COLOR;
+
+
+	vec3 n_out4p0;
+// If:4
+	float n_in4p1 = 1.00000;
+	float n_in4p2 = 0.00001;
+	if(abs((n_out3p0 ? 1.0 : 0.0) - n_in4p1) < n_in4p2)
+	{
+		n_out4p0 = vec3(n_out2p0.xyz);
+	}
+	else if((n_out3p0 ? 1.0 : 0.0) < n_in4p1)
+	{
+		n_out4p0 = vec3(n_out5p0.xyz);
+	}
+	else
+	{
+		n_out4p0 = vec3(n_out5p0.xyz);
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out4p0;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(520, 100)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_26nec")
+nodes/fragment/2/position = Vector2(80, 220)
+nodes/fragment/3/node = SubResource("VisualShaderNodeBooleanParameter_4opve")
+nodes/fragment/3/position = Vector2(80, 40)
+nodes/fragment/4/node = SubResource("VisualShaderNodeIf_m8fvu")
+nodes/fragment/4/position = Vector2(300, 80)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_26nec")
+nodes/fragment/5/position = Vector2(100, 400)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 4, 0, 0, 0, 2, 0, 4, 3, 5, 0, 4, 4, 5, 0, 4, 5)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wnwbv"]
-shader = ExtResource("2_wqfne")
+shader = SubResource("VisualShader_40cl6")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
@@ -1119,7 +1194,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"guard_break",
-"speed": 10.0
+"speed": 11.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1147,7 +1222,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"guard_end",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1164,7 +1239,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"guard_start",
-"speed": 14.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2123,7 +2198,7 @@ collision_mask = 128
 script = ExtResource("1_le0q1")
 anim_player = NodePath("AnimatedSprite2D")
 hurtbox = NodePath("PlayerHurtBox")
-hitboxes = NodePath("HitBoxes")
+hitboxes = NodePath("PlayerHurtBox")
 state_machine = NodePath("PlayerStateMachine")
 hit_listener = NodePath("HitListener")
 buff_manager = NodePath("BuffManager")
@@ -2132,9 +2207,9 @@ buff_manager = NodePath("BuffManager")
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"spear_parry"
+animation = &"guard_end"
 autoplay = "idle"
-frame = 10
+frame = 2
 frame_progress = 1.0
 script = ExtResource("5_fjrip")
 state_machine = NodePath("../PlayerStateMachine")
@@ -2212,7 +2287,7 @@ script = ExtResource("12_oprun")
 
 [node name="Dashing" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("13_a8ls1")
-active_frames = Array[int]([0, 1, 2])
+active_frames = Array[int]([0, 1, 2, 3])
 
 [node name="Hit" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("14_qfm1y")
@@ -2384,7 +2459,7 @@ anim_name = "guard_break"
 active_frames = Array[int]([8])
 hitbox = NodePath("../../HitBoxes/GuardBreak")
 movement_frames = Array[int]([4, 7])
-movement_velocity = Array[Vector2]([Vector2(10, 0), Vector2(36, 0)])
+movement_velocity = Array[Vector2]([Vector2(12, 0), Vector2(40, 0)])
 
 [node name="Staggered" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("65_lw0jh")
@@ -2444,6 +2519,8 @@ shape = SubResource("CapsuleShape2D_md1ol")
 [node name="HammerAttack1" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("33_md1ol")
+attack_type = 2
+impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerAttack1"]
@@ -2454,6 +2531,8 @@ shape = SubResource("CapsuleShape2D_bj30b")
 [node name="HammerAttack2" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("34_bj30b")
+attack_type = 2
+impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerAttack2"]
@@ -2465,6 +2544,8 @@ shape = SubResource("CapsuleShape2D_jc3p3")
 visible = false
 position = Vector2(-13, -2)
 script = ExtResource("24_dt7fs")
+attack_type = 1
+impact = 0
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAttack1"]
@@ -2477,6 +2558,7 @@ shape = SubResource("CapsuleShape2D_hax0n")
 visible = false
 position = Vector2(-13, -2)
 script = ExtResource("25_wqfne")
+impact = 0
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAttack2"]
@@ -2489,6 +2571,8 @@ shape = SubResource("CapsuleShape2D_t4otl")
 visible = false
 position = Vector2(-13, -2)
 script = ExtResource("26_wnwbv")
+life_duration = 0.0
+impact = 0
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAttack3"]
@@ -2499,6 +2583,8 @@ shape = SubResource("CapsuleShape2D_j2b1d")
 [node name="HammerChargedAttack" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("46_mx1m4")
+attack_type = 2
+impact = 3
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerChargedAttack"]
@@ -2509,6 +2595,8 @@ shape = SubResource("CapsuleShape2D_4gjji")
 [node name="SwordCharged" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("50_sc3ue")
+life_duration = 0.0
+impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordCharged"]
@@ -2519,6 +2607,8 @@ shape = SubResource("CircleShape2D_edwuo")
 visible = false
 script = ExtResource("58_tk41t")
 up_value = 120
+life_duration = 0.0
+impact = 0
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAerial"]
@@ -2549,6 +2639,8 @@ shape = SubResource("RectangleShape2D_au7lq")
 [node name="HammerParry" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("75_vx63k")
+attack_type = 2
+impact = 3
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerParry"]
@@ -2558,6 +2650,7 @@ shape = SubResource("CircleShape2D_6pxcr")
 [node name="SwordParry" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("76_lw0jh")
+impact = 3
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBoxes/SwordParry"]
@@ -2567,6 +2660,7 @@ shape = SubResource("RectangleShape2D_uifsl")
 [node name="GuardBreak" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("79_lw0jh")
+impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/GuardBreak"]
@@ -2577,6 +2671,8 @@ shape = SubResource("CircleShape2D_p6pc0")
 visible = false
 script = ExtResource("84_cbf1i")
 up_value = 50
+attack_type = 2
+impact = 2
 metadata/_custom_type_script = "uid://cahklyitgjl16"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerAerial"]
@@ -2585,6 +2681,7 @@ shape = SubResource("CapsuleShape2D_4tr32")
 
 [node name="SpearParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("86_4vfid")
+impact = 3
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearParry"]
@@ -2603,7 +2700,7 @@ frame_progress = 1.0
 
 [node name="HitListener" type="Node2D" parent="."]
 position = Vector2(-2, 9)
-script = ExtResource("54_ha2mi")
+script = ExtResource("88_4vfid")
 
 [node name="GPUParticles2D" type="CPUParticles2D" parent="HitListener"]
 emitting = false
@@ -2625,8 +2722,6 @@ scale_amount_min = 3.0
 scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_8svfe")
 script = ExtResource("54_apa73")
-
-[node name="HitVFXPlayer" type="AnimatedSprite2D" parent="HitListener"]
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 unique_name_in_owner = true

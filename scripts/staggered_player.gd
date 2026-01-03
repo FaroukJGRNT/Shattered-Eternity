@@ -8,7 +8,6 @@ func _ready() -> void:
 	is_state_blocking = true
 
 func enter():
-	print("STAGGERED!")
 	cooldown = stagger_duration
 	AnimPlayer.play("staggered")
 

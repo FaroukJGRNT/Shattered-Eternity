@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://lcalun41bn55" path="res://scenes/ingame_ui.tscn" id="4_mx8sn"]
 [ext_resource type="PackedScene" uid="uid://clq1ba7ljb4ob" path="res://scenes/flying_golem.tscn" id="4_ppgk2"]
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" groups=["Level"]]
 
 [node name="World" parent="." instance=ExtResource("2_ppgk2")]
 position = Vector2(-162, 317)
@@ -16,4 +16,4 @@ position = Vector2(-162, 317)
 player = NodePath("../Player")
 
 [node name="FlyingGolem" parent="." instance=ExtResource("4_ppgk2")]
-position = Vector2(1483, 232)
+position = Vector2(1042, 225)

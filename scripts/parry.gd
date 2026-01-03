@@ -2,17 +2,24 @@ extends PlayerState
 
 var attack_again := false
 var parry_state := "idle"
+var acceleration = 12
+
 
 func _ready() -> void:
 	is_state_blocking = true
 	
 func enter():
-	player.hurtbox.desactivate()
+	#player.hurtbox.desactivate()
 	parry_state = "idle"
 	attack_again = false
 	AnimPlayer.play("perfect_guard")
 
 func update(delta):
+	if player.velocity.x > 0:
+		player.velocity.x = max(player.velocity.x - acceleration, 0)
+	if player.velocity.x < 0:
+		player.velocity.x = min(player.velocity.x + acceleration, 0)
+	player.move_and_slide()
 	if Input.is_action_just_pressed("attack"):
 		attack_again = true
 		match player.current_weapon:
@@ -22,7 +29,6 @@ func update(delta):
 				parry_state = ("hammerparry")
 			player.Weapons.SPEAR:
 				parry_state = ("spearparry")
-				
 	
 func exit():
 	player.hurtbox.activate()

@@ -23,8 +23,11 @@ func on_area_entered(area: Area2D) -> void:
 			return
 		if not area.active or not _daddy_in_targeted_groups(daddy, area.targeted_groups):
 			return
+		if owner in area.affected_targets:
+			return
 		
 		daddy.hit_listener.damage_taken(area)
+		area.affected_targets.append(owner)
 
 func _daddy_in_targeted_groups(diddy: Node, groups: Array) -> bool:
 	for g in groups:

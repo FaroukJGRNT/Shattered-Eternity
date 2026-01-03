@@ -167,6 +167,9 @@ func take_damage(damage: DamageContainer) -> DamageContainer:
 	damage.phys_dmg *= round(1.0 - defense / 100.0)
 	if damage.is_crit:
 		damage.phys_dmg *= 3
+		damage.ice_dmg *= 3
+		damage.thunder_dmg *= 3
+		damage.fire_dmg *= 3
 
 	# --- Accumulation d'éléments réduite ---
 	if "burn" not in active_status_effects:
@@ -190,6 +193,7 @@ func take_damage(damage: DamageContainer) -> DamageContainer:
 	if posture >= max_posture:
 		posture = 0
 		if poise_type != Poises.PLAYER:
+			hit_listener.create_label(Color.REBECCA_PURPLE, "STAGGERED!", 1.3)
 			get_staggered()
 
 	# Total des dégâts
@@ -212,10 +216,11 @@ func deal_damage(motion_value: int, attack_type: String = "") -> DamageContainer
 	var dmg = DamageContainer.new()
 	
 	dmg.daddy_ref = self
+
 	dmg.facing = facing
 
 	# Calcul de base
-	var base_power = motion_value / 100.0
+	var base_power = motion_value / 10.0
 	var raw_value = attack * base_power
 
 	match attack_type:

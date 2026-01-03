@@ -1,8 +1,7 @@
-[gd_scene load_steps=87 format=3 uid="uid://c20oww0mmtpx7"]
+[gd_scene load_steps=91 format=3 uid="uid://c20oww0mmtpx7"]
 
 [ext_resource type="Texture2D" uid="uid://rye6avf45wqu" path="res://assets/sprites/enemy/Skeleton enemy.png" id="1_1qe2k"]
 [ext_resource type="Script" uid="uid://cthv4yog3disp" path="res://scripts/enemy.gd" id="1_rfxxo"]
-[ext_resource type="Shader" uid="uid://dbau474f0ay52" path="res://shaders/hit_flash.tres" id="1_wtq4b"]
 [ext_resource type="Script" uid="uid://cudcd7wg184ea" path="res://scripts/animated_sprite_2d.gd" id="3_5uy6h"]
 [ext_resource type="Script" uid="uid://yeff8at8yhdy" path="res://scripts/hit_box.gd" id="3_f85vv"]
 [ext_resource type="Script" uid="uid://cv64de5dddrge" path="res://scripts/enemy_hurt_box.gd" id="5_w8i8w"]
@@ -27,9 +26,85 @@
 [ext_resource type="Script" uid="uid://b7k3ffwp05oxl" path="res://scripts/buff_manager.gd" id="25_2mchx"]
 [ext_resource type="Script" uid="uid://bpb8sud12vjj4" path="res://scripts/killed_enemy_atk_buff.gd" id="26_t3vcr"]
 
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_26nec"]
+output_port_for_preview = 0
+parameter_name = "tint"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_4opve"]
+parameter_name = "enabled"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_m8fvu"]
+default_input_values = [0, 1.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_26nec"]
+input_name = "color"
+
+[sub_resource type="VisualShader" id="VisualShader_40cl6"]
+resource_local_to_scene = true
+resource_name = "hitfl"
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform bool enabled = false;
+uniform vec4 tint : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+
+void fragment() {
+// BooleanParameter:3
+	bool n_out3p0 = enabled;
+
+
+// ColorParameter:2
+	vec4 n_out2p0 = tint;
+
+
+// Input:5
+	vec4 n_out5p0 = COLOR;
+
+
+	vec3 n_out4p0;
+// If:4
+	float n_in4p1 = 1.00000;
+	float n_in4p2 = 0.00001;
+	if(abs((n_out3p0 ? 1.0 : 0.0) - n_in4p1) < n_in4p2)
+	{
+		n_out4p0 = vec3(n_out2p0.xyz);
+	}
+	else if((n_out3p0 ? 1.0 : 0.0) < n_in4p1)
+	{
+		n_out4p0 = vec3(n_out5p0.xyz);
+	}
+	else
+	{
+		n_out4p0 = vec3(n_out5p0.xyz);
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out4p0;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(520, 100)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_26nec")
+nodes/fragment/2/position = Vector2(80, 220)
+nodes/fragment/3/node = SubResource("VisualShaderNodeBooleanParameter_4opve")
+nodes/fragment/3/position = Vector2(80, 40)
+nodes/fragment/4/node = SubResource("VisualShaderNodeIf_m8fvu")
+nodes/fragment/4/position = Vector2(300, 80)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_26nec")
+nodes/fragment/5/position = Vector2(100, 400)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 4, 0, 0, 0, 2, 0, 4, 3, 5, 0, 4, 4, 5, 0, 4, 5)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wtq4b"]
 resource_local_to_scene = true
-shader = ExtResource("1_wtq4b")
+shader = SubResource("VisualShader_40cl6")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
@@ -634,7 +709,7 @@ metadata/_custom_type_script = "uid://dioqaxwj02s7r"
 [connection signal="animation_finished" from="AnimatedSprite2D" to="EnemyStateMachine" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="HitBoxes/HitBox" method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="timeout" from="AttackCoolDown" to="." method="_on_sliding_timer_timeout"]
 [connection signal="timeout" from="AttackCoolDown" to="." method="_on_attack_cool_down_timeout"]
+[connection signal="timeout" from="AttackCoolDown" to="." method="_on_sliding_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -10,6 +10,8 @@ class_name EnemyAttackState
 @export var movement_frames : Array[int]
 @export var movement_velocity : Array[Vector2]
 
+var usable_mov_frames : Array[int]
+
 @export var deceleration := 10
 
 
@@ -22,17 +24,26 @@ var attack_ended := false
 func _ready() -> void:
 	is_state_blocking = true
 
+
 func enter():
+	usable_mov_frames = movement_frames.duplicate()
 	attack_ended = false
 	AnimPlayer.play(anim_name)
 
 func update(delta):
 	var index = 0
-	for frame in movement_frames:
+	for frame in usable_mov_frames:
 		if AnimPlayer.frame == frame:
 			enemy.velocity += (movement_velocity[index]) * enemy.facing
-			enemy.move_and_slide()
+			usable_mov_frames.pop_front()
+			break
 		index += 1
+
+	if enemy.velocity.x > 0:
+		enemy.velocity.x = max(enemy.velocity.x - deceleration, 0)
+	if enemy.velocity.x < 0:
+		enemy.velocity.x = min(enemy.velocity.x + deceleration, 0)
+	enemy.move_and_slide()
 
 func exit():
 	pass
@@ -49,3 +60,6 @@ func on_animation_end():
 	if recov_anim_name == "":
 		recov_anim_name = "idle"
 	AnimPlayer.play(recov_anim_name)
+
+func on_frame_changed() -> void:
+	pass

@@ -9,14 +9,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.55, 0.55)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
+theme_override_colors/font_shadow_color = Color(0.1625, 0.25, 0.245625, 1)
+theme_override_colors/font_outline_color = Color(0.108721, 0.108721, 0.108721, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 4
 theme_override_fonts/font = ExtResource("1_6p0u7")
-theme_override_font_sizes/font_size = 22
-text = "109"
+theme_override_font_sizes/font_size = 13
+text = "32454
+"
 script = ExtResource("2_6p0u7")
+duration = 0.7
+vert_velocity = -100.0
+horiz_velocity_range = 100.0
+deceleration = 5.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.6

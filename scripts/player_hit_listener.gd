@@ -10,7 +10,32 @@ class_name HitListener
 
 @export var life_bar : TextureProgressBar
 
+var vfx_player_scene : PackedScene = load("res://scenes/short_lived_vfx.tscn")
+
+# Hit freeze durations (seconds)
+const LIGHT_FRAME_FREEZE_DURATION  := 0.010
+const NORMAL_FRAME_FREEZE_DURATION := 0.020
+const BIG_FRAME_FREEZE_DURATION    := 0.026
+const HUGE_FRAME_FREEZE_DURATION   := 0.035
+
+@export var LIGHT_CAM_SHAKE : float = 2
+@export var NORMAL_CAM_SHAKE : float = 3
+@export var BIG_CAM_SHAKE : float = 4
+@export var HUGE_CAM_SHAKE : float = 6
+
+enum GuardResult {
+	HIT,
+	BLOCK,
+	PARRY
+}
+
 var daddy : LivingEntity
+
+func update_lifebar(dmg : int):
+	pass
+
+func handle_guard(area : HitBox) -> GuardResult:
+	return GuardResult.HIT
 
 func _ready() -> void:
 	daddy = owner
@@ -24,15 +49,19 @@ var frozen_label : PackedScene = preload("res://scenes/frozen_text.tscn")
 var burn_label : PackedScene = preload("res://scenes/burn_text.tscn")
 var elec_label : PackedScene = preload("res://scenes/elec_text.tscn")
 
-# TODO : Ajouter des labels speciaux pour une parade, une brise garde, etc
-
 var dmg : DamageContainer = DamageContainer.new()
 
-func frame_freeze(frames := 1) -> void:
-	get_tree().paused = true
-	for i in frames:
+func hit_freeze(duration := 0.08, min_scale := 0.10, recover_time := 0.04) -> void:
+	Engine.time_scale = min_scale
+	await get_tree().create_timer(duration, true).timeout
+
+	var t := 0.0
+	while t < recover_time:
+		t += get_process_delta_time()
+		Engine.time_scale = lerp(min_scale, 1.0, t / recover_time)
 		await get_tree().process_frame
-	get_tree().paused = false
+
+	Engine.time_scale = 1.0
 
 func _process(delta: float) -> void:
 	# Handle hit shader cooldown
@@ -42,15 +71,41 @@ func _process(delta: float) -> void:
 			shader_on_cooldown = false
 			daddy.anim_player.material.set_shader_parameter("enabled", false)
 
+func create_label(color : Color, text : String, scale : float = 1.0, y_offset : int = 50):
+		var dmg_text_instance = damage_label.instantiate()
+		dmg_text_instance.position = global_position - Vector2(0, 10)
+		dmg_text_instance.add_theme_color_override("font_color", color)
+		dmg_text_instance.scale = Vector2(scale, scale)
+		dmg_text_instance.text = text  # affiche la valeur
+		get_tree().get_first_node_in_group("Level").add_child(dmg_text_instance)
+		dmg_text_instance.position.y -= y_offset
+
 func damage_taken(area : HitBox) -> void:
-	# Screen shake
+	# Recaluclate the facing (if multidirectional)
+	if area.multidirectional:
+		if area.owner.position.x < daddy.position.x:
+			area.facing = 1
+		else:
+			area.facing = -1
+
+	# Frame freeze and screen shake
 	var cam = get_tree().get_first_node_in_group("Camera")
-	if cam:
-		cam.trigger_shake(area.cam_shake_value, 10)
+	match area.impact:
+		HitBox.Impact.LIGHT:
+			cam.trigger_shake(LIGHT_CAM_SHAKE)
+			hit_freeze(LIGHT_FRAME_FREEZE_DURATION)
 
-	# Frame freeze
-	frame_freeze(2)
+		HitBox.Impact.NORMAL:
+			cam.trigger_shake(NORMAL_CAM_SHAKE)
+			hit_freeze(NORMAL_FRAME_FREEZE_DURATION)
 
+		HitBox.Impact.BIG:
+			cam.trigger_shake(BIG_CAM_SHAKE)
+			hit_freeze(BIG_FRAME_FREEZE_DURATION)
+
+		HitBox.Impact.HUGE:
+			cam.trigger_shake(HUGE_CAM_SHAKE)
+			hit_freeze(HUGE_FRAME_FREEZE_DURATION/2, 0.01, 0.01)
 	# Particles
 	$GPUParticles2D.direction.x = area.facing
 	$GPUParticles2D.emitting = true
@@ -58,19 +113,19 @@ func damage_taken(area : HitBox) -> void:
 
 	# Verify the hit (GUARD)
 	# GUARD HANDLING
-	if daddy.get_state() == "guard":
-		if daddy.facing * area.facing == -1:
-			if daddy.anim_player.animation == "guard_start":
-				daddy.change_state("parry")
-				daddy.hurtbox.desactivate()
-				return
-			daddy.velocity.x = area.motion_value * area.facing * 20
+	if not area.is_guard_break:
+		var result = handle_guard(area)
+		if result == GuardResult.BLOCK:
+			create_label(Color.WHITE, "BLOCKED!", 1.3)
 			return
-	
+		elif result == GuardResult.PARRY:
+			create_label(Color.SKY_BLUE, "PARRIED!", 1.3)
+			return
+
 	# Taking damage and side effects
 	# GETTING GUARD BROKEN
 	if daddy.get_state() == "guard" and area.is_guard_break:
-		# TODO : Big posture damage to add
+		daddy.posture += (daddy.max_posture * 0.2)
 		match daddy.poise_type:
 			daddy.Poises.PLAYER:
 				daddy.get_staggered()
@@ -81,21 +136,11 @@ func damage_taken(area : HitBox) -> void:
 			daddy.Poises.LARGE:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 		daddy.velocity.x = area.motion_value * area.facing * 20
-
-	# Verify the hit (GUARD)
-	# GUARD HANDLING
-	if daddy.get_state() == "guard":
-		if daddy.facing * area.facing == -1:
-			if daddy.anim_player.animation == "guard_start":
-				daddy.change_state("parry")
-				daddy.hurtbox.desactivate()
-				return
-			daddy.velocity.x = area.motion_value * area.facing * 20
-			return
+		create_label(Color.ROYAL_BLUE, "GUARD BROKEN!", 1.3)
 
 	# GETTING INTERRUPTED
 	if daddy.get_state() == "guardbreak" and area.is_phys_atk:
-		# TODO : Big posture damage to add
+		daddy.posture += (daddy.max_posture * 0.2)
 		match daddy.poise_type:
 			daddy.Poises.PLAYER:
 				daddy.get_staggered()
@@ -106,6 +151,7 @@ func damage_taken(area : HitBox) -> void:
 			daddy.Poises.LARGE:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 		daddy.velocity.x = area.motion_value * area.facing * 20
+		create_label(Color.MEDIUM_SLATE_BLUE, "INTERRUPTED!", 1.3)
 
 	if (daddy.get_state() != "staggered"):
 		daddy.posture += area.motion_value / 3
@@ -138,10 +184,22 @@ func damage_taken(area : HitBox) -> void:
 	daddy.anim_player.material.set_shader_parameter("enabled", true)
 	shader_on_cooldown = true
 	shader_duration = 0.2
-	
-	# TODO: Launch a vfx animation corresponding to the
-	# caracteristics of the hit
-	
+
+	if area.attack_type != HitBox.AttackType.NONE:
+		# Launch a vfx animation corresponding to the
+		# caracteristics of the hit
+		var dmg_vfx : ShortLivedVFX = vfx_player_scene.instantiate()
+		add_child(dmg_vfx)
+		if area.facing == -1:
+			dmg_vfx.flip_h = true
+		match area.attack_type:
+			HitBox.AttackType.SLASH:
+				dmg_vfx.play("slash")
+			HitBox.AttackType.THRUST:
+				dmg_vfx.play("thrust")
+			HitBox.AttackType.BONK:
+				dmg_vfx.play("bonk")
+
 	# Dictionnaire type -> couleur
 	var dmg_colors = {
 		"fire": Color.ORANGE,
@@ -163,22 +221,22 @@ func damage_taken(area : HitBox) -> void:
 		var amount = dmg_list[dmg_type]
 		if amount > 0:
 			var dmg_text_instance = damage_label.instantiate()
-			dmg_text_instance.position = Vector2(position.x + (dmg.facing * 5), position.y - 20)
-			dmg_text_instance.direction = dmg.facing
+			dmg_text_instance.position = global_position - Vector2(0, 10)
 			if owner.is_in_group("Player"):
-				dmg_text_instance.add_theme_color_override("font_color", Color.INDIAN_RED)
+				dmg_text_instance.add_theme_color_override("font_color", Color.FIREBRICK)
 			else:
 				dmg_text_instance.add_theme_color_override("font_color", dmg_colors[dmg_type])
 			dmg_text_instance.text = str(int(amount))  # affiche la valeur
-			daddy.add_child(dmg_text_instance)
+			get_tree().get_first_node_in_group("Level").add_child(dmg_text_instance)
+			dmg_text_instance.position.y -= 30
 
 	# Critique
 	if dmg.is_crit:
 		var crit_text_instance = crit_label.instantiate()
-		crit_text_instance.position = Vector2(position.x + (dmg.facing * 5), position.y - 30)
-		crit_text_instance.direction = dmg.facing
+		crit_text_instance.position = global_position - Vector2(0, 10)
 		# On ne change pas le texte, le crit_label a son propre style
-		daddy.add_child(crit_text_instance)
+		get_tree().get_first_node_in_group("Level").add_child(crit_text_instance)
+		crit_text_instance.position.y -= 30
 
 	# Lifebar update
-	#LifeBar.update_health_bar(dmg.total_dmg)
+	update_lifebar(dmg.total_dmg)

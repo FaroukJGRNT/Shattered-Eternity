@@ -2,31 +2,48 @@ extends Area2D
 class_name HitBox
 
 # The base power of the attack
-var motion_value := 0
+@export var motion_value := 0
 # The elemental type of the attack
-var atk_type := ""
-# The strength of the screen shake
-var cam_shake_value := 0.0
-# The duration of the hitstop
-var hitstop_time := 0.0
-# The strength of the hitstop
-var hitstop_scale := 1.0
-# Whether the hitbox is active or not
+@export var atk_type := ""
+
+enum Impact {
+	LIGHT,
+	NORMAL,
+	BIG,
+	HUGE
+}
+
 var active := false
 # The groups targeted by the hitbox
 var targeted_groups : Array[String] = []
 # The direction of the hit
 var facing := 1
+# Does the hit go is all directions ?
+@export var multidirectional := false
+
+var affected_targets : Array[LivingEntity]
+@export var life_duration := 1.0
+var timer := 0.0
+@export var life_looping := false
 
 enum Pushback {
 	NORMAL,
 	STRONG
 }
 
-var push_back : Pushback = Pushback.NORMAL
+enum AttackType {
+	SLASH,
+	THRUST,
+	BONK,
+	NONE
+}
 
-var is_guard_break := false
-var is_phys_atk := true
+@export var push_back : Pushback = Pushback.NORMAL
+@export var attack_type : AttackType = AttackType.SLASH
+@export var impact : Impact = Impact.NORMAL
+
+@export var is_guard_break := false
+@export var is_phys_atk := true
 
 # For projectiles, since you cant generate damage from them, they're detached
 # from their owmer
@@ -44,6 +61,20 @@ func generate_damage() -> DamageContainer:
 		return premade_dmg
 	# Let the owner generate the damage based on its stats
 	return owner.deal_damage(motion_value, atk_type)
+
+func _process(delta: float) -> void:
+	timer -= delta
+	if timer <= 0:
+		end_life()
+
+func start_life():
+	affected_targets = []
+	timer = life_duration
+
+func end_life():
+	affected_targets = []
+	if life_looping:
+		start_life()
 
 func activate():
 	set_deferred("monitoring", true)

@@ -3,6 +3,3 @@ extends EnemyHitBox
 func _ready() -> void:
 	is_phys_atk = true
 	motion_value = 20
-	cam_shake_value = 5
-	hitstop_time = 0.05
-	hitstop_scale = 0.1

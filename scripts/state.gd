@@ -19,3 +19,8 @@ func exit():
 # since most states end accordingly to an animation
 func on_animation_end():
 	pass
+
+# Actually, some actions about frames must be decided here, not in uppdate
+# Happy i found this bug bro
+func on_frame_changed():
+	pass

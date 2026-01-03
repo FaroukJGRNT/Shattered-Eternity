@@ -31,18 +31,21 @@ var current_weapon = Weapons.SWORD
 func _init() -> void:
 	poise_type = Poises.PLAYER
 	position.x += 200
-	max_life = 100
+	max_life = 200
 	life = max_life
-	attack = 50
-	defense = 5
+	attack = 10
+	defense = 10
 	thunder_res = 10.0
 	fire_res = 10.0
 	ice_res = 10.0
 
 func get_stunned(vel_x : float, duration : float):
-	$PlayerStateMachine/Hit.hit_direction = sign(vel_x)
-	print(vel_x, " ", sign(vel_x))
-	change_state("hit")
+	if $PlayerStateMachine.get_current_state().name != "Staggered":
+		$PlayerStateMachine/Hit.hit_direction = sign(vel_x)
+		print(vel_x, " ", sign(vel_x))
+		if on_dash_cooldown:
+			dash_cooldown = 0.0
+		change_state("hit")
 
 func get_staggered():
 	change_state("staggered")

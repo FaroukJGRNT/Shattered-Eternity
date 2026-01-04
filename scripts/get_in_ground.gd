@@ -8,6 +8,7 @@ func enter():
 	has_shot = false
 
 func update(delta):
+	print("i'm in the ground")
 	super.update(delta)
 	if AnimPlayer.frame == 10 and has_shot == false:
 		has_shot = true
@@ -22,6 +23,5 @@ func update(delta):
 		ground_wave2.global_position = owner.global_position
 		ground_wave2.position.y += 15
 		
-		ground_wave1.set_premade_damage(owner)
 		ground_wave1.set_premade_damage(owner)
 		ground_wave2.set_premade_damage(owner)

@@ -25,6 +25,7 @@ var affected_targets : Array[LivingEntity]
 @export var life_duration := 1.0
 var timer := 0.0
 @export var life_looping := false
+var life_used := false
 
 enum Pushback {
 	NORMAL,
@@ -68,6 +69,7 @@ func _process(delta: float) -> void:
 		end_life()
 
 func start_life():
+	life_used = false
 	affected_targets = []
 	timer = life_duration
 

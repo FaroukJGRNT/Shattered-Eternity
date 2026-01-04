@@ -89,6 +89,8 @@ Sur la colline avec de la foudre faudrait un moyen d'invoquer la foudre et s'en
 servir a notre avantage pour faire des degats aux ennemus
 Dans la zone avec de lave, ca pourrait encourager le joueur a pousser les ennemis avec
 les bonnes competences dans la lave
+Sur le champ de bataille, faudrait pouvoir utiliser ton almana pour invoquer des squelettes qui t'aideront
+
 
 ### Idees de persos:
 Un scientifique qui cherche a comprendre ce qui se passe dans le monde
@@ -145,6 +147,12 @@ en ruine. Il nous previendrait de ne pas s'aventurer plus loin, que c'est un end
 On l'ecoute pas et on avance quand meme et on tombe sur ennemi qui tire un ultralaser d'almana
 Et la dans une cinematique, il sort de nulle part, pose son bouclier et nous protege du laser
 Du coup on affronte le boss avec lui, et des qu'il fera la laser faudra se mettre derriere le npc pour etre protege
+
+Une villageoise, une archere, elle sera forte. Elle sera le premier perso qu'on rencontre et qui nous menera au village.
+Au debut elle sera mefiante et nous prendra pour un infecté. Mais quand elle verra nos pouvoirs elle nous fera plus confiance.
+Son frere a ete infecte. Et son stade est vraiment avance. Et il a ete lache dans la nature. Elle a perdu sa trace. Donc on est son seul espoir.
+Elle nous demande de l'aider a le trouver. Eventuellement on le trouvera, transforme, agressif et on sera oblige de le tuer.
+On aura ensuite le choix de lui dire qu'on la tué, ou bien le lui cacher. On verra la suite plus tard.
 
 # IDEES RANDOM
 Il nous faut une battle de danse

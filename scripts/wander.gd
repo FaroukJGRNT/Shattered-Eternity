@@ -11,7 +11,7 @@ func enter():
 
 func update(delta):
 	if waiting:
-		AnimPlayer.play("idle")
+		AnimPlayer.play("walk")
 		wait_cooldown -= delta
 		if wait_cooldown <= 0:
 			# Turn around

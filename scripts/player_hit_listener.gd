@@ -1,9 +1,9 @@
 extends Node2D
 class_name HitListener
 
-@export var SMALL_PUSHBACK := 20
-@export var MEDIUM_PUSHBACK := 40
-@export var BIG_PUSHBACK := 60
+@export var SMALL_PUSHBACK := 40
+@export var MEDIUM_PUSHBACK := 80
+@export var BIG_PUSHBACK := 120
 @export var SMALL_PUSHBACK_DURATION := 0.5
 @export var MEDIUM_PUSHBACK_DURATION := 1
 @export var BIG_PUSHBACK_DURATION := 1.5
@@ -32,7 +32,8 @@ enum GuardResult {
 var daddy : LivingEntity
 
 func update_lifebar(dmg : int):
-	pass
+	if life_bar:
+		life_bar.update_health_bar(dmg)
 
 func handle_guard(area : HitBox) -> GuardResult:
 	return GuardResult.HIT
@@ -132,10 +133,10 @@ func damage_taken(area : HitBox) -> void:
 			daddy.Poises.SMALL:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 			daddy.Poises.MEDIUM:
+				print("I'm stunned aaaah ", MEDIUM_PUSHBACK * area.facing, " ", MEDIUM_PUSHBACK_DURATION)
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 			daddy.Poises.LARGE:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
-		daddy.velocity.x = area.motion_value * area.facing * 20
 		create_label(Color.ROYAL_BLUE, "GUARD BROKEN!", 1.3)
 
 	# GETTING INTERRUPTED
@@ -150,7 +151,6 @@ func damage_taken(area : HitBox) -> void:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 			daddy.Poises.LARGE:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
-		daddy.velocity.x = area.motion_value * area.facing * 20
 		create_label(Color.MEDIUM_SLATE_BLUE, "INTERRUPTED!", 1.3)
 
 	if (daddy.get_state() != "staggered"):
@@ -161,24 +161,25 @@ func damage_taken(area : HitBox) -> void:
 	# Call the hitbox side effect
 	area.on_hit()
 	
-	match daddy.poise_type:
-		daddy.Poises.PLAYER:
-			print("PLAYER GETTING HURT")
-			daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
-		daddy.Poises.SMALL:
-			match area.push_back:
-				area.Pushback.NORMAL:
-					daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
-				area.Pushback.STRONG:
-					daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
-		daddy.Poises.MEDIUM:
-			match area.push_back:
-				area.Pushback.NORMAL:
-					pass
-				area.Pushback.STRONG:
-					daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
-		daddy.Poises.LARGE:
-			pass
+	if daddy.poise_type == daddy.Poises.PLAYER:
+		daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
+
+	if daddy.is_in_group("Enemy") and not daddy.state_machine.get_current_state().option_type == EnemyState.OptionType.DEFENSIVE:
+		match daddy.poise_type:
+			daddy.Poises.SMALL:
+				match area.push_back:
+					area.Pushback.NORMAL:
+						daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
+					area.Pushback.STRONG:
+						daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+			daddy.Poises.MEDIUM:
+				match area.push_back:
+					area.Pushback.NORMAL:
+						pass
+					area.Pushback.STRONG:
+						daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+			daddy.Poises.LARGE:
+				pass
 	
 	# Hit flash
 	daddy.anim_player.material.set_shader_parameter("enabled", true)

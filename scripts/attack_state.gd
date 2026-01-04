@@ -35,7 +35,11 @@ func update(delta):
 	if Input.is_action_just_pressed("attack"):
 		attack_again = true
 	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= dash_cancel_frame:
-		transitioned.emit("backdashing")
+		player.get_horizontal_input()
+		if player.direction == 0 or player.direction * player.facing == -1:
+			transitioned.emit("backdashing")
+		else:
+			transitioned.emit("dashing")
 
 	#if len(movement_frames) == 0:
 		#return

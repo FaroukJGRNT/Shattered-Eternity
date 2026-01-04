@@ -25,7 +25,7 @@ func on_area_entered(area: Area2D) -> void:
 			return
 		if owner in area.affected_targets:
 			return
-		
+
 		daddy.hit_listener.damage_taken(area)
 		area.affected_targets.append(owner)
 

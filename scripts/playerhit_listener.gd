@@ -5,10 +5,13 @@ func handle_guard(area : HitBox) -> GuardResult:
 		if daddy.facing * area.facing == -1:
 			if daddy.anim_player.animation == "guard_start":
 				daddy.change_state("parry")
-				area.owner.get_stunned(30, 0.6)
-				daddy.velocity.x = area.motion_value * area.facing * 20
+				if area.owner is LivingEntity:
+					area.owner.get_stunned(20, 0.6)
+				daddy.velocity.x = min(area.motion_value * 14, 850)
+				daddy.velocity.x *= area.facing
 				daddy.hurtbox.desactivate()
 				return GuardResult.PARRY
-			daddy.velocity.x = area.motion_value * area.facing * 20
+			daddy.velocity.x = min(area.motion_value * 14, 850)
+			daddy.velocity.x *= area.facing
 			return GuardResult.BLOCK
 	return GuardResult.HIT

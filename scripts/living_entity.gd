@@ -279,6 +279,7 @@ func _apply_burn(delta):
 		add_child(dmg_text_instance)
 		if life <= 0:
 			life = 0
+			Engine.time_scale = 1.0
 			die()
 
 func _apply_shock():

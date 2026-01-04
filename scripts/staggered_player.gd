@@ -10,6 +10,8 @@ func _ready() -> void:
 func enter():
 	cooldown = stagger_duration
 	AnimPlayer.play("staggered")
+	if not player.is_on_floor():
+		transitioned.emit("airborne")
 
 func update(delta):
 	cooldown -= delta

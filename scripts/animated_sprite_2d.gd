@@ -21,7 +21,8 @@ func _on_frame_changed() -> void:
 	var current_state = state_machine.get_current_state()
 	if current_state is EnemyAttackState:
 		if frame in current_state.active_frames:
-			print("Activating enemy hitbox")
+			if frame == current_state.active_frames[0]:
+				current_state.hitbox.start_life()
 			current_state.hitbox.activate()
 			current_state.hitbox.facing = owner.facing
 

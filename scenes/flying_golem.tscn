@@ -1272,6 +1272,7 @@ bg_color = Color(0.17, 0.17, 0.17, 0)
 bg_color = Color(1, 0.866667, 0.341176, 1)
 
 [node name="FlyingGolem" type="CharacterBody2D" node_paths=PackedStringArray("anim_player", "hurtbox", "hitboxes", "state_machine", "hit_listener", "buff_manager") groups=["Enemy"]]
+collision_layer = 2
 script = ExtResource("1_kdecn")
 anim_player = NodePath("AnimatedSprite2D")
 hurtbox = NodePath("HurtBox")
@@ -1418,6 +1419,8 @@ option_cooldown = 16.0
 
 [node name="Guard" type="Node" parent="FGolemStateMachine"]
 script = ExtResource("18_40cl6")
+anim_name = "guard"
+combo_state = "explode"
 
 [node name="Explode" type="Node" parent="FGolemStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("19_fkdit")
@@ -1434,8 +1437,8 @@ script = ExtResource("19_qk0b6")
 material = SubResource("ShaderMaterial_pmxkn")
 position = Vector2(-1, -2)
 sprite_frames = SubResource("SpriteFrames_0edxd")
-animation = &"stagger_end"
-frame = 11
+animation = &"get_in_ground"
+frame = 12
 frame_progress = 1.0
 script = ExtResource("19_nepfb")
 hurtbox = NodePath("../HurtBox")

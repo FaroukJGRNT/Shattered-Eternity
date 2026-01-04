@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://p4w0proattic"]
+[gd_scene load_steps=6 format=3 uid="uid://p4w0proattic"]
 
 [ext_resource type="PackedScene" uid="uid://c1imgcb2kat6k" path="res://scenes/player.tscn" id="2_7lnj0"]
 [ext_resource type="PackedScene" uid="uid://cc3gbjxlqvcli" path="res://scenes/world.tscn" id="2_ppgk2"]
 [ext_resource type="PackedScene" uid="uid://lcalun41bn55" path="res://scenes/ingame_ui.tscn" id="4_mx8sn"]
+[ext_resource type="PackedScene" uid="uid://clq1ba7ljb4ob" path="res://scenes/flying_golem.tscn" id="5_2r41h"]
 [ext_resource type="PackedScene" uid="uid://n3pwaqy58kus" path="res://scenes/bat.tscn" id="5_ppgk2"]
 
 [node name="Level" type="Node2D" groups=["Level"]]
@@ -17,3 +18,6 @@ player = NodePath("../Player")
 
 [node name="Bat" parent="." instance=ExtResource("5_ppgk2")]
 position = Vector2(1070, 109)
+
+[node name="FlyingGolem" parent="." instance=ExtResource("5_2r41h")]
+position = Vector2(834, 283)

@@ -204,6 +204,9 @@ PROBLEMES : Compliqué voire impossible de gérer l'orientation et le scenario d
 
 --> Le corbeau de blasphemous2. Tu entres dans l'ascenseur, fondu noir, bruitage, defondu. Pas besoin d'animation complexe
 
+--> On pourrait ajouter des évènements qui se passent à un certain moment de la boucle à chaque run (Ex : Une montgolfière qui s'écrase quelque part, une tour qui s'effondre…) et créer des backgrounds ou des objets spéciaux (animés peut être) pour les autres zones ou on peut voir le phénomène se dérouler de loin (vu que les arrière-plans des zones contiennent des éléments d'autres zones)
+
+
 # IDEES GAMEPLAY
 
 --> La seule méthode de soin in-game est liée à la résonance. Après les actions parfaites (parade, esquive parfaite etc) on regagne un peu de PV. Cette fonctionnalité n'est disponible qu'à partir du premier niveau de résonance et la quantité de PV regagnés augmente avec les niveaux de résonance.

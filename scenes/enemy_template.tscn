@@ -1,0 +1,430 @@
+[gd_scene load_steps=35 format=3 uid="uid://ovmt6ccp1x55"]
+
+[ext_resource type="Script" uid="uid://cg7y3vd25gmfh" path="res://scripts/enemy_template_base.gd" id="1_c7j3f"]
+[ext_resource type="Script" uid="uid://cudcd7wg184ea" path="res://scripts/animated_sprite_2d.gd" id="2_dlm18"]
+[ext_resource type="Script" uid="uid://busr7orlkflil" path="res://scripts/hurtbox.gd" id="3_g3k0s"]
+[ext_resource type="Script" uid="uid://do8u78sktsj4a" path="res://scripts/enemy_state_machine.gd" id="4_m1eet"]
+[ext_resource type="Script" uid="uid://x51ik5jddhvf" path="res://scripts/player_hit_listener.gd" id="5_a6bxx"]
+[ext_resource type="Script" uid="uid://d1sjbpcwpbklk" path="res://scripts/gpu_particles_2d.gd" id="6_7wst2"]
+[ext_resource type="Script" uid="uid://b7k3ffwp05oxl" path="res://scripts/buff_manager.gd" id="7_e1ahc"]
+[ext_resource type="Texture2D" uid="uid://d1gjlo6f1lshq" path="res://assets/sprites/ui/posture_under.png" id="8_d1ebh"]
+[ext_resource type="Texture2D" uid="uid://c45kmy8nbfigl" path="res://assets/sprites/ui/posture_bar2.png" id="9_atiw3"]
+[ext_resource type="Script" uid="uid://cqta3bldw5h6y" path="res://scripts/posture_bar.gd" id="10_u1jos"]
+[ext_resource type="Texture2D" uid="uid://dfas3tc01xb5l" path="res://assets/sprites/ui/health_bar2.png" id="11_r1p15"]
+[ext_resource type="Script" uid="uid://hdehtxs642ig" path="res://scripts/life_bar.gd" id="12_2a6dq"]
+[ext_resource type="Script" uid="uid://bt0hiyjxpl4to" path="res://scripts/damage_bar.gd" id="13_7qypn"]
+[ext_resource type="Texture2D" uid="uid://bmnomlmjoqny2" path="res://assets/sprites/ui/health_bar3.png" id="14_08iwm"]
+[ext_resource type="Script" uid="uid://pxk2ipo4amci" path="res://scripts/texture_progress_bar.gd" id="15_xy21v"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_mf740"]
+output_port_for_preview = 0
+parameter_name = "tint"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_5gxff"]
+parameter_name = "enabled"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_hysoe"]
+default_input_values = [0, 1.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_yvxpa"]
+input_name = "color"
+
+[sub_resource type="VisualShader" id="VisualShader_u3115"]
+resource_local_to_scene = true
+resource_name = "hitfl"
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform bool enabled = false;
+uniform vec4 tint : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+
+void fragment() {
+// BooleanParameter:3
+	bool n_out3p0 = enabled;
+
+
+// ColorParameter:2
+	vec4 n_out2p0 = tint;
+
+
+// Input:5
+	vec4 n_out5p0 = COLOR;
+
+
+	vec3 n_out4p0;
+// If:4
+	float n_in4p1 = 1.00000;
+	float n_in4p2 = 0.00001;
+	if(abs((n_out3p0 ? 1.0 : 0.0) - n_in4p1) < n_in4p2)
+	{
+		n_out4p0 = vec3(n_out2p0.xyz);
+	}
+	else if((n_out3p0 ? 1.0 : 0.0) < n_in4p1)
+	{
+		n_out4p0 = vec3(n_out5p0.xyz);
+	}
+	else
+	{
+		n_out4p0 = vec3(n_out5p0.xyz);
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out4p0;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(520, 100)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_mf740")
+nodes/fragment/2/position = Vector2(80, 220)
+nodes/fragment/3/node = SubResource("VisualShaderNodeBooleanParameter_5gxff")
+nodes/fragment/3/position = Vector2(80, 40)
+nodes/fragment/4/node = SubResource("VisualShaderNodeIf_hysoe")
+nodes/fragment/4/position = Vector2(300, 80)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_yvxpa")
+nodes/fragment/5/position = Vector2(100, 400)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 4, 0, 0, 0, 2, 0, 4, 3, 5, 0, 4, 4, 5, 0, 4, 5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rgeta"]
+resource_local_to_scene = true
+shader = SubResource("VisualShader_u3115")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_dlm18"]
+resource_local_to_scene = true
+script/source = "extends EnemyState
+
+func _init() -> void:
+	is_state_blocking = true
+
+func enter():
+	AnimPlayer.play(\"walk\")
+
+func update(delta):
+	# Check if close enough -> Then go to decide
+	if enemy.is_target_in_close_range():
+		transitioned.emit(\"decide\")
+		return
+	# Move in direction of the target
+	var direction = (enemy.target.position - enemy.position).normalized()
+	enemy.velocity.x = enemy.SPEED * enemy.global_speed_scale * direction.x
+	enemy.move_and_slide()
+	enemy.direct_sprite()
+
+func exit():
+	pass
+
+# this function will be executed every time an animation ends,
+# since most states end accordingly to an animation
+func on_animation_end():
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_g3k0s"]
+resource_local_to_scene = true
+script/source = "extends EnemyState
+
+func enter():
+	enemy.velocity.y = 0
+	AnimPlayer.play(\"idle\")
+"
+
+[sub_resource type="GDScript" id="GDScript_m1eet"]
+resource_local_to_scene = true
+script/source = "extends EnemyState
+
+var walking := false 
+var waiting := true
+var wait_cooldown = 2.0
+var walk_start = 0
+var last_frame_pos = 0
+@export var walk_anim := \"walk\"
+
+func enter():
+	pass
+
+func update(delta):
+	if waiting:
+		AnimPlayer.play(\"idle\")
+		wait_cooldown -= delta
+		if wait_cooldown <= 0:
+			# Turn around
+			enemy.facing *= -1
+			waiting = false
+			walking = true
+			walk_start = enemy.position.x
+
+	if walking:
+		if enemy.position.x == last_frame_pos:
+			walking = false
+			waiting = true
+			wait_cooldown = 2.0
+		AnimPlayer.play(walk_anim)
+		enemy.velocity.x = enemy.SPEED * enemy.global_speed_scale  / 2 * enemy.facing
+		last_frame_pos = enemy.position.x
+		enemy.move_and_slide()
+		if abs(walk_start - enemy.position.x) >= enemy.wander_distance:
+			walking = false
+			waiting = true
+			wait_cooldown = 2.0
+
+func exit():
+	pass
+
+# this function will be executed every time an animation ends,
+# since most states end accordingly to an animation
+func on_animation_end():
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_a6bxx"]
+resource_local_to_scene = true
+script/source = "extends EnemyState
+
+var push_back := 0
+var deceleration := 2.0
+var timeout := 0.0
+var timer := 0.0
+
+func _init() -> void:
+	is_state_blocking = true
+
+func enter():
+	super.enter()
+	AnimPlayer.play(\"stun\")
+	timer = timeout
+	enemy.velocity.x = push_back
+
+func update(delta):
+	if enemy.velocity.x > 0:
+		enemy.velocity.x = max(enemy.velocity.x - deceleration, 0)
+	elif enemy.velocity.x < 0:
+		enemy.velocity.x = min(enemy.velocity.x + deceleration, 0)
+
+	timer -= delta
+	if timer <= 0:
+		transitioned.emit(\"decide\")
+	enemy.move_and_slide()
+"
+
+[sub_resource type="GDScript" id="GDScript_7wst2"]
+resource_local_to_scene = true
+script/source = "extends EnemyState
+
+var stagger_cooldown = 5.0
+
+func _init() -> void:
+	is_state_blocking = true
+
+func enter():
+	stagger_cooldown = 5.0
+	AnimPlayer.play(\"stagger_start\")
+
+func update(delta):
+	stagger_cooldown -= delta
+	if stagger_cooldown <= 0:
+		AnimPlayer.play(\"stagger_end\")
+
+func exit():
+	pass
+
+# this function will be executed every time an animation ends,
+# since most states end accordingly to an animation
+func on_animation_end():
+	if AnimPlayer.animation == \"stagger_end\":
+		transitioned.emit(\"decide\")
+	if AnimPlayer.animation == \"stagger_start\":
+		AnimPlayer.play(\"staggered\")
+"
+
+[sub_resource type="GDScript" id="GDScript_c7j3f"]
+resource_local_to_scene = true
+script/source = "extends EnemyState
+
+func _init() -> void:
+	is_state_blocking = true
+
+func enter():
+	enemy.dead = true
+	AnimPlayer.play(\"death\")
+
+func exit():
+	pass
+
+# this function will be executed every time an animation ends,
+# since most states end accordingly to an animation
+func on_animation_end():
+	owner.queue_free()
+"
+
+[sub_resource type="GDScript" id="GDScript_e1ahc"]
+resource_local_to_scene = true
+script/source = "extends EnemyState
+
+var timer = 0.0
+
+func _init() -> void:
+	is_state_blocking = true
+
+func update(delta):
+	timer -= delta
+	if timer <= 0:
+		transitioned.emit(\"decide\")
+"
+
+[sub_resource type="Curve" id="Curve_yv3fp"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(0.302691, -200), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_tqu7c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Theme" id="Theme_a4bgl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8hwr"]
+bg_color = Color(0.17, 0.17, 0.17, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlvfo"]
+bg_color = Color(1, 0.866667, 0.341176, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c7j3f"]
+radius = 380.266
+
+[node name="LivingEntity" type="CharacterBody2D" node_paths=PackedStringArray("aggro_area", "anim_player", "hitboxes", "state_machine", "hit_listener", "buff_manager")]
+collision_layer = 2
+script = ExtResource("1_c7j3f")
+aggro_area = NodePath("Area2D")
+anim_player = NodePath("EnemyAnimPlayer")
+hitboxes = NodePath("HitBoxes")
+state_machine = NodePath("EnemyStateMachine")
+hit_listener = NodePath("HitListener")
+buff_manager = NodePath("BuffManager")
+metadata/_custom_type_script = "uid://sbr2kdsijr7e"
+
+[node name="EnemyAnimPlayer" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_rgeta")
+script = ExtResource("2_dlm18")
+metadata/_custom_type_script = "uid://cudcd7wg184ea"
+
+[node name="HurtBox" type="Area2D" parent="."]
+script = ExtResource("3_g3k0s")
+metadata/_custom_type_script = "uid://busr7orlkflil"
+
+[node name="EnemyStateMachine" type="Node" parent="."]
+script = ExtResource("4_m1eet")
+metadata/_custom_type_script = "uid://do8u78sktsj4a"
+
+[node name="Chase" type="Node" parent="EnemyStateMachine"]
+script = SubResource("GDScript_dlm18")
+
+[node name="Decide" type="Node" parent="EnemyStateMachine"]
+script = SubResource("GDScript_g3k0s")
+
+[node name="Wander" type="Node" parent="EnemyStateMachine"]
+script = SubResource("GDScript_m1eet")
+
+[node name="Stun" type="Node" parent="EnemyStateMachine"]
+script = SubResource("GDScript_a6bxx")
+
+[node name="Staggered" type="Node" parent="EnemyStateMachine"]
+script = SubResource("GDScript_7wst2")
+
+[node name="Death" type="Node" parent="EnemyStateMachine"]
+script = SubResource("GDScript_c7j3f")
+
+[node name="Recovery" type="Node" parent="EnemyStateMachine"]
+script = SubResource("GDScript_e1ahc")
+
+[node name="HitBoxes" type="Node2D" parent="."]
+
+[node name="HitListener" type="Node2D" parent="." node_paths=PackedStringArray("life_bar")]
+script = ExtResource("5_a6bxx")
+life_bar = NodePath("../LifeBar")
+metadata/_custom_type_script = "uid://x51ik5jddhvf"
+
+[node name="GPUParticles2D" type="CPUParticles2D" parent="HitListener"]
+emitting = false
+amount = 18
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 52.05
+gravity = Vector2(0, 0)
+initial_velocity_min = 52.55
+initial_velocity_max = 257.02
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+linear_accel_curve = SubResource("Curve_yv3fp")
+angle_min = 30.0
+angle_max = 60.0
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_tqu7c")
+script = ExtResource("6_7wst2")
+
+[node name="BuffManager" type="Node" parent="."]
+script = ExtResource("7_e1ahc")
+metadata/_custom_type_script = "uid://b7k3ffwp05oxl"
+
+[node name="PostureBar" type="TextureProgressBar" parent="."]
+offset_left = -22.0
+offset_top = -53.0
+offset_right = 41.0
+offset_bottom = -43.0
+scale = Vector2(0.7, 0.7)
+value = 36.0
+texture_under = ExtResource("8_d1ebh")
+texture_progress = ExtResource("9_atiw3")
+script = ExtResource("10_u1jos")
+
+[node name="LifeBar" type="TextureProgressBar" parent="."]
+z_index = 1
+offset_left = -24.0
+offset_top = -59.0
+offset_right = 44.0
+offset_bottom = -47.0
+scale = Vector2(0.7, 0.6)
+size_flags_vertical = 0
+theme = SubResource("Theme_a4bgl")
+value = 18.0
+texture_under = ExtResource("11_r1p15")
+script = ExtResource("12_2a6dq")
+
+[node name="DamageBar" type="ProgressBar" parent="LifeBar"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 4.0
+offset_right = 66.0
+offset_bottom = 8.0
+theme_override_styles/background = SubResource("StyleBoxFlat_p8hwr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mlvfo")
+max_value = 121.0
+value = 91.0
+show_percentage = false
+script = ExtResource("13_7qypn")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="LifeBar"]
+layout_mode = 0
+offset_right = 68.0
+offset_bottom = 12.0
+value = 42.0
+texture_progress = ExtResource("14_08iwm")
+script = ExtResource("15_xy21v")
+
+[node name="Area2D" type="Area2D" parent="."]
+light_mask = 128
+visibility_layer = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_c7j3f")

@@ -8,7 +8,6 @@ func enter():
 	has_shot = false
 
 func update(delta):
-	print("i'm in the ground")
 	super.update(delta)
 	if AnimPlayer.frame == 10 and has_shot == false:
 		has_shot = true

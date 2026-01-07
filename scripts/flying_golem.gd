@@ -82,14 +82,30 @@ func _physics_process(delta: float) -> void:
 	if current_mode == Mode.BASIC_AGGRO:
 		enemy_ai()
 
-func is_target_in_close_range() -> bool:
-	if abs(position.x - target.position.x) <= ATTACK_RANGE and\
-	(position.x - target.position.x) * direction.x < 0:
+func is_target_close() -> bool:
+	if abs(position.x - target.position.x) <= ATTACK_RANGE:
 		return true
-	return false
+	else:
+		return false
+
+func is_target_in_front() -> bool:
+	return ((target.position.x - position.x) * facing > 0)
+
+func is_target_in_close_range() -> bool:
+	return (is_target_close() and is_target_in_front())
+
+func turn_around():
+	if facing == -1:
+		velocity.x = 1
+	if facing == 1:
+		velocity.x = -1
+	direct_sprite()
+	move_and_slide()
 
 func enemy_ai():
-	
+	if not is_target_in_front():
+		turn_around()
+
 	# Are my attacks blocked a lot
 		# Break guard (if you know how to)
 
@@ -170,7 +186,6 @@ func _on_aggro_range_body_entered(body: Node2D) -> void:
 	if dead:
 		return
 	if body.is_in_group("Player"):
-		print("Now aggro")
 		target = body
 		current_mode = Mode.BASIC_AGGRO
 		$FGolemStateMachine.on_state_transition("decide")

@@ -133,7 +133,6 @@ func damage_taken(area : HitBox) -> void:
 			daddy.Poises.SMALL:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 			daddy.Poises.MEDIUM:
-				print("I'm stunned aaaah ", MEDIUM_PUSHBACK * area.facing, " ", MEDIUM_PUSHBACK_DURATION)
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 			daddy.Poises.LARGE:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)

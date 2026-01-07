@@ -4,7 +4,6 @@ var deceleration_ = 10
 
 func enter():
 	super.enter()
-	print("ENTERING HAMMER PARRY")
 
 func update(delta):
 	super.update(delta)

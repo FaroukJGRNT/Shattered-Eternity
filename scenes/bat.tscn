@@ -668,12 +668,9 @@ func _init() -> void:
 	is_state_blocking = true
 
 func enter():
-	print(\"OKAY I AM NOW STUNNED\")
 	super.enter()
-	AnimPlayer.play(\"stun\")
 	timer = timeout
-	print(\"Timer at start \", timer)
-	print(\"Timeout \", timeout)
+	AnimPlayer.play(\"stun\")
 	enemy.velocity.x = push_back
 
 func update(delta):
@@ -684,13 +681,11 @@ func update(delta):
 
 	timer -= delta
 	if timer <= 0:
-		print(\"Timer \", timer)
 		transitioned.emit(\"decide\")
 	enemy.move_and_slide()
 
-func  exit():
+func exit():
 	super.exit()
-	print(\"OKAY I CAN MOVE NOW\")
 "
 
 [sub_resource type="GDScript" id="GDScript_6x6ks"]
@@ -939,7 +934,7 @@ value = 18.0
 texture_under = ExtResource("23_n4gqs")
 script = ExtResource("24_m5qm7")
 
-[node name="DamageBar" type="ProgressBar" parent="LifeBar" node_paths=PackedStringArray("life_bar")]
+[node name="DamageBar" type="ProgressBar" parent="LifeBar"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 4.0
@@ -951,7 +946,6 @@ max_value = 121.0
 value = 91.0
 show_percentage = false
 script = ExtResource("25_88a2k")
-life_bar = NodePath("../TextureProgressBar")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="LifeBar"]
 layout_mode = 0

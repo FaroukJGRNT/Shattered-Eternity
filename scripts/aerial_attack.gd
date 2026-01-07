@@ -23,11 +23,9 @@ func update(delta):
 	if player.is_on_floor():
 		# Case of unset variables
 		if frame_teshold == -1 or ground_attck == "": 
-			print("Unset variables")
 			transitioned.emit("landing")
 		# We check if we passed the treshold
 		if player.anim_player.frame < frame_teshold:
-			print("Transfering to g a")
 			transitioned.emit(ground_attck)
 		else:
 			transitioned.emit("landing")

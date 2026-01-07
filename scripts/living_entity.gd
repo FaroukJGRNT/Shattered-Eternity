@@ -273,7 +273,6 @@ func _apply_burn(delta):
 		var dmg_text_instance = damage_label.instantiate()
 		dmg_text_instance.position = owner.position
 		dmg_text_instance.position.y -= 20
-		dmg_text_instance.direction = randi_range(0, 1) 
 		dmg_text_instance.add_theme_color_override("font_color", Color.ORANGE)
 		dmg_text_instance.text = str(int(burn_damage_per_second))  # affiche la valeur
 		add_child(dmg_text_instance)
@@ -291,7 +290,6 @@ func _apply_freeze():
 	global_speed_scale *= 0.75
 
 func _remove_status(status_name: String):
-	print("Status ended:", status_name)
 	match status_name:
 		"burn":
 			burn_tick_timer = 0.0

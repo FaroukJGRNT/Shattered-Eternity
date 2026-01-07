@@ -1,4 +1,4 @@
-[gd_scene load_steps=208 format=3 uid="uid://clq1ba7ljb4ob"]
+[gd_scene load_steps=226 format=3 uid="uid://clq1ba7ljb4ob"]
 
 [ext_resource type="Script" uid="uid://yjogv5m7qp8i" path="res://scripts/flying_golem.gd" id="1_kdecn"]
 [ext_resource type="Script" uid="uid://kgxjnq2iuxfb" path="res://scripts/fgolem_hb.gd" id="2_a614t"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bjj75abyjrvw5" path="res://scripts/explodehb.gd" id="7_kf6te"]
 [ext_resource type="Texture2D" uid="uid://tfpd1cj0ka35" path="res://assets/sprites/stoneGolem(Air)/GroundSmashAttack-Start.png" id="7_t8cbp"]
 [ext_resource type="Script" uid="uid://dbrqianaqlbl" path="res://scripts/decide.gd" id="7_yrhpr"]
+[ext_resource type="Script" uid="uid://dass3u4ef3rdj" path="res://scripts/enemy_hitbox.gd" id="8_coppp"]
 [ext_resource type="Script" uid="uid://d2m4obxg6e5yd" path="res://scripts/wander.gd" id="8_t8cbp"]
 [ext_resource type="Texture2D" uid="uid://mg8e3e1qyycy" path="res://assets/sprites/stoneGolem(Air)/GroundSmashAttack-Shakin.png" id="8_yrhpr"]
 [ext_resource type="Script" uid="uid://dag5ny4lr14eq" path="res://scripts/stun.gd" id="9_ocd6t"]
@@ -29,6 +30,8 @@
 [ext_resource type="Script" uid="uid://dskj5ia2pdi8h" path="res://scripts/golemdeath.gd" id="19_qk0b6"]
 [ext_resource type="Texture2D" uid="uid://vebtjr4r4olf" path="res://assets/sprites/stoneGolem(Air)/Death.png" id="20_hbj3s"]
 [ext_resource type="Script" uid="uid://d1sjbpcwpbklk" path="res://scripts/gpu_particles_2d.gd" id="21_1d5ej"]
+[ext_resource type="Script" uid="uid://bda3ddloir83w" path="res://scripts/dash.gd" id="21_tywe1"]
+[ext_resource type="Texture2D" uid="uid://dmxfhgkb1mvy0" path="res://assets/sprites/stoneGolem(Air)/Charge.png" id="22_mv25r"]
 [ext_resource type="Texture2D" uid="uid://cvq37wevq2un0" path="res://assets/sprites/stoneGolem(Air)/Stagger-After.png" id="26_bi1ak"]
 [ext_resource type="Texture2D" uid="uid://o83sma0wehdi" path="res://assets/sprites/stoneGolem(Air)/Stagger-Before.png" id="27_coppp"]
 [ext_resource type="Script" uid="uid://b5rdj4rkiw48l" path="res://scripts/fgolemhit_listener.gd" id="28_rdy5o"]
@@ -167,6 +170,66 @@ resource_name = "hitfl"
 shader = SubResource("VisualShader_40cl6")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgp3h"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(0, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_waptv"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(480, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tvsx"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(960, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lalq"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(1440, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30a6x"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(1920, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vogf7"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(2400, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gvul"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(2880, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mq5bk"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(3360, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6k1g"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(3840, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i16gd"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(4320, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxoji"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(4800, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt1gr"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(5280, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10tj8"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(5760, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsq4n"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(6240, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fslw6"]
+atlas = ExtResource("22_mv25r")
+region = Rect2(6720, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_skgua"]
 atlas = ExtResource("20_hbj3s")
@@ -750,6 +813,56 @@ region = Rect2(2400, 0, 480, 384)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0edxd"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgp3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_waptv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tvsx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lalq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30a6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vogf7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gvul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mq5bk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6k1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i16gd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxoji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vt1gr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10tj8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsq4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fslw6")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 9.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_skgua")
@@ -1354,6 +1467,17 @@ position = Vector2(6, -19)
 rotation = 1.58476
 shape = SubResource("CapsuleShape2D_ncuxf")
 
+[node name="Dash" type="Area2D" parent="HitBoxes"]
+script = ExtResource("8_coppp")
+motion_value = 15
+attack_type = 3
+impact = 3
+metadata/_custom_type_script = "uid://dass3u4ef3rdj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/Dash"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_k30vi")
+
 [node name="BuffManager" type="Node" parent="."]
 script = ExtResource("3_00fqx")
 
@@ -1433,13 +1557,24 @@ metadata/_custom_type_script = "uid://dvclob6aaps4"
 [node name="Death" type="Node" parent="FGolemStateMachine"]
 script = ExtResource("19_qk0b6")
 
+[node name="Dash" type="Node" parent="FGolemStateMachine" node_paths=PackedStringArray("hitbox")]
+script = ExtResource("21_tywe1")
+anim_name = "dash"
+active_frames = Array[int]([9, 10, 11])
+hitbox = NodePath("../../HitBoxes/Dash")
+movement_frames = Array[int]([9])
+movement_velocity = Array[Vector2]([Vector2(600, 0)])
+deceleration = 15
+attack_cooldown = 1.0
+option_type = 2
+option_cooldown = 4.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
 material = SubResource("ShaderMaterial_pmxkn")
 position = Vector2(-1, -2)
 sprite_frames = SubResource("SpriteFrames_0edxd")
-animation = &"get_in_ground"
-frame = 12
-frame_progress = 1.0
+animation = &"dash"
+frame = 9
 script = ExtResource("19_nepfb")
 hurtbox = NodePath("../HurtBox")
 hitboxes = NodePath("../HitBoxes")
@@ -1503,7 +1638,7 @@ value = 18.0
 texture_under = ExtResource("32_jffma")
 script = ExtResource("33_x24ss")
 
-[node name="DamageBar" type="ProgressBar" parent="LifeBar" node_paths=PackedStringArray("life_bar")]
+[node name="DamageBar" type="ProgressBar" parent="LifeBar"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 4.0
@@ -1515,7 +1650,6 @@ max_value = 121.0
 value = 91.0
 show_percentage = false
 script = ExtResource("34_vneuw")
-life_bar = NodePath("../TextureProgressBar")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="LifeBar"]
 layout_mode = 0

@@ -919,7 +919,7 @@ hitbox = NodePath("../../HitBoxes/Tackle")
 movement_frames = Array[int]([20])
 movement_velocity = Array[Vector2]([Vector2(350, 0)])
 deceleration = 0
-attack_cooldown = 1.0
+attack_cooldown = 0.5
 option_type = 2
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
@@ -947,11 +947,6 @@ metadata/_custom_type_script = "uid://dass3u4ef3rdj"
 position = Vector2(24, 12)
 rotation = 0.820305
 shape = SubResource("CapsuleShape2D_mneqp")
-
-[node name="Area2D" parent="." index="8"]
-visible = false
-collision_layer = 128
-collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="9"]
 visible = false

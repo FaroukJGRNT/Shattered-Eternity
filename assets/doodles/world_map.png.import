@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6h7etludfymt"
-path="res://.godot/imported/tree_man_stag_death.png-c3a212e3f6a94964469e52693c176797.ctex"
+uid="uid://ukbg30cywmkw"
+path="res://.godot/imported/world_map.png-b7cb4e78048c09b84d52be89c6e3563f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/TreeMan/tree_man_stag_death.png"
-dest_files=["res://.godot/imported/tree_man_stag_death.png-c3a212e3f6a94964469e52693c176797.ctex"]
+source_file="res://assets/doodles/world_map.png"
+dest_files=["res://.godot/imported/world_map.png-b7cb4e78048c09b84d52be89c6e3563f.ctex"]
 
 [params]
 

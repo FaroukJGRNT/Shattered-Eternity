@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5r2o5ikps431"
-path="res://.godot/imported/tree_man_stag_end.png-d463bc938835cbd3f055afcba08ffb74.ctex"
+uid="uid://cd3if17085wni"
+path="res://.godot/imported/tree_man_stagger_start.png-f27d51d546a3c99270a7e211ac0c5d85.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/TreeMan/tree_man_stag_end.png"
-dest_files=["res://.godot/imported/tree_man_stag_end.png-d463bc938835cbd3f055afcba08ffb74.ctex"]
+source_file="res://assets/sprites/TreeMan/tree_man_stagger_start.png"
+dest_files=["res://.godot/imported/tree_man_stagger_start.png-f27d51d546a3c99270a7e211ac0c5d85.ctex"]
 
 [params]
 

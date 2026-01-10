@@ -425,6 +425,8 @@ script = ExtResource("15_xy21v")
 [node name="Area2D" type="Area2D" parent="."]
 light_mask = 128
 visibility_layer = 128
+collision_layer = 128
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_c7j3f")

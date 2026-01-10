@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtcrggrkee5tb"
-path="res://.godot/imported/night.jpg-1829c8ff2570590826aeda305085a4e0.ctex"
+uid="uid://bg4r54wgjqnhg"
+path="res://.godot/imported/icon.svg-10102856410ddce50ac88391f7b8eb94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/night.jpg"
-dest_files=["res://.godot/imported/night.jpg-1829c8ff2570590826aeda305085a4e0.ctex"]
+source_file="res://assets/doodles/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-10102856410ddce50ac88391f7b8eb94.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

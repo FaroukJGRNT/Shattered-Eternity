@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h7jdneicsfbt"
-path="res://.godot/imported/tree_man_stag_mid.png-c84b908dc57f4b14c91ce65990439f3f.ctex"
+uid="uid://dwicvhmkmjmml"
+path="res://.godot/imported/way_to_dark_forest.png-6a25860d1e39f77922643b93bc7ecead.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/TreeMan/tree_man_stag_mid.png"
-dest_files=["res://.godot/imported/tree_man_stag_mid.png-c84b908dc57f4b14c91ce65990439f3f.ctex"]
+source_file="res://assets/doodles/way_to_dark_forest.png"
+dest_files=["res://.godot/imported/way_to_dark_forest.png-6a25860d1e39f77922643b93bc7ecead.ctex"]
 
 [params]
 

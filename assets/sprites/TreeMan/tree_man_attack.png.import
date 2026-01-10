@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vkwpkedqvk7c"
-path="res://.godot/imported/tree_man_atk.png-d92dee85870559bd6367340943aef02e.ctex"
+uid="uid://hei2l8g2s1t8"
+path="res://.godot/imported/tree_man_attack.png-520125861d4d8303d26087704052da81.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/TreeMan/tree_man_atk.png"
-dest_files=["res://.godot/imported/tree_man_atk.png-d92dee85870559bd6367340943aef02e.ctex"]
+source_file="res://assets/sprites/TreeMan/tree_man_attack.png"
+dest_files=["res://.godot/imported/tree_man_attack.png-520125861d4d8303d26087704052da81.ctex"]
 
 [params]
 

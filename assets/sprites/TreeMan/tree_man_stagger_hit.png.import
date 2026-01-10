@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwicvhmkmjmml"
-path="res://.godot/imported/way_to_dark_forest.png-cc117e07cf0b80a6aa68292d91ff9907.ctex"
+uid="uid://dvu3gvc3b5wwd"
+path="res://.godot/imported/tree_man_stagger_hit.png-d5bc37abfc2d186dc28b485d70fcd5f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/way_to_dark_forest.png"
-dest_files=["res://.godot/imported/way_to_dark_forest.png-cc117e07cf0b80a6aa68292d91ff9907.ctex"]
+source_file="res://assets/sprites/TreeMan/tree_man_stagger_hit.png"
+dest_files=["res://.godot/imported/tree_man_stagger_hit.png-d5bc37abfc2d186dc28b485d70fcd5f1.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbvtgdx0l2gs2"
-path="res://.godot/imported/day.jpg-38d54002cde6a7513e5dd5fa3f3756ba.ctex"
+uid="uid://c5ywvfs85vcoa"
+path="res://.godot/imported/tree_man_death.png-5d30cc5d90947411f861c30056d655d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/day.jpg"
-dest_files=["res://.godot/imported/day.jpg-38d54002cde6a7513e5dd5fa3f3756ba.ctex"]
+source_file="res://assets/sprites/TreeMan/tree_man_death.png"
+dest_files=["res://.godot/imported/tree_man_death.png-5d30cc5d90947411f861c30056d655d1.ctex"]
 
 [params]
 

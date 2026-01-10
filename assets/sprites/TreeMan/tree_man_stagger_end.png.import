@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ukbg30cywmkw"
-path="res://.godot/imported/world_map.png-338d0d0d25decca5df3f8d5ab6fd5584.ctex"
+uid="uid://l3vq7eif81ss"
+path="res://.godot/imported/tree_man_stagger_end.png-fbe6e8bcd85445881a6c49c60498a4c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world_map.png"
-dest_files=["res://.godot/imported/world_map.png-338d0d0d25decca5df3f8d5ab6fd5584.ctex"]
+source_file="res://assets/sprites/TreeMan/tree_man_stagger_end.png"
+dest_files=["res://.godot/imported/tree_man_stagger_end.png-fbe6e8bcd85445881a6c49c60498a4c9.ctex"]
 
 [params]
 

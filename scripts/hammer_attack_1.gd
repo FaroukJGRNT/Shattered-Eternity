@@ -17,5 +17,3 @@ func update(delta):
 	if charge_timer >= 0.20:
 		transitioned.emit("hammercharging")
 		return
-
-	player.handle_horizontal_movement(player.RUN_SPEED / 8)

@@ -10,16 +10,22 @@ class_name AerialAttack
 
 func enter():
 	super.enter()
-	#player.velocity.x = 0
-	#player.velocity.y = 5
 	player.friction = vertital_friction
 
 func update(delta):
-	super.update(delta)
+	player.move_and_slide()
+
+	if Input.is_action_just_pressed("attack"):
+		attack_again = true
+	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= dash_cancel_frame:
+		transitioned.emit("dashing")
+
 	player.handle_vertical_movement(player.get_gravity().y * delta)
 	player.get_horizontal_input()
 	if player.direction == player.facing:
 		player.handle_horizontal_movement(player.AERIAL_SPEED - horizontal_friction)
+	else:
+		player.handle_horizontal_movement((player.AERIAL_SPEED - horizontal_friction)/3)
 	if player.is_on_floor():
 		# Case of unset variables
 		if frame_teshold == -1 or ground_attck == "": 

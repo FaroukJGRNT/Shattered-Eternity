@@ -26,6 +26,7 @@ func update(delta):
 	if player.is_on_floor():
 		transitioned.emit("idle")
 	player.handle_vertical_movement(player.get_gravity().y * delta)
+	player.move_and_slide()
 
 func exit():
 	pass

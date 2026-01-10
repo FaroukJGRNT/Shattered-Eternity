@@ -43,6 +43,7 @@ func update(delta):
 				transitioned.emit("swordaerial1")
 			player.Weapons.HAMMER:
 				transitioned.emit("hammeraerial")
+	player.move_and_slide()
 func exit():
 	pass
 

@@ -926,6 +926,7 @@ metadata/_custom_type_script = "uid://dvclob6aaps4"
 [node name="Tackle" type="Area2D" parent="HitBoxes" index="0"]
 script = ExtResource("12_fc1cp")
 motion_value = 30
+life_duration = 2.0
 attack_type = 3
 impact = 3
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=359 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=388 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Texture2D" uid="uid://bm7w2ao6eeavq" path="res://assets/sprites/player/SimpleCharacter2-Sheet.png" id="3_5h808"]
@@ -40,10 +40,13 @@
 [ext_resource type="Script" uid="uid://cxj685gd2bpvs" path="res://scripts/wall_sliding.gd" id="17_qfm1y"]
 [ext_resource type="Script" uid="uid://bhoiqxgbbk5rm" path="res://scripts/sword_attack_2.gd" id="19_60mlk"]
 [ext_resource type="Texture2D" uid="uid://6y0tadqelsly" path="res://assets/sprites/player/SpearAttack-Counter.png" id="19_cbf1i"]
+[ext_resource type="Texture2D" uid="uid://b7ign6vjnrhhq" path="res://assets/sprites/player/Stagger-End.png" id="20_gvmy4"]
 [ext_resource type="Script" uid="uid://cy15p8y2yuxsa" path="res://scripts/sword_attack_1.gd" id="20_i4ail"]
 [ext_resource type="Texture2D" uid="uid://dm5vguv2khllx" path="res://assets/sprites/player/LightAttack-Counter.png" id="20_irpag"]
+[ext_resource type="Texture2D" uid="uid://p8rbcq0qapp2" path="res://assets/sprites/player/Stagger-Start.png" id="21_fcu33"]
 [ext_resource type="Script" uid="uid://btgj2uli02xcl" path="res://scripts/sword_attack_3.gd" id="21_i4ail"]
 [ext_resource type="Script" uid="uid://bhegj3j58yy64" path="res://scripts/hammer_attack_1.gd" id="22_31cv2"]
+[ext_resource type="Texture2D" uid="uid://bxgadkccowraa" path="res://assets/sprites/player/Stagger-Middle.png" id="22_qmsq4"]
 [ext_resource type="Script" uid="uid://fdglitdfcjg8" path="res://scripts/hammer_attack_2.gd" id="23_pf23h"]
 [ext_resource type="Script" uid="uid://l6hkc1wejp0v" path="res://scripts/spear_attack_1.gd" id="24_dt7fs"]
 [ext_resource type="Script" uid="uid://dolvr5biacg1u" path="res://scripts/parry.gd" id="25_vau08"]
@@ -669,14 +672,6 @@ region = Rect2(3840, 0, 480, 384)
 atlas = ExtResource("9_au7lq")
 region = Rect2(4320, 0, 480, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uukdq"]
-atlas = ExtResource("9_8svfe")
-region = Rect2(0, 0, 480, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3k3j0"]
-atlas = ExtResource("9_8svfe")
-region = Rect2(480, 0, 480, 384)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_0bpox"]
 atlas = ExtResource("9_8svfe")
 region = Rect2(960, 0, 480, 384)
@@ -886,8 +881,120 @@ atlas = ExtResource("11_42b1b")
 region = Rect2(480, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cwl8n"]
-atlas = ExtResource("5_ur7pv")
-region = Rect2(288, 192, 96, 64)
+atlas = ExtResource("20_gvmy4")
+region = Rect2(0, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2t4xi"]
+atlas = ExtResource("20_gvmy4")
+region = Rect2(480, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ybkv"]
+atlas = ExtResource("20_gvmy4")
+region = Rect2(960, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0ija"]
+atlas = ExtResource("20_gvmy4")
+region = Rect2(1440, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uc5i5"]
+atlas = ExtResource("20_gvmy4")
+region = Rect2(1920, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl364"]
+atlas = ExtResource("20_gvmy4")
+region = Rect2(2400, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64ww5"]
+atlas = ExtResource("20_gvmy4")
+region = Rect2(2880, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0x2e"]
+atlas = ExtResource("20_gvmy4")
+region = Rect2(3360, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgof3"]
+atlas = ExtResource("21_fcu33")
+region = Rect2(0, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37cei"]
+atlas = ExtResource("21_fcu33")
+region = Rect2(480, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stxmr"]
+atlas = ExtResource("21_fcu33")
+region = Rect2(960, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_682xl"]
+atlas = ExtResource("21_fcu33")
+region = Rect2(1440, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_go1u0"]
+atlas = ExtResource("21_fcu33")
+region = Rect2(1920, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swia0"]
+atlas = ExtResource("21_fcu33")
+region = Rect2(2400, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onbmp"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(0, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_406d8"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(480, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yt45"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(960, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8iei4"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(1440, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgfsc"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(1920, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xt5ia"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(2400, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od10n"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(2880, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bucin"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(3360, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eael2"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(3840, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktl01"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(4320, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br2wr"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(4800, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2vg5"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(5280, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3e3rs"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(5760, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7ju7"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(6240, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3usut"]
+atlas = ExtResource("22_qmsq4")
+region = Rect2(6720, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7iw1"]
 atlas = ExtResource("13_nubpm")
@@ -1599,12 +1706,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uukdq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3k3j0")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_0bpox")
 }, {
 "duration": 1.0,
@@ -1618,7 +1719,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"spear_attack_1",
-"speed": 15.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1812,10 +1913,104 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cwl8n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2t4xi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ybkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0ija")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uc5i5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl364")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64ww5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0x2e")
 }],
 "loop": false,
+"name": &"stagger_end",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgof3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37cei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stxmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_682xl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_go1u0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swia0")
+}],
+"loop": false,
+"name": &"stagger_start",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onbmp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_406d8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yt45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8iei4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgfsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xt5ia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od10n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bucin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eael2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktl01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_br2wr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2vg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3e3rs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7ju7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3usut")
+}],
+"loop": true,
 "name": &"staggered",
-"speed": 5.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1832,7 +2027,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_aerial_1",
-"speed": 12.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1852,7 +2047,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_aerial_2",
-"speed": 12.0
+"speed": 13.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2206,9 +2401,10 @@ buff_manager = NodePath("BuffManager")
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"sword_attack_3"
+animation = &"spear_attack_1"
 autoplay = "idle"
-frame = 1
+frame = 3
+frame_progress = 1.0
 script = ExtResource("5_fjrip")
 state_machine = NodePath("../PlayerStateMachine")
 hitboxes = NodePath("../HitBoxes")
@@ -2245,6 +2441,9 @@ recovery_state_name = "sword_parry_end"
 anim_name = "sword_parry"
 active_frames = Array[int]([3])
 hitbox = NodePath("../../HitBoxes/SwordParry")
+movement_frames = Array[int]([0])
+movement_velocity = Array[Vector2]([Vector2(950, 0)])
+deceleration = 60
 
 [node name="SpearParry" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("29_bpsgo")
@@ -2253,7 +2452,7 @@ anim_name = "spear_parry"
 active_frames = Array[int]([4])
 hitbox = NodePath("../../HitBoxes/SpearParry")
 movement_frames = Array[int]([4])
-movement_velocity = Array[Vector2]([Vector2(-120, 0)])
+movement_velocity = Array[Vector2]([Vector2(-400, 0)])
 
 [node name="HammerParry" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("30_jx8is")
@@ -2306,7 +2505,8 @@ anim_name = "sword_attack_1"
 active_frames = Array[int]([2])
 hitbox = NodePath("../../HitBoxes/SwordAttack1")
 movement_frames = Array[int]([1])
-movement_velocity = Array[Vector2]([Vector2(0, 0)])
+movement_velocity = Array[Vector2]([Vector2(100, 0)])
+deceleration = 25
 next_combo_state_name = "swordattack2"
 
 [node name="SwordAttack2" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
@@ -2331,8 +2531,11 @@ script = ExtResource("22_31cv2")
 dash_cancel_frame = 7
 recovery_state_name = "hammer_recovery_1"
 anim_name = "hammer_attack_1"
-active_frames = Array[int]([6])
+active_frames = Array[int]([5])
 hitbox = NodePath("../../HitBoxes/HammerAttack1")
+movement_frames = Array[int]([5])
+movement_velocity = Array[Vector2]([Vector2(220, 0)])
+deceleration = 20
 next_combo_state_name = "hammerattack2"
 
 [node name="HeavyAttackRecovery" type="Node" parent="PlayerStateMachine"]
@@ -2348,13 +2551,12 @@ hitbox = NodePath("../../HitBoxes/HammerAttack2")
 
 [node name="SpearAttack1" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("37_2a3c5")
-dash_cancel_frame = 5
+dash_cancel_frame = 3
 recovery_state_name = "spear_recovery_1"
 anim_name = "spear_attack_1"
-active_frames = Array[int]([4])
+active_frames = Array[int]([2])
 hitbox = NodePath("../../HitBoxes/SpearAttack1")
-movement_frames = Array[int]([2])
-movement_velocity = Array[Vector2]([Vector2(50, 0)])
+deceleration = 25
 next_combo_state_name = "spearattack2"
 
 [node name="SpearAttack2" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
@@ -2410,6 +2612,7 @@ hitbox = NodePath("../../HitBoxes/SwordCharged")
 
 [node name="SpearAerial" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("47_51ujp")
+horizontal_friction = -10.0
 vertital_friction = 5.0
 frame_teshold = 2
 ground_attck = "spearattack2"
@@ -2420,6 +2623,7 @@ hitbox = NodePath("../../HitBoxes/SpearAerial")
 
 [node name="SwordAerial1" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("48_fuw3a")
+horizontal_friction = -10.0
 frame_teshold = 1
 ground_attck = "swordattack1"
 dash_cancel_frame = 10
@@ -2431,8 +2635,6 @@ next_combo_state_name = "swordaerial2"
 
 [node name="SwordAerial2" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("49_8txt3")
-horizontal_friction = 40.0
-vertital_friction = 6.0
 dash_cancel_frame = 10
 recovery_state_name = "airborne"
 anim_name = "sword_aerial_2"
@@ -2463,15 +2665,16 @@ anim_name = "guard_break"
 active_frames = Array[int]([8])
 hitbox = NodePath("../../HitBoxes/GuardBreak")
 movement_frames = Array[int]([4, 7])
-movement_velocity = Array[Vector2]([Vector2(12, 0), Vector2(40, 0)])
+movement_velocity = Array[Vector2]([Vector2(130, 0), Vector2(200, 0)])
+deceleration = 15
 
 [node name="Staggered" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("65_lw0jh")
 
 [node name="HammerAerial" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("67_w5j5w")
-horizontal_friction = 50.0
-vertital_friction = 10.0
+horizontal_friction = 10.0
+vertital_friction = -5.0
 frame_teshold = 4
 ground_attck = "hammerattack2"
 dash_cancel_frame = 100
@@ -2607,7 +2810,7 @@ shape = SubResource("CircleShape2D_edwuo")
 [node name="SpearAerial" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("58_tk41t")
-up_value = 120
+up_value = 70
 life_duration = 0.0
 impact = 0
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
@@ -2619,7 +2822,8 @@ shape = SubResource("CircleShape2D_i18u8")
 [node name="SwordAerial1" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("59_fuw3a")
-up_value = 30
+up_value = 35
+atk_type = "full_thunder"
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAerial1"]
@@ -2631,7 +2835,7 @@ shape = SubResource("CapsuleShape2D_46bxm")
 [node name="SwordAerial2" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("60_8txt3")
-up_value = 200
+up_value = 30
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAerial2"]
@@ -2674,7 +2878,7 @@ shape = SubResource("CircleShape2D_p6pc0")
 [node name="HammerAerial" type="Area2D" parent="HitBoxes"]
 visible = false
 script = ExtResource("84_cbf1i")
-up_value = 50
+up_value = 20
 attack_type = 2
 impact = 2
 metadata/_custom_type_script = "uid://cahklyitgjl16"

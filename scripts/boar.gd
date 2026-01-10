@@ -1,23 +1,16 @@
 extends BasicEnemy
 
 func enemy_ai():
-	print("Making a decision")
 	# Bro has no defensive
 	
 	# Priority event : Enemy close behind us
-	print(is_target_close())
-	print(is_target_in_front())
-	print($EnemyStateMachine/Kick.option_cooldown)
 	if is_target_close() and not is_target_in_front() and $EnemyStateMachine/Kick.option_timer <= 0:
-		print("He is close but behind")
 		state_machine.on_state_transition("kick")
 		return
 
 	if not is_target_in_front():
-		print("Nah im turning")
 		turn_around()	
 	if not is_target_in_close_range():
-		print("He is far")
 		# Choose randomly a ranged offens act (If no available, go closer)
 		var ready_acts = []
 		for act in ranged_offensive_actions:

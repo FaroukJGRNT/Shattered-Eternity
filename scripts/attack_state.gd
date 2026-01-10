@@ -15,6 +15,8 @@ class_name AttackState
 
 var attack_again := false
 @export var next_combo_state_name : String = ""
+var usable_mov_frames : Array[int]
+var usable_velocs : Array[Vector2]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,15 +24,25 @@ func _ready() -> void:
 
 func enter():
 	attack_again = false
+	usable_mov_frames = movement_frames.duplicate()
+	usable_velocs = movement_velocity.duplicate()
 	AnimPlayer.play(anim_name)
 
 func update(delta):
 	var index = 0
-	for frame in movement_frames:
+	for frame in usable_mov_frames:
 		if AnimPlayer.frame == frame:
-			player.velocity += (movement_velocity[index]) * player.facing
-			player.move_and_slide()
+			player.velocity += (usable_velocs[index]) * player.facing
+			usable_mov_frames.pop_front()
+			usable_velocs.pop_front()
+			break
 		index += 1
+
+	if player.velocity.x > 0:
+		player.velocity.x = max(player.velocity.x - deceleration, 0)
+	if player.velocity.x < 0:
+		player.velocity.x = min(player.velocity.x + deceleration, 0)
+	player.move_and_slide()
 
 	if Input.is_action_just_pressed("attack"):
 		attack_again = true
@@ -40,14 +52,6 @@ func update(delta):
 			transitioned.emit("backdashing")
 		else:
 			transitioned.emit("dashing")
-
-	#if len(movement_frames) == 0:
-		#return
-	#if player.velocity.x != 0:
-		#if player.velocity.x > 0:
-			#player.velocity.x = min(0, player.velocity.x - deceleration)
-		#if player.velocity.x < 0:
-			#player.velocity.x = max(0, player.velocity.x + deceleration)
 
 func exit():
 	pass

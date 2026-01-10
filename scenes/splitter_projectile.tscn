@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://splitter_proj"]
+
+[ext_resource type="Script" path="res://scripts/splitter_projectile.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ally_hitbox.gd" id="2"]
+
+[node name="SplitterProjectile" type="Node2D" node_paths=PackedStringArray("HitBox", "AnimatedSprite2D")]
+script = ExtResource("1")
+is_one_shot = true
+is_anim_one_shot = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+autoplay = "default"
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("2")
+motion_value = 12
+atk_type =  "phys"
+metadata/_custom_type_script = "uid://ally_hitbox"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = CircleShape2D.new()
+shape.radius = 10

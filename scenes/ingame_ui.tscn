@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://lcalun41bn55"]
+[gd_scene load_steps=14 format=3 uid="uid://lcalun41bn55"]
 
 [ext_resource type="Script" uid="uid://ckkbj12ajssly" path="res://scripts/ingame_ui.gd" id="1_v3yap"]
 [ext_resource type="Texture2D" uid="uid://jn6qnqfr4t2q" path="res://assets/sprites/ui/health_bar_middle.png" id="2_i42rf"]
@@ -6,11 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://djgtlpka5r4sy" path="res://assets/sprites/ui/ValueRed_120x8.png" id="4_f6424"]
 [ext_resource type="Texture2D" uid="uid://b5c04ekcshet0" path="res://assets/sprites/ui/health_bar_left.png" id="5_uyn70"]
 [ext_resource type="Texture2D" uid="uid://5goleerlvdew" path="res://assets/sprites/ui/health_bar_right.png" id="6_yrj12"]
+[ext_resource type="Texture2D" uid="uid://3c03tem7na86" path="res://assets/sprites/ui/player_bar_under.png" id="7_k4ad5"]
+[ext_resource type="Texture2D" uid="uid://dh77fsrq1a8by" path="res://assets/sprites/ui/player_bar_over.png" id="8_wmlis"]
+[ext_resource type="Script" uid="uid://dreov0j7j6wxm" path="res://scripts/player_h_bar.gd" id="9_fjjdp"]
+[ext_resource type="Texture2D" uid="uid://bj88iin24h2ld" path="res://assets/sprites/ui/player_bar_effect.png" id="10_55lpn"]
+[ext_resource type="Script" uid="uid://d0tuemj4x3ujj" path="res://scripts/player_damage_bar.gd" id="11_hahea"]
+[ext_resource type="Texture2D" uid="uid://bi26ushl24ou5" path="res://assets/sprites/ui/player_bar_progress.png" id="12_70tcv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ehd4"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="IngameUI" type="CanvasLayer" groups=["UI"]]
 script = ExtResource("1_v3yap")
 
 [node name="LifeBar" type="TextureProgressBar" parent="."]
+visible = false
 z_index = 10
 offset_left = 21.0
 offset_top = 18.0
@@ -37,3 +47,37 @@ texture = ExtResource("5_uyn70")
 [node name="HealthBarRight" type="Sprite2D" parent="LifeBar"]
 position = Vector2(100, 8)
 texture = ExtResource("6_yrj12")
+
+[node name="LifeBar2" type="TextureProgressBar" parent="." groups=["PlayerHealthBar"]]
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 110.0
+offset_bottom = 38.0
+scale = Vector2(2.2, 2.2)
+texture_under = ExtResource("7_k4ad5")
+texture_over = ExtResource("8_wmlis")
+script = ExtResource("9_fjjdp")
+
+[node name="Effect" type="Sprite2D" parent="LifeBar2"]
+show_behind_parent = true
+position = Vector2(50, 15)
+texture = ExtResource("10_55lpn")
+
+[node name="DamageBar" type="ProgressBar" parent="LifeBar2"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 14.0
+offset_right = 97.0
+offset_bottom = 18.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_7ehd4")
+value = 80.0
+show_percentage = false
+script = ExtResource("11_hahea")
+
+[node name="RealLifeBar" type="TextureProgressBar" parent="LifeBar2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+max_value = 100.19
+value = 50.0
+texture_progress = ExtResource("12_70tcv")

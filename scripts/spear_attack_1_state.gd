@@ -8,8 +8,7 @@ func enter():
 
 func update(delta):
 	super.update(delta)
-	if AnimPlayer.frame < 2:
-		player.handle_horizontal_movement(player.RUN_SPEED / 6)
+
 
 	if Input.is_action_pressed("attack"):
 		charge_timer += delta

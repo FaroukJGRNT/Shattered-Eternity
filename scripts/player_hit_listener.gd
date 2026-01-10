@@ -130,6 +130,7 @@ func damage_taken(area : HitBox) -> void:
 		match daddy.poise_type:
 			daddy.Poises.PLAYER:
 				daddy.get_staggered()
+				daddy.velocity.x += MEDIUM_PUSHBACK * area.facing
 			daddy.Poises.SMALL:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 			daddy.Poises.MEDIUM:
@@ -144,6 +145,7 @@ func damage_taken(area : HitBox) -> void:
 		match daddy.poise_type:
 			daddy.Poises.PLAYER:
 				daddy.get_staggered()
+				daddy.velocity.x += MEDIUM_PUSHBACK * area.facing
 			daddy.Poises.SMALL:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 			daddy.Poises.MEDIUM:

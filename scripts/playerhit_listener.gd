@@ -21,3 +21,7 @@ func handle_guard(area : HitBox) -> GuardResult:
 			daddy.velocity.x *= area.facing
 			return GuardResult.BLOCK
 	return GuardResult.HIT
+
+func update_lifebar(dmg):
+	var lb = get_tree().get_first_node_in_group("PlayerHealthBar")
+	lb.update_health_bar(dmg)

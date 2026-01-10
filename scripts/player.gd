@@ -40,11 +40,13 @@ func _init() -> void:
 	ice_res = 10.0
 
 func get_stunned(vel_x : float, duration : float):
-	if $PlayerStateMachine.get_current_state().name != "Staggered":
-		$PlayerStateMachine/Hit.hit_direction = sign(vel_x)
-		if on_dash_cooldown:
-			dash_cooldown = 0.0
-		change_state("hit")
+	if $PlayerStateMachine.get_current_state().name == "Staggered":
+		if $PlayerStateMachine/Staggered.cooldown > 1.5:
+			return 
+	$PlayerStateMachine/Hit.hit_direction = sign(vel_x)
+	if on_dash_cooldown:
+		dash_cooldown = 0.0
+	change_state("hit")
 
 func get_staggered():
 	change_state("staggered")
@@ -103,6 +105,7 @@ func _physics_process(delta: float) -> void:
 		$VFXPlayer.rotation = randf_range(0, 360)
 		$VFXPlayer.play("weapon_change")
 		current_weapon = (int(current_weapon) + 1) % 3
+	move_and_slide()
 
 #------ Utility functions ------#
 
@@ -115,7 +118,6 @@ func handle_vertical_movement(gravity):
 		velocity.y = MAX_VERTICAL_VELOC
 	if velocity.y < -MAX_VERTICAL_VELOC:
 		velocity.y = -MAX_VERTICAL_VELOC
-	move_and_slide()
 
 func handle_horizontal_movement(speed):
 	# Get the input direction and
@@ -125,11 +127,10 @@ func handle_horizontal_movement(speed):
 	elif direction < 0:
 		velocity.x = max(velocity.x - acceleration, (direction * speed * global_speed_scale))
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-	move_and_slide()
+		velocity.x = move_toward(velocity.x, 0, acceleration)
 
 func direct_sprite():
-	# Make the sprite and boxes face the right direction
+	# Make the sprite and boxeshandle_horizontal face the right direction
 	if direction <  0:
 		$AnimatedSprite2D.flip_h = true
 		$PlayerHurtBox.scale.x = -1
@@ -165,6 +166,8 @@ func initiate_ground_actions():
 		allowed_jumps = 0
 		change_state("jumpstart")
 		return
+	if Input.is_action_just_pressed("guard") and Input.is_action_just_pressed("attack"):
+		change_state("guardbreak")
 	if Input.is_action_just_pressed("attack"):
 		match current_weapon:
 			Weapons.SWORD:

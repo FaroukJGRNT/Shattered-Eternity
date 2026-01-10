@@ -20,15 +20,15 @@ var facing : int = 1
 var global_speed_scale := 1.0
 var dead := false
 
-var FreezeBar: PackedScene = preload("res://scenes/freeze_bar.tscn")
-var BurnBar: PackedScene = preload("res://scenes/burn_bar.tscn")
-var ThunderBar: PackedScene = preload("res://scenes/thunder_bar.tscn")
+#var FreezeBar: PackedScene = preload("res://scenes/freeze_bar.tscn")
+#var BurnBar: PackedScene = preload("res://scenes/burn_bar.tscn")
+#var ThunderBar: PackedScene = preload("res://scenes/thunder_bar.tscn")
 
-var status_bars : Dictionary = {
-	"fire": BurnBar,
-	"thunder": ThunderBar,
-	"ice": FreezeBar
-}  # {"fire": ProgressBar, "ice": ProgressBar, ...}
+#var status_bars : Dictionary = {
+	#"fire": BurnBar,
+	#"thunder": ThunderBar,
+	#"ice": FreezeBar
+#}  # {"fire": ProgressBar, "ice": ProgressBar, ...}
 
 var active_status_bars : Dictionary = {}
 
@@ -110,10 +110,10 @@ var burn_tick_timer := 0.0
 var active_status_effects = {}
 
 # --- Labels spécifiques pour chaque statut ---
-var frozen_label : PackedScene = preload("res://scenes/frozen_text.tscn") 
-var burn_label : PackedScene = preload("res://scenes/burn_text.tscn") 
-var elec_label : PackedScene = preload("res://scenes/elec_text.tscn") 
-var damage_label : PackedScene = preload("res://scenes/damage_text.tscn") 
+#var frozen_label : PackedScene = preload("res://scenes/frozen_text.tscn") 
+#var burn_label : PackedScene = preload("res://scenes/burn_text.tscn") 
+#var elec_label : PackedScene = preload("res://scenes/elec_text.tscn") 
+#var damage_label : PackedScene = preload("res://scenes/damage_text.tscn") 
 
 var pulse_timer := 0.0  # à mettre dans la classe
 
@@ -124,7 +124,7 @@ func _process(delta):
 	#posture = max(posture - (accum_decay_rate/5 * delta), 0)
 	for key in accum.keys():
 		accum[key] = max(accum[key] - accum_decay_rate * delta, 0)
-	_update_accum_bars()
+	#_update_accum_bars()
 
 	# Appliquer les statuts actifs
 	var to_remove = []
@@ -270,12 +270,14 @@ func _apply_burn(delta):
 	if burn_tick_timer >= burn_tick_interval:
 		burn_tick_timer = 0.0
 		life -= burn_damage_per_second
-		var dmg_text_instance = damage_label.instantiate()
-		dmg_text_instance.position = owner.position
-		dmg_text_instance.position.y -= 20
-		dmg_text_instance.add_theme_color_override("font_color", Color.ORANGE)
-		dmg_text_instance.text = str(int(burn_damage_per_second))  # affiche la valeur
-		add_child(dmg_text_instance)
+		#var dmg_text_instance = damage_label.instantiate()
+		#dmg_text_instance.position = owner.position
+		#dmg_text_instance.position.y -= 20
+		#dmg_text_instance.add_theme_color_override("font_color", Color.ORANGE)
+		#dmg_text_instance.text = str(int(burn_damage_per_second))  # affiche la valeur
+		#add_child(dmg_text_instance)
+		hit_listener.create_label(Color.ORANGE_RED, str(int(burn_damage_per_second)), 1)
+
 		if life <= 0:
 			life = 0
 			Engine.time_scale = 1.0
@@ -306,47 +308,47 @@ func _show_status_label(status_name: String):
 	var label: Node = null
 	match status_name:
 		"burn":
-			label = burn_label.instantiate()
+			hit_listener.create_label(Color.ORANGE_RED, "BURNED!", 1.3)
 		"shock":
-			label = elec_label.instantiate()
+			hit_listener.create_label(Color.YELLOW, "SHOCKED!", 1.3)
 		"freeze":
-			label = frozen_label.instantiate()
+			hit_listener.create_label(Color.DEEP_SKY_BLUE, "FREEZED!", 1.3)
 	if label:
 		label.position = Vector2(0, -40) # un peu au-dessus du perso
 		add_child(label)
 
-func _update_accum_bars():
-	var index := 0
-	for elem in accum.keys():
-		var value = accum[elem]
-
-		if value > 0:
-			# Créer la barre si elle n'existe pas encore
-			if not active_status_bars.has(elem):
-				var bar = status_bars[elem].instantiate()
-				add_child(bar)
-				active_status_bars[elem] = bar
-
-			# Mettre à jour la barre
-			var bar_node = active_status_bars[elem]
-			bar_node.value = accum[elem]
-			match elem:
-				"fire":
-					bar_node.max_value = fire_res
-				"ice":
-					bar_node.max_value = ice_res
-				"thunder":
-					bar_node.max_value = thunder_res
-
-			# Positionner la barre comme dans un VBox
-			bar_node.position = Vector2(-20, -40 - index * 8)  # -40 au-dessus du perso, puis -12px par barre
-			index += 1
-
-		else:
-			# Si la valeur est 0 et la barre existe → on la supprime
-			if active_status_bars.has(elem):
-				active_status_bars[elem].queue_free()
-				active_status_bars.erase(elem)
+#func _update_accum_bars():
+	#var index := 0
+	#for elem in accum.keys():
+		#var value = accum[elem]
+#
+		#if value > 0:
+			## Créer la barre si elle n'existe pas encore
+			#if not active_status_bars.has(elem):
+				#var bar = status_bars[elem].instantiate()
+				#add_child(bar)
+				#active_status_bars[elem] = bar
+#
+			## Mettre à jour la barre
+			#var bar_node = active_status_bars[elem]
+			#bar_node.value = accum[elem]
+			#match elem:
+				#"fire":
+					#bar_node.max_value = fire_res
+				#"ice":
+					#bar_node.max_value = ice_res
+				#"thunder":
+					#bar_node.max_value = thunder_res
+#
+			## Positionner la barre comme dans un VBox
+			#bar_node.position = Vector2(-20, -40 - index * 8)  # -40 au-dessus du perso, puis -12px par barre
+			#index += 1
+#
+		#else:
+			## Si la valeur est 0 et la barre existe → on la supprime
+			#if active_status_bars.has(elem):
+				#active_status_bars[elem].queue_free()
+				#active_status_bars.erase(elem)
 
 func get_stunned(vel_x : float, duration : float):
 	pass

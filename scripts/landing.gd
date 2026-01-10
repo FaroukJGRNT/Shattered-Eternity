@@ -13,6 +13,7 @@ func update(delta):
 	player.handle_horizontal_movement(player.RUN_SPEED/1.75)
 	player.direct_sprite()
 	player.initiate_ground_actions()
+	player.move_and_slide()g
 
 func exit():
 	pass

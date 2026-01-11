@@ -37,6 +37,7 @@ Camera=""
 UI=""
 Level=""
 PlayerHealthBar=""
+EnemyProjectile=""
 
 [input]
 

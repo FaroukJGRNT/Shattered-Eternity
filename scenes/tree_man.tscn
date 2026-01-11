@@ -543,19 +543,15 @@ size = Vector2(24, 70)
 radius = 22.0
 height = 78.0
 
-[node name="TreeMan" node_paths=PackedStringArray("hurtbox") groups=["Enemy"] instance=ExtResource("1_wscxd")]
+[node name="TreeMan" instance=ExtResource("1_wscxd")]
 ATTACK_RANGE = 50
-hurtbox = NodePath("HurtBox")
 max_life = 200
 
-[node name="EnemyAnimPlayer" parent="." index="0" node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
+[node name="EnemyAnimPlayer" parent="." index="0"]
 material = SubResource("ShaderMaterial_pcsp4")
 sprite_frames = SubResource("SpriteFrames_8j0do")
 animation = &"attack"
 frame = 9
-hurtbox = NodePath("../HurtBox")
-hitboxes = NodePath("../HitBoxes")
-state_machine = NodePath("../EnemyStateMachine")
 
 [node name="HurtBox" parent="." index="1"]
 visible = false

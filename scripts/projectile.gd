@@ -36,6 +36,7 @@ func move(delta):
 	pass
 
 func on_hit():
+	print("WELL HIT SOMETHING")
 	if is_one_shot:
 		destroy()
 
@@ -43,13 +44,14 @@ func destroy():
 	destroyed = true
 	hitbox.desactivate()
 	if hurtbox:
-		hurtbox.activate()
+		hurtbox.desactivate()
 
 	# Maybe play an animation
 	queue_free()
 
 func set_premade_damage(entity : LivingEntity):
-	pass
+	$HitBox.premade_dmg = entity.deal_damage($HitBox.motion_value, $HitBox.atk_type)
+	$HitBox.facing = entity.facing
 
 func _process(delta: float) -> void:
 	if destroyed:

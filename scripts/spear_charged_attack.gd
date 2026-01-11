@@ -48,6 +48,7 @@ func update(delta):
 	if AnimPlayer.frame == 2 and !shot:
 		shot = true
 		var projectile = projectile_scene.instantiate()
+		print("I give it facing to: ", owner.facing)
 		projectile.set_premade_damage(owner)
 		get_tree().current_scene.add_child(projectile) # recommandé
 		projectile.global_position = owner.global_position

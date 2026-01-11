@@ -44,7 +44,7 @@ func update(delta):
 		player.velocity.x = min(player.velocity.x + deceleration, 0)
 	player.move_and_slide()
 
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and AnimPlayer.frame >= AnimPlayer.sprite_frames.get_frame_count(AnimPlayer.animation) / 2:
 		attack_again = true
 	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= dash_cancel_frame:
 		player.get_horizontal_input()

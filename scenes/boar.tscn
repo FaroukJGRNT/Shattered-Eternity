@@ -876,20 +876,16 @@ height = 52.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mneqp"]
 height = 40.9379
 
-[node name="Boar" node_paths=PackedStringArray("hurtbox") groups=["Enemy"] instance=ExtResource("1_tgiih")]
+[node name="Boar" instance=ExtResource("1_tgiih")]
 script = ExtResource("2_fc1cp")
-hurtbox = NodePath("HurtBox")
 max_life = 250
 life = 250
 
-[node name="EnemyAnimPlayer" parent="." index="0" node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
+[node name="EnemyAnimPlayer" parent="." index="0"]
 material = SubResource("ShaderMaterial_mn0bm")
 sprite_frames = SubResource("SpriteFrames_wsqhb")
 animation = &"kick"
 frame = 5
-hurtbox = NodePath("../HurtBox")
-hitboxes = NodePath("../HitBoxes")
-state_machine = NodePath("../EnemyStateMachine")
 
 [node name="HurtBox" parent="." index="1"]
 visible = false

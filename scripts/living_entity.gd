@@ -218,6 +218,7 @@ func deal_damage(motion_value: int, attack_type: String = "") -> DamageContainer
 	dmg.daddy_ref = self
 
 	dmg.facing = facing
+	print("TRASMISSION: ", dmg.facing, "   ", facing)
 
 	# Calcul de base
 	var base_power = motion_value / 10.0

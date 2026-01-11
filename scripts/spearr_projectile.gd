@@ -17,6 +17,3 @@ func set_target(_target : LivingEntity):
 
 func move(delta):
 	global_position += direction * SPEED * delta
-
-func set_premade_damage(entity : LivingEntity):
-	$HitBox.premade_dmg = entity.deal_damage($HitBox.motion_value, $HitBox.atk_type)

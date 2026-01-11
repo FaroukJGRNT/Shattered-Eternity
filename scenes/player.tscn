@@ -1810,7 +1810,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"spear_charged_attack",
-"speed": 12.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2401,9 +2401,9 @@ buff_manager = NodePath("BuffManager")
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"spear_attack_1"
+animation = &"spear_charged_attack"
 autoplay = "idle"
-frame = 3
+frame = 6
 frame_progress = 1.0
 script = ExtResource("5_fjrip")
 state_machine = NodePath("../PlayerStateMachine")
@@ -2561,7 +2561,7 @@ next_combo_state_name = "spearattack2"
 
 [node name="SpearAttack2" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("38_42b1b")
-dash_cancel_frame = 10
+dash_cancel_frame = 2
 recovery_state_name = "spear_recovery_2"
 anim_name = "spear_attack_2"
 active_frames = Array[int]([1])
@@ -2665,7 +2665,7 @@ anim_name = "guard_break"
 active_frames = Array[int]([8])
 hitbox = NodePath("../../HitBoxes/GuardBreak")
 movement_frames = Array[int]([4, 7])
-movement_velocity = Array[Vector2]([Vector2(130, 0), Vector2(200, 0)])
+movement_velocity = Array[Vector2]([Vector2(160, 0), Vector2(250, 0)])
 deceleration = 15
 
 [node name="Staggered" type="Node" parent="PlayerStateMachine"]

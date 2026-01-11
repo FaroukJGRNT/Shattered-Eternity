@@ -300,20 +300,24 @@ bg_color = Color(1, 0.866667, 0.341176, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_c7j3f"]
 radius = 380.266
 
-[node name="LivingEntity" type="CharacterBody2D" node_paths=PackedStringArray("aggro_area", "anim_player", "hitboxes", "state_machine", "hit_listener", "buff_manager")]
+[node name="LivingEntity" type="CharacterBody2D" node_paths=PackedStringArray("aggro_area", "anim_player", "hurtbox", "hitboxes", "state_machine", "hit_listener", "buff_manager") groups=["Enemy"]]
 collision_layer = 2
 script = ExtResource("1_c7j3f")
 aggro_area = NodePath("Area2D")
 anim_player = NodePath("EnemyAnimPlayer")
+hurtbox = NodePath("HurtBox")
 hitboxes = NodePath("HitBoxes")
 state_machine = NodePath("EnemyStateMachine")
 hit_listener = NodePath("HitListener")
 buff_manager = NodePath("BuffManager")
 metadata/_custom_type_script = "uid://sbr2kdsijr7e"
 
-[node name="EnemyAnimPlayer" type="AnimatedSprite2D" parent="."]
+[node name="EnemyAnimPlayer" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
 material = SubResource("ShaderMaterial_rgeta")
 script = ExtResource("2_dlm18")
+hurtbox = NodePath("../HurtBox")
+hitboxes = NodePath("../HitBoxes")
+state_machine = NodePath("../EnemyStateMachine")
 metadata/_custom_type_script = "uid://cudcd7wg184ea"
 
 [node name="HurtBox" type="Area2D" parent="."]

@@ -37,6 +37,21 @@ func update_lifebar(dmg : int):
 
 func handle_guard(area : HitBox) -> GuardResult:
 	return GuardResult.HIT
+	
+func handle_guard_break(area : HitBox):
+	if daddy.get_state() == "guard" and area.is_guard_break:
+		daddy.posture += (daddy.max_posture * 0.2)
+		match daddy.poise_type:
+			daddy.Poises.PLAYER:
+				daddy.get_staggered()
+				daddy.velocity.x += MEDIUM_PUSHBACK * area.facing
+			daddy.Poises.SMALL:
+				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+			daddy.Poises.MEDIUM:
+				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+			daddy.Poises.LARGE:
+				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+		create_label(Color.ROYAL_BLUE, "GUARD BROKEN!", 1.3)
 
 func _ready() -> void:
 	daddy = owner
@@ -125,19 +140,7 @@ func damage_taken(area : HitBox) -> void:
 
 	# Taking damage and side effects
 	# GETTING GUARD BROKEN
-	if daddy.get_state() == "guard" and area.is_guard_break:
-		daddy.posture += (daddy.max_posture * 0.2)
-		match daddy.poise_type:
-			daddy.Poises.PLAYER:
-				daddy.get_staggered()
-				daddy.velocity.x += MEDIUM_PUSHBACK * area.facing
-			daddy.Poises.SMALL:
-				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
-			daddy.Poises.MEDIUM:
-				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
-			daddy.Poises.LARGE:
-				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
-		create_label(Color.ROYAL_BLUE, "GUARD BROKEN!", 1.3)
+	handle_guard_break(area)
 
 	# GETTING INTERRUPTED
 	if daddy.get_state() == "guardbreak" and area.is_phys_atk:

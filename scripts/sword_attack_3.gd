@@ -3,9 +3,6 @@ extends AttackState
 func enter():
 	AnimPlayer.play("sword_attack_3")
 
-func update(delta):
-	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= 2:
-		transitioned.emit("backdashing")
 
 func exit():
 	pass

@@ -2415,9 +2415,6 @@ position = Vector2(1, -2)
 shape = SubResource("CapsuleShape2D_gl8cc")
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
-position = Vector2(-2, -4)
-offset = Vector2(27, -37)
-zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 script = ExtResource("6_fjrip")
 

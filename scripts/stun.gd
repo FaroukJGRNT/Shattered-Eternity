@@ -16,9 +16,9 @@ func enter():
 
 func update(delta):
 	if enemy.velocity.x > 0:
-		enemy.velocity.x = max(enemy.velocity.x - deceleration, 0)
+		enemy.velocity.x = max(enemy.velocity.x - deceleration * 100 * delta, 0)
 	elif enemy.velocity.x < 0:
-		enemy.velocity.x = min(enemy.velocity.x + deceleration, 0)
+		enemy.velocity.x = min(enemy.velocity.x + deceleration * 100 * delta, 0)
 
 	timer -= delta
 	if timer <= 0:

@@ -128,10 +128,8 @@ var active_status_effects = {}
 var pulse_timer := 0.0  # à mettre dans la classe
 
 func _process(delta):
-	# Because max life is dynamic...
-	burn_damage_per_second = round(max_life * 0.02)
 	# Vider les barres d'accumulation progressivement
-	#posture = max(posture - (accum_decay_rate/5 * delta), 0)
+	posture = max(posture - (accum_decay_rate * delta), 0)
 	for key in accum.keys():
 		accum[key] = max(accum[key] - accum_decay_rate * delta, 0)
 	#_update_accum_bars()
@@ -143,11 +141,7 @@ func _process(delta):
 		# Burn is the only status that works over time, other ones are just set
 		if status == "burn":
 			_apply_burn(delta)
-		#elif status == "shock":
-			#_apply_shock()
-		#elif status == "freeze":
-			#_apply_freeze()
-		
+	
 		if active_status_effects[status] <= 0:
 			to_remove.append(status)
 	
@@ -277,21 +271,15 @@ func apply_status(status_name: String):
 			_apply_freeze()
 
 func _apply_burn(delta):
+	burn_damage_per_second = round(max_life * 0.02)
 	burn_tick_timer += delta
 	if burn_tick_timer >= burn_tick_interval:
 		burn_tick_timer = 0.0
 		life -= burn_damage_per_second
-		#var dmg_text_instance = damage_label.instantiate()
-		#dmg_text_instance.position = owner.position
-		#dmg_text_instance.position.y -= 20
-		#dmg_text_instance.add_theme_color_override("font_color", Color.ORANGE)
-		#dmg_text_instance.text = str(int(burn_damage_per_second))  # affiche la valeur
-		#add_child(dmg_text_instance)
 		hit_listener.create_label(Color.ORANGE_RED, str(int(burn_damage_per_second)), 1)
 
 		if life <= 0:
 			life = 0
-			Engine.time_scale = 1.0
 			die()
 
 func _apply_shock():

@@ -6,7 +6,7 @@ var over = false
 @export var duration := 0.8
 @export var vert_velocity = -10.0
 @export var horiz_velocity_range = 20.0
-@export var deceleration := 120.0
+@export var deceleration := 100.0
 
 func _ready() -> void:
 	z_index = 900
@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	position += velocity * delta
 
 	# décélération progressive
-	velocity = velocity.move_toward(Vector2.ZERO, deceleration)
+	velocity = velocity.move_toward(Vector2.ZERO, deceleration * 100 * delta)
 
 func _on_timer_timeout() -> void:
 	over = true

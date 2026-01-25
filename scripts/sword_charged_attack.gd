@@ -1,15 +1,15 @@
 extends AttackState
 
-var deceleration_ = 10
+var deceleration_ = 18
 
 func enter():
-	player.velocity.x = -150 * player.facing
+	player.velocity.x = -280 * player.facing
 	super.enter()
 
 func update(delta):
 	super.update(delta)
 	if player.velocity.x > 0:
-		player.velocity.x -= deceleration_
+		player.velocity.x -= deceleration_ * delta * 100
 	if player.velocity.x < 0:
-		player.velocity.x += deceleration_
+		player.velocity.x += deceleration_ * delta * 100
 	player.move_and_slide()

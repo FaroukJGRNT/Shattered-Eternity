@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://gx5s2fc7d8dp"]
+[gd_scene load_steps=78 format=3 uid="uid://gx5s2fc7d8dp"]
 
 [ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/enemy_template.tscn" id="1_xi2v8"]
 [ext_resource type="Texture2D" uid="uid://bb812m8j5qvqe" path="res://assets/sprites/ForestSpirit/spit.png" id="2_1dokw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bx7ay353pggkp" path="res://assets/sprites/ForestSpirit/idle.png" id="5_wwko4"]
 [ext_resource type="Texture2D" uid="uid://nhbht2orkaof" path="res://assets/sprites/ForestSpirit/stagend.png" id="6_dupw8"]
 [ext_resource type="Texture2D" uid="uid://behne6bx37cm6" path="res://assets/sprites/ForestSpirit/stagmid.png" id="7_7q151"]
+[ext_resource type="Script" uid="uid://sc5xlvvg1fb6" path="res://scripts/forest_spirit_recovery.gd" id="8_0cxfh"]
 [ext_resource type="Script" uid="uid://gjmlpxlokoj2" path="res://scripts/spirit_attack.gd" id="8_egho6"]
 [ext_resource type="Script" uid="uid://dbffy46xjoalv" path="res://scripts/spirit_collision_shape_2d.gd" id="9_egho6"]
 
@@ -532,6 +533,36 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_egho6"]
 radius = 25.02
 
+[sub_resource type="GDScript" id="GDScript_egho6"]
+resource_local_to_scene = true
+script/source = "extends EnemyState
+
+func _init() -> void:
+	is_state_blocking = true
+
+func enter():
+	AnimPlayer.play(\"walk\")
+
+func update(delta):
+	# Check if close enough -> Then go to decide
+	if enemy.is_target_in_close_range():
+		transitioned.emit(\"decide\")
+		return
+	# Move in direction of the target
+	var direction = (enemy.target.position - enemy.position).normalized()
+	enemy.velocity.x = enemy.SPEED * enemy.global_speed_scale * direction.x
+	enemy.move_and_slide()
+	enemy.direct_sprite()
+
+func exit():
+	pass
+
+# this function will be executed every time an animation ends,
+# since most states end accordingly to an animation
+func on_animation_end():
+	pass
+"
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0cxfh"]
 radius = 14.0
 height = 152.0
@@ -543,21 +574,25 @@ ATTACK_RANGE = 150
 material = SubResource("ShaderMaterial_h4tx2")
 sprite_frames = SubResource("SpriteFrames_dl7f3")
 animation = &"attack"
-frame = 7
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(-11, -4)
 shape = SubResource("CircleShape2D_egho6")
+
+[node name="Chase" parent="EnemyStateMachine" index="0"]
+script = SubResource("GDScript_egho6")
+
+[node name="Recovery" parent="EnemyStateMachine" index="6"]
+script = ExtResource("8_0cxfh")
 
 [node name="Attack" type="Node" parent="EnemyStateMachine" index="7"]
 script = ExtResource("8_egho6")
 anim_name = "attack"
 movement_frames = Array[int]([3, 7])
 movement_velocity = Array[Vector2]([Vector2(-100, 0), Vector2(200, 0)])
-deceleration = 150
 attack_cooldown = 1.0
 option_type = 1
-option_cooldown = 1.5
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
 [node name="Area2D" parent="." index="8"]

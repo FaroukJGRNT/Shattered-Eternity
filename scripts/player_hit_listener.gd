@@ -67,11 +67,6 @@ var elec_label : PackedScene = preload("res://scenes/elec_text.tscn")
 
 var dmg : DamageContainer = DamageContainer.new()
 
-func hit_freeze(duration := 0.08, scale := 0.1) -> void:
-	Engine.time_scale = scale
-	await get_tree().create_timer(duration, true).timeout
-	Engine.time_scale = 1.0
-
 func _process(delta: float) -> void:
 	# Handle hit shader cooldown
 	if shader_on_cooldown:
@@ -102,19 +97,19 @@ func damage_taken(area : HitBox) -> void:
 	match area.impact:
 		HitBox.Impact.LIGHT:
 			cam.trigger_shake(LIGHT_CAM_SHAKE)
-			hit_freeze(LIGHT_FRAME_FREEZE_DURATION)
+			Toolbox.hit_freeze(LIGHT_FRAME_FREEZE_DURATION)
 
 		HitBox.Impact.NORMAL:
 			cam.trigger_shake(NORMAL_CAM_SHAKE)
-			hit_freeze(NORMAL_FRAME_FREEZE_DURATION)
+			Toolbox.hit_freeze(NORMAL_FRAME_FREEZE_DURATION)
 
 		HitBox.Impact.BIG:
 			cam.trigger_shake(BIG_CAM_SHAKE)
-			hit_freeze(BIG_FRAME_FREEZE_DURATION)
+			Toolbox.hit_freeze(BIG_FRAME_FREEZE_DURATION)
 
 		HitBox.Impact.HUGE:
 			cam.trigger_shake(HUGE_CAM_SHAKE)
-			hit_freeze(HUGE_FRAME_FREEZE_DURATION)
+			Toolbox.hit_freeze(HUGE_FRAME_FREEZE_DURATION)
 	# Particles
 	$GPUParticles2D.direction.x = area.facing
 	$GPUParticles2D.emitting = true

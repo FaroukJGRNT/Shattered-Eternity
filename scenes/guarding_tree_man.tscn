@@ -604,8 +604,8 @@ anim_name = "attack"
 active_frames = Array[int]([8, 9, 10])
 hitbox = NodePath("../../HitBoxes/Attack")
 movement_frames = Array[int]([8])
-movement_velocity = Array[Vector2]([Vector2(500, 0)])
-deceleration = 20
+movement_velocity = Array[Vector2]([Vector2(450, 0)])
+deceleration = 12
 attack_cooldown = 1.0
 option_type = 1
 option_cooldown = 3.0
@@ -621,7 +621,7 @@ metadata/_custom_type_script = "uid://dvclob6aaps4"
 script = ExtResource("11_mtgtp")
 motion_value = 10
 attack_type = 3
-impact = 2
+impact = 3
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/Attack" index="0"]

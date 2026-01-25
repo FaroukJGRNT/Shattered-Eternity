@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://dissnb5nfrcg"]
+[gd_scene load_steps=35 format=4 uid="uid://dissnb5nfrcg"]
 
 [ext_resource type="Texture2D" uid="uid://bs8iioih0veo8" path="res://assets/sprites/environment/ForestScene/ForestZone-Tileset.png" id="1_3jp10"]
 [ext_resource type="Texture2D" uid="uid://be0cqx4puye83" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-1.png" id="1_7s4hh"]
@@ -7,11 +7,13 @@
 [ext_resource type="Script" uid="uid://c1paobpsf310a" path="res://scenes/CloudLayer.gd" id="2_tcea8"]
 [ext_resource type="Texture2D" uid="uid://bh1tf5vfibdas" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-3.png" id="3_tcea8"]
 [ext_resource type="Texture2D" uid="uid://6iqujdloxp6k" path="res://assets/sprites/environment/ForestScene/ForestZone-Background-1.png" id="4_4mgxn"]
-[ext_resource type="Script" uid="uid://4gd1kpn0ol6e" path="res://scripts/CloudLayer.gd" id="4_l65lk"]
+[ext_resource type="Script" path="res://scripts/CloudLayer.gd" id="4_l65lk"]
 [ext_resource type="Texture2D" uid="uid://bsyfvh76q8heu" path="res://assets/sprites/environment/ForestScene/ForestZone-Background-2.png" id="5_l65lk"]
 [ext_resource type="Texture2D" uid="uid://bhbrmgb1qc3kh" path="res://assets/sprites/environment/ForestScene/ForestZone-Background-3.png" id="6_pf0y0"]
 [ext_resource type="Texture2D" uid="uid://wfmghlqla7su" path="res://assets/sprites/environment/ForestScene/ForestZone-Background-4.png" id="7_vvr6j"]
 [ext_resource type="Texture2D" uid="uid://n5quvh3kr6f4" path="res://assets/sprites/environment/ForestScene/ForestZone-Assets.png" id="8_atu5g"]
+[ext_resource type="PackedScene" uid="uid://d3kvl1e2ls3do" path="res://scenes/dummy.tscn" id="13_pf0y0"]
+[ext_resource type="PackedScene" uid="uid://lcalun41bn55" path="res://scenes/ingame_ui.tscn" id="14_vvr6j"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4mgxn"]
 blend_mode = 1
@@ -182,7 +184,7 @@ glow_enabled = true
 glow_intensity = 1.25
 glow_bloom = 0.2
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" groups=["Level"]]
 
 [node name="LightEffects" type="Node2D" parent="."]
 
@@ -319,8 +321,14 @@ tile_map_data = PackedByteArray("AAAWAAkAAAABAAEAAAAWAAgAAAABAAEAAAAWAAcAAAABAAE
 tile_set = SubResource("TileSet_sfind")
 
 [node name="Player" parent="." instance=ExtResource("2_qbdkf")]
-collision_layer = 129
+collision_layer = 0
 collision_mask = 129
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_d6xuq")
+
+[node name="Dummy" parent="." instance=ExtResource("13_pf0y0")]
+position = Vector2(927, 272)
+
+[node name="IngameUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("14_vvr6j")]
+player = NodePath("../Player")

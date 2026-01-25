@@ -132,9 +132,16 @@ func on_animation_end():
 resource_local_to_scene = true
 script/source = "extends EnemyState
 
+@export var backward_walk_speed = 150.0
+
 func enter():
 	enemy.velocity.y = 0
 	AnimPlayer.play(\"idle\")
+
+func update(delta):
+	super.update(delta)
+	#enemy.velocity.x = -150 * enemy.facing
+	#enemy.move_and_slide()
 "
 
 [sub_resource type="GDScript" id="GDScript_m1eet"]
@@ -278,6 +285,8 @@ func update(delta):
 	timer -= delta
 	if timer <= 0:
 		transitioned.emit(\"decide\")
+	enemy.velocity.x = -50 * enemy.facing
+	enemy.move_and_slide()
 "
 
 [sub_resource type="Curve" id="Curve_yv3fp"]

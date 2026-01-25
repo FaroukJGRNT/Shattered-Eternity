@@ -15,8 +15,8 @@ var vfx_player_scene : PackedScene = load("res://scenes/short_lived_vfx.tscn")
 # Hit freeze durations (seconds)
 const LIGHT_FRAME_FREEZE_DURATION  := 0.010
 const NORMAL_FRAME_FREEZE_DURATION := 0.020
-const BIG_FRAME_FREEZE_DURATION    := 0.026
-const HUGE_FRAME_FREEZE_DURATION   := 0.035
+const BIG_FRAME_FREEZE_DURATION    := 0.03
+const HUGE_FRAME_FREEZE_DURATION   := 0.040
 
 @export var LIGHT_CAM_SHAKE : float = 2
 @export var NORMAL_CAM_SHAKE : float = 3
@@ -67,16 +67,9 @@ var elec_label : PackedScene = preload("res://scenes/elec_text.tscn")
 
 var dmg : DamageContainer = DamageContainer.new()
 
-func hit_freeze(duration := 0.08, min_scale := 0.10, recover_time := 0.04) -> void:
-	Engine.time_scale = min_scale
+func hit_freeze(duration := 0.08, scale := 0.1) -> void:
+	Engine.time_scale = scale
 	await get_tree().create_timer(duration, true).timeout
-
-	var t := 0.0
-	while t < recover_time:
-		t += get_process_delta_time()
-		Engine.time_scale = lerp(min_scale, 1.0, t / recover_time)
-		await get_tree().process_frame
-
 	Engine.time_scale = 1.0
 
 func _process(delta: float) -> void:
@@ -121,7 +114,7 @@ func damage_taken(area : HitBox) -> void:
 
 		HitBox.Impact.HUGE:
 			cam.trigger_shake(HUGE_CAM_SHAKE)
-			hit_freeze(HUGE_FRAME_FREEZE_DURATION/2, 0.01, 0.01)
+			hit_freeze(HUGE_FRAME_FREEZE_DURATION)
 	# Particles
 	$GPUParticles2D.direction.x = area.facing
 	$GPUParticles2D.emitting = true

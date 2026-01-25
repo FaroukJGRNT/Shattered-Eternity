@@ -133,11 +133,10 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="GolemiteProjectile" type="Node2D" node_paths=PackedStringArray("hitbox", "hurtbox", "anim_player") groups=["EnemyProjectile"]]
+[node name="GolemiteProjectile" type="Node2D" node_paths=PackedStringArray("hitbox", "anim_player") groups=["EnemyProjectile"]]
 script = ExtResource("1_fx3hv")
 is_destructible = true
 hitbox = NodePath("HitBox")
-hurtbox = NodePath("")
 anim_player = NodePath("AnimatedSprite2D")
 
 [node name="HitBox" type="Area2D" parent="."]

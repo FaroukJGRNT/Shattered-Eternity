@@ -1702,7 +1702,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"spear_aerial",
-"speed": 10.0
+"speed": 11.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2401,9 +2401,9 @@ buff_manager = NodePath("BuffManager")
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"spear_charged_attack"
+animation = &"spear_aerial"
 autoplay = "idle"
-frame = 6
+frame = 7
 frame_progress = 1.0
 script = ExtResource("5_fjrip")
 state_machine = NodePath("../PlayerStateMachine")
@@ -2613,7 +2613,6 @@ hitbox = NodePath("../../HitBoxes/SwordCharged")
 [node name="SpearAerial" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("47_51ujp")
 horizontal_friction = -10.0
-vertital_friction = 5.0
 frame_teshold = 2
 ground_attck = "spearattack2"
 dash_cancel_frame = 20
@@ -2683,22 +2682,20 @@ active_frames = Array[int]([4, 5])
 hitbox = NodePath("../../HitBoxes/HammerAerial")
 
 [node name="HitBoxes" type="Node2D" parent="."]
+visible = false
 
 [node name="SwordAttack2" type="Area2D" parent="HitBoxes"]
-visible = false
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("27_dt7fs")
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAttack2"]
-visible = false
 position = Vector2(39, -1)
 rotation = 1.63188
 shape = SubResource("CapsuleShape2D_487ah")
 
 [node name="SwordAttack1" type="Area2D" parent="HitBoxes"]
-visible = false
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("28_wqfne")
@@ -2721,7 +2718,6 @@ rotation = -3.12414
 shape = SubResource("RectangleShape2D_4vfid")
 
 [node name="HammerAttack1" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("33_md1ol")
 attack_type = 2
 impact = 2
@@ -2733,7 +2729,6 @@ rotation = -3.54651
 shape = SubResource("CapsuleShape2D_bj30b")
 
 [node name="HammerAttack2" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("34_bj30b")
 attack_type = 2
 impact = 2
@@ -2745,7 +2740,6 @@ rotation = -3.19744
 shape = SubResource("CapsuleShape2D_jc3p3")
 
 [node name="SpearAttack1" type="Area2D" parent="HitBoxes"]
-visible = false
 position = Vector2(-13, -2)
 script = ExtResource("24_dt7fs")
 attack_type = 1
@@ -2753,26 +2747,22 @@ impact = 0
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAttack1"]
-visible = false
 position = Vector2(97, -12)
 rotation = -4.77697
 shape = SubResource("CapsuleShape2D_hax0n")
 
 [node name="SpearAttack2" type="Area2D" parent="HitBoxes"]
-visible = false
 position = Vector2(-13, -2)
 script = ExtResource("25_wqfne")
 impact = 0
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAttack2"]
-visible = false
 position = Vector2(104, 2)
 rotation = -4.70715
 shape = SubResource("CapsuleShape2D_t4otl")
 
 [node name="SpearAttack3" type="Area2D" parent="HitBoxes"]
-visible = false
 position = Vector2(-13, -2)
 script = ExtResource("26_wnwbv")
 life_duration = 0.0
@@ -2785,7 +2775,6 @@ rotation = -4.70715
 shape = SubResource("CapsuleShape2D_j2b1d")
 
 [node name="HammerChargedAttack" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("46_mx1m4")
 attack_type = 2
 impact = 3
@@ -2797,7 +2786,6 @@ rotation = 1.58825
 shape = SubResource("CapsuleShape2D_4gjji")
 
 [node name="SwordCharged" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("50_sc3ue")
 life_duration = 0.0
 impact = 2
@@ -2808,9 +2796,8 @@ position = Vector2(62, -24)
 shape = SubResource("CircleShape2D_edwuo")
 
 [node name="SpearAerial" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("58_tk41t")
-up_value = 70
+up_value = 40
 life_duration = 0.0
 impact = 0
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
@@ -2820,20 +2807,17 @@ position = Vector2(8, -25)
 shape = SubResource("CircleShape2D_i18u8")
 
 [node name="SwordAerial1" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("59_fuw3a")
 up_value = 35
 atk_type = "full_thunder"
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAerial1"]
-visible = false
 position = Vector2(23, -12)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_46bxm")
 
 [node name="SwordAerial2" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("60_8txt3")
 up_value = 30
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
@@ -2843,7 +2827,6 @@ position = Vector2(28, -17)
 shape = SubResource("RectangleShape2D_au7lq")
 
 [node name="HammerParry" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("75_vx63k")
 attack_type = 2
 impact = 3
@@ -2854,7 +2837,6 @@ position = Vector2(18, -1)
 shape = SubResource("CircleShape2D_6pxcr")
 
 [node name="SwordParry" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("76_lw0jh")
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
@@ -2864,19 +2846,16 @@ position = Vector2(-69, 6)
 shape = SubResource("RectangleShape2D_uifsl")
 
 [node name="GuardBreak" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("79_lw0jh")
 attack_type = 2
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/GuardBreak"]
-visible = false
 position = Vector2(14, -4)
 shape = SubResource("CircleShape2D_p6pc0")
 
 [node name="HammerAerial" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("84_cbf1i")
 up_value = 20
 attack_type = 2
@@ -2884,18 +2863,15 @@ impact = 2
 metadata/_custom_type_script = "uid://cahklyitgjl16"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerAerial"]
-visible = false
 position = Vector2(52, -14)
 shape = SubResource("CapsuleShape2D_4tr32")
 
 [node name="SpearParry" type="Area2D" parent="HitBoxes"]
-visible = false
 script = ExtResource("86_4vfid")
 impact = 3
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearParry"]
-visible = false
 position = Vector2(52, 10)
 rotation = 1.57952
 shape = SubResource("CapsuleShape2D_2t4xi")

@@ -2,6 +2,7 @@ extends HurtBox
 class_name ProjectileHurtBox
 
 var real_daddy : Projectile
+@export var physical := false
 
 func _ready () -> void:
 	real_daddy = owner
@@ -12,6 +13,9 @@ func _ready () -> void:
 		collision_layer = 0
 	collision_mask = 2
 	connect("area_entered", on_area_entered)
+	#if physical:
+		#set_collision_mask_value(8, true)
+		#connect("body_entered", on_body_entered)
 
 func on_area_entered(area: Area2D) -> void:
 	if area == null:
@@ -25,6 +29,10 @@ func on_area_entered(area: Area2D) -> void:
 
 		owner.on_hit()
 		area.affected_targets.append(owner)
+
+func on_body_entered(body:Node2D):
+	if physical:
+		real_daddy.on_hit()
 
 func _real_daddy_in_targeted_groups(diddy: Node, groups: Array) -> bool:
 	for g in groups:

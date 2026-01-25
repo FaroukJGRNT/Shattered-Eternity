@@ -46,7 +46,6 @@ func _ready() -> void:
 			defensive_actions.append(state)
 	aggro_area.connect("body_entered", _on_aggro_range_body_entered)
 	aggro_area.connect("body_exited", _on_area_2d_body_exited)
-	print("all connected and ready")
 
 # Formalities methods
 
@@ -177,7 +176,6 @@ func direct_sprite():
 # TODO: Replace by calculating distance to the player
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if dead:
-		print("I'm dead lol")
 		return
 	if body.is_in_group("Player"):
 		current_mode = Mode.CHILLIN
@@ -185,12 +183,9 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		#state_machine/Wander.wait_cooldown = 5.0
 
 func _on_aggro_range_body_entered(body: Node2D) -> void:
-	print(body)
 	if dead:
-		print("I'm dead lol")
 		return
 	if body.is_in_group("Player"):
-		print("Let's eat this nigga")
 		target = body
 		current_mode = Mode.BASIC_AGGRO
 		state_machine.on_state_transition("decide")

@@ -38,16 +38,17 @@ func update(delta):
 		if AnimPlayer.frame == frame:
 			enemy.velocity.x += (usable_velocs[index].x) * enemy.facing
 			enemy.velocity.y += (usable_velocs[index].y)
+
 			usable_mov_frames.pop_front()
 			usable_velocs.pop_front()
 			break
 		index += 1
 
 	if enemy.velocity.x > 0:
-		enemy.velocity.x = max(enemy.velocity.x - deceleration, 0)
+		enemy.velocity.x = max(enemy.velocity.x - deceleration * delta, 0)
 	if enemy.velocity.x < 0:
-		enemy.velocity.x = min(enemy.velocity.x + deceleration, 0)
-	enemy.move_and_slide()
+		enemy.velocity.x = min(enemy.velocity.x + deceleration * delta, 0)
+
 
 func exit():
 	pass

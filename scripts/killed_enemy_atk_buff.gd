@@ -1,14 +1,13 @@
 extends Buff
 
-var bonus_attack := 0.0
+var bonus := 1.2
 
 func _init() -> void:
 	timeout = 7.0
 	trigger_event = LivingEntity.Event.ENEMY_KILLED
-
+ 
 func activate():
-	bonus_attack = daddy.attack * 0.2
-	daddy.attack += bonus_attack
+	daddy.attack_multipliers.append(bonus)
 
 func desactivate():
-	daddy.attack -= bonus_attack
+	daddy.attack_multipliers.erase(bonus)

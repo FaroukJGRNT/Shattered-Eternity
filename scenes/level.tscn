@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c1imgcb2kat6k" path="res://scenes/player.tscn" id="2_7lnj0"]
 [ext_resource type="PackedScene" uid="uid://cc3gbjxlqvcli" path="res://scenes/world.tscn" id="2_ppgk2"]
 [ext_resource type="PackedScene" uid="uid://lcalun41bn55" path="res://scenes/ingame_ui.tscn" id="4_mx8sn"]
-[ext_resource type="PackedScene" uid="uid://bb7tjs6gcrm6i" path="res://scenes/guarding_tree_man.tscn" id="4_ppgk2"]
+[ext_resource type="PackedScene" uid="uid://gx5s2fc7d8dp" path="res://scenes/forest_spirit.tscn" id="4_ppgk2"]
 
 [node name="Level" type="Node2D" groups=["Level"]]
 
@@ -15,5 +15,8 @@ position = Vector2(-162, 317)
 [node name="IngameUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_mx8sn")]
 player = NodePath("../Player")
 
-[node name="GuardingTreeMan" parent="." instance=ExtResource("4_ppgk2")]
-position = Vector2(1141, 264)
+[node name="ForestSpirit" parent="." instance=ExtResource("4_ppgk2")]
+position = Vector2(865, 167)
+
+[node name="ForestSpirit2" parent="." instance=ExtResource("4_ppgk2")]
+position = Vector2(854, -462)

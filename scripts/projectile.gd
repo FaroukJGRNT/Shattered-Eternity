@@ -36,7 +36,6 @@ func move(delta):
 	pass
 
 func on_hit():
-	print("WELL HIT SOMETHING")
 	if is_one_shot:
 		destroy()
 

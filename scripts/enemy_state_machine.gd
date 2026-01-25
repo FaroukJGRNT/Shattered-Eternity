@@ -29,6 +29,8 @@ func _process(delta: float) -> void:
 		current_state.update(delta)
 
 func on_state_transition(new_state_name):
+	if enemy.dead and new_state_name != "death":
+		return
 	if states[new_state_name] != current_state:
 		current_state.exit()
 		current_state.option_timer = current_state.option_cooldown

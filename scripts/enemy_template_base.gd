@@ -1,5 +1,20 @@
 extends BasicEnemy
 
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	var current_state : EnemyState = state_machine.get_current_state()
+
+	if current_state.is_state_blocking:
+		return
+
+	direct_sprite()
+
+	if current_mode == Mode.BASIC_AGGRO:
+		enemy_ai()
+
 func enemy_ai():
 	if not is_target_in_front():
 		turn_around()

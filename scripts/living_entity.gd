@@ -34,8 +34,24 @@ var active_status_bars : Dictionary = {}
 
 @export var max_life: int = 0
 @export var life: int = 0
+
 @export var attack: int = 0
 @export var defense: int = 0
+
+var attack_multipliers : Array[float] = [] 
+var defense_multipliers : Array[float] = [] 
+
+func get_attack() -> float:
+	var value = attack
+	for m in attack_multipliers:
+		value *= m
+	return value
+
+func get_defense() -> float:
+	var value = defense
+	for m in defense_multipliers:
+		value *= m
+	return value
 
 enum Poises {
 	PLAYER,
@@ -102,18 +118,12 @@ var burn_tick_timer := 0.0
 # --- Effets des statuts ---
 @export var burn_damage_per_second := 0
 @export var shock_attack_reduction := 0.5  # -50%
-@export var shock_defense_reduction := 0.75 # -75%
+@export var shock_defense_reduction := 0.5 # -75%
 @export var freeze_speed_reduction := 0.5  # -50% vitesse
 @export var status_duration := 7.0         # durée générique des statuts
 
 # Statuts actifs : { "burn": temps_restant, ... }
 var active_status_effects = {}
-
-# --- Labels spécifiques pour chaque statut ---
-#var frozen_label : PackedScene = preload("res://scenes/frozen_text.tscn") 
-#var burn_label : PackedScene = preload("res://scenes/burn_text.tscn") 
-#var elec_label : PackedScene = preload("res://scenes/elec_text.tscn") 
-#var damage_label : PackedScene = preload("res://scenes/damage_text.tscn") 
 
 var pulse_timer := 0.0  # à mettre dans la classe
 
@@ -161,10 +171,11 @@ func _process(delta):
 func take_damage(damage: DamageContainer) -> DamageContainer:
 	propagate_event(Event.HIT_TAKEN)
 	# Appliquer les résistances directement sur le DamageContainer
-	damage.fire_dmg *= round(1.0 - fire_res / 100.0)
-	damage.thunder_dmg *= round(1.0 - thunder_res / 100.0)
-	damage.ice_dmg *= round(1.0 - ice_res / 100.0)
-	damage.phys_dmg *= round(1.0 - defense / 100.0)
+	damage.fire_dmg *= 1.0 - fire_res / 100.0
+	damage.thunder_dmg *= 1.0 - thunder_res / 100.0
+	damage.ice_dmg *= 1.0 - ice_res / 100.0
+	damage.phys_dmg *= 1.0 - get_defense() / 100.0
+
 	if damage.is_crit:
 		damage.phys_dmg *= 3
 		damage.ice_dmg *= 3
@@ -218,11 +229,10 @@ func deal_damage(motion_value: int, attack_type: String = "") -> DamageContainer
 	dmg.daddy_ref = self
 
 	dmg.facing = facing
-	print("TRASMISSION: ", dmg.facing, "   ", facing)
 
 	# Calcul de base
 	var base_power = motion_value / 10.0
-	var raw_value = attack * base_power
+	var raw_value = get_attack() * base_power
 
 	match attack_type:
 		"phys":
@@ -285,8 +295,8 @@ func _apply_burn(delta):
 			die()
 
 func _apply_shock():
-	attack *= round(1.0 - shock_attack_reduction)
-	defense *= round(1.0 - shock_defense_reduction)
+	attack_multipliers.append(shock_attack_reduction)
+	defense_multipliers.append(shock_defense_reduction)
 
 func _apply_freeze():
 	anim_player.speed_scale = freeze_speed_reduction
@@ -297,8 +307,8 @@ func _remove_status(status_name: String):
 		"burn":
 			burn_tick_timer = 0.0
 		"shock":
-			attack *= 2 
-			defense *= 2
+			attack_multipliers.erase(shock_attack_reduction)
+			defense_multipliers.erase(shock_defense_reduction)
 		"freeze":
 			global_speed_scale = 1.0
 			if anim_player:

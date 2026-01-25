@@ -14,6 +14,9 @@ Marteau:
 Degats stupides au corps a corps mais assez lent.
 Attaque chargee: BONK.
 
+ON DOIT TROUVER UN MOYEN DE RENDRE LE GAMEPLAY DE CHAQUE ARME FUN ET MOUVEMENTE,
+ET AUSSI TROUVER UNE MECANIQUE DE GAMEPLAY PROPRE A CHACUNE D'ELLE, comme dans blasphemous2
+
 ###Flow du combat:
 Attaque normale:
 Rien de special, mais peut etre paré par la garde
@@ -114,7 +117,18 @@ Je pense a un skill qui ajoutera un niveau aux attaques chargees
 Avec la lance, des lances additionnelles apparaitront au moment de les Lancer
 Avec le marteau, le premier coup horizontal est suivi d'un mechant coup vertical
 Avec l'epee on peut enchainer avec le slash rapide horizontal qui vous fait passer derriere l'ennemi
-Il aura une enorme cicatrice sur le torse. Et 
+Il aura une enorme cicatrice sur le torse. Et ce sera le boss des bandits qui lui aura fait cette cicatrice
+Il aura une attaque ou il lance sa hacche comme un boomrang. et si tu bloques la hache, elle tombe au sol
+Il passe alors en mode hands et il aura une grab attaque ou il te chope, t'envoie en l'air et te close combat
+
+Une dame qui sera medecin, et qui s'occupera des infectes, elle te demandera ton aide pour mieux comprendre l'infection
+a l'almana et comment la soigner. Elle aura surement un lien avec le pere de josey
+
+Un infecte qui a mute et a surpasse l'infection. Tu tombes sur lui par hasard et tu l'affrontes
+Il est fort mais tu le bats, il sera utile au medecin, pour trouver eventuellement un remede et vaccin
+contre l'infection
+
+Le grand tueur de geants, on le trouvera a la forge. Tout au fond, pour un combat incroyable.
 
 
 Un gars de l'est (un japonais avec un odachi) qui porte sur son dos un cercueil
@@ -188,6 +202,12 @@ Le joueur respawn sur des coeurs d'almana. Chaque zone en a un gros et des petit
 
 --> TOUS LES CHARA DESIGNS DOIVENT ETRE UNIQUES. L'art style doit avoir qulque chose qui permet d'identifier le jeu direct, tout en restant beau
 
+--> On doit avoir des competences d'exploration qui permettent par exemple d'escalader une montagne ou de planer, ou de resister a un element
+Bro attends on peut faire un truc. Une sorte d'artefact super puissant qui permet de dompter les elements
+Il peut par exemple te permettre de traverser une cascade de lave pour atteindre le volcan des geants
+Ou bien traverser le blizzard qui mene a la zone enneigee. Ou bien etre immunise aux eclairs des collines de foudre
+Bref du coup je voulais parler de competences qu permettent d'explorer. Par exemple une comp d'escalade, ou une pour planer
+Ce serait bien qu'au sommet des monts, tu puisse sauter et planer jusqu'aux iles flottantes
 
 # IDEES WORLD-BUILDING/DESIGN
 
@@ -206,6 +226,8 @@ Le joueur respawn sur des coeurs d'almana. Chaque zone en a un gros et des petit
 --> Le corbeau de blasphemous2. Tu entres dans l'ascenseur, fondu noir, bruitage, defondu. Pas besoin d'animation complexe
 
 --> On pourrait ajouter des évènements qui se passent à un certain moment de la boucle à chaque run (Ex : Une montgolfière qui s'écrase quelque part, une tour qui s'effondre…) et créer des backgrounds ou des objets spéciaux (animés peut être) pour les autres zones ou on peut voir le phénomène se dérouler de loin (vu que les arrière-plans des zones contiennent des éléments d'autres zones)
+
+
 
 
 # IDEES GAMEPLAY
@@ -249,3 +271,11 @@ Le monde aura vecu 2 guerres. D'abord une grande guerre contre les geants ya lon
 des humains entre eux. Le berserker sera un descendant des geants. Btw ils ont vraiment ete TOUS rayes de la surface de la terre
 Tous ces morts sont sans doute la raison de l'apocalypse de l'almana et tout.
 C'est une maniere pour la planete d'essayer de se debarasser des monstres que sont les humains
+
+IDEES ennemis
+Les monstres de fire emblem sont d'excellentes inspirations
+
+╔═╦╗╔╦╗╔═╦═╦╦╦╦╗╔═╗
+║╚╣║║║╚╣╚╣╔╣╔╣║╚╣═╣ 
+╠╗║╚╝║║╠╗║╚╣║║║║║═╣
+╚═╩══╩═╩═╩═╩╝╚╩═╩═╝

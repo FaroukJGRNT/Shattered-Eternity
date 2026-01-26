@@ -7,7 +7,7 @@ func enter():
 	AnimPlayer.play("jump_start")
 
 func update(delta):
-	player.handle_horizontal_movement(player.RUN_SPEED/10)
+	player.handle_horizontal_movement(player.RUN_SPEED/10, delta)
 
 func exit():
 	player.velocity.y = player.JUMP_VELOCITY

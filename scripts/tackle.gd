@@ -1,8 +1,12 @@
 extends EnemyAttackState
 
-@export var custom_decel = 25
+@export var custom_decel = 5
 
 func update(delta):
+	if AnimPlayer.frame < 20:
+		if not enemy.is_target_in_front():
+			enemy.turn_around()
+
 	var index = 0
 	for frame in usable_mov_frames:
 		if AnimPlayer.frame == frame:
@@ -14,8 +18,9 @@ func update(delta):
 		index += 1
 	
 	if AnimPlayer.frame >= 35:
+
 		if enemy.velocity.x > 0:
-			enemy.velocity.x = max(enemy.velocity.x - custom_decel, 0)
+			enemy.velocity.x = max(enemy.velocity.x - custom_decel * delta * 30, 0)
 		if enemy.velocity.x < 0:
-			enemy.velocity.x = min(enemy.velocity.x + custom_decel, 0)
+			enemy.velocity.x = min(enemy.velocity.x + custom_decel * delta * 30, 0)
 	enemy.move_and_slide()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=94 format=3 uid="uid://bohmugldj6x0r"]
+[gd_scene load_steps=95 format=3 uid="uid://bohmugldj6x0r"]
 
 [ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/enemy_template.tscn" id="1_udkj3"]
 [ext_resource type="Texture2D" uid="uid://clct1y4dbrpeu" path="res://assets/sprites/golemite/golemite_idle.png" id="2_mke8x"]
+[ext_resource type="Script" uid="uid://bmnt7dbvqnllc" path="res://scripts/golemite.gd" id="2_ruah2"]
 [ext_resource type="Texture2D" uid="uid://c32qwk6gufv2y" path="res://assets/sprites/golemite/backdash.png" id="2_tn1b4"]
 [ext_resource type="Texture2D" uid="uid://bs1ccbj1nps4i" path="res://assets/sprites/golemite/death.png" id="3_lktxo"]
 [ext_resource type="Texture2D" uid="uid://downsthur6sdt" path="res://assets/sprites/golemite/golemite_shoot.png" id="3_t1v51"]
@@ -659,7 +660,8 @@ radius = 11.0
 height = 64.0
 
 [node name="Golemite" instance=ExtResource("1_udkj3")]
-ATTACK_RANGE = 150
+script = ExtResource("2_ruah2")
+ATTACK_RANGE = 100
 
 [node name="EnemyAnimPlayer" parent="." index="0"]
 material = SubResource("ShaderMaterial_xokyh")
@@ -675,6 +677,7 @@ script = ExtResource("10_lktxo")
 anim_name = "shoot"
 movement_frames = Array[int]([13])
 movement_velocity = Array[Vector2]([Vector2(-300, 0)])
+deceleration = 17
 attack_cooldown = 1.0
 option_type = 1
 
@@ -683,6 +686,7 @@ script = ExtResource("11_ruah2")
 anim_name = "backdash"
 movement_frames = Array[int]([1, 2])
 movement_velocity = Array[Vector2]([Vector2(-150, 0), Vector2(-400, 0)])
+deceleration = 15
 option_type = 3
 option_cooldown = 2.0
 metadata/_custom_type_script = "uid://dvclob6aaps4"

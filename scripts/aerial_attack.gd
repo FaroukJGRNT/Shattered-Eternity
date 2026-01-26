@@ -23,9 +23,9 @@ func update(delta):
 	player.handle_vertical_movement(player.get_gravity().y * delta)
 	player.get_horizontal_input()
 	if player.direction == player.facing:
-		player.handle_horizontal_movement(player.AERIAL_SPEED - horizontal_friction)
+		player.handle_horizontal_movement(player.AERIAL_SPEED - horizontal_friction, delta)
 	else:
-		player.handle_horizontal_movement((player.AERIAL_SPEED - horizontal_friction)/3)
+		player.handle_horizontal_movement((player.AERIAL_SPEED - horizontal_friction)/3, delta)
 	if player.is_on_floor():
 		# Case of unset variables
 		if frame_teshold == -1 or ground_attck == "": 

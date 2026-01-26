@@ -884,8 +884,7 @@ life = 250
 [node name="EnemyAnimPlayer" parent="." index="0"]
 material = SubResource("ShaderMaterial_mn0bm")
 sprite_frames = SubResource("SpriteFrames_wsqhb")
-animation = &"kick"
-frame = 5
+animation = &"tackle"
 
 [node name="HurtBox" parent="." index="1"]
 visible = false
@@ -901,7 +900,7 @@ active_frames = Array[int]([4])
 hitbox = NodePath("../../HitBoxes/Kick")
 movement_frames = Array[int]([4])
 movement_velocity = Array[Vector2]([Vector2(-300, 0)])
-deceleration = 12
+deceleration = 14
 attack_cooldown = 1.0
 option_cooldown = 1.5
 metadata/_custom_type_script = "uid://dvclob6aaps4"

@@ -1883,7 +1883,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"spear_parry",
-"speed": 12.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2401,10 +2401,9 @@ buff_manager = NodePath("BuffManager")
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"spear_aerial"
+animation = &"hammer_parry"
 autoplay = "idle"
-frame = 7
-frame_progress = 1.0
+frame = 4
 script = ExtResource("5_fjrip")
 state_machine = NodePath("../PlayerStateMachine")
 hitboxes = NodePath("../HitBoxes")
@@ -2449,7 +2448,8 @@ anim_name = "spear_parry"
 active_frames = Array[int]([4])
 hitbox = NodePath("../../HitBoxes/SpearParry")
 movement_frames = Array[int]([4])
-movement_velocity = Array[Vector2]([Vector2(-400, 0)])
+movement_velocity = Array[Vector2]([Vector2(-450, 0)])
+deceleration = 25
 
 [node name="HammerParry" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("30_jx8is")
@@ -2457,6 +2457,9 @@ dash_cancel_frame = 8
 anim_name = "hammer_parry"
 active_frames = Array[int]([4])
 hitbox = NodePath("../../HitBoxes/HammerParry")
+movement_frames = Array[int]([4])
+movement_velocity = Array[Vector2]([Vector2(280, 0)])
+deceleration = 14
 
 [node name="Parry" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("25_vau08")
@@ -2503,7 +2506,7 @@ active_frames = Array[int]([2])
 hitbox = NodePath("../../HitBoxes/SwordAttack1")
 movement_frames = Array[int]([1])
 movement_velocity = Array[Vector2]([Vector2(100, 0)])
-deceleration = 25
+deceleration = 30
 next_combo_state_name = "swordattack2"
 
 [node name="SwordAttack2" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
@@ -2532,7 +2535,7 @@ active_frames = Array[int]([5])
 hitbox = NodePath("../../HitBoxes/HammerAttack1")
 movement_frames = Array[int]([5])
 movement_velocity = Array[Vector2]([Vector2(220, 0)])
-deceleration = 20
+deceleration = 22
 next_combo_state_name = "hammerattack2"
 
 [node name="HeavyAttackRecovery" type="Node" parent="PlayerStateMachine"]
@@ -2590,6 +2593,8 @@ recovery_state_name = "idle"
 anim_name = "hammer_charged_attack"
 active_frames = Array[int]([1])
 hitbox = NodePath("../../HitBoxes/HammerChargedAttack")
+movement_frames = Array[int]([1])
+movement_velocity = Array[Vector2]([Vector2(200, 0)])
 
 [node name="SwordCharging" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("41_2gdjj")
@@ -2644,6 +2649,9 @@ script = ExtResource("50_8txt3")
 script = ExtResource("56_mwp2n")
 dash_cancel_frame = 3
 anim_name = "spear_charged_attack"
+movement_frames = Array[int]([2])
+movement_velocity = Array[Vector2]([Vector2(200, 0)])
+deceleration = 13
 
 [node name="SpearCharging" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("56_0yhus")
@@ -2727,6 +2735,7 @@ shape = SubResource("CapsuleShape2D_bj30b")
 
 [node name="HammerAttack2" type="Area2D" parent="HitBoxes"]
 script = ExtResource("34_bj30b")
+push_back = 1
 attack_type = 2
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
@@ -2773,6 +2782,7 @@ shape = SubResource("CapsuleShape2D_j2b1d")
 
 [node name="HammerChargedAttack" type="Area2D" parent="HitBoxes"]
 script = ExtResource("46_mx1m4")
+push_back = 1
 attack_type = 2
 impact = 3
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
@@ -2785,6 +2795,7 @@ shape = SubResource("CapsuleShape2D_4gjji")
 [node name="SwordCharged" type="Area2D" parent="HitBoxes"]
 script = ExtResource("50_sc3ue")
 life_duration = 0.0
+push_back = 1
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
@@ -2825,6 +2836,7 @@ shape = SubResource("RectangleShape2D_au7lq")
 
 [node name="HammerParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("75_vx63k")
+push_back = 1
 attack_type = 2
 impact = 3
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
@@ -2835,6 +2847,7 @@ shape = SubResource("CircleShape2D_6pxcr")
 
 [node name="SwordParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("76_lw0jh")
+push_back = 1
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
@@ -2865,6 +2878,7 @@ shape = SubResource("CapsuleShape2D_4tr32")
 
 [node name="SpearParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("86_4vfid")
+push_back = 1
 impact = 3
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 

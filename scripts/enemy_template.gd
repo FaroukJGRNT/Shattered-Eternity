@@ -70,12 +70,12 @@ func get_state():
 func _physics_process(delta: float) -> void:
 	var current_state : EnemyState = state_machine.get_current_state()
 
-	if current_state.is_state_blocking:
-		return
-
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+
+	if current_state.is_state_blocking:
+		return
 
 	direct_sprite()
 
@@ -157,6 +157,9 @@ func enemy_ai():
 	# Or is this nigga guardbreaking for no reason ? fuk u
 
 func direct_sprite():
+	var state_name = state_machine.get_current_state().name.to_lower()
+	if state_name == "stun" or state_name == "staggered":
+		return
 	# make sure he faces the right direction
 	if velocity.x > 0:
 		anim_player.flip_h = true

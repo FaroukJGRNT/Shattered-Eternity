@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://dissnb5nfrcg"]
+[gd_scene load_steps=36 format=4 uid="uid://dissnb5nfrcg"]
 
 [ext_resource type="Texture2D" uid="uid://bs8iioih0veo8" path="res://assets/sprites/environment/ForestScene/ForestZone-Tileset.png" id="1_3jp10"]
 [ext_resource type="Texture2D" uid="uid://be0cqx4puye83" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-1.png" id="1_7s4hh"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://wfmghlqla7su" path="res://assets/sprites/environment/ForestScene/ForestZone-Background-4.png" id="7_vvr6j"]
 [ext_resource type="Texture2D" uid="uid://n5quvh3kr6f4" path="res://assets/sprites/environment/ForestScene/ForestZone-Assets.png" id="8_atu5g"]
 [ext_resource type="PackedScene" uid="uid://d3kvl1e2ls3do" path="res://scenes/dummy.tscn" id="13_pf0y0"]
+[ext_resource type="Script" uid="uid://cg7y3vd25gmfh" path="res://scripts/enemy_template_base.gd" id="14_fkkko"]
 [ext_resource type="PackedScene" uid="uid://lcalun41bn55" path="res://scenes/ingame_ui.tscn" id="14_vvr6j"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4mgxn"]
@@ -329,6 +330,8 @@ environment = SubResource("Environment_d6xuq")
 
 [node name="Dummy" parent="." instance=ExtResource("13_pf0y0")]
 position = Vector2(927, 272)
+script = ExtResource("14_fkkko")
+metadata/_custom_type_script = "uid://sbr2kdsijr7e"
 
 [node name="IngameUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("14_vvr6j")]
 player = NodePath("../Player")

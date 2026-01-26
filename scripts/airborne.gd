@@ -33,7 +33,7 @@ func update(delta):
 	if player.velocity.y > 0 and AnimPlayer.animation != "fall":
 		AnimPlayer.play("fall")
 	player.initiate_slide()
-	player.handle_horizontal_movement(player.AERIAL_SPEED + added_horiz_speed)
+	player.handle_horizontal_movement(player.AERIAL_SPEED + added_horiz_speed, delta)
 	if Input.is_action_just_pressed("attack") and not player.aerial_attack_used:
 		player.aerial_attack_used = false
 		match player.current_weapon:

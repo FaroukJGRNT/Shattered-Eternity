@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://ovmt6ccp1x55"]
 
-[ext_resource type="Script" uid="uid://cg7y3vd25gmfh" path="res://scripts/enemy_template_base.gd" id="1_c7j3f"]
+[ext_resource type="Script" uid="uid://cx5ih5jiwvxep" path="res://scripts/enemy_template.gd" id="1_c7j3f"]
 [ext_resource type="Script" uid="uid://cudcd7wg184ea" path="res://scripts/animated_sprite_2d.gd" id="2_dlm18"]
 [ext_resource type="Script" uid="uid://busr7orlkflil" path="res://scripts/hurtbox.gd" id="3_g3k0s"]
 [ext_resource type="Script" uid="uid://do8u78sktsj4a" path="res://scripts/enemy_state_machine.gd" id="4_m1eet"]
@@ -191,7 +191,7 @@ func on_animation_end():
 script/source = "extends EnemyState
 
 var push_back := 0
-var deceleration := 2.0
+var deceleration := 4
 var timeout := 0.0
 var timer := 0.0
 
@@ -213,6 +213,7 @@ func update(delta):
 	timer -= delta
 	if timer <= 0:
 		transitioned.emit(\"decide\")
+	enemy.move_and_slide()
 "
 
 [sub_resource type="GDScript" id="GDScript_7wst2"]
@@ -307,7 +308,7 @@ hitboxes = NodePath("HitBoxes")
 state_machine = NodePath("EnemyStateMachine")
 hit_listener = NodePath("HitListener")
 buff_manager = NodePath("BuffManager")
-metadata/_custom_type_script = "uid://sbr2kdsijr7e"
+metadata/_custom_type_script = "uid://cx5ih5jiwvxep"
 
 [node name="EnemyAnimPlayer" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
 material = SubResource("ShaderMaterial_rgeta")

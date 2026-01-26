@@ -16,7 +16,7 @@ var aerial_dash_used := false
 var aerial_attack_used := false
 var friction = 0
 var allowed_jumps := 1
-var acceleration = 65
+var acceleration = 85
 
 enum Weapons {
 	SPEAR,
@@ -119,15 +119,15 @@ func handle_vertical_movement(gravity):
 	if velocity.y < -MAX_VERTICAL_VELOC:
 		velocity.y = -MAX_VERTICAL_VELOC
 
-func handle_horizontal_movement(speed):
+func handle_horizontal_movement(speed, delta):
 	# Get the input direction and
 	# handle the movement/deceleration
 	if direction > 0:
-		velocity.x = min(velocity.x + acceleration, (direction * speed * global_speed_scale))
+		velocity.x = min(velocity.x + acceleration * 50 * delta, (direction * speed * global_speed_scale))
 	elif direction < 0:
-		velocity.x = max(velocity.x - acceleration, (direction * speed * global_speed_scale))
+		velocity.x = max(velocity.x - acceleration * 50 * delta, (direction * speed * global_speed_scale))
 	else:
-		velocity.x = move_toward(velocity.x, 0, acceleration)
+		velocity.x = move_toward(velocity.x, 0, acceleration * 50 * delta)
 
 func direct_sprite():
 	# Make the sprite and boxeshandle_horizontal face the right direction

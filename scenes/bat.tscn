@@ -660,7 +660,7 @@ func on_animation_end():
 script/source = "extends EnemyState
 
 var push_back := 0
-var deceleration := 2.0
+var deceleration := 4.0
 var timeout := 0.0
 var timer := 0.0
 

@@ -16,5 +16,7 @@ func update(delta):
 		spit.position = owner.global_position
 		spit.facing =  owner.facing
 		spit.set_premade_damage(owner)
-		spit.HORIZ_VELOCITY = max(abs(enemy.position.x - enemy.target.position.x) * 1.6, 30)
+		spit.HORIZ_VELOCITY = max(abs(enemy.position.x - enemy.target.position.x) * 1.5, 30)
+		if spit.HORIZ_VELOCITY > 350:
+			spit.HORIZ_VELOCITY = 350
 		get_tree().get_first_node_in_group("Level").add_child(spit)

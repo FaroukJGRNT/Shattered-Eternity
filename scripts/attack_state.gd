@@ -39,9 +39,9 @@ func update(delta):
 		index += 1
 
 	if player.velocity.x > 0:
-		player.velocity.x = max(player.velocity.x - deceleration * delta * 100, 0)
+		player.velocity.x = max(player.velocity.x - deceleration * delta * 50, 0)
 	if player.velocity.x < 0:
-		player.velocity.x = min(player.velocity.x + deceleration * delta * 100, 0)
+		player.velocity.x = min(player.velocity.x + deceleration * delta * 50, 0)
 	player.move_and_slide()
 
 	if Input.is_action_just_pressed("attack") and AnimPlayer.frame >= AnimPlayer.sprite_frames.get_frame_count(AnimPlayer.animation) / 2:

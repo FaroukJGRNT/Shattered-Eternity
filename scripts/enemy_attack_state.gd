@@ -45,9 +45,9 @@ func update(delta):
 		index += 1
 
 	if enemy.velocity.x > 0:
-		enemy.velocity.x = max(enemy.velocity.x - deceleration * 100 * delta, 0)
+		enemy.velocity.x = max(enemy.velocity.x - deceleration * 50 * delta, 0)
 	if enemy.velocity.x < 0:
-		enemy.velocity.x = min(enemy.velocity.x + deceleration * 100 * delta, 0)
+		enemy.velocity.x = min(enemy.velocity.x + deceleration * 50 * delta, 0)
 
 	enemy.move_and_slide()
 

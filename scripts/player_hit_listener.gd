@@ -1,8 +1,8 @@
 extends Node2D
 class_name HitListener
 
-@export var SMALL_PUSHBACK := 40
-@export var MEDIUM_PUSHBACK := 80
+@export var SMALL_PUSHBACK := 80
+@export var MEDIUM_PUSHBACK := 150
 @export var BIG_PUSHBACK := 120
 @export var SMALL_PUSHBACK_DURATION := 0.5
 @export var MEDIUM_PUSHBACK_DURATION := 1

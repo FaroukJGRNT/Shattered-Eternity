@@ -10,7 +10,7 @@ func update(delta):
 	player.get_horizontal_input()
 	if player.direction != 0 and AnimPlayer.frame >= 1:
 		transitioned.emit("idle")
-	player.handle_horizontal_movement(player.RUN_SPEED/1.75)
+	player.handle_horizontal_movement(player.RUN_SPEED/1.75, delta)
 	player.direct_sprite()
 	player.initiate_ground_actions()
 	player.move_and_slide()

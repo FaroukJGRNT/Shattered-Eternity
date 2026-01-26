@@ -1,7 +1,7 @@
 extends EnemyState
 
 var push_back := 0
-var deceleration := 2.0
+var deceleration := 4.0
 var timeout := 0.0
 var timer := 0.0
 
@@ -16,9 +16,9 @@ func enter():
 
 func update(delta):
 	if enemy.velocity.x > 0:
-		enemy.velocity.x = max(enemy.velocity.x - deceleration * 100 * delta, 0)
+		enemy.velocity.x = max(enemy.velocity.x - deceleration * 50 * delta, 0)
 	elif enemy.velocity.x < 0:
-		enemy.velocity.x = min(enemy.velocity.x + deceleration * 100 * delta, 0)
+		enemy.velocity.x = min(enemy.velocity.x + deceleration * 50 * delta, 0)
 
 	timer -= delta
 	if timer <= 0:

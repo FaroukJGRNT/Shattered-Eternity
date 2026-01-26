@@ -9,7 +9,7 @@ func enter():
 func update(delta):
 	super.update(delta)
 	if player.velocity.x > 0:
-		player.velocity.x -= deceleration_ * delta * 100
+		player.velocity.x -= deceleration_ * delta * 50
 	if player.velocity.x < 0:
-		player.velocity.x += deceleration_ * delta * 100
+		player.velocity.x += deceleration_ * delta * 50
 	player.move_and_slide()

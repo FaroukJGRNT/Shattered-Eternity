@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://gx5s2fc7d8dp"]
+[gd_scene load_steps=79 format=3 uid="uid://gx5s2fc7d8dp"]
 
 [ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/enemy_template.tscn" id="1_xi2v8"]
 [ext_resource type="Texture2D" uid="uid://bb812m8j5qvqe" path="res://assets/sprites/ForestSpirit/spit.png" id="2_1dokw"]
@@ -10,6 +10,26 @@
 [ext_resource type="Script" uid="uid://sc5xlvvg1fb6" path="res://scripts/forest_spirit_recovery.gd" id="8_0cxfh"]
 [ext_resource type="Script" uid="uid://gjmlpxlokoj2" path="res://scripts/spirit_attack.gd" id="8_egho6"]
 [ext_resource type="Script" uid="uid://dbffy46xjoalv" path="res://scripts/spirit_collision_shape_2d.gd" id="9_egho6"]
+
+[sub_resource type="GDScript" id="GDScript_0cxfh"]
+resource_local_to_scene = true
+script/source = "extends BasicEnemy
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	var current_state : EnemyState = state_machine.get_current_state()
+
+	if current_state.is_state_blocking:
+		return
+
+	direct_sprite()
+
+	if current_mode == Mode.BASIC_AGGRO:
+		enemy_ai()
+"
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_mf740"]
 output_port_for_preview = 0
@@ -568,6 +588,7 @@ radius = 14.0
 height = 152.0
 
 [node name="ForestSpirit" instance=ExtResource("1_xi2v8")]
+script = SubResource("GDScript_0cxfh")
 ATTACK_RANGE = 150
 
 [node name="EnemyAnimPlayer" parent="." index="0"]
@@ -590,7 +611,7 @@ script = ExtResource("8_0cxfh")
 script = ExtResource("8_egho6")
 anim_name = "attack"
 movement_frames = Array[int]([3, 7])
-movement_velocity = Array[Vector2]([Vector2(-100, 0), Vector2(200, 0)])
+movement_velocity = Array[Vector2]([Vector2(-100, 0), Vector2(100, 0)])
 attack_cooldown = 1.0
 option_type = 1
 metadata/_custom_type_script = "uid://dvclob6aaps4"

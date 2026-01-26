@@ -13,6 +13,9 @@ func enter():
 
 func update(delta):
 	super.update(delta)
+	if AnimPlayer.frame >= 6 and not has_hot:
+		if not enemy.is_target_in_front():
+			enemy.turn_around()
 
 	if AnimPlayer.frame >= 6 and not has_hot:
 		has_hot = true

@@ -1391,7 +1391,7 @@ aggro_area = NodePath("AggroRange")
 anim_player = NodePath("AnimatedSprite2D")
 hurtbox = NodePath("HurtBox")
 hitboxes = NodePath("HitBoxes")
-state_machine = NodePath("FGolemStateMachine")
+state_machine = NodePath("EnemyStateMachine")
 hit_listener = NodePath("HitListener")
 buff_manager = NodePath("BuffManager")
 metadata/_custom_type_script = "uid://sbr2kdsijr7e"
@@ -1490,26 +1490,26 @@ shape = SubResource("CircleShape2D_k30vi")
 [node name="BuffManager" type="Node" parent="."]
 script = ExtResource("3_00fqx")
 
-[node name="FGolemStateMachine" type="Node" parent="."]
+[node name="EnemyStateMachine" type="Node" parent="."]
 script = ExtResource("5_a614t")
 metadata/_custom_type_script = "uid://do8u78sktsj4a"
 
-[node name="Chase" type="Node" parent="FGolemStateMachine"]
+[node name="Chase" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("6_t8cbp")
 
-[node name="Decide" type="Node" parent="FGolemStateMachine"]
+[node name="Decide" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("7_yrhpr")
 
-[node name="Wander" type="Node" parent="FGolemStateMachine"]
+[node name="Wander" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("8_t8cbp")
 
-[node name="Stun" type="Node" parent="FGolemStateMachine"]
+[node name="Stun" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("9_ocd6t")
 
-[node name="Staggered" type="Node" parent="FGolemStateMachine"]
+[node name="Staggered" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("10_a614t")
 
-[node name="Punch1" type="Node" parent="FGolemStateMachine" node_paths=PackedStringArray("hitbox")]
+[node name="Punch1" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("hitbox")]
 script = SubResource("GDScript_48mis")
 anim_name = "punch_1"
 combo_state = "punch2"
@@ -1519,7 +1519,7 @@ movement_frames = Array[int]([5])
 movement_velocity = Array[Vector2]([Vector2(220, 0)])
 option_type = 1
 
-[node name="Punch2" type="Node" parent="FGolemStateMachine" node_paths=PackedStringArray("hitbox")]
+[node name="Punch2" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("hitbox")]
 script = SubResource("GDScript_rdy5o")
 anim_name = "punch_2"
 combo_state = "punch3"
@@ -1529,7 +1529,7 @@ movement_frames = Array[int]([2])
 movement_velocity = Array[Vector2]([Vector2(220, 0)])
 attack_cooldown = 1.0
 
-[node name="Punch3" type="Node" parent="FGolemStateMachine" node_paths=PackedStringArray("hitbox")]
+[node name="Punch3" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("hitbox")]
 script = SubResource("GDScript_kf6te")
 anim_name = "punch_3"
 active_frames = Array[int]([6])
@@ -1538,10 +1538,10 @@ movement_frames = Array[int]([5])
 movement_velocity = Array[Vector2]([Vector2(120, 0)])
 attack_cooldown = 2.0
 
-[node name="Recovery" type="Node" parent="FGolemStateMachine"]
+[node name="Recovery" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("15_iaaar")
 
-[node name="GetInGround" type="Node" parent="FGolemStateMachine" node_paths=PackedStringArray("hitbox")]
+[node name="GetInGround" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("17_hnjy8")
 anim_name = "get_in_ground"
 combo_state = "guard"
@@ -1550,12 +1550,12 @@ hitbox = NodePath("../../HitBoxes/GetInGround")
 option_type = 3
 option_cooldown = 10.0
 
-[node name="Guard" type="Node" parent="FGolemStateMachine"]
+[node name="Guard" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("18_40cl6")
 anim_name = "guard"
 combo_state = "explode"
 
-[node name="Explode" type="Node" parent="FGolemStateMachine" node_paths=PackedStringArray("hitbox")]
+[node name="Explode" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("19_fkdit")
 anim_name = "explode"
 active_frames = Array[int]([1])
@@ -1564,10 +1564,10 @@ attack_cooldown = 1.5
 option_cooldown = 10.0
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
-[node name="Death" type="Node" parent="FGolemStateMachine"]
+[node name="Death" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("19_qk0b6")
 
-[node name="Dash" type="Node" parent="FGolemStateMachine" node_paths=PackedStringArray("hitbox")]
+[node name="Dash" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("21_tywe1")
 anim_name = "dash"
 active_frames = Array[int]([9, 10, 11])
@@ -1588,7 +1588,7 @@ frame = 9
 script = ExtResource("19_nepfb")
 hurtbox = NodePath("../HurtBox")
 hitboxes = NodePath("../HitBoxes")
-state_machine = NodePath("../FGolemStateMachine")
+state_machine = NodePath("../EnemyStateMachine")
 
 [node name="AggroRange" type="Area2D" parent="."]
 visible = false

@@ -1,4 +1,4 @@
-extends Projectile
+extends ProjectileTemplate
 class_name SpiritSpit
 
 @export var JUMP_VELOCITY := -180.0
@@ -10,17 +10,12 @@ var facing := 1
 
 var velocity := Vector2.ZERO
 
-var vfx : PackedScene = load("res://scenes/short_lived_vfx.tscn")
 var splash : ShortLivedVFX
 
 func _ready() -> void:
 	super._ready()
 
-	splash = vfx.instantiate()
-	splash.position = global_position
-	get_tree().get_first_node_in_group("Level").add_child(splash)
-	splash.play("spirit_splash")
-
+	splash = Toolbox.spawn_vfx(self, "spirit_splash")
 	velocity.y += JUMP_VELOCITY
 
 func move(delta):
@@ -35,14 +30,12 @@ func move(delta):
 	
 	position += velocity * delta
 
-func set_target(_target : LivingEntity):
-	pass
-
 func destroy():
 	destroyed = true
 	hitbox.desactivate()
+	hurtbox.desactivate()
 	anim_player.play("hit")
 
-func _on_animated_sprite_2d_animation_finished() -> void:
+func on_anim_finished() -> void:
 	if anim_player.animation == "hit":
 		queue_free()

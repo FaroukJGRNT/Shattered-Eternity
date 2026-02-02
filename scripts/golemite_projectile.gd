@@ -1,4 +1,4 @@
-extends Projectile
+extends ProjectileTemplate
 
 var spawned := false
 var speed := 200.0
@@ -8,26 +8,26 @@ var direction := Vector2(1, 0)
 
 func _ready() -> void:
 	super._ready()
-	$HurtBox.desactivate()
-	$HitBox.desactivate()
-	$AnimatedSprite2D.play("spawn")
+	hurtbox.desactivate()
+	hitbox.desactivate()
+	anim_player.play("spawn")
 
 func move(delta):
 	if spawned:
 		position += speed * direction * delta
 		speed = min(speed + accel, max_speed)
 
-func _on_animated_sprite_2d_animation_finished() -> void:
+func on_anim_finished():
 	if anim_player.animation == "spawn":
 		spawned = true
 		anim_player.play("go")
 	if anim_player.animation == "destroy":
 		queue_free()
 
-func _on_animated_sprite_2d_frame_changed() -> void:
+func on_frame_changed():
 	if anim_player.animation == "spawn" and anim_player.frame >= 6:
-		$HurtBox.activate()
-		$HitBox.activate()
+		hurtbox.activate()
+		hitbox.activate()
 
 func destroy():
 	destroyed = true

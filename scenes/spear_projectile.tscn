@@ -7,9 +7,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0eh8n"]
 size = Vector2(4, 44)
 
-[node name="SpearProjectile" type="Node2D"]
+[node name="SpearProjectile" type="Node2D" node_paths=PackedStringArray("hitbox") groups=["AllyProjectile"]]
 rotation = 1.5708
 script = ExtResource("1_eqoxf")
+is_one_shot = false
+hitbox = NodePath("HitBox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0.000347137, 0.000114441)
@@ -19,7 +21,7 @@ texture = ExtResource("2_ns2n2")
 [node name="HitBox" type="Area2D" parent="."]
 position = Vector2(0.000347137, 0.000114441)
 script = ExtResource("3_vrhfa")
-metadata/_custom_type_script = "uid://ca7lo8315oxt"
+metadata/_custom_type_script = "uid://6eagvjgkh23i"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, -2)

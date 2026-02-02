@@ -1,12 +1,11 @@
-extends Projectile
-
-func set_premade_damage(entity : LivingEntity):
-	$EnemyHitBox.premade_dmg = entity.deal_damage($EnemyHitBox.motion_value, $EnemyHitBox.atk_type)
+extends ProjectileTemplate
 
 func _process(delta: float) -> void:
 	super._process(delta)
-	if not get_parent().owner:
+	if not target:
+		print("Leaving")
 		return
-	if get_parent().owner.target.position.distance_to(position) <= $EnemyHitBox/CollisionShape2D.shape.radius:
-		if get_parent().owner.target.state_machine.get_current_state() is EvadeState:
-			$EnemyHitBox.desactivate()
+	if target.position.distance_to(position) <= $EnemyHitBox/CollisionShape2D.shape.radius:
+		if target.state_machine.get_current_state() is EvadeState:
+			hitbox.desactivate()
+			print("Player detected evading, deactivatedd")

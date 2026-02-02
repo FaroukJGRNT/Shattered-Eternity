@@ -4,8 +4,9 @@ class_name Projectile
 @export var is_one_shot := true
 @export var is_anim_one_shot := false
 
-
 @export var anim_player : AnimatedSprite2D
+@export var hitbox : HitBox
+@export var hurtbox : HurtBox
 
 var target : LivingEntity
 
@@ -49,13 +50,8 @@ func destroy():
 
 # Since projectile damage are calculated on instanciation, not on hit
 func set_premade_damage(entity : LivingEntity):
-	$HitBox.premade_dmg = entity.deal_damage($HitBox.motion_value, $HitBox.atk_type)
-	$HitBox.facing = entity.facing
-
-# To regroup all the boilerplate code to properly set up the projectile
-func spawn_on_me(entity : LivingEntity):
-	set_premade_damage(entity)
-	# Position setting and all this boring stuff
+	hitbox .premade_dmg = entity.deal_damage(hitbox .motion_value, hitbox .atk_type)
+	hitbox .facing = entity.facing
 
 # Will call move, and eventually destroy if too far
 func _process(delta: float) -> void:

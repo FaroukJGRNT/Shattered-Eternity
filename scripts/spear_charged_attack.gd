@@ -47,11 +47,7 @@ func update(delta):
 	super.update(delta)
 	if AnimPlayer.frame == 2 and !shot:
 		shot = true
-		var projectile = projectile_scene.instantiate()
-		projectile.set_premade_damage(owner)
-		get_tree().current_scene.add_child(projectile) # recommandé
-		projectile.global_position = owner.global_position
-		projectile.position.y -= 10
+		var projectile = Toolbox.spawn_projectile(owner, projectile_scene, Vector2(0, -10))
 		projectile.direction.x = player.facing
 		projectile.scale.x = player.facing
 		projectile.scale.y = player.facing

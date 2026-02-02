@@ -92,19 +92,18 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BatWave" type="Node2D" node_paths=PackedStringArray("hitbox", "anim_player")]
+[node name="BatWave" type="Node2D" node_paths=PackedStringArray("anim_player", "hitbox") groups=["EnemyProjectile"]]
 script = ExtResource("1_ugqs5")
 is_one_shot = false
 is_anim_one_shot = true
-hitbox = NodePath("EnemyHitBox")
 anim_player = NodePath("AnimatedSprite2D")
+hitbox = NodePath("EnemyHitBox")
 metadata/_custom_type_script = "uid://dljy0sgyva0yd"
 
 [node name="EnemyHitBox" type="Area2D" parent="."]
 script = ExtResource("2_ugqs5")
-motion_value = 20
+motion_value = 15
 multidirectional = true
-attack_type = 3
 impact = 3
 is_phys_atk = false
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"

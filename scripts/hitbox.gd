@@ -52,8 +52,8 @@ enum AttackType {
 var premade_dmg : DamageContainer = null
 
 func _ready() -> void:
-	var bad_guys = ["Enemy", "EnemyProjectile"]
-	var good_guys = ["Player", "AllyProjectile"]
+	var bad_guys : Array[String] = ["Enemy", "EnemyProjectile"]
+	var good_guys : Array[String] = ["Player", "AllyProjectile"]
 	# Decide your positionment based on your father nature
 	collision_layer = 0
 	collision_mask = 0

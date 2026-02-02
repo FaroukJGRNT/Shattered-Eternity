@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://6eagvjgkh23i" path="res://scripts/enemy_projectile_hb.gd" id="2_qyxii"]
 [ext_resource type="Script" uid="uid://dd3w3luy0l2xt" path="res://scripts/projectile_hurtbox.gd" id="3_vlcgo"]
 
-[node name="EnemyProjectile" type="Node2D"]
+[node name="ProjectileTemplate" type="Node2D" node_paths=PackedStringArray("anim_player", "hitbox", "hurtbox")]
 script = ExtResource("1_8xxw7")
-is_one_shot = null
-is_anim_one_shot = null
+anim_player = NodePath("AnimatedSprite2D")
+hitbox = NodePath("ProjectileHitBox")
+hurtbox = NodePath("ProjectileHurtBox")
 metadata/_custom_type_script = "uid://buu5eyjfovye8"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

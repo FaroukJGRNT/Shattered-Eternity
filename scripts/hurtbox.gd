@@ -5,7 +5,9 @@ var disabled := false
 var daddy : LivingEntity
 
 func _ready () -> void:
-	daddy = owner
+	if owner is LivingEntity:
+		
+		daddy = owner
 	# Enemy hurtboxes need to be detected by the player
 	collision_layer = 0
 	collision_mask = 0

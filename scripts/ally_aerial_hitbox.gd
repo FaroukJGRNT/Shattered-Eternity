@@ -1,5 +1,5 @@
 extends HitBox
-class_name AllyAerialHitBox
+class_name AerialHitBox
 
 @export var up_value := 0
 

@@ -1,1 +1,1 @@
-extends "res://scripts/enemy_hitbox.gd"
+extends HitBox

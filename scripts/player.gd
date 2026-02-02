@@ -47,7 +47,7 @@ func _init() -> void:
 func get_stunned(vel_x : float, duration : float):
 	if current_state.name == "staggered":
 		if $PlayerStateMachine/Staggered.cooldown > 1.5:
-			return 
+			return
 	$PlayerStateMachine/Hit.hit_direction = sign(vel_x)
 	if on_dash_cooldown:
 		dash_cooldown = 0.0

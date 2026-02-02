@@ -95,12 +95,13 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7h4pb"]
 
-[node name="GolemGroundWave" type="Node2D" node_paths=PackedStringArray("hitbox", "anim_player")]
+[node name="GolemGroundWave" type="Node2D" node_paths=PackedStringArray("anim_player", "hitbox") groups=["EnemyProjectile"]]
 script = ExtResource("1_yhaq2")
 is_one_shot = false
 is_anim_one_shot = true
-hitbox = NodePath("HitBox")
 anim_player = NodePath("AnimatedSprite2D")
+hitbox = NodePath("HitBox")
+metadata/_custom_type_script = "uid://buu5eyjfovye8"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-35, 11)

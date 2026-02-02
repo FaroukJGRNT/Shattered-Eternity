@@ -12,11 +12,8 @@ func update(delta):
 	super.update(delta)
 	if AnimPlayer.frame >= 7 and not has_shot:
 		has_shot = true
-		var spit : SpiritSpit = proj.instantiate()
-		spit.position = owner.global_position
+		var spit : SpiritSpit = Toolbox.spawn_projectile(owner, proj)
 		spit.facing =  owner.facing
-		spit.set_premade_damage(owner)
 		spit.HORIZ_VELOCITY = max(abs(enemy.position.x - enemy.target.position.x) * 1.5, 30)
 		if spit.HORIZ_VELOCITY > 350:
 			spit.HORIZ_VELOCITY = 350
-		get_tree().get_first_node_in_group("Level").add_child(spit)

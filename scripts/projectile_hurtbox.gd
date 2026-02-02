@@ -4,7 +4,7 @@ class_name ProjectileHurtBox
 # Custom hurtbox for projectiles
 # Will call on_hit on collision, and collide with terrain of specified
 
-var real_daddy : Projectile
+@onready var real_daddy : Projectile = owner
 @export var collide_with_terrain := false
 
 func _ready() -> void:

@@ -70,7 +70,6 @@ func get_staggered():
 # NOW THE REAL STUFF, THE BIG WIGS
 func _physics_process(delta: float) -> void:
 	current_state = state_machine.get_current_state()
-	print(current_state.name)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -165,15 +164,15 @@ func direct_sprite():
 	# make sure he faces the right direction
 	if velocity.x > 0:
 		anim_player.flip_h = true
-		$HitBoxes.scale.x = -1
-		$HitBoxes.scale.y = 1
-		$HurtBox.scale.x = -1
+		hitboxes.scale.x = -1
+		hitboxes.scale.y = 1
+		hurtbox.scale.x = -1
 		facing = 1
 	if velocity.x < 0:
 		anim_player.flip_h = false
-		$HitBoxes.scale.x = 1
-		$HitBoxes.scale.y = 1
-		$HurtBox.scale.x = 1
+		hitboxes.scale.x = 1
+		hitboxes.scale.y = 1
+		hurtbox.scale.x = 1
 		facing = -1
 
 # Handling aggro zone
@@ -183,14 +182,11 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if dead:
 		return
 	if body.is_in_group("Player"):
-		print("Player leaving, in middle of ", current_state.name)
 		if current_state is not EnemyAttackState:
-			print("Not attack state, can wander")
 			current_mode = Mode.CHILLIN
 			state_machine.on_state_transition("wander")
 			return
 		else:
-			print("Attack state, must wait")
 			current_state.wander_queued = true
 		#state_machine/Wander.wait_cooldown = 5.0
 

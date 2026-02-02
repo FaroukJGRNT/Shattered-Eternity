@@ -99,17 +99,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_drinr"]
 radius = 14.0357
 
-[node name="SpiritSpit" type="Node2D" node_paths=PackedStringArray("hitbox", "hurtbox", "anim_player") groups=["EnemyProjectile"]]
+[node name="SpiritSpit" type="Node2D" node_paths=PackedStringArray("anim_player", "hitbox", "hurtbox") groups=["EnemyProjectile"]]
 script = ExtResource("1_7gjnm")
-JUMP_VELOCITY = null
 HORIZ_VELOCITY = 250.0
 GRAVITY = 13.0
-GRAVITY_ACCEL = null
-is_one_shot = null
-is_anim_one_shot = null
+anim_player = NodePath("AnimatedSprite2D")
 hitbox = NodePath("HitBox")
 hurtbox = NodePath("HurtBox")
-anim_player = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://dljy0sgyva0yd"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -122,7 +118,6 @@ script = ExtResource("4_g5dfh")
 motion_value = 16
 multidirectional = true
 attack_type = 3
-impact = 3
 is_phys_atk = false
 metadata/_custom_type_script = "uid://6eagvjgkh23i"
 
@@ -137,5 +132,3 @@ metadata/_custom_type_script = "uid://dd3w3luy0l2xt"
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_drinr")
-
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

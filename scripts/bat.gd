@@ -7,6 +7,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		if current_state is EnemyAttackState:
 			velocity += get_gravity() * delta / 50
+		if current_state.name.to_lower() == "hurl":
+			velocity = Vector2.ZERO
 		else: 
 			velocity += get_gravity() * delta / 10
 

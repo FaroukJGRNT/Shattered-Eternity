@@ -1,1 +1,1 @@
-extends AllyAerialHitBox
+extends AerialHitBox

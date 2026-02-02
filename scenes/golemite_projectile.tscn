@@ -133,11 +133,11 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="GolemiteProjectile" type="Node2D" node_paths=PackedStringArray("hitbox", "anim_player") groups=["EnemyProjectile"]]
+[node name="GolemiteProjectile" type="Node2D" node_paths=PackedStringArray("anim_player", "hitbox", "hurtbox") groups=["EnemyProjectile"]]
 script = ExtResource("1_fx3hv")
-is_destructible = true
-hitbox = NodePath("HitBox")
 anim_player = NodePath("AnimatedSprite2D")
+hitbox = NodePath("HitBox")
+hurtbox = NodePath("HurtBox")
 
 [node name="HitBox" type="Area2D" parent="."]
 script = ExtResource("2_fx3hv")
@@ -150,7 +150,7 @@ metadata/_custom_type_script = "uid://dass3u4ef3rdj"
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_b5r7x")
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="." groups=["EnemyProjectile"]]
 script = ExtResource("3_fx3hv")
 metadata/_custom_type_script = "uid://dd3w3luy0l2xt"
 
@@ -164,7 +164,3 @@ sprite_frames = SubResource("SpriteFrames_2dfji")
 animation = &"destroy"
 frame = 6
 frame_progress = 1.0
-
-[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

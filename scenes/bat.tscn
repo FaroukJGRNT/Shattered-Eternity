@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://wmgi2vuvi46u" path="res://assets/sprites/Bat/bat_hurl.png" id="4_1ial8"]
 [ext_resource type="Texture2D" uid="uid://dr6c7r6jeneyn" path="res://assets/sprites/Bat/bat_hit.png" id="4_cv41e"]
 [ext_resource type="Texture2D" uid="uid://dh2vhtoblkv21" path="res://assets/sprites/Bat/bat_scratch.png" id="6_pn0sf"]
-[ext_resource type="Script" uid="uid://dass3u4ef3rdj" path="res://scripts/enemy_hitbox.gd" id="8_pphv1"]
+[ext_resource type="Script" uid="uid://c30upb3dqxva2" path="res://scripts/scratch_hb.gd" id="9_1ial8"]
 [ext_resource type="Script" uid="uid://busr7orlkflil" path="res://scripts/hurtbox.gd" id="9_ss3wr"]
 [ext_resource type="Script" uid="uid://do8u78sktsj4a" path="res://scripts/enemy_state_machine.gd" id="10_0imbl"]
 [ext_resource type="Script" uid="uid://do7rjsh8mrcw7" path="res://scripts/hurl.gd" id="13_6x6ks"]
@@ -584,8 +584,8 @@ func update(delta):
 		transitioned.emit(\"decide\")
 		return
 	# Move in direction of the target
-	enemy.direction = (enemy.target.position - enemy.position).normalized()
-	enemy.velocity.x = enemy.SPEED * enemy.global_speed_scale * enemy.direction.x
+	var direction = (enemy.target.position - enemy.position).normalized()
+	enemy.velocity.x = enemy.SPEED * enemy.global_speed_scale * direction.x
 	enemy.move_and_slide()
 	enemy.direct_sprite()
 
@@ -774,15 +774,17 @@ bg_color = Color(0.17, 0.17, 0.17, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uarvl"]
 bg_color = Color(1, 0.866667, 0.341176, 1)
 
-[node name="Bat" type="CharacterBody2D" node_paths=PackedStringArray("anim_player", "hurtbox", "hitboxes", "state_machine", "hit_listener", "buff_manager") groups=["Enemy"]]
+[node name="Bat" type="CharacterBody2D" node_paths=PackedStringArray("aggro_area", "anim_player", "hurtbox", "hitboxes", "state_machine", "hit_listener", "buff_manager") groups=["Enemy"]]
 collision_layer = 2
 script = ExtResource("1_xuti2")
+aggro_area = NodePath("AggroRange")
 anim_player = NodePath("EnemyAnimPlayer")
 hurtbox = NodePath("HurtBox")
 hitboxes = NodePath("HitBoxes")
 state_machine = NodePath("EnemyStateMachine")
 hit_listener = NodePath("HitListener")
 buff_manager = NodePath("BuffManager")
+poise_type = 1
 metadata/_custom_type_script = "uid://sbr2kdsijr7e"
 
 [node name="EnemyAnimPlayer" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
@@ -804,8 +806,8 @@ shape = SubResource("CapsuleShape2D_uo0jq")
 [node name="HitBoxes" type="Node2D" parent="."]
 
 [node name="Scratch" type="Area2D" parent="HitBoxes"]
-script = ExtResource("8_pphv1")
-motion_value = 18
+script = ExtResource("9_1ial8")
+motion_value = 16
 impact = 3
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"
 
@@ -850,6 +852,8 @@ movement_frames = Array[int]([6])
 movement_velocity = Array[Vector2]([Vector2(250, 0)])
 deceleration = 5
 attack_cooldown = 0.5
+option_type = 1
+option_cooldown = 1.0
 
 [node name="Recovery" type="Node" parent="EnemyStateMachine"]
 script = SubResource("GDScript_86kk5")
@@ -861,6 +865,8 @@ movement_frames = Array[int]([2, 3])
 movement_velocity = Array[Vector2]([Vector2(-40, -20), Vector2(-300, -110)])
 deceleration = 7
 attack_cooldown = 0.5
+option_type = 3
+option_cooldown = 1.0
 
 [node name="Death" type="Node" parent="EnemyStateMachine"]
 script = SubResource("GDScript_tnpbf")
@@ -869,6 +875,8 @@ script = SubResource("GDScript_tnpbf")
 script = ExtResource("13_6x6ks")
 anim_name = "hurl"
 attack_cooldown = 1.0
+option_type = 2
+option_cooldown = 4.0
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
 [node name="HitListener" type="Node2D" parent="." node_paths=PackedStringArray("life_bar")]
@@ -899,8 +907,7 @@ script = ExtResource("20_7m0mp")
 
 [node name="AggroRange" type="Area2D" parent="."]
 visible = false
-collision_layer = 128
-collision_mask = 128
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
 shape = SubResource("CircleShape2D_fggvm")
@@ -953,6 +960,3 @@ script = ExtResource("27_ilhet")
 [node name="BuffManager" type="Node" parent="."]
 script = ExtResource("28_hxbdp")
 metadata/_custom_type_script = "uid://b7k3ffwp05oxl"
-
-[connection signal="body_entered" from="AggroRange" to="." method="_on_aggro_range_body_entered"]
-[connection signal="body_exited" from="AggroRange" to="." method="_on_aggro_range_body_exited"]

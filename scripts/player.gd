@@ -13,6 +13,8 @@ class_name Player
 
 @export var specialVFXPlayer : SpecialVFXPlayer
 
+var current_state : PlayerState
+
 var dash_cooldown := 1.0
 var on_dash_cooldown := false
 var aerial_dash_used := false
@@ -43,7 +45,7 @@ func _init() -> void:
 	ice_res = 10.0
 
 func get_stunned(vel_x : float, duration : float):
-	if get_state() == "staggered":
+	if current_state.name == "staggered":
 		if $PlayerStateMachine/Staggered.cooldown > 1.5:
 			return 
 	$PlayerStateMachine/Hit.hit_direction = sign(vel_x)
@@ -65,7 +67,7 @@ func _physics_process(delta: float) -> void:
 	run_cooldowns(delta)
 
  	#------ Do nothing when in a blocking state ------#
-	var current_state : PlayerState = state_machine.get_current_state()
+	current_state = state_machine.get_current_state()
 	if current_state.is_state_blocking:
 		return
 

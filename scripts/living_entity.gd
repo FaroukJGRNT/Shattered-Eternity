@@ -9,7 +9,7 @@ var facing : int = 1
 
 @export var hitboxes : Node2D
 
-@export var state_machine : Node
+@export var state_machine : StateMachine
 
 @export var hit_listener : HitListener
 
@@ -66,7 +66,7 @@ enum Event {
 	PARRY
 }
 
-var poise_type := Poises.MEDIUM
+@export var poise_type := Poises.MEDIUM
 
 @export var fire_atk := 0.0      # % de bonus dégâts feu
 @export var thunder_atk := 0.0   # % de bonus dégâts foudre
@@ -127,6 +127,16 @@ var burn_tick_timer := 0.0
 var active_status_effects = {}
 
 var pulse_timer := 0.0  # à mettre dans la classe
+
+func _ready() -> void:
+	# Set collision layers and masks
+	collision_layer = 0
+	collision_mask = 0
+	set_collision_mask_value(8, true)
+	if is_in_group("Player"):
+		set_collision_layer_value(1, true)
+	elif is_in_group("Enemy"):
+		set_collision_layer_value(2, true)
 
 func _process(delta):
 	# Vider les barres d'accumulation progressivement

@@ -1,21 +1,16 @@
 extends HurtBox
 class_name ProjectileHurtBox
 
-var real_daddy : Projectile
-@export var physical := false
+# Custom hurtbox for projectiles
+# Will call on_hit on collision, and collide with terrain of specified
 
-func _ready () -> void:
-	real_daddy = owner
-	# Enemy hurtboxes need to be detected by the player
-	if real_daddy.is_in_group("ProjectileEnemy"):
-		collision_layer = 2
-	else:
-		collision_layer = 0
-	collision_mask = 2
-	connect("area_entered", on_area_entered)
-	#if physical:
-		#set_collision_mask_value(8, true)
-		#connect("body_entered", on_body_entered)
+var real_daddy : Projectile
+@export var collide_with_terrain := false
+
+func _ready() -> void:
+	super._ready()
+	if collide_with_terrain:
+		set_collision_mask_value(8, true)
 
 func on_area_entered(area: Area2D) -> void:
 	if area == null:
@@ -31,7 +26,7 @@ func on_area_entered(area: Area2D) -> void:
 		area.affected_targets.append(owner)
 
 func on_body_entered(body:Node2D):
-	if physical:
+	if collide_with_terrain:
 		real_daddy.on_hit()
 
 func _real_daddy_in_targeted_groups(diddy: Node, groups: Array) -> bool:

@@ -11,9 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://dgq87p03s30iv" path="res://assets/sprites/TreeMan/guard_man_walk.png" id="9_ouosm"]
 [ext_resource type="Script" uid="uid://bu12d3jgj4hqg" path="res://scripts/guardtreestun.gd" id="10_bg810"]
 [ext_resource type="Script" uid="uid://dvclob6aaps4" path="res://scripts/enemy_attack_state.gd" id="10_uddhs"]
-[ext_resource type="Script" uid="uid://dass3u4ef3rdj" path="res://scripts/enemy_hitbox.gd" id="11_mtgtp"]
 [ext_resource type="Script" uid="uid://wjvoahql1wyc" path="res://scripts/guard_treeman_hit_list.gd" id="12_0miqs"]
 [ext_resource type="Script" uid="uid://dcyrdorbq64wa" path="res://scripts/treemanblock.gd" id="12_dgdvm"]
+[ext_resource type="Script" uid="uid://dpui3ac2qscjh" path="res://scripts/attack_hb_gtreeman.gd" id="13_dgdvm"]
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_mf740"]
 output_port_for_preview = 0
@@ -616,8 +616,9 @@ deceleration = 5
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
 [node name="Attack" type="Area2D" parent="HitBoxes" index="0"]
-script = ExtResource("11_mtgtp")
-motion_value = 10
+script = ExtResource("13_dgdvm")
+motion_value = 16
+push_back = 1
 attack_type = 3
 impact = 3
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"

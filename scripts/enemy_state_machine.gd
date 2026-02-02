@@ -1,13 +1,10 @@
-extends Node
+extends StateMachine
 class_name EnemyStateMachine
 
-@onready var AnimPlayer : AnimatedSprite2D = owner.anim_player
-@onready var enemy : LivingEntity = owner
-var current_state : EnemyState
-var states : Dictionary = {}
+@onready var enemy : BasicEnemy = owner
 
 func _ready() -> void:
-	AnimPlayer.connect("animation_finished", _on_animated_sprite_2d_animation_finished)
+	super._ready()
 	# Gather all different states in the dictionnary
 	for child in get_children():
 		if child is EnemyState:
@@ -31,11 +28,11 @@ func on_state_transition(new_state_name):
 		current_state.exit()
 		if current_state is EnemyAttackState:
 			current_state.option_timer = current_state.option_cooldown
+			if current_state.wander_queued:
+				current_state.wander_queued = false
+				enemy.current_mode = enemy.Mode.CHILLIN
+				current_state = states["wander"]
+				current_state.enter()
+				return
 		current_state = states[new_state_name.to_lower()]
 		current_state.enter()
-
-func get_current_state():
-	return current_state
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	current_state.on_animation_end()

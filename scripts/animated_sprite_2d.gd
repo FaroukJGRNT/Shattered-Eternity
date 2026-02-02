@@ -1,29 +1,32 @@
 extends AnimatedSprite2D
-class_name EnemyAnimPlayer
+class_name BasicAnimPlayer
 
 @export var hurtbox : HurtBox
 @export var hitboxes : Node2D
-@export var state_machine : EnemyStateMachine
+@export var state_machine : StateMachine
+var active_hitboxes : Array[HitBox] =  []
 
 func _ready() -> void:
 	connect("frame_changed", _on_frame_changed)
 
-func _process(delta: float) -> void:
-	pass
-
 func _on_frame_changed() -> void:
 	# default reset
-	hurtbox.activate()
+	if hurtbox.disabled:
+		hurtbox.activate()
 
-	for hitbox in hitboxes.get_children():
+	for hitbox in active_hitboxes:
 		hitbox.desactivate()
+	active_hitboxes.clear()
 
 	var current_state = state_machine.get_current_state()
-	if current_state is EnemyAttackState:
+	if current_state == null:
+		return
+	if current_state is EnemyAttackState or  current_state is AttackState:
 		if frame in current_state.active_frames:
 			if frame == current_state.active_frames[0]:
 				current_state.hitbox.start_life()
 			current_state.hitbox.activate()
+			active_hitboxes.append(current_state.hitbox)
 			current_state.hitbox.facing = owner.facing
 
 	if current_state is EvadeState:

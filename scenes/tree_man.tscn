@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dvu3gvc3b5wwd" path="res://assets/sprites/TreeMan/tree_man_stagger_hit.png" id="8_sm566"]
 [ext_resource type="Texture2D" uid="uid://pac7os3xmlpp" path="res://assets/sprites/TreeMan/tree_man_walk.png" id="9_7csko"]
 [ext_resource type="Script" uid="uid://bh4051womny00" path="res://scripts/treeman_attack.gd" id="10_yobas"]
-[ext_resource type="Script" uid="uid://dass3u4ef3rdj" path="res://scripts/enemy_hitbox.gd" id="11_tsnlx"]
+[ext_resource type="Script" uid="uid://duq0844ietjid" path="res://scripts/attack_hb.gd" id="11_yobas"]
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_mf740"]
 output_port_for_preview = 0
@@ -571,8 +571,9 @@ movement_velocity = Array[Vector2]([Vector2(160, 0)])
 attack_cooldown = 0.5
 
 [node name="Attack" type="Area2D" parent="HitBoxes" index="0"]
-script = ExtResource("11_tsnlx")
-motion_value = 14
+script = ExtResource("11_yobas")
+motion_value = 15
+attack_type = 3
 impact = 3
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"
 

@@ -7,11 +7,17 @@ var daddy : LivingEntity
 func _ready () -> void:
 	daddy = owner
 	# Enemy hurtboxes need to be detected by the player
-	if daddy.is_in_group("Enemy"):
-		collision_layer = 2
-	else:
-		collision_layer = 0
-	collision_mask = 2
+	collision_layer = 0
+	collision_mask = 0
+	if owner.is_in_group("Player"):
+		set_collision_mask_value(2, true)
+	elif owner.is_in_group("Enemy"):
+		set_collision_mask_value(1, true)
+	if owner.is_in_group("AllyProjectile"):
+		set_collision_mask_value(2, true)
+	elif owner.is_in_group("EnemyProjectile"):
+		set_collision_mask_value(1, true)
+
 	connect("area_entered", on_area_entered)
 
 func on_area_entered(area: Area2D) -> void:

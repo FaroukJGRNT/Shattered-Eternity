@@ -3,6 +3,7 @@ extends EnemyAttackState
 var has_hot := false
 var wave_scene : PackedScene = load("res://scenes/bat_wave.tscn")
 
+
 func enter():
 	super.enter()
 	has_hot = false

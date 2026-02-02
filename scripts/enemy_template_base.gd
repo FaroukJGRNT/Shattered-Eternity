@@ -5,7 +5,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	var current_state : EnemyState = state_machine.get_current_state()
+	current_state = state_machine.get_current_state()
 
 	if current_state.is_state_blocking:
 		return

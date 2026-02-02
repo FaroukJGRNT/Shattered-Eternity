@@ -15,6 +15,7 @@ var usable_velocs : Array[Vector2]
 
 @export var deceleration := 10
 
+var wander_queued := false
 
 # During this time, the enemy will stay idle after attacking before moving again
 @export var attack_cooldown : float = 0.0

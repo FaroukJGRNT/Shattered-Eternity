@@ -1,4 +1,1 @@
-extends AllyHitBox
-
-func _ready() -> void:
-	motion_value = 50
+extends HitBox

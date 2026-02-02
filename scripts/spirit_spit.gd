@@ -15,14 +15,14 @@ var splash : ShortLivedVFX
 
 func _ready() -> void:
 	super._ready()
-	
+
 	splash = vfx.instantiate()
 	splash.position = global_position
 	get_tree().get_first_node_in_group("Level").add_child(splash)
 	splash.play("spirit_splash")
-	
+
 	velocity.y += JUMP_VELOCITY
-	
+
 func move(delta):
 	if facing == 1:
 		anim_player.flip_h = true
@@ -30,7 +30,7 @@ func move(delta):
 			splash.flip_h = true
 	velocity.x = HORIZ_VELOCITY * facing
 	velocity.y += GRAVITY + GRAVITY_ACCEL
-	
+
 	GRAVITY_ACCEL += 10 * delta
 	
 	position += velocity * delta
@@ -41,9 +41,7 @@ func set_target(_target : LivingEntity):
 func destroy():
 	destroyed = true
 	hitbox.desactivate()
-
 	anim_player.play("hit")
-
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim_player.animation == "hit":

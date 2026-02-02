@@ -12,8 +12,8 @@ func enter():
 	AnimPlayer.play("slide")
 
 func update(delta):
-	#if player.is_on_wall() and not player.is_on_floor():
-		#transitioned.emit("wallsliding") 
+	if player.is_on_wall() and not player.is_on_floor():
+		transitioned.emit("airborne")
 	if abs(player.position.x - slide_start) < player.SLIDE_DIST:
 		player.velocity.x = slide_direction * player.SLIDE_SPEED * player.global_speed_scale
 	else:

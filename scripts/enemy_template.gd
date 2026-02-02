@@ -1,6 +1,7 @@
 extends LivingEntity
 class_name BasicEnemy
 
+@export var test := false
 @export var SPEED = 150.0
 @export var ATTACK_RANGE = 80
 @export var wander_distance = 200
@@ -11,6 +12,7 @@ class_name BasicEnemy
 var offensive_actions : Array[EnemyState] = []
 var ranged_offensive_actions : Array[EnemyState] = []
 var defensive_actions : Array[EnemyState] = []
+var current_state : EnemyState
 
 var last_decide_hp := life
 
@@ -36,6 +38,7 @@ func _init() -> void:
 	elem_mode = ElemMode.NONE
 
 func _ready() -> void:
+	super._ready()
 	# Gather our options
 	for state in state_machine.get_children():
 		if not state is EnemyAttackState:
@@ -66,7 +69,8 @@ func get_staggered():
 
 # NOW THE REAL STUFF, THE BIG WIGS
 func _physics_process(delta: float) -> void:
-	var current_state : EnemyState = state_machine.get_current_state()
+	current_state = state_machine.get_current_state()
+	print(current_state.name)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -81,7 +85,7 @@ func _physics_process(delta: float) -> void:
 		enemy_ai()
 
 func is_target_close() -> bool:
-	if abs(position.x - target.position.x) <= ATTACK_RANGE:
+	if position.distance_to(target.position) <= ATTACK_RANGE:
 		return true
 	else:
 		return false
@@ -179,8 +183,15 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if dead:
 		return
 	if body.is_in_group("Player"):
-		current_mode = Mode.CHILLIN
-		state_machine.on_state_transition("wander")
+		print("Player leaving, in middle of ", current_state.name)
+		if current_state is not EnemyAttackState:
+			print("Not attack state, can wander")
+			current_mode = Mode.CHILLIN
+			state_machine.on_state_transition("wander")
+			return
+		else:
+			print("Attack state, must wait")
+			current_state.wander_queued = true
 		#state_machine/Wander.wait_cooldown = 5.0
 
 func _on_aggro_range_body_entered(body: Node2D) -> void:
@@ -189,4 +200,8 @@ func _on_aggro_range_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		target = body
 		current_mode = Mode.BASIC_AGGRO
-		state_machine.on_state_transition("decide")
+		if current_state is not EnemyAttackState:
+			state_machine.on_state_transition("decide")
+		else:
+			if current_state.wander_queued:
+				current_state.wander_queued = false

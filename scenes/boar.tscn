@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://dimdq1p3y55rx"]
+[gd_scene load_steps=129 format=3 uid="uid://dimdq1p3y55rx"]
 
 [ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/enemy_template.tscn" id="1_tgiih"]
 [ext_resource type="Texture2D" uid="uid://bxys11ibhv102" path="res://assets/sprites/Boar/boar_death.png" id="2_4qjkf"]
@@ -12,8 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://d2jqbllfwlthn" path="res://assets/sprites/Boar/boar_stagger_tackle.png" id="9_i82p4"]
 [ext_resource type="Texture2D" uid="uid://b6s1uony7c8j3" path="res://assets/sprites/Boar/boar_walk.png" id="10_2bhyl"]
 [ext_resource type="Script" uid="uid://dvclob6aaps4" path="res://scripts/enemy_attack_state.gd" id="11_rlyfy"]
-[ext_resource type="Script" uid="uid://dass3u4ef3rdj" path="res://scripts/enemy_hitbox.gd" id="12_fc1cp"]
 [ext_resource type="Script" uid="uid://dbvd8w5b3ygc" path="res://scripts/tackle.gd" id="13_7fxvx"]
+[ext_resource type="Script" uid="uid://dnp3a55oowh1f" path="res://scripts/tackle_hb.gd" id="14_p1bql"]
+[ext_resource type="Script" uid="uid://btbs38te0nmu5" path="res://scripts/kick_hb.gd" id="15_mneqp"]
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_mf740"]
 output_port_for_preview = 0
@@ -897,7 +898,7 @@ shape = SubResource("RectangleShape2D_7fxvx")
 script = ExtResource("11_rlyfy")
 anim_name = "kick"
 active_frames = Array[int]([4])
-hitbox = NodePath("../../HitBoxes/Kick")
+hitbox = NodePath("")
 movement_frames = Array[int]([4])
 movement_velocity = Array[Vector2]([Vector2(-300, 0)])
 deceleration = 14
@@ -909,7 +910,7 @@ script = ExtResource("13_7fxvx")
 custom_decel = 18
 anim_name = "tackle"
 active_frames = Array[int]([20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35])
-hitbox = NodePath("../../HitBoxes/Tackle")
+hitbox = NodePath("")
 movement_frames = Array[int]([20])
 movement_velocity = Array[Vector2]([Vector2(350, 0)])
 deceleration = 0
@@ -917,11 +918,7 @@ attack_cooldown = 0.5
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
 [node name="Tackle" type="Area2D" parent="HitBoxes" index="0"]
-script = ExtResource("12_fc1cp")
-motion_value = 30
-life_duration = 2.0
-attack_type = 3
-impact = 3
+script = ExtResource("14_p1bql")
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/Tackle" index="0"]
@@ -929,11 +926,7 @@ position = Vector2(-24, 12)
 shape = SubResource("CapsuleShape2D_p1bql")
 
 [node name="Kick" type="Area2D" parent="HitBoxes" index="1"]
-script = ExtResource("12_fc1cp")
-motion_value = 20
-multidirectional = true
-attack_type = 1
-impact = 3
+script = ExtResource("15_mneqp")
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/Kick" index="0"]

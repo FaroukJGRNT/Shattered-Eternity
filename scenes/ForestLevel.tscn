@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://c1paobpsf310a" path="res://scenes/CloudLayer.gd" id="2_tcea8"]
 [ext_resource type="Texture2D" uid="uid://bh1tf5vfibdas" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-3.png" id="3_tcea8"]
 [ext_resource type="Texture2D" uid="uid://6iqujdloxp6k" path="res://assets/sprites/environment/ForestScene/ForestZone-Background-1.png" id="4_4mgxn"]
-[ext_resource type="Script" uid="uid://4gd1kpn0ol6e" path="res://scripts/CloudLayer.gd" id="4_l65lk"]
+[ext_resource type="Script" path="res://scripts/CloudLayer.gd" id="4_l65lk"]
 [ext_resource type="Texture2D" uid="uid://bsyfvh76q8heu" path="res://assets/sprites/environment/ForestScene/ForestZone-Background-2.png" id="5_l65lk"]
 [ext_resource type="Texture2D" uid="uid://bhbrmgb1qc3kh" path="res://assets/sprites/environment/ForestScene/ForestZone-Background-3.png" id="6_pf0y0"]
 [ext_resource type="Texture2D" uid="uid://wfmghlqla7su" path="res://assets/sprites/environment/ForestScene/ForestZone-Background-4.png" id="7_vvr6j"]

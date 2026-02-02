@@ -1,6 +1,7 @@
 extends Area2D
 class_name HitBox
 
+@export var test := false
 # The base power of the attack
 @export var motion_value := 0
 # The elemental type of the attack
@@ -50,12 +51,19 @@ enum AttackType {
 # from their owmer
 var premade_dmg : DamageContainer = null
 
-func _init() -> void:
-	desactivate()
-	# Hitboxes look for hurtboxes on layer 2
-	collision_layer = 2
-	# Hitboxes don't need to be in a mask 
+func _ready() -> void:
+	var bad_guys = ["Enemy", "EnemyProjectile"]
+	var good_guys = ["Player", "AllyProjectile"]
+	# Decide your positionment based on your father nature
+	collision_layer = 0
 	collision_mask = 0
+	if owner.is_in_group("Player") or owner.is_in_group("AllyProjectile"):
+		targeted_groups = bad_guys
+		set_collision_layer_value(1, true)
+	elif owner.is_in_group("Enemy") or owner.is_in_group("EnemyProjectile"):
+		targeted_groups = good_guys
+		set_collision_layer_value(2, true)
+	desactivate()
 
 func generate_damage() -> DamageContainer:
 	if premade_dmg != null:

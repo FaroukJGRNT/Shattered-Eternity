@@ -1,4 +1,4 @@
-extends AllyHitBox
+extends HitBox
 class_name AllyAerialHitBox
 
 @export var up_value := 0

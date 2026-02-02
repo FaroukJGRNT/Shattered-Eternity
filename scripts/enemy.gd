@@ -11,6 +11,8 @@ var direction
 var can_attack = true
 var hit_counter := 0
 
+var current_state : EnemyState
+
 # Stats
 func _init() -> void:
 	poise_type = Poises.MEDIUM
@@ -58,7 +60,7 @@ func get_state():
 	return $EnemyStateMachine.get_current_state().name.to_lower()
 
 func _physics_process(delta: float) -> void:
-	var current_state : EnemyState = $EnemyStateMachine.get_current_state()
+	current_state = $EnemyStateMachine.get_current_state()
 
 	if current_state.is_state_blocking:
 		return

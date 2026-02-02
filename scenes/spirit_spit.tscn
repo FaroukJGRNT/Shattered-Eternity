@@ -101,8 +101,12 @@ radius = 14.0357
 
 [node name="SpiritSpit" type="Node2D" node_paths=PackedStringArray("hitbox", "hurtbox", "anim_player") groups=["EnemyProjectile"]]
 script = ExtResource("1_7gjnm")
+JUMP_VELOCITY = null
 HORIZ_VELOCITY = 250.0
 GRAVITY = 13.0
+GRAVITY_ACCEL = null
+is_one_shot = null
+is_anim_one_shot = null
 hitbox = NodePath("HitBox")
 hurtbox = NodePath("HurtBox")
 anim_player = NodePath("AnimatedSprite2D")
@@ -128,7 +132,6 @@ shape = SubResource("CircleShape2D_drinr")
 
 [node name="HurtBox" type="Area2D" parent="."]
 script = ExtResource("5_g5dfh")
-physical = true
 metadata/_custom_type_script = "uid://dd3w3luy0l2xt"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]

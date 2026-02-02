@@ -1,4 +1,4 @@
-extends AllyHitBox
+extends HitBox
 
 func _init() -> void:
 	super()

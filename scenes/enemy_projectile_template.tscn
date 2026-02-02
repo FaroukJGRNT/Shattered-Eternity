@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cutbi5dnu4dxn"]
+
+[ext_resource type="Script" uid="uid://buu5eyjfovye8" path="res://scripts/enemy_projectile_base.gd" id="1_8xxw7"]
+[ext_resource type="Script" uid="uid://6eagvjgkh23i" path="res://scripts/enemy_projectile_hb.gd" id="2_qyxii"]
+[ext_resource type="Script" uid="uid://dd3w3luy0l2xt" path="res://scripts/projectile_hurtbox.gd" id="3_vlcgo"]
+
+[node name="EnemyProjectile" type="Node2D"]
+script = ExtResource("1_8xxw7")
+is_one_shot = null
+is_anim_one_shot = null
+metadata/_custom_type_script = "uid://buu5eyjfovye8"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="ProjectileHitBox" type="Area2D" parent="."]
+script = ExtResource("2_qyxii")
+metadata/_custom_type_script = "uid://6eagvjgkh23i"
+
+[node name="ProjectileHurtBox" type="Area2D" parent="."]
+script = ExtResource("3_vlcgo")
+metadata/_custom_type_script = "uid://dd3w3luy0l2xt"

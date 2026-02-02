@@ -2388,8 +2388,8 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.495516, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("specialVFXPlayer", "anim_player", "hurtbox", "hitboxes", "state_machine", "hit_listener", "buff_manager") groups=["Player"]]
-collision_layer = 128
-collision_mask = 128
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_le0q1")
 specialVFXPlayer = NodePath("VFXPlayer")
 anim_player = NodePath("AnimatedSprite2D")
@@ -2399,7 +2399,7 @@ state_machine = NodePath("PlayerStateMachine")
 hit_listener = NodePath("HitListener")
 buff_manager = NodePath("BuffManager")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("state_machine", "hitboxes", "hurtbox")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
@@ -2408,9 +2408,9 @@ autoplay = "idle"
 frame = 2
 frame_progress = 1.0
 script = ExtResource("5_fjrip")
-state_machine = NodePath("../PlayerStateMachine")
-hitboxes = NodePath("../HitBoxes")
 hurtbox = NodePath("../PlayerHurtBox")
+hitboxes = NodePath("../HitBoxes")
+state_machine = NodePath("../PlayerStateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -2)
@@ -2421,7 +2421,8 @@ position_smoothing_enabled = true
 script = ExtResource("6_fjrip")
 
 [node name="PlayerHurtBox" type="Area2D" parent="."]
-visible = false
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("7_fjrip")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtBox"]
@@ -2694,6 +2695,7 @@ visible = false
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("27_dt7fs")
+motion_value = 22
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAttack2"]
@@ -2705,6 +2707,7 @@ shape = SubResource("CapsuleShape2D_487ah")
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("28_wqfne")
+motion_value = 20
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAttack1"]
@@ -2716,6 +2719,8 @@ shape = SubResource("CapsuleShape2D_487ah")
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("29_wnwbv")
+motion_value = 30
+push_back = 1
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAttack3"]
@@ -2725,6 +2730,7 @@ shape = SubResource("RectangleShape2D_4vfid")
 
 [node name="HammerAttack1" type="Area2D" parent="HitBoxes"]
 script = ExtResource("33_md1ol")
+motion_value = 80
 attack_type = 2
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
@@ -2736,6 +2742,8 @@ shape = SubResource("CapsuleShape2D_bj30b")
 
 [node name="HammerAttack2" type="Area2D" parent="HitBoxes"]
 script = ExtResource("34_bj30b")
+motion_value = 42
+life_duration = 0.0
 push_back = 1
 attack_type = 2
 impact = 2
@@ -2749,6 +2757,7 @@ shape = SubResource("CapsuleShape2D_jc3p3")
 [node name="SpearAttack1" type="Area2D" parent="HitBoxes"]
 position = Vector2(-13, -2)
 script = ExtResource("24_dt7fs")
+motion_value = 15
 attack_type = 1
 impact = 0
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
@@ -2761,6 +2770,7 @@ shape = SubResource("CapsuleShape2D_hax0n")
 [node name="SpearAttack2" type="Area2D" parent="HitBoxes"]
 position = Vector2(-13, -2)
 script = ExtResource("25_wqfne")
+motion_value = 18
 impact = 0
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
@@ -2772,7 +2782,9 @@ shape = SubResource("CapsuleShape2D_t4otl")
 [node name="SpearAttack3" type="Area2D" parent="HitBoxes"]
 position = Vector2(-13, -2)
 script = ExtResource("26_wnwbv")
+motion_value = 15
 life_duration = 0.0
+push_back = 1
 impact = 0
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
@@ -2783,9 +2795,9 @@ shape = SubResource("CapsuleShape2D_j2b1d")
 
 [node name="HammerChargedAttack" type="Area2D" parent="HitBoxes"]
 script = ExtResource("46_mx1m4")
+motion_value = 150
 push_back = 1
 attack_type = 2
-impact = 3
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerChargedAttack"]
@@ -2795,6 +2807,7 @@ shape = SubResource("CapsuleShape2D_4gjji")
 
 [node name="SwordCharged" type="Area2D" parent="HitBoxes"]
 script = ExtResource("50_sc3ue")
+motion_value = 30
 life_duration = 0.0
 push_back = 1
 impact = 2
@@ -2807,7 +2820,7 @@ shape = SubResource("CircleShape2D_edwuo")
 [node name="SpearAerial" type="Area2D" parent="HitBoxes"]
 script = ExtResource("58_tk41t")
 up_value = 40
-atk_type = "full_ice"
+motion_value = 15
 life_duration = 0.0
 impact = 0
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
@@ -2819,7 +2832,7 @@ shape = SubResource("CircleShape2D_i18u8")
 [node name="SwordAerial1" type="Area2D" parent="HitBoxes"]
 script = ExtResource("59_fuw3a")
 up_value = 35
-atk_type = "full_thunder"
+motion_value = 20
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAerial1"]
@@ -2830,6 +2843,7 @@ shape = SubResource("CapsuleShape2D_46bxm")
 [node name="SwordAerial2" type="Area2D" parent="HitBoxes"]
 script = ExtResource("60_8txt3")
 up_value = 30
+motion_value = 25
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAerial2"]
@@ -2838,9 +2852,9 @@ shape = SubResource("RectangleShape2D_au7lq")
 
 [node name="HammerParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("75_vx63k")
+motion_value = 80
 push_back = 1
 attack_type = 2
-impact = 3
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerParry"]
@@ -2849,6 +2863,7 @@ shape = SubResource("CircleShape2D_6pxcr")
 
 [node name="SwordParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("76_lw0jh")
+motion_value = 80
 push_back = 1
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
@@ -2859,8 +2874,11 @@ shape = SubResource("RectangleShape2D_uifsl")
 
 [node name="GuardBreak" type="Area2D" parent="HitBoxes"]
 script = ExtResource("79_lw0jh")
+motion_value = 20
+push_back = 1
 attack_type = 2
 impact = 2
+is_guard_break = true
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/GuardBreak"]
@@ -2870,7 +2888,7 @@ shape = SubResource("CircleShape2D_p6pc0")
 [node name="HammerAerial" type="Area2D" parent="HitBoxes"]
 script = ExtResource("84_cbf1i")
 up_value = 20
-atk_type = "full_fire"
+motion_value = 35
 attack_type = 2
 impact = 2
 metadata/_custom_type_script = "uid://cahklyitgjl16"
@@ -2881,8 +2899,8 @@ shape = SubResource("CapsuleShape2D_4tr32")
 
 [node name="SpearParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("86_4vfid")
+motion_value = 60
 push_back = 1
-impact = 3
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearParry"]
@@ -2935,7 +2953,3 @@ script = ExtResource("91_4vfid")
 [node name="KilledEnemyAtkBuff" type="Node" parent="BuffManager"]
 script = ExtResource("92_ljgr3")
 metadata/_custom_type_script = "uid://dioqaxwj02s7r"
-
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="PlayerStateMachine" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]

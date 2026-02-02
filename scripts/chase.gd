@@ -12,8 +12,8 @@ func update(delta):
 		transitioned.emit("decide")
 		return
 	# Move in direction of the target
-	enemy.direction = (enemy.target.position - enemy.position).normalized()
-	enemy.velocity.x = enemy.SPEED * enemy.global_speed_scale * enemy.direction.x
+	var direction = (enemy.target.position - enemy.position).normalized()
+	enemy.velocity.x = enemy.SPEED * enemy.global_speed_scale * direction.x
 	enemy.move_and_slide()
 	enemy.direct_sprite()
 

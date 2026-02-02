@@ -1,4 +1,5 @@
 extends BasicEnemy
+class_name Boar
 
 func enemy_ai():
 	# Bro has no defensive

@@ -688,7 +688,7 @@ movement_frames = Array[int]([1, 2])
 movement_velocity = Array[Vector2]([Vector2(-150, 0), Vector2(-400, 0)])
 deceleration = 15
 option_type = 3
-option_cooldown = 2.0
+option_cooldown = 1.5
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
 [node name="Area2D" parent="." index="8"]

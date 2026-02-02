@@ -227,8 +227,9 @@ Ce serait bien qu'au sommet des monts, tu puisse sauter et planer jusqu'aux iles
 
 --> On pourrait ajouter des évènements qui se passent à un certain moment de la boucle à chaque run (Ex : Une montgolfière qui s'écrase quelque part, une tour qui s'effondre…) et créer des backgrounds ou des objets spéciaux (animés peut être) pour les autres zones ou on peut voir le phénomène se dérouler de loin (vu que les arrière-plans des zones contiennent des éléments d'autres zones)
 
+--> Le village a un moyen de monter en hauteur pour acceder a un pont, et ce pont mene normalement aux ruines de la cite des grants, sauf qu'il est effondre a un moment donne, mais un oiseau peut vous emmener de l'autre cote, si vous avez le bon objet
 
-
+--> On doit trouver des moyens originaux qui font reflechir le player pour debloquer des trucs, par exemple un boss ultra dur mais qui devient facile quand on trouve son point faible, ou bien utiliser le bon element pour detruire un obstacle
 
 # IDEES GAMEPLAY
 
@@ -237,7 +238,7 @@ Il y a aussi des objets dispersés dans le monde qui génèrent du "mana pur" pe
 
 --> Si le joueur arrive à placer trois coups en restant en l'air, il recharge son double saut (le nombre de coups diminue avec les niveaux de résonance)
 
-
+--> Il doit y avoir 3 types de stagger, un leger tick, pour les petits coups, un hurt medium qui t'envoie en l'air vers l'arriere, et un gros stagger qui te balance vers l'arriere et t'envoie congner un mur
 
 # QUESTIONNEMENTS GAMEPLAY
 

@@ -902,7 +902,6 @@ movement_frames = Array[int]([4])
 movement_velocity = Array[Vector2]([Vector2(-300, 0)])
 deceleration = 14
 attack_cooldown = 1.0
-option_cooldown = 1.5
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
 [node name="Tackle" type="Node" parent="EnemyStateMachine" index="7" node_paths=PackedStringArray("hitbox")]
@@ -915,7 +914,6 @@ movement_frames = Array[int]([20])
 movement_velocity = Array[Vector2]([Vector2(350, 0)])
 deceleration = 0
 attack_cooldown = 0.5
-option_type = 2
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
 [node name="Tackle" type="Area2D" parent="HitBoxes" index="0"]

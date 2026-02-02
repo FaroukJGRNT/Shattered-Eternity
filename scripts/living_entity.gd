@@ -79,8 +79,8 @@ var poise_type := Poises.MEDIUM
 @export var max_mana := 0
 @export var mana := 0
 
-@export var max_posture := 100
-@export var posture := 0
+@export var max_posture := 100.0
+@export var posture := 0.0
 
 enum ElemMode {
 	NONE,
@@ -106,6 +106,7 @@ var accum_factor = {
 }
 
 @export var accum_decay_rate := 0.5  # points par seconde
+@export var posture_decay_rate := 5.0  # points par seconde
 
 # --- Cooldowns pour chaque statut (en secondes) ---
 @export var burn_cooldown_time := 3.0
@@ -129,7 +130,7 @@ var pulse_timer := 0.0  # à mettre dans la classe
 
 func _process(delta):
 	# Vider les barres d'accumulation progressivement
-	posture = max(posture - (accum_decay_rate * delta), 0)
+	posture = max(posture - (posture_decay_rate * delta), 0)
 	for key in accum.keys():
 		accum[key] = max(accum[key] - accum_decay_rate * delta, 0)
 	#_update_accum_bars()
@@ -141,14 +142,17 @@ func _process(delta):
 		# Burn is the only status that works over time, other ones are just set
 		if status == "burn":
 			_apply_burn(delta)
-	
+
 		if active_status_effects[status] <= 0:
 			to_remove.append(status)
-	
+
 	# Nettoyer les statuts expirés
 	for status in to_remove:
 		_remove_status(status)
 
+	if active_status_effects.is_empty():
+		return
+		
 	# --- Pulsation (effet couleur indiquant le malus de statut) avec delta ---
 	pulse_timer += delta
 	var t = sin(pulse_timer * 5.0) * 0.5 + 0.5  # multiplier pour ajuster la vitesse du pulse
@@ -194,12 +198,6 @@ func take_damage(damage: DamageContainer) -> DamageContainer:
 	if accum["ice"] >= ice_res:
 		apply_status("freeze")
 		accum["ice"] = 0
-
-	if posture >= max_posture:
-		posture = 0
-		if poise_type != Poises.PLAYER:
-			hit_listener.create_label(Color.REBECCA_PURPLE, "STAGGERED!", 1.3)
-			get_staggered()
 
 	# Total des dégâts
 	damage.total_dmg = damage.fire_dmg + damage.thunder_dmg + damage.ice_dmg + damage.phys_dmg
@@ -304,7 +302,6 @@ func _remove_status(status_name: String):
 	active_status_effects.erase(status_name)
 
 func _show_status_label(status_name: String):
-	var label: Node = null
 	match status_name:
 		"burn":
 			hit_listener.create_label(Color.ORANGE_RED, "BURNED!", 1.3)
@@ -312,9 +309,6 @@ func _show_status_label(status_name: String):
 			hit_listener.create_label(Color.YELLOW, "SHOCKED!", 1.3)
 		"freeze":
 			hit_listener.create_label(Color.DEEP_SKY_BLUE, "FREEZED!", 1.3)
-	if label:
-		label.position = Vector2(0, -40) # un peu au-dessus du perso
-		add_child(label)
 
 #func _update_accum_bars():
 	#var index := 0
@@ -356,7 +350,11 @@ func get_staggered():
 	pass
 
 func get_state():
-	pass
+	return state_machine.get_current_state().name.to_lower()
 	
+func change_state(new_state):
+	$PlayerStateMachine.on_state_transition(new_state)
+
 func propagate_event(event : Event):
-	$BuffManager.propagate_event(event)
+	if buff_manager:
+		buff_manager.propagate_event(event)

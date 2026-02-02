@@ -10,6 +10,9 @@ class_name Player
 @export var BACKSLIDE_DIST = 80.0
 @export var WALL_SLIDE_SPEED = 50.0
 @export var MAX_VERTICAL_VELOC = 300.0
+
+@export var specialVFXPlayer : SpecialVFXPlayer
+
 var dash_cooldown := 1.0
 var on_dash_cooldown := false
 var aerial_dash_used := false
@@ -40,7 +43,7 @@ func _init() -> void:
 	ice_res = 10.0
 
 func get_stunned(vel_x : float, duration : float):
-	if $PlayerStateMachine.get_current_state().name == "Staggered":
+	if get_state() == "staggered":
 		if $PlayerStateMachine/Staggered.cooldown > 1.5:
 			return 
 	$PlayerStateMachine/Hit.hit_direction = sign(vel_x)
@@ -50,12 +53,6 @@ func get_stunned(vel_x : float, duration : float):
 
 func get_staggered():
 	change_state("staggered")
-
-func get_state():
-	return $PlayerStateMachine.get_current_state().name.to_lower()
-
-func change_state(new_state):
-	$PlayerStateMachine.on_state_transition(new_state)
 
 func run_cooldowns(delta):
 	if on_dash_cooldown:
@@ -68,7 +65,7 @@ func _physics_process(delta: float) -> void:
 	run_cooldowns(delta)
 
  	#------ Do nothing when in a blocking state ------#
-	var current_state : PlayerState = $PlayerStateMachine.get_current_state()
+	var current_state : PlayerState = state_machine.get_current_state()
 	if current_state.is_state_blocking:
 		return
 
@@ -85,7 +82,7 @@ func _physics_process(delta: float) -> void:
 		aerial_dash_used = false
 		aerial_attack_used = false
 		# Determine if the player just landed
-		if $PlayerStateMachine.current_state.name == "Airborne":
+		if current_state.name == "Airborne":
 			change_state("landing")
 			return
 		# Determine if the player is running or not
@@ -99,12 +96,10 @@ func _physics_process(delta: float) -> void:
 		change_state("airborne")
 
 	if Input.is_action_just_pressed("change_weapon"):
-		$VFXPlayer.visible = true
-		if $VFXPlayer.is_playing():
-			$VFXPlayer.stop()
-		$VFXPlayer.rotation = randf_range(0, 360)
-		$VFXPlayer.play("weapon_change")
+		specialVFXPlayer.play_vfx("weapon_change")
+		specialVFXPlayer.rotation_degrees = randf_range(0, 360)
 		current_weapon = (int(current_weapon) + 1) % 3
+
 	move_and_slide()
 
 #------ Utility functions ------#
@@ -183,12 +178,3 @@ func initiate_ground_actions():
 		change_state("guard")
 		return
 	initiate_slide()
-
-func _on_vfx_player_animation_finished() -> void:
-	$VFXPlayer.visible = false
-	$VFXPlayer.position = Vector2(0, 0)
-
-func on_attack_charged() -> void:
-	$VFXPlayer.visible = true
-	$VFXPlayer.position = Vector2(-20 * direction, -20)
-	$VFXPlayer.play("full_charge")

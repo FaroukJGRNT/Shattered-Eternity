@@ -36,12 +36,14 @@ func _init() -> void:
 
 func _ready() -> void:
 	# Gather our options
-	for state in $EnemyStateMachine.get_children():
-		if state.option_type == EnemyState.OptionType.OFFENSIVE:
+	for state in state_machine.get_children():
+		if not state is EnemyAttackState:
+			continue
+		if state.option_type == EnemyAttackState.OptionType.OFFENSIVE:
 			offensive_actions.append(state)
-		elif state.option_type == EnemyState.OptionType.RANGED_OFFENSIVE:
+		elif state.option_type == EnemyAttackState.OptionType.RANGED_OFFENSIVE:
 			ranged_offensive_actions.append(state)
-		elif state.option_type == EnemyState.OptionType.DEFENSIVE:
+		elif state.option_type == EnemyAttackState.OptionType.DEFENSIVE:
 			defensive_actions.append(state)
 
 # Formalities methods

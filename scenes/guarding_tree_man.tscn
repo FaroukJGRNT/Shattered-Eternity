@@ -607,8 +607,6 @@ movement_frames = Array[int]([8])
 movement_velocity = Array[Vector2]([Vector2(450, 0)])
 deceleration = 16
 attack_cooldown = 1.0
-option_type = 1
-option_cooldown = 3.0
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
 [node name="Block" type="Node" parent="EnemyStateMachine" index="8"]

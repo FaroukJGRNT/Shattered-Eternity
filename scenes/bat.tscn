@@ -850,7 +850,6 @@ movement_frames = Array[int]([6])
 movement_velocity = Array[Vector2]([Vector2(250, 0)])
 deceleration = 5
 attack_cooldown = 0.5
-option_type = 1
 
 [node name="Recovery" type="Node" parent="EnemyStateMachine"]
 script = SubResource("GDScript_86kk5")
@@ -862,8 +861,6 @@ movement_frames = Array[int]([2, 3])
 movement_velocity = Array[Vector2]([Vector2(-40, -20), Vector2(-300, -110)])
 deceleration = 7
 attack_cooldown = 0.5
-option_type = 3
-option_cooldown = 1.0
 
 [node name="Death" type="Node" parent="EnemyStateMachine"]
 script = SubResource("GDScript_tnpbf")
@@ -872,8 +869,6 @@ script = SubResource("GDScript_tnpbf")
 script = ExtResource("13_6x6ks")
 anim_name = "hurl"
 attack_cooldown = 1.0
-option_type = 2
-option_cooldown = 2.0
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
 [node name="HitListener" type="Node2D" parent="." node_paths=PackedStringArray("life_bar")]

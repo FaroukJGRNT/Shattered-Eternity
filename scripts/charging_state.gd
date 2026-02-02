@@ -1,6 +1,5 @@
 extends PlayerState
 class_name ChargingState
-signal attack_charged
 
 @export var charge_time : float
 @export var charge_animation : String
@@ -9,7 +8,6 @@ signal attack_charged
 @export var attack_state : String
 
 var timer := 0.0
-
 
 var emitted := false
 
@@ -28,7 +26,8 @@ func update(delta):
 		AnimPlayer.play(charge_end_animation)
 		if not emitted:
 			emitted = true
-			attack_charged.emit()
+			player.specialVFXPlayer.play_vfx("full_charge")
+			player.specialVFXPlayer.position = Vector2(-20 * player.direction, -20)
 
 	if not Input.is_action_pressed("attack") and timer > 0:
 		transitioned.emit("attackrecovery")

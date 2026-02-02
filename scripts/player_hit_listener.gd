@@ -13,10 +13,10 @@ class_name HitListener
 var vfx_player_scene : PackedScene = load("res://scenes/short_lived_vfx.tscn")
 
 # Hit freeze durations (seconds)
-const LIGHT_FRAME_FREEZE_DURATION  := 0.010
-const NORMAL_FRAME_FREEZE_DURATION := 0.020
-const BIG_FRAME_FREEZE_DURATION    := 0.03
-const HUGE_FRAME_FREEZE_DURATION   := 0.040
+const LIGHT_FRAME_FREEZE_DURATION  := 0.012
+const NORMAL_FRAME_FREEZE_DURATION := 0.024
+const BIG_FRAME_FREEZE_DURATION    := 0.038
+const HUGE_FRAME_FREEZE_DURATION   := 0.056
 
 @export var LIGHT_CAM_SHAKE : float = 2
 @export var NORMAL_CAM_SHAKE : float = 3
@@ -38,8 +38,8 @@ func update_lifebar(dmg : int):
 func handle_guard(area : HitBox) -> GuardResult:
 	return GuardResult.HIT
 	
-func handle_guard_break(area : HitBox):
-	if daddy.get_state() == "guard" and area.is_guard_break:
+func handle_guard_break(area : HitBox, current_state : State):
+	if current_state.name.to_lower() == "guard" and area.is_guard_break:
 		daddy.posture += (daddy.max_posture * 0.2)
 		match daddy.poise_type:
 			daddy.Poises.PLAYER:
@@ -75,16 +75,20 @@ func _process(delta: float) -> void:
 			shader_on_cooldown = false
 			daddy.anim_player.material.set_shader_parameter("enabled", false)
 
-func create_label(color : Color, text : String, scale : float = 1.0, y_offset : int = 50):
+func create_label(color : Color, text : String, scale : float = 1.0, y_offset : int = 50, special := false):
 		var dmg_text_instance = damage_label.instantiate()
 		dmg_text_instance.position = global_position - Vector2(0, 10)
 		dmg_text_instance.add_theme_color_override("font_color", color)
+		if special:
+			dmg_text_instance.add_theme_color_override("font_outline_color", Color.WHITE)
 		dmg_text_instance.scale = Vector2(scale, scale)
 		dmg_text_instance.text = text  # affiche la valeur
 		get_tree().get_first_node_in_group("Level").add_child(dmg_text_instance)
 		dmg_text_instance.position.y -= y_offset
 
 func damage_taken(area : HitBox) -> void:
+	var current_state : State = daddy.state_machine.get_current_state()
+	
 	# Recaluclate the facing (if multidirectional)
 	if area.multidirectional:
 		if area.owner.position.x < daddy.position.x:
@@ -128,10 +132,10 @@ func damage_taken(area : HitBox) -> void:
 
 	# Taking damage and side effects
 	# GETTING GUARD BROKEN
-	handle_guard_break(area)
+	handle_guard_break(area, current_state)
 
 	# GETTING INTERRUPTED
-	if daddy.get_state() == "guardbreak" and area.is_phys_atk:
+	if current_state.name.to_lower() == "guardbreak" and area.is_phys_atk:
 		daddy.posture += (daddy.max_posture * 0.2)
 		match daddy.poise_type:
 			daddy.Poises.PLAYER:
@@ -145,8 +149,12 @@ func damage_taken(area : HitBox) -> void:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 		create_label(Color.MEDIUM_SLATE_BLUE, "INTERRUPTED!", 1.3)
 
-	if (daddy.get_state() != "staggered"):
-		daddy.posture += area.motion_value / 3
+	if daddy.posture >= daddy.max_posture:
+		daddy.posture = 0
+		if daddy.poise_type != daddy.Poises.PLAYER:
+			create_label(Color.REBECCA_PURPLE, "STAGGERED!", 1.3)
+			daddy.get_staggered()
+
 	dmg = area.generate_damage()
 	dmg = daddy.take_damage(dmg)
 
@@ -156,7 +164,7 @@ func damage_taken(area : HitBox) -> void:
 	if daddy.poise_type == daddy.Poises.PLAYER:
 		daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
 
-	if daddy.is_in_group("Enemy") and not daddy.state_machine.get_current_state().option_type == EnemyState.OptionType.DEFENSIVE:
+	if daddy.is_in_group("Enemy") and current_state is EnemyAttackState and not current_state.option_type == EnemyAttackState.OptionType.DEFENSIVE:
 		match daddy.poise_type:
 			daddy.Poises.SMALL:
 				match area.push_back:
@@ -201,6 +209,12 @@ func damage_taken(area : HitBox) -> void:
 		"phys": Color.WHITE
 	}
 
+	var dmg_outlines = {
+		"fire": Color.CORAL,
+		"thunder": Color.LIGHT_YELLOW,
+		"ice": Color.LIGHT_BLUE,
+	}
+
 	# Liste des dégâts et leur type
 	var dmg_list = {
 		"fire": dmg.fire_dmg,
@@ -219,6 +233,8 @@ func damage_taken(area : HitBox) -> void:
 				dmg_text_instance.add_theme_color_override("font_color", Color.FIREBRICK)
 			else:
 				dmg_text_instance.add_theme_color_override("font_color", dmg_colors[dmg_type])
+				if dmg_type != "phys":
+					dmg_text_instance.add_theme_color_override("font_outline_color", dmg_outlines[dmg_type])
 			dmg_text_instance.text = str(int(amount))  # affiche la valeur
 			get_tree().get_first_node_in_group("Level").add_child(dmg_text_instance)
 			dmg_text_instance.position.y -= 30

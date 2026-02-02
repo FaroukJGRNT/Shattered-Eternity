@@ -2,7 +2,7 @@ extends PlayerState
 
 @export var stagger_duration := 2.0 
 var cooldown := 0.0
-var acceleration = 1.0
+var acceleration = 2.5
 
 func _ready() -> void:
 	is_state_blocking = true
@@ -15,12 +15,12 @@ func enter():
 
 func update(delta):
 	cooldown -= delta
-	if cooldown <= 0 and player.velocity.x == 0:
+	if cooldown <= 0:
 		AnimPlayer.play("stagger_end")
 	if player.velocity.x > 0:
-		player.velocity.x = max(player.velocity.x - acceleration, 0)
+		player.velocity.x = max(player.velocity.x - acceleration * 100 * delta, 0)
 	if player.velocity.x < 0:
-		player.velocity.x = min(player.velocity.x + acceleration, 0)
+		player.velocity.x = min(player.velocity.x + acceleration * 100 * delta, 0)
 	player.move_and_slide()
 
 func exit():

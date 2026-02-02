@@ -1539,7 +1539,7 @@ combo_state = "guard"
 active_frames = Array[int]([10, 11])
 hitbox = NodePath("../../HitBoxes/GetInGround")
 option_type = 3
-option_cooldown = 16.0
+option_cooldown = 10.0
 
 [node name="Guard" type="Node" parent="FGolemStateMachine"]
 script = ExtResource("18_40cl6")
@@ -1552,6 +1552,7 @@ anim_name = "explode"
 active_frames = Array[int]([1])
 hitbox = NodePath("../../HitBoxes/Explode")
 attack_cooldown = 1.5
+option_cooldown = 10.0
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
 [node name="Death" type="Node" parent="FGolemStateMachine"]
@@ -1567,7 +1568,7 @@ movement_velocity = Array[Vector2]([Vector2(600, 0)])
 deceleration = 20
 attack_cooldown = 1.0
 option_type = 2
-option_cooldown = 4.0
+option_cooldown = 3.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
 material = SubResource("ShaderMaterial_pmxkn")

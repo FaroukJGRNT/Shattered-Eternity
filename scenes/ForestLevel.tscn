@@ -335,3 +335,12 @@ metadata/_custom_type_script = "uid://sbr2kdsijr7e"
 
 [node name="IngameUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("14_vvr6j")]
 player = NodePath("../Player")
+
+[node name="Dummy2" parent="." instance=ExtResource("13_pf0y0")]
+position = Vector2(342, 254)
+
+[node name="Dummy3" parent="." instance=ExtResource("13_pf0y0")]
+position = Vector2(1720, 225)
+
+[node name="Dummy4" parent="." instance=ExtResource("13_pf0y0")]
+position = Vector2(2277, 234)

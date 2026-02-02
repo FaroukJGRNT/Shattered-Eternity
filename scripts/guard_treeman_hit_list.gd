@@ -12,7 +12,7 @@ func handle_guard(area : HitBox) -> GuardResult:
 		return GuardResult.BLOCK
 	return GuardResult.HIT
 
-func handle_guard_break(area : HitBox):
+func handle_guard_break(area : HitBox, current_state : State):
 	if daddy.state_machine.get_current_state().name != "Staggered" and daddy.facing * area.facing == -1:
 		if daddy.dead:
 			return GuardResult.HIT

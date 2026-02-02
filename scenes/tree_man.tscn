@@ -569,7 +569,6 @@ hitbox = NodePath("../../HitBoxes/Attack")
 movement_frames = Array[int]([9])
 movement_velocity = Array[Vector2]([Vector2(160, 0)])
 attack_cooldown = 0.5
-option_type = 1
 
 [node name="Attack" type="Area2D" parent="HitBoxes" index="0"]
 script = ExtResource("11_tsnlx")

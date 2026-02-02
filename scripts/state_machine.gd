@@ -1,10 +1,9 @@
 extends Node
 class_name PlayerStateMachine
 
-@export var AnimPlayer : AnimatedSprite2D
-@export var player : Player
+@onready var AnimPlayer : AnimatedSprite2D = owner.anim_player
+@onready var player : Player = owner
 var current_state : PlayerState
-var transition_state : PlayerState
 var old_state : PlayerState
 var states : Dictionary = {}
 
@@ -16,8 +15,6 @@ func _ready() -> void:
 			child.transitioned.connect(on_state_transition)
 			child.AnimPlayer = AnimPlayer
 			child.player = player
-			if child is ChargingState:
-				child.connect("attack_charged", player.on_attack_charged, )
 	current_state = states["idle"]
 	old_state = current_state
 

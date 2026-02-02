@@ -18,7 +18,7 @@ func update(delta):
 		player.velocity.x = slide_direction * player.SLIDE_SPEED * player.global_speed_scale
 	else:
 		player.velocity.x = slide_direction * player.SLIDE_SPEED * player.global_speed_scale / 5
-		if not player.is_on_floor():
+		if not player.is_on_floor() and AnimPlayer.frame > 1:
 			transitioned.emit("airborne")
 			return
 	player.velocity.y = 0

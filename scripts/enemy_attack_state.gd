@@ -21,6 +21,18 @@ var usable_velocs : Array[Vector2]
 
 var attack_ended := false
 
+enum OptionType {
+	NONE,
+	OFFENSIVE,
+	RANGED_OFFENSIVE,
+	DEFENSIVE
+}
+
+@export var option_type := OptionType.NONE
+@export var option_cooldown : float = 0.0
+var option_timer := 0.0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	is_state_blocking = true

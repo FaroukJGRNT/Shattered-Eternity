@@ -38,11 +38,13 @@ func _init() -> void:
 func _ready() -> void:
 	# Gather our options
 	for state in state_machine.get_children():
-		if state.option_type == EnemyState.OptionType.OFFENSIVE:
+		if not state is EnemyAttackState:
+			continue 
+		if state.option_type == EnemyAttackState.OptionType.OFFENSIVE:
 			offensive_actions.append(state)
-		elif state.option_type == EnemyState.OptionType.RANGED_OFFENSIVE:
+		elif state.option_type == EnemyAttackState.OptionType.RANGED_OFFENSIVE:
 			ranged_offensive_actions.append(state)
-		elif state.option_type == EnemyState.OptionType.DEFENSIVE:
+		elif state.option_type == EnemyAttackState.OptionType.DEFENSIVE:
 			defensive_actions.append(state)
 	aggro_area.connect("body_entered", _on_aggro_range_body_entered)
 	aggro_area.connect("body_exited", _on_area_2d_body_exited)
@@ -62,18 +64,14 @@ func get_staggered():
 	if state_machine.current_state.name != "Death":
 		state_machine.on_state_transition("staggered")
 
-func get_state():
-	return state_machine.get_current_state().name.to_lower()
-
 # NOW THE REAL STUFF, THE BIG WIGS
-
 func _physics_process(delta: float) -> void:
 	var current_state : EnemyState = state_machine.get_current_state()
-
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+		move_and_slide()
+		
 	if current_state.is_state_blocking:
 		return
 

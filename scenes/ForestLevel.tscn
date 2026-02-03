@@ -369,7 +369,6 @@ tile_map_data = PackedByteArray("AAAWAAkAAAABAAEAAAAWAAgAAAABAAEAAAAWAAcAAAABAAE
 tile_set = SubResource("TileSet_sfind")
 
 [node name="Player" parent="." instance=ExtResource("2_qbdkf")]
-collision_layer = 0
 collision_mask = 129
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

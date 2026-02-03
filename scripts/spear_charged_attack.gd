@@ -14,7 +14,7 @@ func get_closest_enemy() -> Array:
 	# var facing_dir = Vector2.RIGHT.rotated(owner.global_rotation)
 	
 	var MAX_ANGLE = deg_to_rad(60) # champ de vision de 90° (45° à gauche/droite)
-	var VERTICAL_LIMIT = 50        # tolérance en hauteur
+	var VERTICAL_LIMIT = 60        # tolérance en hauteur
 
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		var dir_to_enemy = (enemy.global_position - my_pos).normalized()

@@ -353,6 +353,9 @@ animations = [{
 "texture": SubResource("AtlasTexture_vlmw3")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vlmw3")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_7y380")
 }, {
 "duration": 1.0,
@@ -362,7 +365,16 @@ animations = [{
 "texture": SubResource("AtlasTexture_v14wi")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_v14wi")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_2jvar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jvar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46ot8")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_46ot8")
@@ -564,11 +576,13 @@ shape = SubResource("RectangleShape2D_tfqy6")
 [node name="Attack" type="Node" parent="EnemyStateMachine" index="7" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("10_yobas")
 anim_name = "attack"
-active_frames = Array[int]([9])
+active_frames = Array[int]([10])
 hitbox = NodePath("../../HitBoxes/Attack")
-movement_frames = Array[int]([9])
+movement_frames = Array[int]([10])
 movement_velocity = Array[Vector2]([Vector2(160, 0)])
-attack_cooldown = 0.5
+attack_cooldown = 1.0
+option_type = 1
+option_cooldown = 1.0
 
 [node name="Attack" type="Area2D" parent="HitBoxes" index="0"]
 script = ExtResource("11_yobas")

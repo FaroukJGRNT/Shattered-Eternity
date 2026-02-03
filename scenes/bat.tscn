@@ -527,7 +527,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cs315")
 }],
-"loop": true,
+"loop": false,
 "name": &"stagger_end",
 "speed": 5.0
 }, {
@@ -535,7 +535,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cs315")
 }],
-"loop": true,
+"loop": false,
 "name": &"stagger_start",
 "speed": 5.0
 }, {
@@ -790,9 +790,7 @@ metadata/_custom_type_script = "uid://sbr2kdsijr7e"
 [node name="EnemyAnimPlayer" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
 material = SubResource("ShaderMaterial_ss3wr")
 sprite_frames = SubResource("SpriteFrames_rrah6")
-animation = &"hurl"
-frame = 18
-frame_progress = 1.0
+animation = &"staggered"
 script = ExtResource("3_lv0ya")
 hurtbox = NodePath("../HurtBox")
 hitboxes = NodePath("../HitBoxes")

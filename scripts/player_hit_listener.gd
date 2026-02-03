@@ -139,6 +139,7 @@ func damage_taken(area : HitBox) -> void:
 		daddy.posture += (daddy.max_posture * 0.2)
 		match daddy.poise_type:
 			daddy.Poises.PLAYER:
+				print("PLAYER INTERRUPTED")
 				daddy.get_staggered()
 				daddy.velocity.x += MEDIUM_PUSHBACK * area.facing
 			daddy.Poises.SMALL:
@@ -149,6 +150,8 @@ func damage_taken(area : HitBox) -> void:
 				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 		create_label(Color.MEDIUM_SLATE_BLUE, "INTERRUPTED!", 1.3)
 
+	if daddy.get_state() != "staggered":
+		daddy.posture += area.motion_value / 2
 	if daddy.posture >= daddy.max_posture:
 		daddy.posture = 0
 		if daddy.poise_type != daddy.Poises.PLAYER:
@@ -164,23 +167,26 @@ func damage_taken(area : HitBox) -> void:
 	if daddy.poise_type == daddy.Poises.PLAYER:
 		daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
 
-	if daddy.is_in_group("Enemy") and current_state is EnemyAttackState and not current_state.option_type == EnemyAttackState.OptionType.DEFENSIVE:
-		match daddy.poise_type:
-			daddy.Poises.SMALL:
-				match area.push_back:
-					area.Pushback.NORMAL:
-						daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
-					area.Pushback.STRONG:
-						daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
-			daddy.Poises.MEDIUM:
-				match area.push_back:
-					area.Pushback.NORMAL:
-						pass
-					area.Pushback.STRONG:
-						daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
-			daddy.Poises.LARGE:
-				pass
-	
+	if daddy.is_in_group("Enemy"):
+		if current_state is EnemyAttackState and current_state.option_type == EnemyAttackState.OptionType.DEFENSIVE:
+			pass
+		else:
+			match daddy.poise_type:
+				daddy.Poises.SMALL:
+					match area.push_back:
+						area.Pushback.NORMAL:
+							daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
+						area.Pushback.STRONG:
+							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+				daddy.Poises.MEDIUM:
+					match area.push_back:
+						area.Pushback.NORMAL:
+							pass
+						area.Pushback.STRONG:
+							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+				daddy.Poises.LARGE:
+					pass
+		
 	# Hit flash
 	daddy.anim_player.material.set_shader_parameter("enabled", true)
 	shader_on_cooldown = true

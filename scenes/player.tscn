@@ -2398,6 +2398,7 @@ hitboxes = NodePath("PlayerHurtBox")
 state_machine = NodePath("PlayerStateMachine")
 hit_listener = NodePath("HitListener")
 buff_manager = NodePath("BuffManager")
+poise_type = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("hurtbox", "hitboxes", "state_machine")]
 material = SubResource("ShaderMaterial_wnwbv")
@@ -2721,6 +2722,7 @@ collision_mask = 2
 script = ExtResource("29_wnwbv")
 motion_value = 30
 push_back = 1
+impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SwordAttack3"]
@@ -2785,7 +2787,7 @@ script = ExtResource("26_wnwbv")
 motion_value = 15
 life_duration = 0.0
 push_back = 1
-impact = 0
+impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAttack3"]
@@ -2822,7 +2824,6 @@ script = ExtResource("58_tk41t")
 up_value = 40
 motion_value = 15
 life_duration = 0.0
-impact = 0
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearAerial"]
@@ -2901,6 +2902,7 @@ shape = SubResource("CapsuleShape2D_4tr32")
 script = ExtResource("86_4vfid")
 motion_value = 60
 push_back = 1
+impact = 3
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearParry"]

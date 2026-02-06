@@ -33,7 +33,8 @@ var direction
 var current_weapon = Weapons.SWORD
 
 # Stats
-func _init() -> void:
+func _ready() -> void:
+	super._ready()
 	poise_type = Poises.PLAYER
 	position.x += 200
 	max_life = 200
@@ -48,12 +49,18 @@ func get_stunned(vel_x : float, duration : float):
 	if get_state() == "staggered":
 		if $PlayerStateMachine/Staggered.cooldown > 1.5:
 			return
+	if abs(vel_x) == 1:
+		$PlayerStateMachine/Hit.hit_type = $PlayerStateMachine/Hit.HitType.TICK
+	elif abs(vel_x) == 2:
+		$PlayerStateMachine/Hit.hit_type = $PlayerStateMachine/Hit.HitType.NORMAL
+	elif abs(vel_x) == 3:
+		$PlayerStateMachine/Hit.hit_type = $PlayerStateMachine/Hit.HitType.GINORMOUS
 	$PlayerStateMachine/Hit.hit_direction = sign(vel_x)
 	if on_dash_cooldown:
 		dash_cooldown = 0.0
 	change_state("hit")
 
-func get_staggered():
+func get_staggered(x_vel : float = 0):
 	change_state("staggered")
 
 func run_cooldowns(delta):

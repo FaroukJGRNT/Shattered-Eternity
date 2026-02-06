@@ -11,11 +11,11 @@ func handle_guard_break(area : HitBox, current_state : State):
 		match daddy.poise_type:
 			daddy.Poises.PLAYER:
 				daddy.get_staggered()
-				daddy.velocity.x += MEDIUM_PUSHBACK * area.facing
+				daddy.velocity.x += BIG_PUSHBACK * area.facing
 			daddy.Poises.SMALL:
-				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 			daddy.Poises.MEDIUM:
-				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 			daddy.Poises.LARGE:
-				daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 		create_label(Color.ROYAL_BLUE, "GUARD BROKEN!", 1.3)

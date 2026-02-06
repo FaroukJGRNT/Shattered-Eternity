@@ -5,8 +5,9 @@ func enemy_ai():
 		turn_around()
 
 	if (target.get_state() == "guard" or state_machine.old_state.name.to_lower() == "stun") and is_target_close():
-		change_state("kick")
-		return
+		if $EnemyStateMachine/GuardBreak.option_cooldown <= 0:
+			change_state("guardbreak")
+			return
 
 	# Have I taken a lot of damage quickly
 	if (last_decide_hp - life) >= (max_life / 6) and state_machine.old_state.name.to_lower() != "staggered":

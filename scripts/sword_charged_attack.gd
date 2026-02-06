@@ -1,9 +1,9 @@
 extends AttackState
 
-var deceleration_ = 18
+var deceleration_ = 20
 
 func enter():
-	player.velocity.x = -280 * player.facing
+	player.velocity.x = -200 * player.facing
 	super.enter()
 
 func update(delta):

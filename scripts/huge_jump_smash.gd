@@ -23,9 +23,6 @@ func update(delta):
 		var x_veloc = abs(owner.position.x - owner.target.position.x) + 100
 		var y_veloc = 800 - x_veloc
 		
-		print(x_veloc)
-		print(y_veloc)
-
 		enemy.velocity.x += (x_veloc * owner.facing)
 		enemy.velocity.y += y_veloc
 

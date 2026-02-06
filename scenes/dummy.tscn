@@ -1,7 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://d3kvl1e2ls3do"]
+[gd_scene load_steps=37 format=3 uid="uid://d3kvl1e2ls3do"]
 
 [ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/enemy_template.tscn" id="1_w4gkx"]
 [ext_resource type="Texture2D" uid="uid://d2xf13bun56i8" path="res://assets/sprites/Dummy/dummy_death.png" id="2_fva3d"]
+[ext_resource type="Script" uid="uid://brc3etuunl5ba" path="res://scripts/dummy.gd" id="2_v72lb"]
 [ext_resource type="Texture2D" uid="uid://b3v31qr122f66" path="res://assets/sprites/Dummy/dummy_idle.png" id="3_v72lb"]
 [ext_resource type="Texture2D" uid="uid://bynrqhp4dho07" path="res://assets/sprites/Dummy/dummy_hit.png" id="4_p3fdn"]
 
@@ -341,6 +342,7 @@ func update(delta):
 "
 
 [node name="Dummy" instance=ExtResource("1_w4gkx")]
+script = ExtResource("2_v72lb")
 
 [node name="EnemyAnimPlayer" parent="." index="0"]
 material = SubResource("ShaderMaterial_ynn4s")

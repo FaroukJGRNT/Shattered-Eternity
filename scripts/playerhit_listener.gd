@@ -1,9 +1,9 @@
 extends HitListener
 
-@export var parry_recoil := 7.0
+@export var parry_recoil := 13.0
 @export var max_parry_speed := 450.0
 
-@export var guard_recoil := 14.0
+@export var guard_recoil := 28.0
 @export var max_guard_speed := 850.0
 
 func handle_guard(area : HitBox) -> GuardResult: 

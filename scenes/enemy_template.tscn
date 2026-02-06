@@ -221,7 +221,9 @@ func update(delta):
 resource_local_to_scene = true
 script/source = "extends EnemyState
 
-var stagger_cooldown = 5.0
+@export var stagger_cooldown := 5.0
+var push_back := 0.0
+@export var deceleration := 4.0
 
 func _init() -> void:
 	is_state_blocking = true
@@ -229,11 +231,19 @@ func _init() -> void:
 func enter():
 	stagger_cooldown = 5.0
 	AnimPlayer.play(\"stagger_start\")
+	enemy.velocity.x = push_back
 
 func update(delta):
 	stagger_cooldown -= delta
 	if stagger_cooldown <= 0:
 		AnimPlayer.play(\"stagger_end\")
+
+	if enemy.velocity.x > 0:
+		enemy.velocity.x = max(enemy.velocity.x - deceleration * 100 * delta, 0)
+	elif enemy.velocity.x < 0:
+		enemy.velocity.x = min(enemy.velocity.x + deceleration * 100 * delta, 0)
+
+	enemy.move_and_slide()
 
 func exit():
 	pass

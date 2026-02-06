@@ -1,4 +1,4 @@
-[gd_scene load_steps=389 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=381 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Texture2D" uid="uid://bm7w2ao6eeavq" path="res://assets/sprites/player/SimpleCharacter2-Sheet.png" id="3_5h808"]
@@ -345,10 +345,6 @@ region = Rect2(1920, 0, 480, 384)
 atlas = ExtResource("7_au8ao")
 region = Rect2(2400, 0, 480, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1776x"]
-atlas = ExtResource("7_au8ao")
-region = Rect2(2880, 0, 480, 384)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_b6n08"]
 atlas = ExtResource("7_au8ao")
 region = Rect2(3360, 0, 480, 384)
@@ -473,18 +469,6 @@ region = Rect2(1440, 0, 480, 384)
 atlas = ExtResource("6_holxr")
 region = Rect2(1920, 0, 480, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r7b2j"]
-atlas = ExtResource("8_p21yu")
-region = Rect2(0, 0, 480, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bjhuq"]
-atlas = ExtResource("8_p21yu")
-region = Rect2(480, 0, 480, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jwvtp"]
-atlas = ExtResource("8_p21yu")
-region = Rect2(960, 0, 480, 384)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_1w2jg"]
 atlas = ExtResource("8_p21yu")
 region = Rect2(1440, 0, 480, 384)
@@ -580,6 +564,10 @@ region = Rect2(0, 0, 480, 384)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5lhw1"]
 atlas = ExtResource("5_vx63k")
 region = Rect2(2880, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uukdq"]
+atlas = ExtResource("5_ur7pv")
+region = Rect2(288, 192, 96, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_36p4m"]
 atlas = ExtResource("10_vdulj")
@@ -817,18 +805,6 @@ region = Rect2(2400, 0, 480, 384)
 atlas = ExtResource("14_qjsmb")
 region = Rect2(2880, 0, 480, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4tr32"]
-atlas = ExtResource("19_cbf1i")
-region = Rect2(480, 0, 480, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_calqp"]
-atlas = ExtResource("19_cbf1i")
-region = Rect2(960, 0, 480, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2tnnx"]
-atlas = ExtResource("19_cbf1i")
-region = Rect2(1440, 0, 480, 384)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_q60f8"]
 atlas = ExtResource("19_cbf1i")
 region = Rect2(1920, 0, 480, 384)
@@ -836,14 +812,6 @@ region = Rect2(1920, 0, 480, 384)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hsoij"]
 atlas = ExtResource("19_cbf1i")
 region = Rect2(2400, 0, 480, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_txvuj"]
-atlas = ExtResource("19_cbf1i")
-region = Rect2(2880, 0, 480, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_446j8"]
-atlas = ExtResource("19_cbf1i")
-region = Rect2(3360, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nrd1h"]
 atlas = ExtResource("19_cbf1i")
@@ -1366,9 +1334,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_h8fhv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1776x")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_b6n08")
 }, {
 "duration": 1.0,
@@ -1382,7 +1347,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hammer_aerial",
-"speed": 13.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1440,7 +1405,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hammer_attack_2",
-"speed": 10.0
+"speed": 11.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1491,15 +1456,6 @@ animations = [{
 "speed": 7.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r7b2j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bjhuq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jwvtp")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1w2jg")
 }, {
@@ -1615,6 +1571,14 @@ animations = [{
 "loop": false,
 "name": &"landing",
 "speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uukdq")
+}],
+"loop": true,
+"name": &"light_hit",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1850,28 +1814,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4tr32")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_calqp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2tnnx")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_q60f8")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hsoij")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_txvuj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_446j8")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_nrd1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_il6c1")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_il6c1")
@@ -2028,7 +1980,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_aerial_1",
-"speed": 14.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2048,7 +2000,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_aerial_2",
-"speed": 13.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2068,7 +2020,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_attack_1",
-"speed": 13.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2085,7 +2037,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_attack_2",
-"speed": 13.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2105,7 +2057,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"sword_attack_3",
-"speed": 14.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2404,10 +2356,8 @@ poise_type = 0
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"sword_recovery_1"
+animation = &"hit"
 autoplay = "idle"
-frame = 2
-frame_progress = 1.0
 script = ExtResource("5_fjrip")
 hurtbox = NodePath("../PlayerHurtBox")
 hitboxes = NodePath("../HitBoxes")
@@ -2419,6 +2369,8 @@ shape = SubResource("CapsuleShape2D_gl8cc")
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
 position_smoothing_enabled = true
+drag_horizontal_offset = 0.65
+drag_vertical_offset = -0.92
 script = ExtResource("6_fjrip")
 
 [node name="PlayerHurtBox" type="Area2D" parent="."]
@@ -2448,21 +2400,23 @@ deceleration = 60
 script = ExtResource("29_bpsgo")
 dash_cancel_frame = 8
 anim_name = "spear_parry"
-active_frames = Array[int]([4])
+active_frames = Array[int]([1])
 hitbox = NodePath("../../HitBoxes/SpearParry")
-movement_frames = Array[int]([4])
+movement_frames = Array[int]([1])
 movement_velocity = Array[Vector2]([Vector2(-450, 0)])
 deceleration = 25
+next_combo_state_name = "spearattack1"
 
 [node name="HammerParry" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("30_jx8is")
 dash_cancel_frame = 8
 anim_name = "hammer_parry"
-active_frames = Array[int]([4])
+active_frames = Array[int]([1])
 hitbox = NodePath("../../HitBoxes/HammerParry")
-movement_frames = Array[int]([4])
-movement_velocity = Array[Vector2]([Vector2(280, 0)])
+movement_frames = Array[int]([1])
+movement_velocity = Array[Vector2]([Vector2(280, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)])
 deceleration = 14
+next_combo_state_name = "hammerattack1"
 
 [node name="Parry" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("25_vau08")
@@ -2508,8 +2462,8 @@ anim_name = "sword_attack_1"
 active_frames = Array[int]([2])
 hitbox = NodePath("../../HitBoxes/SwordAttack1")
 movement_frames = Array[int]([1])
-movement_velocity = Array[Vector2]([Vector2(100, 0)])
-deceleration = 30
+movement_velocity = Array[Vector2]([Vector2(200, 0)])
+deceleration = 35
 next_combo_state_name = "swordattack2"
 
 [node name="SwordAttack2" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
@@ -2519,6 +2473,8 @@ recovery_state_name = "sword_recovery_2"
 anim_name = "sword_attack_2"
 active_frames = Array[int]([1])
 hitbox = NodePath("../../HitBoxes/SwordAttack2")
+movement_frames = Array[int]([1])
+movement_velocity = Array[Vector2]([Vector2(120, 0)])
 next_combo_state_name = "swordattack3"
 
 [node name="SwordAttack3" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
@@ -2528,6 +2484,8 @@ recovery_state_name = "idle"
 anim_name = "sword_attack_3"
 active_frames = Array[int]([1])
 hitbox = NodePath("../../HitBoxes/SwordAttack3")
+movement_frames = Array[int]([1])
+movement_velocity = Array[Vector2]([Vector2(120, 0)])
 
 [node name="HammerAttack1" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("22_31cv2")
@@ -2551,6 +2509,9 @@ recovery_state_name = "idle"
 anim_name = "hammer_attack_2"
 active_frames = Array[int]([2, 3])
 hitbox = NodePath("../../HitBoxes/HammerAttack2")
+movement_frames = Array[int]([2])
+movement_velocity = Array[Vector2]([Vector2(180, 0)])
+deceleration = 12
 
 [node name="SpearAttack1" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("37_2a3c5")
@@ -2559,7 +2520,9 @@ recovery_state_name = "spear_recovery_1"
 anim_name = "spear_attack_1"
 active_frames = Array[int]([2])
 hitbox = NodePath("../../HitBoxes/SpearAttack1")
-deceleration = 25
+movement_frames = Array[int]([2])
+movement_velocity = Array[Vector2]([Vector2(200, 0)])
+deceleration = 40
 next_combo_state_name = "spearattack2"
 
 [node name="SpearAttack2" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
@@ -2569,6 +2532,9 @@ recovery_state_name = "spear_recovery_2"
 anim_name = "spear_attack_2"
 active_frames = Array[int]([1])
 hitbox = NodePath("../../HitBoxes/SpearAttack2")
+movement_frames = Array[int]([1])
+movement_velocity = Array[Vector2]([Vector2(100, 0)])
+deceleration = 15
 next_combo_state_name = "spearattack3"
 
 [node name="SpearAttack3" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("hitbox")]
@@ -2577,6 +2543,9 @@ dash_cancel_frame = 4
 anim_name = "spear_attack_3"
 active_frames = Array[int]([2, 3])
 hitbox = NodePath("../../HitBoxes/SpearAttack3")
+movement_frames = Array[int]([1])
+movement_velocity = Array[Vector2]([Vector2(100, 0)])
+deceleration = 15
 
 [node name="AttackRecovery" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("34_hhpqf")
@@ -2721,7 +2690,7 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("29_wnwbv")
 motion_value = 30
-push_back = 1
+push_back = 2
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
@@ -2746,7 +2715,7 @@ shape = SubResource("CapsuleShape2D_bj30b")
 script = ExtResource("34_bj30b")
 motion_value = 42
 life_duration = 0.0
-push_back = 1
+push_back = 2
 attack_type = 2
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
@@ -2786,7 +2755,7 @@ position = Vector2(-13, -2)
 script = ExtResource("26_wnwbv")
 motion_value = 15
 life_duration = 0.0
-push_back = 1
+push_back = 2
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
@@ -2798,8 +2767,9 @@ shape = SubResource("CapsuleShape2D_j2b1d")
 [node name="HammerChargedAttack" type="Area2D" parent="HitBoxes"]
 script = ExtResource("46_mx1m4")
 motion_value = 150
-push_back = 1
+push_back = 2
 attack_type = 2
+impact = 3
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerChargedAttack"]
@@ -2811,7 +2781,6 @@ shape = SubResource("CapsuleShape2D_4gjji")
 script = ExtResource("50_sc3ue")
 motion_value = 30
 life_duration = 0.0
-push_back = 1
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
@@ -2854,8 +2823,8 @@ shape = SubResource("RectangleShape2D_au7lq")
 [node name="HammerParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("75_vx63k")
 motion_value = 80
-push_back = 1
-attack_type = 2
+attack_type = 3
+impact = 3
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerParry"]
@@ -2865,7 +2834,6 @@ shape = SubResource("CircleShape2D_6pxcr")
 [node name="SwordParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("76_lw0jh")
 motion_value = 80
-push_back = 1
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
@@ -2876,7 +2844,6 @@ shape = SubResource("RectangleShape2D_uifsl")
 [node name="GuardBreak" type="Area2D" parent="HitBoxes"]
 script = ExtResource("79_lw0jh")
 motion_value = 20
-push_back = 1
 attack_type = 2
 impact = 2
 is_guard_break = true
@@ -2901,7 +2868,6 @@ shape = SubResource("CapsuleShape2D_4tr32")
 [node name="SpearParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("86_4vfid")
 motion_value = 60
-push_back = 1
 impact = 3
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 

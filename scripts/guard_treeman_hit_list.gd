@@ -17,5 +17,5 @@ func handle_guard_break(area : HitBox, current_state : State):
 		if daddy.dead:
 			return GuardResult.HIT
 		daddy.posture += daddy.max_posture
-		daddy.velocity.x += 100 * area.facing
+		daddy.velocity.x += BIG_PUSHBACK * area.facing
 		create_label(Color.ROYAL_BLUE, "GUARD BROKEN!", 1.3)

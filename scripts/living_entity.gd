@@ -356,7 +356,7 @@ func _show_status_label(status_name: String):
 func get_stunned(vel_x : float, duration : float):
 	pass
 
-func get_staggered():
+func get_staggered(vel_x : float = 0.0):
 	pass
 
 func get_state():

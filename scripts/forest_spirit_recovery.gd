@@ -9,5 +9,5 @@ func update(delta):
 	timer -= delta
 	if timer <= 0:
 		transitioned.emit("decide")
-	enemy.velocity.x = -150
+	enemy.velocity.x = -80
 	enemy.move_and_slide()

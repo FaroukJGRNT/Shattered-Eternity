@@ -29,8 +29,10 @@ var timer := 0.0
 var life_used := false
 
 enum Pushback {
+	TICK,
 	NORMAL,
-	STRONG
+	STRONG,
+	GINORMOUS
 }
 
 enum AttackType {

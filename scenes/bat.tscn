@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://n3pwaqy58kus"]
+[gd_scene load_steps=106 format=3 uid="uid://n3pwaqy58kus"]
 
 [ext_resource type="Script" uid="uid://b3ktma8tmt2hk" path="res://scripts/bat.gd" id="1_xuti2"]
 [ext_resource type="Texture2D" uid="uid://c015gnei2jalm" path="res://assets/sprites/Bat/bat_death.png" id="2_7m0mp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dr6c7r6jeneyn" path="res://assets/sprites/Bat/bat_hit.png" id="4_cv41e"]
 [ext_resource type="Texture2D" uid="uid://dh2vhtoblkv21" path="res://assets/sprites/Bat/bat_scratch.png" id="6_pn0sf"]
 [ext_resource type="Script" uid="uid://c30upb3dqxva2" path="res://scripts/scratch_hb.gd" id="9_1ial8"]
+[ext_resource type="Script" uid="uid://dbffy46xjoalv" path="res://scripts/spirit_collision_shape_2d.gd" id="9_6x6ks"]
 [ext_resource type="Script" uid="uid://busr7orlkflil" path="res://scripts/hurtbox.gd" id="9_ss3wr"]
 [ext_resource type="Script" uid="uid://do8u78sktsj4a" path="res://scripts/enemy_state_machine.gd" id="10_0imbl"]
 [ext_resource type="Script" uid="uid://do7rjsh8mrcw7" path="res://scripts/hurl.gd" id="13_6x6ks"]
@@ -558,7 +559,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uo0jq"]
 radius = 35.0
-height = 90.0
+height = 112.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3p8w2"]
 radius = 44.0
@@ -798,8 +799,12 @@ state_machine = NodePath("../EnemyStateMachine")
 metadata/_custom_type_script = "uid://cudcd7wg184ea"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 24)
+position = Vector2(-1, 27)
 shape = SubResource("CapsuleShape2D_uo0jq")
+script = ExtResource("9_6x6ks")
+min_height = 110.0
+max_height = 140.0
+duration = 1.2
 
 [node name="HitBoxes" type="Node2D" parent="."]
 

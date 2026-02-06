@@ -624,3 +624,5 @@ visible = false
 position = Vector2(-11, 47)
 shape = SubResource("CapsuleShape2D_0cxfh")
 script = ExtResource("9_egho6")
+min_height = 120.0
+max_height = 160.0

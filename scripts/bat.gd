@@ -9,6 +9,8 @@ func _physics_process(delta: float) -> void:
 			velocity += get_gravity() * delta / 50
 		if current_state.name.to_lower() == "hurl":
 			velocity = Vector2.ZERO
+		if current_state.name.to_lower() == "stun":
+			velocity.y = -10
 		else: 
 			velocity += get_gravity() * delta / 10
 

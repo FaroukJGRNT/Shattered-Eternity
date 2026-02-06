@@ -57,13 +57,15 @@ func die():
 	state_machine.on_state_transition("death")
 
 func get_stunned(vel_x : float, duration : float):
+	print("I will get stunned, here is my veloc: ", vel_x)
 	if state_machine.current_state.name != "Death" and state_machine.current_state.name != "Staggered":
 		$EnemyStateMachine/Stun.push_back = vel_x
 		$EnemyStateMachine/Stun.timeout = duration
 		state_machine.on_state_transition("stun")
 
-func get_staggered():
+func get_staggered(vel_x : float = 0):
 	if state_machine.current_state.name != "Death":
+		$EnemyStateMachine/Staggered.push_back = vel_x
 		state_machine.on_state_transition("staggered")
 
 # NOW THE REAL STUFF, THE BIG WIGS

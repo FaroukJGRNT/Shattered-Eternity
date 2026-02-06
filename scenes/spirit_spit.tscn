@@ -118,6 +118,7 @@ script = ExtResource("4_g5dfh")
 motion_value = 16
 multidirectional = true
 attack_type = 3
+impact = 3
 is_phys_atk = false
 metadata/_custom_type_script = "uid://6eagvjgkh23i"
 

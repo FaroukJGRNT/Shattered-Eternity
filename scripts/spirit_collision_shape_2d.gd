@@ -2,7 +2,7 @@ extends CollisionShape2D
 
 @export var min_height := 140.0
 @export var max_height := 152.0
-@export var duration := 0.6
+@export var duration := 1.0
 
 var tween: Tween
 

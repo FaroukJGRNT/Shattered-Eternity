@@ -976,7 +976,9 @@ height = 110.0
 resource_local_to_scene = true
 script/source = "extends EnemyState
 
-var stagger_cooldown = 5.0
+@export var stagger_cooldown := 5.0
+var push_back := 0.0
+@export var deceleration := 4.0
 
 func _init() -> void:
 	is_state_blocking = true
@@ -984,11 +986,19 @@ func _init() -> void:
 func enter():
 	stagger_cooldown = 5.0
 	AnimPlayer.play(\"stagger_start\")
+	enemy.velocity.x = push_back
 
 func update(delta):
 	stagger_cooldown -= delta
 	if stagger_cooldown <= 0:
-		AnimPlayer.play_backwards(\"stagger_end\")
+		AnimPlayer.play(\"stagger_end\")
+
+	if enemy.velocity.x > 0:
+		enemy.velocity.x = max(enemy.velocity.x - deceleration * 100 * delta, 0)
+	elif enemy.velocity.x < 0:
+		enemy.velocity.x = min(enemy.velocity.x + deceleration * 100 * delta, 0)
+
+	enemy.move_and_slide()
 
 func exit():
 	pass
@@ -1074,13 +1084,15 @@ option_type = 3
 option_cooldown = 12.0
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
-[node name="Kick" type="Node" parent="EnemyStateMachine" index="11" node_paths=PackedStringArray("hitbox")]
+[node name="GuardBreak" type="Node" parent="EnemyStateMachine" index="11" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("15_fjeip")
 anim_name = "kick"
-active_frames = Array[int]([7])
+active_frames = Array[int]([7, 8])
 hitbox = NodePath("../../HitBoxes/KKick")
 movement_frames = Array[int]([7])
-movement_velocity = Array[Vector2]([Vector2(250, 0)])
+movement_velocity = Array[Vector2]([Vector2(450, 0)])
+deceleration = 27
+option_type = 1
 option_cooldown = 8.0
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
@@ -1088,7 +1100,6 @@ metadata/_custom_type_script = "uid://dvclob6aaps4"
 visible = false
 script = ExtResource("16_tg2sk")
 motion_value = 26
-push_back = 1
 attack_type = 3
 impact = 3
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
@@ -1113,6 +1124,7 @@ shape = SubResource("CapsuleShape2D_82cua")
 [node name="KKick" type="Area2D" parent="HitBoxes" index="2"]
 script = ExtResource("16_tg2sk")
 motion_value = 30
+push_back = 3
 attack_type = 3
 impact = 3
 is_guard_break = true
@@ -1124,6 +1136,8 @@ shape = SubResource("RectangleShape2D_5lhf0")
 
 [node name="HitListener" parent="." index="4"]
 script = ExtResource("18_82cua")
+min_guard_break_frame = 4
+max_guard_break_frame = 8
 
 [node name="Area2D" parent="." index="8"]
 visible = false

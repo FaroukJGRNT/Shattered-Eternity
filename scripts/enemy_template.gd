@@ -110,7 +110,7 @@ func enemy_ai():
 		# Break guard (if you know how to)
 
 	# Have I taken a lot of damage quickly
-	if (last_decide_hp - life) >= (max_life / 6) and state_machine.old_state.name.to_lower != "staggered":
+	if (last_decide_hp - life) >= (max_life / 6) and state_machine.old_state.name.to_lower() != "staggered":
 		# Chose a defensive action
 		var ready_acts = []
 		for act in defensive_actions:

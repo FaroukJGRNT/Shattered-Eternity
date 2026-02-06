@@ -1,7 +1,8 @@
-[gd_scene load_steps=142 format=3 uid="uid://clblykkm6pbb5"]
+[gd_scene load_steps=144 format=3 uid="uid://clblykkm6pbb5"]
 
 [ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/enemy_template.tscn" id="1_6wcm8"]
 [ext_resource type="Texture2D" uid="uid://dfd63b6ortn8k" path="res://assets/sprites/HugeTreeMan/huge_tree_death.png" id="2_ar82n"]
+[ext_resource type="Script" uid="uid://bsob55to4biir" path="res://scripts/huge_tree_man.gd" id="2_ywi2u"]
 [ext_resource type="Texture2D" uid="uid://r2kufturts72" path="res://assets/sprites/HugeTreeMan/huge_tree_guard_mid.png" id="3_fjeip"]
 [ext_resource type="Texture2D" uid="uid://c8oqofqhq1cxn" path="res://assets/sprites/HugeTreeMan/huge_tree_guard_end.png" id="4_tg2sk"]
 [ext_resource type="Texture2D" uid="uid://bswbq04wddtck" path="res://assets/sprites/HugeTreeMan/huge_tree_guard_start.png" id="5_h5nhi"]
@@ -778,6 +779,9 @@ animations = [{
 "texture": SubResource("AtlasTexture_oxig0")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_oxig0")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_i14mo")
 }, {
 "duration": 1.0,
@@ -794,7 +798,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"kick",
-"speed": 7.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1006,13 +1010,17 @@ height = 177.365
 radius = 34.6727
 height = 131.492
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5lhf0"]
+size = Vector2(72, 40)
+
 [node name="HugeTreeMan" instance=ExtResource("1_6wcm8")]
-ATTACK_RANGE = 150
+script = ExtResource("2_ywi2u")
 
 [node name="EnemyAnimPlayer" parent="." index="0"]
 material = SubResource("ShaderMaterial_sb7sn")
 sprite_frames = SubResource("SpriteFrames_q5peb")
-animation = &"swipe"
+animation = &"kick"
+frame = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(-2, 6)
@@ -1066,6 +1074,16 @@ option_type = 3
 option_cooldown = 12.0
 metadata/_custom_type_script = "uid://dvclob6aaps4"
 
+[node name="Kick" type="Node" parent="EnemyStateMachine" index="11" node_paths=PackedStringArray("hitbox")]
+script = ExtResource("15_fjeip")
+anim_name = "kick"
+active_frames = Array[int]([7])
+hitbox = NodePath("../../HitBoxes/KKick")
+movement_frames = Array[int]([7])
+movement_velocity = Array[Vector2]([Vector2(250, 0)])
+option_cooldown = 8.0
+metadata/_custom_type_script = "uid://dvclob6aaps4"
+
 [node name="Swipe" type="Area2D" parent="HitBoxes" index="0"]
 visible = false
 script = ExtResource("16_tg2sk")
@@ -1091,6 +1109,18 @@ metadata/_custom_type_script = "uid://ca7lo8315oxt"
 position = Vector2(-50, 2)
 rotation = 0.251327
 shape = SubResource("CapsuleShape2D_82cua")
+
+[node name="KKick" type="Area2D" parent="HitBoxes" index="2"]
+script = ExtResource("16_tg2sk")
+motion_value = 30
+attack_type = 3
+impact = 3
+is_guard_break = true
+metadata/_custom_type_script = "uid://ca7lo8315oxt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/KKick" index="0"]
+position = Vector2(-26, 10)
+shape = SubResource("RectangleShape2D_5lhf0")
 
 [node name="HitListener" parent="." index="4"]
 script = ExtResource("18_82cua")

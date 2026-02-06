@@ -363,7 +363,7 @@ func get_state():
 	return state_machine.get_current_state().name.to_lower()
 	
 func change_state(new_state):
-	$PlayerStateMachine.on_state_transition(new_state)
+	state_machine.on_state_transition(new_state)
 
 func propagate_event(event : Event):
 	if buff_manager:

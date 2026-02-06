@@ -218,6 +218,7 @@ func update(delta):
 "
 
 [sub_resource type="GDScript" id="GDScript_7wst2"]
+resource_local_to_scene = true
 script/source = "extends EnemyState
 
 var stagger_cooldown = 5.0

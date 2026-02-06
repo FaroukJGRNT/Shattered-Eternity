@@ -1,7 +1,6 @@
 extends LivingEntity
 class_name BasicEnemy
 
-@export var test := false
 @export var SPEED = 150.0
 @export var ATTACK_RANGE = 80
 @export var wander_distance = 200
@@ -111,7 +110,7 @@ func enemy_ai():
 		# Break guard (if you know how to)
 
 	# Have I taken a lot of damage quickly
-	if (last_decide_hp - life) >= (max_life / 6):
+	if (last_decide_hp - life) >= (max_life / 6) and state_machine.old_state.name.to_lower != "staggered":
 		# Chose a defensive action
 		var ready_acts = []
 		for act in defensive_actions:

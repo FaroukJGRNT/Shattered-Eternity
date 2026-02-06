@@ -1,0 +1,32 @@
+extends EnemyAttackState
+
+var turned := false
+
+func enter():
+	super.enter()
+	turned = false
+
+func update(delta):
+	if AnimPlayer.frame <= 1 and not owner.is_target_close() and get_parent().get_node("JumpSmash").option_cooldown <= 0:
+		transitioned.emit("jumpsmash")
+	var index = 0
+	for frame in usable_mov_frames:
+		if AnimPlayer.frame == frame:
+			enemy.velocity.x += (usable_velocs[index].x) * enemy.facing
+			enemy.velocity.y += (usable_velocs[index].y)
+
+			usable_mov_frames.pop_front()
+			usable_velocs.pop_front()
+			break
+		index += 1
+
+	if enemy.velocity.x > 0:
+		enemy.velocity.x = max(enemy.velocity.x - deceleration * 50 * delta, 0)
+	if enemy.velocity.x < 0:
+		enemy.velocity.x = min(enemy.velocity.x + deceleration * 50 * delta, 0)
+
+	enemy.move_and_slide()
+
+	if  0 <= AnimPlayer.frame and AnimPlayer.frame <= 3:
+		if not owner.is_target_in_front() and not turned:
+			owner.turn_around()

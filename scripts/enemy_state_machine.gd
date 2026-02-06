@@ -2,6 +2,7 @@ extends StateMachine
 class_name EnemyStateMachine
 
 @onready var enemy : BasicEnemy = owner
+var old_state : EnemyState
 
 func _ready() -> void:
 	super._ready()
@@ -13,6 +14,7 @@ func _ready() -> void:
 			child.AnimPlayer = AnimPlayer
 			child.enemy = enemy
 	current_state = states["wander"]
+	old_state = null
 
 func _process(delta: float) -> void:
 	for child in get_children():
@@ -26,6 +28,7 @@ func on_state_transition(new_state_name):
 		return
 	if states[new_state_name] != current_state:
 		current_state.exit()
+		old_state = current_state
 		if current_state is EnemyAttackState:
 			current_state.option_timer = current_state.option_cooldown
 			if current_state.wander_queued:

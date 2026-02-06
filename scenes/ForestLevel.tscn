@@ -201,7 +201,8 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_sfind"]
 tile_size = Vector2i(32, 32)
 occlusion_layer_0/light_mask = 1
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 128
+physics_layer_0/collision_mask = 128
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
@@ -233,6 +234,7 @@ texture = SubResource("GradientTexture2D_pf0y0")
 polygon = PackedVector2Array(332, -386, 351, -385, 506, 317, 469, 317)
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 z_index = 1
 material = SubResource("CanvasItemMaterial_vvr6j")
 offset_left = -587.0

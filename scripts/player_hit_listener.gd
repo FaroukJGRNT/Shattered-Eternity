@@ -179,6 +179,7 @@ func damage_taken(area : HitBox) -> void:
 				daddy.get_stunned(3 * area.facing, SMALL_PUSHBACK_DURATION)
 
 	if daddy.is_in_group("Enemy"):
+		print("Enemy taking a hit")
 		if current_state is EnemyAttackState and current_state.option_type == EnemyAttackState.OptionType.DEFENSIVE:
 			pass
 		else:
@@ -192,13 +193,17 @@ func damage_taken(area : HitBox) -> void:
 						area.Pushback.GINORMOUS:
 							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 				daddy.Poises.MEDIUM:
+					print("Enemy is medium")
 					match area.push_back:
 						area.Pushback.NORMAL:
+							print("NORMAL PUSHBACK")
 							if daddy.velocity.x == 0:
 								daddy.velocity.x += (area.facing * SMALL_PUSHBACK)
 						area.Pushback.STRONG:
+							print("STRON PUSHBACK")
 							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 						area.Pushback.GINORMOUS:
+							print("GINORMOUS PUSHBACK")
 							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 				daddy.Poises.LARGE:
 					pass

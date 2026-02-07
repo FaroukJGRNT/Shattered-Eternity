@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 func on_state_transition(new_state_name):
 	if enemy.dead and new_state_name != "death":
 		return
-	if states[new_state_name] != current_state:
+	if states[new_state_name] != current_state or new_state_name == "stun":
 		current_state.exit()
 		old_state = current_state
 		if current_state is EnemyAttackState:

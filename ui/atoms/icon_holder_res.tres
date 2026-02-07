@@ -2,10 +2,10 @@
 
 [resource]
 resource_name = "icon_holder_res"
-bg_color = Color(2.50385e-05, 0.0105903, 0.113048, 0.811765)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
+bg_color = Color(0.1404, 0.19864, 0.39, 0.454902)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
 border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 4
@@ -13,6 +13,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 shadow_color = Color(0, 0, 0, 0.490196)
-shadow_size = 5
-shadow_offset = Vector2(3, 3)
+shadow_size = 2
+shadow_offset = Vector2(1, 1)
 anti_aliasing = false

@@ -201,6 +201,7 @@ func _init() -> void:
 
 func enter():
 	super.enter()
+	print(\"Stunned\")
 	AnimPlayer.play(\"stun\")
 	timer = timeout
 	enemy.velocity.x = push_back

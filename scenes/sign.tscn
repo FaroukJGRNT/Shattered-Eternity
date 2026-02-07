@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://u8xrklg5udr8"]
+
+[ext_resource type="Texture2D" uid="uid://dww18ec0qvnyl" path="res://assets/sprites/environment/ForestScene/SimplePlacard.png" id="1_kd50q"]
+[ext_resource type="PackedScene" uid="uid://b5vd46yxc7dj8" path="res://ui/atoms/description_text.tscn" id="2_8yyji"]
+[ext_resource type="Script" uid="uid://chbsdemth6rjs" path="res://scripts/sign_panel.gd" id="2_ge2pc"]
+[ext_resource type="FontFile" uid="uid://c22hpqiolc8ba" path="res://assets/fonts/munro.ttf" id="2_pnnkw"]
+[ext_resource type="Script" uid="uid://bg3xcvu70ptg0" path="res://scripts/sign.gd" id="2_qkam6"]
+[ext_resource type="StyleBox" uid="uid://bplwb375xct12" path="res://ui/atoms/icon_holder_res.tres" id="3_4irdt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ge2pc"]
+radius = 144.641
+
+[sub_resource type="Theme" id="Theme_mifvb"]
+Button/constants/outline_size = 6
+Button/font_sizes/font_size = 22
+Button/fonts/font = ExtResource("2_pnnkw")
+Button/styles/normal = null
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 6
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
+Label/font_sizes/font_size = 22
+Label/fonts/font = ExtResource("2_pnnkw")
+Panel/styles/panel = ExtResource("3_4irdt")
+
+[node name="Sign" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2_qkam6")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ge2pc")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -101.0
+offset_top = -147.0
+offset_right = 99.0
+offset_bottom = -47.0
+grow_horizontal = 2
+theme = SubResource("Theme_mifvb")
+script = ExtResource("2_ge2pc")
+
+[node name="DescriptionText" parent="Panel" instance=ExtResource("2_8yyji")]
+layout_mode = 1
+theme_override_font_sizes/font_size = 12
+text = "Hello nigger"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kd50q")
+
+[connection signal="body_entered" from="Area2D" to="Panel" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Panel" method="_on_area_2d_body_exited"]

@@ -16,6 +16,8 @@ class_name Player
 var current_state : PlayerState
 
 var dash_cooldown := 1.0
+var change_weapon_cooldown = 0.1
+var change_weapon_timer = 0.1
 var on_dash_cooldown := false
 var aerial_dash_used := false
 var aerial_attack_used := false
@@ -29,7 +31,7 @@ enum Weapons {
 	HAMMER
 }
 
-var direction
+var direction := 0
 var current_weapon = Weapons.SWORD
 
 # Stats
@@ -75,6 +77,9 @@ func run_cooldowns(delta):
 		dash_cooldown -= delta
 	if dash_cooldown <= 0:
 		on_dash_cooldown = false
+	change_weapon_timer -= delta
+	if change_weapon_timer <= 0:
+		change_weapon_timer = 0
 
 # The process function makes sure the player is in the right state
 func _physics_process(delta: float) -> void:
@@ -114,7 +119,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		change_state("airborne")
 
-	if Input.is_action_just_pressed("change_weapon"):
+	if Input.is_action_just_pressed("change_weapon") and change_weapon_timer <= 0:
+		change_weapon_timer = change_weapon_cooldown
 		specialVFXPlayer.play_vfx("weapon_change")
 		specialVFXPlayer.rotation_degrees = randf_range(0, 360)
 		current_weapon = (int(current_weapon) + 1) % 3
@@ -161,15 +167,20 @@ func direct_sprite():
 func adjust_cam(delta):
 
 	if facing < 0:
-		$Camera2D.drag_horizontal_offset = lerp($Camera2D.drag_horizontal_offset, -1.0, 1.0 * delta)
+		$Camera2D.drag_horizontal_offset = lerp($Camera2D.drag_horizontal_offset, -1.0, 2.0 * delta)
 	if facing > 0:
-		$Camera2D.drag_horizontal_offset = lerp($Camera2D.drag_horizontal_offset, 1.0, 1.0 * delta)
+		$Camera2D.drag_horizontal_offset = lerp($Camera2D.drag_horizontal_offset, 1.0, 2.0 * delta)
 
 func get_horizontal_input():
-	direction = Input.get_axis("left", "right")
+	var axis = Input.get_axis("left", "right")
+	if abs(axis) > 0.1:
+		direction = Input.get_axis("left", "right")
+	else:
+		direction = 0
 
 func initiate_slide():
 	if Input.is_action_just_pressed("dash"):
+		print("dash")
 		if is_on_floor() and not on_dash_cooldown:
 			if direction == 0:
 				change_state("backdashing")
@@ -189,6 +200,7 @@ func initiate_ground_actions():
 		return
 	if Input.is_action_just_pressed("guard") and Input.is_action_just_pressed("attack"):
 		change_state("guardbreak")
+		return
 	if Input.is_action_just_pressed("attack"):
 		match current_weapon:
 			Weapons.SWORD:

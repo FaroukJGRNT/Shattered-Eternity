@@ -2869,8 +2869,9 @@ shape = SubResource("RectangleShape2D_au7lq")
 [node name="HammerParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("75_vx63k")
 motion_value = 80
+push_back = 2
 attack_type = 3
-impact = 3
+impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/HammerParry"]
@@ -2880,6 +2881,7 @@ shape = SubResource("CircleShape2D_6pxcr")
 [node name="SwordParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("76_lw0jh")
 motion_value = 80
+push_back = 2
 impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
@@ -2914,7 +2916,8 @@ shape = SubResource("CapsuleShape2D_4tr32")
 [node name="SpearParry" type="Area2D" parent="HitBoxes"]
 script = ExtResource("86_4vfid")
 motion_value = 60
-impact = 3
+push_back = 2
+impact = 2
 metadata/_custom_type_script = "uid://dlb8mkkslpv3y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/SpearParry"]

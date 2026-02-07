@@ -58,9 +58,6 @@ func get_staggered(vel_x : float = 0):
 
 # NOW THE REAL STUFF, THE BIG WIGS
 func _physics_process(delta: float) -> void:
-	var player : Player = get_tree().get_first_node_in_group("Player")
-	if position.distance_to(player.position) > 1000:
-		return
 	current_state = state_machine.get_current_state()
 	# Add the gravity.
 	if not is_on_floor():

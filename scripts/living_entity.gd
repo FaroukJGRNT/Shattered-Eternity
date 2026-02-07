@@ -32,11 +32,12 @@ var dead := false
 
 var active_status_bars : Dictionary = {}
 
-@export var max_life: int = 0
-@export var life: int = 0
 
-@export var attack: int = 0
-@export var defense: int = 0
+@export var max_life: int = 500
+@export var life: int = max_life
+
+@export var attack: int = 12
+@export var defense: int = 20
 
 var attack_multipliers : Array[float] = [] 
 var defense_multipliers : Array[float] = [] 
@@ -68,13 +69,13 @@ enum Event {
 
 @export var poise_type := Poises.MEDIUM
 
-@export var fire_atk := 0.0      # % de bonus dégâts feu
-@export var thunder_atk := 0.0   # % de bonus dégâts foudre
-@export var ice_atk := 0.0       # % de bonus dégâts glace
+@export var fire_atk := 2.0      # % de bonus dégâts feu
+@export var thunder_atk := 2.0   # % de bonus dégâts foudre
+@export var ice_atk := 2.0       # % de bonus dégâts glace
 
-@export var thunder_res := 0.0
-@export var fire_res := 0.0
-@export var ice_res := 0.0
+@export var thunder_res := 2.0
+@export var fire_res := 2.0
+@export var ice_res := 2.0
 
 @export var max_mana := 0
 @export var mana := 0
@@ -129,6 +130,7 @@ var active_status_effects = {}
 var pulse_timer := 0.0  # à mettre dans la classe
 
 func _ready() -> void:
+	life = max_life
 	# Set collision layers and masks
 	collision_layer = 0
 	collision_mask = 0

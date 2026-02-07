@@ -2,6 +2,7 @@ extends HitListener
 
 func handle_guard(area : HitBox) -> GuardResult:
 	if daddy.anim_player.animation == "guard" and area.facing * daddy.facing == -1:
+		daddy.change_state("swiped ")
 		return GuardResult.BLOCK
 	return GuardResult.HIT
 

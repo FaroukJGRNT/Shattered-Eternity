@@ -24,18 +24,6 @@ var current_mode = Mode.CHILLIN
 
 var target : LivingEntity
 
-# Stats initialization
-func _init() -> void:
-	poise_type = Poises.MEDIUM
-	max_life = 500
-	life = max_life
-	attack = 12
-	defense = 20
-	thunder_res = 2.0
-	fire_res = 2.0
-	ice_res = 2.0
-	elem_mode = ElemMode.NONE
-
 func _ready() -> void:
 	super._ready()
 	# Gather our options
@@ -70,6 +58,9 @@ func get_staggered(vel_x : float = 0):
 
 # NOW THE REAL STUFF, THE BIG WIGS
 func _physics_process(delta: float) -> void:
+	var player : Player = get_tree().get_first_node_in_group("Player")
+	if position.distance_to(player.position) > 1000:
+		return
 	current_state = state_machine.get_current_state()
 	# Add the gravity.
 	if not is_on_floor():

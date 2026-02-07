@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://d3kvl1e2ls3do"]
+[gd_scene load_steps=38 format=3 uid="uid://d3kvl1e2ls3do"]
 
 [ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/enemy_template.tscn" id="1_w4gkx"]
 [ext_resource type="Texture2D" uid="uid://d2xf13bun56i8" path="res://assets/sprites/Dummy/dummy_death.png" id="2_fva3d"]
@@ -341,6 +341,27 @@ func update(delta):
 		transitioned.emit(\"decide\")
 "
 
+[sub_resource type="GDScript" id="GDScript_fva3d"]
+resource_local_to_scene = true
+script/source = "extends EnemyState
+
+func _init() -> void:
+	is_state_blocking = true
+
+func enter():
+	enemy.dead = true
+	AnimPlayer.play(\"death\")
+
+func exit():
+	pass
+
+# this function will be executed every time an animation ends,
+# since most states end accordingly to an animation
+func on_animation_end():
+	Toolbox.handle_event(Toolbox.GameEvents.DUMMY_DEAD, owner)
+	owner.queue_free()
+"
+
 [node name="Dummy" instance=ExtResource("1_w4gkx")]
 script = ExtResource("2_v72lb")
 
@@ -363,6 +384,9 @@ script = SubResource("GDScript_qqfk8")
 
 [node name="Stun" parent="EnemyStateMachine" index="3"]
 script = SubResource("GDScript_wcfci")
+
+[node name="Death" parent="EnemyStateMachine" index="5"]
+script = SubResource("GDScript_fva3d")
 
 [node name="Area2D" parent="." index="8"]
 visible = false

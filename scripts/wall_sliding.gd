@@ -1,17 +1,26 @@
 extends PlayerState
 
 var old_direction = 0
+@export var max_friction := 60.0
+@export var min_friction := 15.0
+@export var increment :=  0.6
+var friction = 100
 
 func _ready() -> void:
 	is_state_blocking = true
 
 func enter():
-	player.friction = 15
+	friction = min_friction
+	player.aerial_dash_used = false
+	player.aerial_attack_used = false
+	player.friction = friction
 	old_direction = player.direction
 	player.velocity.x =  0
 	AnimPlayer.play("wallsliding")
 
 func update(delta):
+	print(friction)
+	friction = min(friction + (increment * delta), max_friction)
 	if old_direction == 1:
 		AnimPlayer.flip_h = true
 	if old_direction == -1:
@@ -22,6 +31,8 @@ func update(delta):
 	player.handle_vertical_movement(player.get_gravity().y * delta)
 	if player.is_on_floor():
 		transitioned.emit("idle")
+	player.friction = friction
+	player.move_and_slide()
 
 func exit():
 	player.friction = 0

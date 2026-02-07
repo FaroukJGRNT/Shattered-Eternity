@@ -558,7 +558,7 @@ height = 78.0
 [node name="TreeMan" instance=ExtResource("1_wscxd")]
 SPEED = 100.0
 ATTACK_RANGE = 50
-max_life = 100
+max_life = 80
 
 [node name="EnemyAnimPlayer" parent="." index="0"]
 material = SubResource("ShaderMaterial_pcsp4")

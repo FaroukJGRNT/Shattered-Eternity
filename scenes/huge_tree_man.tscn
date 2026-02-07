@@ -991,7 +991,7 @@ func enter():
 func update(delta):
 	stagger_cooldown -= delta
 	if stagger_cooldown <= 0:
-		AnimPlayer.play(\"stagger_end\")
+		AnimPlayer.play_backwards(\"stagger_end\")
 
 	if enemy.velocity.x > 0:
 		enemy.velocity.x = max(enemy.velocity.x - deceleration * 100 * delta, 0)
@@ -1025,6 +1025,7 @@ size = Vector2(72, 40)
 
 [node name="HugeTreeMan" instance=ExtResource("1_6wcm8")]
 script = ExtResource("2_ywi2u")
+max_life = 400
 
 [node name="EnemyAnimPlayer" parent="." index="0"]
 material = SubResource("ShaderMaterial_sb7sn")

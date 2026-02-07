@@ -46,6 +46,8 @@ func _ready() -> void:
 	ice_res = 10.0
 
 func get_stunned(vel_x : float, duration : float):
+	if dead:
+		return
 	if get_state() == "staggered":
 		if $PlayerStateMachine/Staggered.cooldown > 1.5:
 			return
@@ -61,7 +63,12 @@ func get_stunned(vel_x : float, duration : float):
 	change_state("hit")
 
 func get_staggered(x_vel : float = 0):
+	if dead:
+		return
 	change_state("staggered")
+
+func die():
+	state_machine.on_state_transition("death")
 
 func run_cooldowns(delta):
 	if on_dash_cooldown:
@@ -71,6 +78,9 @@ func run_cooldowns(delta):
 
 # The process function makes sure the player is in the right state
 func _physics_process(delta: float) -> void:
+	adjust_cam(delta)
+	if dead:
+		return
 	run_cooldowns(delta)
 
  	#------ Do nothing when in a blocking state ------#
@@ -116,8 +126,8 @@ func _physics_process(delta: float) -> void:
 func handle_vertical_movement(gravity):
 	# Apply the gravity
 	velocity.y += gravity
-	if velocity.y >= 0:
-		velocity.y -= friction
+	if velocity.y > 0:
+		velocity.y = max(velocity.y - friction, 0)
 	if velocity.y > MAX_VERTICAL_VELOC:
 		velocity.y = MAX_VERTICAL_VELOC
 	if velocity.y < -MAX_VERTICAL_VELOC:
@@ -147,6 +157,13 @@ func direct_sprite():
 		$HitBoxes.scale.x = 1
 		$RayCast2D.scale.x = 1
 		facing = 1
+
+func adjust_cam(delta):
+
+	if facing < 0:
+		$Camera2D.drag_horizontal_offset = lerp($Camera2D.drag_horizontal_offset, -1.0, 1.0 * delta)
+	if facing > 0:
+		$Camera2D.drag_horizontal_offset = lerp($Camera2D.drag_horizontal_offset, 1.0, 1.0 * delta)
 
 func get_horizontal_input():
 	direction = Input.get_axis("left", "right")

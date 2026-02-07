@@ -258,6 +258,7 @@ func on_animation_end():
 "
 
 [sub_resource type="GDScript" id="GDScript_c7j3f"]
+resource_local_to_scene = true
 script/source = "extends EnemyState
 
 func _init() -> void:

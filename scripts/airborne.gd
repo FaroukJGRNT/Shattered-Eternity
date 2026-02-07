@@ -8,9 +8,30 @@ func enter():
 	coyote_time = 0.12
 
 func update(delta):
-	#if %RayCast2D.is_colliding():
-		#transitioned.emit("wallsliding")
-		#return
+	if %RayCast2D.is_colliding():
+		print("COLLISION")
+
+		var collider = %RayCast2D.get_collider()
+
+		# ✅ On vérifie bien une TileMapLayer
+		if collider is TileMapLayer:
+			print("It's TileMapLayer")
+
+			var tilemap: TileMapLayer = collider
+
+			# Position du point d'impact en coordonnées monde
+			var hit_pos = %RayCast2D.get_collision_point()
+
+			# Convertir en coordonnée de tuile (cellule)
+			var cell = tilemap.local_to_map(hit_pos)
+
+			# Récupérer les données de la tuile touchée
+			var tile_data = tilemap.get_cell_tile_data(cell)
+
+			if tile_data and tile_data.get_custom_data("WallSlide") == true:
+				print("WALLSLIDEABLE")
+				transitioned.emit("wallsliding")
+				return
 
 	# Jump peak
 	coyote_time -= delta

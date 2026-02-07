@@ -662,6 +662,7 @@ height = 64.0
 [node name="Golemite" instance=ExtResource("1_udkj3")]
 script = ExtResource("2_ruah2")
 ATTACK_RANGE = 100
+max_life = 70
 
 [node name="EnemyAnimPlayer" parent="." index="0"]
 material = SubResource("ShaderMaterial_xokyh")

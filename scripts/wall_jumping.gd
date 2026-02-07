@@ -1,21 +1,28 @@
 extends PlayerState
 
+@export var cooldown := 0.18
+var timer := 0.0
+
 func _ready() -> void:
 	is_state_blocking = true
 
 func enter():
-	player.velocity.y = player.JUMP_VELOCITY
-	AnimPlayer.play("walljumping")
+	timer = cooldown
+	player.velocity.y = player.JUMP_VELOCITY * 60000
+	AnimPlayer.play("jump")
 	
 func update(delta):
-	player.velocity.x = player.AERIAL_SPEED * 2 * player.facing * -1
-	# Change state descending
-	if player.velocity.y >= 10:
+	timer -= delta
+	if timer <= 0:
 		transitioned.emit("airborne")
+		
+	player.velocity.x = player.AERIAL_SPEED * 1.2 * player.facing * -1
+	# Change state descending
 	if player.is_on_floor():
 		transitioned.emit("idle")
 
 	player.handle_vertical_movement(player.get_gravity().y * delta)
+	player.move_and_slide()
 	
 func exit():
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=381 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=383 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Texture2D" uid="uid://bm7w2ao6eeavq" path="res://assets/sprites/player/SimpleCharacter2-Sheet.png" id="3_5h808"]
@@ -86,6 +86,7 @@
 [ext_resource type="Script" uid="uid://clxmwn43lb4wo" path="res://scripts/guard_break_state.gd" id="63_vx63k"]
 [ext_resource type="Script" uid="uid://nkq76mulpq41" path="res://scripts/staggered_player.gd" id="65_lw0jh"]
 [ext_resource type="Script" uid="uid://d4l1ih7clndhf" path="res://scripts/hammer_aerial.gd" id="67_w5j5w"]
+[ext_resource type="Script" uid="uid://00i2uqcaxfp6" path="res://scripts/player_death.gd" id="71_qmsq4"]
 [ext_resource type="Script" uid="uid://16jb0f75kgfp" path="res://scripts/hammer_parry_hb.gd" id="75_vx63k"]
 [ext_resource type="Script" uid="uid://digaj2k75uibf" path="res://scripts/sword_parry_hb.gd" id="76_lw0jh"]
 [ext_resource type="Script" uid="uid://baintj7h5x6b4" path="res://scripts/guard_break.gd" id="79_lw0jh"]
@@ -196,6 +197,10 @@ region = Rect2(288, 192, 96, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hhpqf"]
 atlas = ExtResource("5_ur7pv")
 region = Rect2(384, 192, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3k3j0"]
+atlas = ExtResource("21_fcu33")
+region = Rect2(480, 0, 480, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lw0jh"]
 atlas = ExtResource("5_vx63k")
@@ -1190,6 +1195,41 @@ animations = [{
 "loop": false,
 "name": &"backdash",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k3j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k3j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k3j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k3j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k3j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k3j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k3j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k3j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k3j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k3j0")
+}],
+"loop": false,
+"name": &"death",
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2356,7 +2396,7 @@ poise_type = 0
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"hit"
+animation = &"death"
 autoplay = "idle"
 script = ExtResource("5_fjrip")
 hurtbox = NodePath("../PlayerHurtBox")
@@ -2364,16 +2404,18 @@ hitboxes = NodePath("../HitBoxes")
 state_machine = NodePath("../PlayerStateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1, -2)
 shape = SubResource("CapsuleShape2D_gl8cc")
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
 position_smoothing_enabled = true
-drag_horizontal_offset = 0.65
-drag_vertical_offset = -0.92
+drag_horizontal_offset = 1.0
+drag_vertical_offset = -0.9
 script = ExtResource("6_fjrip")
 
 [node name="PlayerHurtBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("7_fjrip")
@@ -2658,6 +2700,10 @@ anim_name = "hammer_aerial"
 active_frames = Array[int]([4, 5])
 hitbox = NodePath("../../HitBoxes/HammerAerial")
 
+[node name="Death" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("71_qmsq4")
+metadata/_custom_type_script = "uid://b51fdna2jgrw0"
+
 [node name="HitBoxes" type="Node2D" parent="."]
 visible = false
 
@@ -2914,6 +2960,7 @@ script = ExtResource("54_apa73")
 unique_name_in_owner = true
 position = Vector2(-2, -7)
 target_position = Vector2(18, 0)
+collision_mask = 128
 
 [node name="BuffManager" type="Node" parent="."]
 script = ExtResource("91_4vfid")

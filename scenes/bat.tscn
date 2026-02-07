@@ -785,6 +785,7 @@ hitboxes = NodePath("HitBoxes")
 state_machine = NodePath("EnemyStateMachine")
 hit_listener = NodePath("HitListener")
 buff_manager = NodePath("BuffManager")
+max_life = 300
 poise_type = 1
 metadata/_custom_type_script = "uid://sbr2kdsijr7e"
 

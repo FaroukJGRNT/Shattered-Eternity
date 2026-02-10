@@ -843,12 +843,10 @@ metadata/_custom_type_script = "uid://dvclob6aaps4"
 
 [node name="Tackle" type="Node" parent="EnemyStateMachine" index="7" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("13_7fxvx")
-custom_decel = 18
+custom_decel = 14
 anim_name = "tackle"
 active_frames = Array[int]([12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22])
 hitbox = NodePath("../../HitBoxes/Tackle")
-movement_frames = Array[int]([11])
-movement_velocity = Array[Vector2]([Vector2(350, 0)])
 deceleration = 0
 attack_cooldown = 0.5
 metadata/_custom_type_script = "uid://dvclob6aaps4"
@@ -857,7 +855,6 @@ metadata/_custom_type_script = "uid://dvclob6aaps4"
 script = ExtResource("14_p1bql")
 motion_value = 25
 life_duration = 1.5
-push_back = 1
 attack_type = 3
 impact = 3
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"

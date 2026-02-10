@@ -1428,7 +1428,6 @@ shape = SubResource("CapsuleShape2D_nepfb")
 [node name="Punch2" type="Area2D" parent="HitBoxes"]
 script = ExtResource("4_db4wm")
 motion_value = 20
-push_back = 1
 attack_type = 2
 impact = 3
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"
@@ -1453,7 +1452,6 @@ shape = SubResource("CapsuleShape2D_pmxkn")
 visible = false
 script = ExtResource("6_rdy5o")
 motion_value = 20
-push_back = 1
 attack_type = 2
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"
 
@@ -1464,7 +1462,6 @@ shape = SubResource("CircleShape2D_k30vi")
 [node name="Explode" type="Area2D" parent="HitBoxes"]
 script = ExtResource("7_kf6te")
 motion_value = 80
-push_back = 1
 attack_type = 3
 impact = 3
 is_phys_atk = false
@@ -1478,7 +1475,6 @@ shape = SubResource("CapsuleShape2D_ncuxf")
 [node name="Dash" type="Area2D" parent="HitBoxes"]
 script = ExtResource("8_coppp")
 motion_value = 18
-push_back = 1
 attack_type = 3
 impact = 3
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"

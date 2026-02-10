@@ -1,0 +1,53 @@
+Le joueur incarne un héros sans nom, réveillé dans un royaume en ruine, porteur d’une 
+prophétie annonçant qu’une entité destructrice détruira peu à peu ce monde jusqu’à 
+son anéantissement. La prophétie est censée avoir lieu à la fin de la journée. Guidé 
+par  quelques  survivants,  il  explore  un  univers  fragmenté,  récupère  des  artefacts 
+anciens et  de  nouvelles  capacités  pour  tenter  d’affronter  un  boss  final présenté 
+comme l’ennemi à abattre. L’histoire semble d’abord suivre une trame classique 
+d’action/aventure : le joueur croit incarner l’élu venu briser une malédiction. Mais 
+chaque partie est limitée à trente minutes, correspondant à une journée complète in-
+game, au terme de laquelle l’influence grandissante du boss sur le monde devient 
+irrésistible.  Des  cristaux  sombres  envahissent  les  paysages,  des  glitchs  visuels 
+corrompent les décors et des flux de magie s’infiltrent dans les environnements 
+jusqu’à ce que, inévitablement, le héros soit téléporté vers l’arène finale. Avant d’y 
+entrer, il rencontre dans une antichambre un mystérieux personnage sarcastique, 
+drôle et attachant, qui commente son parcours, brise parfois le quatrième mur et agit 
+comme un contrepoint humain dans cet univers oppressant. 
+Après cet échange, le joueur est projeté dans la salle du boss, où l’affrontement se 
+déroule, toujours fatal pour le joueur, puisque seule une route (quasi introuvable) 
+permet réellement d’accéder à un build capable de vaincre le boss final.
+
+NORMALEMENT : Ecran de game over + credits
+ALTERNATIVE : Cinematique de mort + Cinematique qui montre qu'il aspire l'energie du monde + Cinematique de respawn
+ + Dialogue de AAAA "Alors tu decides de revenir. Tres bien, je te tuerai autant de fois qu'il le faut"
+
+ Cependant,  à  chaque  relance,  le  monde  est  un  peu  plus 
+corrompu  :  les  environnements  se  fissurent,  les  PNJ  semblent  revivre  certains 
+dialogues puis paraissent devenir peu à peu fous, les discussions se raréfient, et 
+l’attitude du mystérieux compagnon d’avant-boss s’assombrit, passant de l’ironie 
+légère à l’aigreur. Finalement, vient le moment où le joueur réussit la « run parfaite », 
+rassemble les bons objets, exécute la séquence idéale et parvient à épuiser toute la 
+barre de vie du boss. Celui-ci tombe, perd son masque, et révèle qu’il était en réalité 
+le personnage de l’antichambre depuis le début. Dans une scène brutale, il abat alors 
+le joueur, inversant la perception que l’on avait de lui. 
+
+ Cependant,  à  chaque  relance,  le  monde  est  un  peu  plus 
+corrompu  :  les  environnements  se  fissurent,  les  PNJ  semblent  revivre  certains 
+dialogues puis paraissent devenir peu à peu fous, les discussions se raréfient, et 
+l’attitude du mystérieux compagnon d’avant-boss s’assombrit, passant de l’ironie 
+légère à l’aigreur. Finalement, vient le moment où le joueur réussit la « run parfaite », 
+rassemble les bons objets, exécute la séquence idéale et parvient à épuiser toute la 
+barre de vie du boss. Celui-ci tombe, perd son masque, et révèle qu’il était en réalité 
+le personnage de l’antichambre depuis le début. Dans une scène brutale, il abat alors 
+le joueur, inversant la perception que l’on avait de lui. 
+
+Basiquement la meme chose, juste que la raison pour laquelle le joueur ne peut plus relancer de run
+est que le pouvoir de mort du boss a depasse le pouvoir de renaissance du joueur
+
+Mais on peut toujours relancer une run en passant par le mode custom qui sera disponible des le debut
+
+Les quetes des pnj devront etre realisables en une seule run"
+Certaines quetes ne se lanceront plus une fios finies dans les runs a suivre, d'autres oui, d'autre donneront
+des recompenses differentes. On trouvera une solution adaptee a chaque quetes
+
+Aussi, certaines quetes pevent etre alterees apres un certain nombre de runs

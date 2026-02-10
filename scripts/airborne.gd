@@ -9,13 +9,11 @@ func enter():
 
 func update(delta):
 	if %RayCast2D.is_colliding():
-		print("COLLISION")
 
 		var collider = %RayCast2D.get_collider()
 
 		# ✅ On vérifie bien une TileMapLayer
 		if collider is TileMapLayer:
-			print("It's TileMapLayer")
 
 			var tilemap: TileMapLayer = collider
 
@@ -28,8 +26,14 @@ func update(delta):
 			# Récupérer les données de la tuile touchée
 			var tile_data = tilemap.get_cell_tile_data(cell)
 
-			if tile_data and tile_data.get_custom_data("WallSlide") == true:
-				print("WALLSLIDEABLE")
+			if tile_data and tile_data.get_custom_data("WallSlideFacingRight") == true:
+				player.facing = 1
+				player.direction = 1
+				transitioned.emit("wallsliding")
+				return
+			elif tile_data and tile_data.get_custom_data("WallSlideFacingLeft") == true:
+				player.facing = -1
+				player.direction = -1
 				transitioned.emit("wallsliding")
 				return
 
@@ -43,7 +47,8 @@ func update(delta):
 			return
 
 	# when at peak height, reduce gravity, add horizontal speed
-	if abs(player.velocity.y) < 50:
+	if abs(player.velocity.y) < 50 and player.state_machine.old_state.name.to_lower() != "wallsliding":
+		print("Low fall veloc")
 		added_horiz_speed = 25.0
 		#AnimPlayer.play("jump_peak")
 		player.handle_vertical_movement((player.get_gravity().y) / 1.5 * delta)
@@ -65,6 +70,7 @@ func update(delta):
 			player.Weapons.HAMMER:
 				transitioned.emit("hammeraerial")
 	player.move_and_slide()
+
 func exit():
 	pass
 

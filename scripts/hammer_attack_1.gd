@@ -4,7 +4,6 @@ var charge_timer := 0.0
 
 func enter():
 	super.enter()
-	player.velocity.x /= 1.8
 	charge_timer = 0.0
 
 func update(delta):

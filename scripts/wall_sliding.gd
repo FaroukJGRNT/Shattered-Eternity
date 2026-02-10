@@ -14,17 +14,14 @@ func enter():
 	player.aerial_dash_used = false
 	player.aerial_attack_used = false
 	player.friction = friction
-	old_direction = player.direction
-	player.velocity.x =  0
+	#old_direction = player.direction
+	#player.velocity.x =  0
 	AnimPlayer.play("wallsliding")
+	player.direct_sprite()
 
 func update(delta):
-	print(friction)
 	friction = min(friction + (increment * delta), max_friction)
-	if old_direction == 1:
-		AnimPlayer.flip_h = true
-	if old_direction == -1:
-		AnimPlayer.flip_h = false
+
 	if Input.is_action_just_pressed("jump"):
 		transitioned.emit("walljumping")
 		return

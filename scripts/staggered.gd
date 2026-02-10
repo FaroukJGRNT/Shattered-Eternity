@@ -1,6 +1,7 @@
 extends EnemyState
 
 var stagger_cooldown = 5.0
+var push_back := 0
 
 func _init() -> void:
 	is_state_blocking = true

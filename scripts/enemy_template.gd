@@ -45,7 +45,6 @@ func die():
 	state_machine.on_state_transition("death")
 
 func get_stunned(vel_x : float, duration : float):
-	print("I will get stunned, here is my veloc: ", vel_x)
 	if state_machine.current_state.name != "Death" and state_machine.current_state.name != "Staggered":
 		$EnemyStateMachine/Stun.push_back = vel_x
 		$EnemyStateMachine/Stun.timeout = duration

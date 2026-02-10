@@ -5,7 +5,7 @@ class_name AttackState
 @export var recovery_state_name : String
 @export var anim_name : String
 
-@export var active_frames : Array[int]
+@export var active_frames : Array[int] = [0]
 @export var hitbox : HitBox
 
 @export var movement_frames : Array[int]
@@ -17,6 +17,7 @@ var attack_again := false
 @export var next_combo_state_name : String = ""
 var usable_mov_frames : Array[int]
 var usable_velocs : Array[Vector2]
+@export var initial_veloc_multiplier := 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,6 +25,7 @@ func _ready() -> void:
 
 func enter():
 	attack_again = false
+	player.velocity *= initial_veloc_multiplier
 	usable_mov_frames = movement_frames.duplicate()
 	usable_velocs = movement_velocity.duplicate()
 	AnimPlayer.play(anim_name)
@@ -44,14 +46,23 @@ func update(delta):
 		player.velocity.x = min(player.velocity.x + deceleration * delta * 50, 0)
 	player.move_and_slide()
 
-	if Input.is_action_just_pressed("attack") and AnimPlayer.frame >= AnimPlayer.sprite_frames.get_frame_count(AnimPlayer.animation) / 2:
+	if Input.is_action_just_pressed("attack") and AnimPlayer.frame >= (AnimPlayer.sprite_frames.get_frame_count(AnimPlayer.animation) / 2):
 		attack_again = true
-	if Input.is_action_just_pressed("dash") and AnimPlayer.frame >= dash_cancel_frame:
-		player.get_horizontal_input()
-		if player.direction == 0 or player.direction * player.facing == -1:
-			transitioned.emit("backdashing")
-		else:
-			transitioned.emit("dashing")
+	if AnimPlayer.frame < active_frames[0] or AnimPlayer.frame >= dash_cancel_frame:
+		# Initiating a jump or a slide or an attack
+		if Input.is_action_just_pressed("jump") and player.is_on_floor():
+			player.allowed_jumps = 0
+			player.change_state("jumpstart")
+			return
+		if Input.is_action_just_pressed("guard"):
+			player.change_state("guard")
+			return
+		if Input.is_action_just_pressed("dash"):
+			player.get_horizontal_input()
+			if player.direction == 0 or player.direction * player.facing == -1:
+				transitioned.emit("backdashing")
+			else:
+				transitioned.emit("dashing")
 
 func exit():
 	pass

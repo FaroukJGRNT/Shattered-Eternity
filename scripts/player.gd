@@ -31,7 +31,7 @@ enum Weapons {
 	HAMMER
 }
 
-var direction := 0
+var direction := 0.0
 var current_weapon = Weapons.SWORD
 
 # Stats
@@ -130,6 +130,9 @@ func _physics_process(delta: float) -> void:
 #------ Utility functions ------#
 
 func handle_vertical_movement(gravity):
+	if current_state.name.to_lower() != "wallsliding" and current_state is not AerialAttack:
+		friction = 0
+	print("Player friction: ", friction)
 	# Apply the gravity
 	velocity.y += gravity
 	if velocity.y > 0:
@@ -172,15 +175,16 @@ func adjust_cam(delta):
 		$Camera2D.drag_horizontal_offset = lerp($Camera2D.drag_horizontal_offset, 1.0, 2.0 * delta)
 
 func get_horizontal_input():
-	var axis = Input.get_axis("left", "right")
-	if abs(axis) > 0.1:
-		direction = Input.get_axis("left", "right")
+	var raw = Input.get_axis("left", "right")
+	print(raw)
+
+	if abs(raw) > 0.2:        # deadzone
+		direction = sign(raw)  # devient -1 ou 1
 	else:
-		direction = 0
+		direction = 0.0
 
 func initiate_slide():
 	if Input.is_action_just_pressed("dash"):
-		print("dash")
 		if is_on_floor() and not on_dash_cooldown:
 			if direction == 0:
 				change_state("backdashing")

@@ -8,6 +8,9 @@ class_name AerialAttack
 @export var frame_teshold := -1
 @export var ground_attck := ""
 
+func _init() -> void:
+	initial_veloc_multiplier = 1.0
+
 func enter():
 	super.enter()
 	player.friction = vertital_friction

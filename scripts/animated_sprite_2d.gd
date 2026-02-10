@@ -22,7 +22,7 @@ func _on_frame_changed() -> void:
 	if current_state == null:
 		return
 	if current_state is EnemyAttackState or  current_state is AttackState:
-		if frame in current_state.active_frames:
+		if frame in current_state.active_frames and current_state.hitbox:
 			if frame == current_state.active_frames[0]:
 				current_state.hitbox.start_life()
 			current_state.hitbox.activate()

@@ -14,9 +14,9 @@ var vfx_player_scene : PackedScene = load("res://scenes/short_lived_vfx.tscn")
 
 # Hit freeze durations (seconds)
 const LIGHT_FRAME_FREEZE_DURATION  := 0.012
-const NORMAL_FRAME_FREEZE_DURATION := 0.024
-const BIG_FRAME_FREEZE_DURATION    := 0.038
-const HUGE_FRAME_FREEZE_DURATION   := 0.056
+const NORMAL_FRAME_FREEZE_DURATION := 0.020
+const BIG_FRAME_FREEZE_DURATION    := 0.034
+const HUGE_FRAME_FREEZE_DURATION   := 0.050
 
 @export var LIGHT_CAM_SHAKE : float = 2
 @export var NORMAL_CAM_SHAKE : float = 3
@@ -179,7 +179,6 @@ func damage_taken(area : HitBox) -> void:
 				daddy.get_stunned(3 * area.facing, SMALL_PUSHBACK_DURATION)
 
 	if daddy.is_in_group("Enemy"):
-		print("Enemy taking a hit")
 		if current_state is EnemyAttackState and current_state.option_type == EnemyAttackState.OptionType.DEFENSIVE:
 			pass
 		else:
@@ -191,22 +190,22 @@ func damage_taken(area : HitBox) -> void:
 						area.Pushback.STRONG:
 							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 						area.Pushback.GINORMOUS:
-							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+							daddy.get_stunned(MEDIUM_PUSHBACK * 2 * area.facing, MEDIUM_PUSHBACK_DURATION)
 				daddy.Poises.MEDIUM:
-					print("Enemy is medium")
 					match area.push_back:
 						area.Pushback.NORMAL:
-							print("NORMAL PUSHBACK")
 							if daddy.velocity.x == 0:
 								daddy.velocity.x += (area.facing * SMALL_PUSHBACK)
 						area.Pushback.STRONG:
-							print("STRON PUSHBACK")
 							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 						area.Pushback.GINORMOUS:
-							print("GINORMOUS PUSHBACK")
-							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+							daddy.get_stunned(MEDIUM_PUSHBACK * 2 * area.facing, MEDIUM_PUSHBACK_DURATION)
 				daddy.Poises.LARGE:
-					pass
+					match area.push_back:
+						area.Pushback.GINORMOUS:
+							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+						_:
+							pass
 
 	# Hit flash
 	daddy.anim_player.material.set_shader_parameter("enabled", true)

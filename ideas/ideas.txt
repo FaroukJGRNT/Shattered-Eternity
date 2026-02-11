@@ -198,7 +198,9 @@ Le joueur respawn sur des coeurs d'almana. Chaque zone en a un gros et des petit
 
 --> Avant le tout premier combat, le PNJ que le joueur rencontre avant la salle du boss explique au joueur que les attaques du boss sont imprégnées d'une magie qui annule l'immortalité Il dit au joueur que s'il perd contre le boss c'est donc définitif.
 
---> Idée de boss : Un personnage qui peut insufler (trouver comment) des âmes dans des trucs (Il se balade sur un destrier squelette, il peut invoquer des squelettes mais plot twist il peut aussi insufler une âme dans des objets inanimés)(Idée de phase 2 : Il perd son destrier, il insuffle une âme à son arme et elle forme une sorte de boss duo en synergie avec lui)
+--> Idée de boss : Un personnage qui peut insufler (trouver comment) des âmes en insérant de l'almana dans des trucs (Il se balade sur un destrier squelette, il peut invoquer des squelettes mais plot twist il peut aussi insufler une âme dans des objets inanimés)(Idée de phase 2 : Il perd son destrier, il insuffle une âme à son arme et elle forme une sorte de boss duo en synergie avec lui)
+
+--> Idée de boss : Un boss qui manipule la gravité, il peut t'attirer vers lui juste avant de lancer une attaque, te repousser quand tu tentes de l'attaquer, te lancer des objets etc...En phase 2, il utilise toute sa force pour littéralement retourner l'arène 
 
 --> TOUS LES CHARA DESIGNS DOIVENT ETRE UNIQUES. L'art style doit avoir qulque chose qui permet d'identifier le jeu direct, tout en restant beau
 
@@ -208,6 +210,17 @@ Il peut par exemple te permettre de traverser une cascade de lave pour atteindre
 Ou bien traverser le blizzard qui mene a la zone enneigee. Ou bien etre immunise aux eclairs des collines de foudre
 Bref du coup je voulais parler de competences qu permettent d'explorer. Par exemple une comp d'escalade, ou une pour planer
 Ce serait bien qu'au sommet des monts, tu puisse sauter et planer jusqu'aux iles flottantes
+
+-->  Les safe-rooms seront des rooms de tailles et de types variés situées entre deux grandes séries de rooms de combat. Il y en aura de très petites, de moyennes, de très grandes, des contemplatives, certaines focus sur un évènement ou une mécanique de gameplay. Elles ont pour principal rôle de servir de nœuds à partir desquels ont peut emprunter un large panel de chemin et de servir de points d'ancrage du lore et de la narration pour gérer efficacement la courbe émotionnelle du gameplay.
+
+--> Avant les safe-rooms il y aura une succession de rooms de combat de moins en moins intenses : avec peu d'ennemis ou sans ennemis ou peut-être focus sur une récompense du genre buff et autre Pour que la transition ne soit pas trop brutale 
+
+--> Il y aura des indices visuels qui prouvent qu'on approche d'une safe-room Exemple : De la lumière qui se dégage du prochain passage, la musique qui est réduite à de simples percussions etc
+
+-->  Les safes-rooms auront soit Pas de musique et que des bruits ambiants soit une musique qui contraste assez faiblement avec les musiques des rooms de combat (Ex : On garde juste les percussions/ le son de la musique est comme étouffé pas juste volume diminué mais vraiment un effet d'étouffement)
+
+--> Les safe-rooms seront dessinées comme des pièces d'arts Aucun parallaxe et aucun effet "cheap" Chaque élément sera placé de manière à sublimé le tout comme dans un vrai dessin. La palette de couleurs sera choisie intelligemment selon la théorie des couleurs, il y aura de très nombreux éléments et assets uniques aussi bien dans la scène que dans son background.
+
 
 # IDEES WORLD-BUILDING/DESIGN
 
@@ -231,6 +244,9 @@ Ce serait bien qu'au sommet des monts, tu puisse sauter et planer jusqu'aux iles
 
 --> On doit trouver des moyens originaux qui font reflechir le player pour debloquer des trucs, par exemple un boss ultra dur mais qui devient facile quand on trouve son point faible, ou bien utiliser le bon element pour detruire un obstacle
 
+--> Une immense et incroyable forge auparavant dirigée par un forgeron et située dans une zone volcanique ou au sein même d'un volcan avec lequel elle fait complètement corps
+
+
 # IDEES GAMEPLAY
 
 --> La seule méthode de soin in-game est liée à la résonance. Après les actions parfaites (parade, esquive parfaite etc) on regagne un peu de PV. Cette fonctionnalité n'est disponible qu'à partir du premier niveau de résonance et la quantité de PV regagnés augmente avec les niveaux de résonance.
@@ -239,6 +255,11 @@ Il y a aussi des objets dispersés dans le monde qui génèrent du "mana pur" pe
 --> Si le joueur arrive à placer trois coups en restant en l'air, il recharge son double saut (le nombre de coups diminue avec les niveaux de résonance)
 
 --> Il doit y avoir 3 types de stagger, un leger tick, pour les petits coups, un hurt medium qui t'envoie en l'air vers l'arriere, et un gros stagger qui te balance vers l'arriere et t'envoie congner un mur
+
+-->  Ajouter une attaque qui envoie l'ennemi vers le ciel ? Comme ça il ne peut plus attaquer 
+Ajouter un combo aerien
+
+--> Les ennemis du tutoriel ne sont tuables qu'en un combo complet (pour obliger le joueur à voir le combo complet) ou en une attaque chargée etc), l'ennemi qui doit t'apprendre à esquiver ne doit pas mourir avant d'avoir pu mettre une attaque à esquiver etc
 
 # QUESTIONNEMENTS GAMEPLAY
 

@@ -1137,8 +1137,8 @@ shape = SubResource("RectangleShape2D_5lhf0")
 
 [node name="HitListener" parent="." index="4"]
 script = ExtResource("18_82cua")
-min_guard_break_frame = 4
-max_guard_break_frame = 8
+min_guard_break_frame = 3
+max_guard_break_frame = 9
 
 [node name="Area2D" parent="." index="8"]
 visible = false

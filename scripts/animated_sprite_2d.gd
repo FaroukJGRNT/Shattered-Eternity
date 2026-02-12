@@ -6,8 +6,18 @@ class_name BasicAnimPlayer
 @export var state_machine : StateMachine
 var active_hitboxes : Array[HitBox] =  []
 
+var speed_multipliers : Array[float] = []
+var base_speed := 1.0
+
 func _ready() -> void:
 	connect("frame_changed", _on_frame_changed)
+
+func _process(delta: float) -> void:
+	var spd = base_speed
+	for m in speed_multipliers:
+		spd *= m
+	speed_scale = spd
+
 
 func _on_frame_changed() -> void:
 	# default reset

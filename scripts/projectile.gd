@@ -50,8 +50,9 @@ func destroy():
 
 # Since projectile damage are calculated on instanciation, not on hit
 func set_premade_damage(entity : LivingEntity):
-	hitbox .premade_dmg = entity.deal_damage(hitbox .motion_value, hitbox .atk_type)
-	hitbox .facing = entity.facing
+	hitbox.premade_dmg = entity.deal_damage(hitbox .motion_value, hitbox .atk_type)
+	hitbox.facing = entity.facing
+	hitbox.premade_dmg
 
 # Will call move, and eventually destroy if too far
 func _process(delta: float) -> void:

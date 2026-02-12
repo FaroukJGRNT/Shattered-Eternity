@@ -19,11 +19,24 @@ var usable_mov_frames : Array[int]
 var usable_velocs : Array[Vector2]
 @export var initial_veloc_multiplier := 0.0
 
+@export var spawns_proj := false
+@export var spawn_frame := 0
+var proj_spawned := false
+
+@export var reson_speed_boost := 1.3
+
+func spawn_proj():
+	pass
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	is_state_blocking = true
 
 func enter():
+	if player.resonance_value >= 200:
+		AnimPlayer.speed_multipliers.append(reson_speed_boost)
+
+	proj_spawned = false
 	attack_again = false
 	player.velocity *= initial_veloc_multiplier
 	usable_mov_frames = movement_frames.duplicate()
@@ -31,6 +44,10 @@ func enter():
 	AnimPlayer.play(anim_name)
 
 func update(delta):
+	if AnimPlayer.frame == spawn_frame and not proj_spawned:
+		proj_spawned = true
+		spawn_proj()
+
 	var index = 0
 	for frame in usable_mov_frames:
 		if AnimPlayer.frame == frame:
@@ -44,6 +61,10 @@ func update(delta):
 		player.velocity.x = max(player.velocity.x - deceleration * delta * 50, 0)
 	if player.velocity.x < 0:
 		player.velocity.x = min(player.velocity.x + deceleration * delta * 50, 0)
+	if player.velocity.y > 0:
+		player.velocity.y = max(player.velocity.y - deceleration * delta * 50, 0)
+	if player.velocity.y < 0:
+		player.velocity.y = min(player.velocity.y + deceleration * delta * 50, 0)
 	player.move_and_slide()
 
 	if Input.is_action_just_pressed("attack") and AnimPlayer.frame >= (AnimPlayer.sprite_frames.get_frame_count(AnimPlayer.animation) / 2):
@@ -54,7 +75,7 @@ func update(delta):
 			player.allowed_jumps = 0
 			player.change_state("jumpstart")
 			return
-		if Input.is_action_just_pressed("guard"):
+		if Input.is_action_just_pressed("guard") and player.is_on_floor():
 			player.change_state("guard")
 			return
 		if Input.is_action_just_pressed("dash"):
@@ -65,6 +86,8 @@ func update(delta):
 				transitioned.emit("dashing")
 
 func exit():
+	if player.resonance_value >= 200:
+		AnimPlayer.speed_multipliers.erase(reson_speed_boost)
 	pass
 
 # this function will be executed every time an animation ends,

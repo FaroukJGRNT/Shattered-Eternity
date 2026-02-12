@@ -11,7 +11,13 @@ class_name Player
 @export var WALL_SLIDE_SPEED = 50.0
 @export var MAX_VERTICAL_VELOC = 300.0
 
+@export var max_resonance_value := 400.0
+var resonance_value = 0.0
+
 @export var specialVFXPlayer : SpecialVFXPlayer
+
+var equipped_spell1 : Spell
+var equipped_spell2 : Spell
 
 var current_state : PlayerState
 
@@ -37,6 +43,7 @@ var current_weapon = Weapons.SWORD
 # Stats
 func _ready() -> void:
 	super._ready()
+	mana = 100
 	poise_type = Poises.PLAYER
 	position.x += 200
 	max_life = 200
@@ -46,6 +53,54 @@ func _ready() -> void:
 	thunder_res = 10.0
 	fire_res = 10.0
 	ice_res = 10.0
+	equip_spell_slot1(IceSpell.new())
+	equip_spell_slot2(ThunderSpell.new())
+
+@export var mana_regen_multipliers : Array[float] = []
+
+@export var base_reson_decay := 2.0
+@export var reson_decay_accel := 1.0
+var reson_decay := 2.0
+var attack_reson_boost := 5.0
+var kill_reson_boost := 50.0
+var parry_reson_boost := 80.0
+var guard_break_reson_boost := 80.0
+var interruption_reson_boost := 80.0
+var dodge_reson_boost := 25.0
+
+var hit_reson_loss := 75.0
+
+func propagate_event(event : Event):
+	super.propagate_event(event)
+
+	match event:
+		Event.HIT_TAKEN:
+			resonance_value -= hit_reson_loss
+			if resonance_value < 0:
+				resonance_value = 0
+		
+		Event.ENEMY_KILLED:
+			resonance_value += kill_reson_boost
+			reson_decay = base_reson_decay
+		Event.PARRY:
+			resonance_value += parry_reson_boost
+			reson_decay = base_reson_decay
+		Event.ATTACK_EVADED:
+			resonance_value += dodge_reson_boost
+			reson_decay = base_reson_decay
+		Event.HIT_DEALT:
+			resonance_value += attack_reson_boost
+			reson_decay = base_reson_decay
+		Event.ENEMY_GUARD_BROKEN:
+			resonance_value += guard_break_reson_boost
+			reson_decay = base_reson_decay
+		Event.ENEMY_INTERRUPTED:
+			resonance_value += interruption_reson_boost
+			reson_decay = base_reson_decay
+
+	if resonance_value > max_resonance_value:
+		resonance_value = max_resonance_value
+	
 
 func get_stunned(vel_x : float, duration : float):
 	if dead:
@@ -73,6 +128,9 @@ func die():
 	state_machine.on_state_transition("death")
 
 func run_cooldowns(delta):
+	reson_decay += reson_decay_accel * delta
+	resonance_value = max(0, resonance_value - reson_decay * delta)
+
 	if on_dash_cooldown:
 		dash_cooldown -= delta
 	if dash_cooldown <= 0:
@@ -107,7 +165,10 @@ func _physics_process(delta: float) -> void:
 		aerial_attack_used = false
 		# Determine if the player just landed
 		if current_state.name == "Airborne":
-			change_state("landing")
+			if resonance_value >= 100:
+				change_state("running")
+			else:
+				change_state("landing")
 			return
 		# Determine if the player is running or not
 		if direction != 0:
@@ -132,7 +193,6 @@ func _physics_process(delta: float) -> void:
 func handle_vertical_movement(gravity):
 	if current_state.name.to_lower() != "wallsliding" and current_state is not AerialAttack:
 		friction = 0
-	print("Player friction: ", friction)
 	# Apply the gravity
 	velocity.y += gravity
 	if velocity.y > 0:
@@ -176,7 +236,6 @@ func adjust_cam(delta):
 
 func get_horizontal_input():
 	var raw = Input.get_axis("left", "right")
-	print(raw)
 
 	if abs(raw) > 0.2:        # deadzone
 		direction = sign(raw)  # devient -1 ou 1
@@ -220,3 +279,18 @@ func initiate_ground_actions():
 		change_state("guard")
 		return
 	initiate_slide()
+	
+	if Input.is_action_just_pressed("cast_spell1"):
+		if mana >= equipped_spell1.mana_cost:
+			state_machine.special_state_transition(equipped_spell1)
+	if Input.is_action_just_pressed("cast_spell2"):
+		if mana >= equipped_spell2.mana_cost:
+			state_machine.special_state_transition(equipped_spell2)
+
+func equip_spell_slot1(spell : Spell):
+	equipped_spell1 = spell
+	state_machine.connect_state(spell)
+
+func equip_spell_slot2(spell : Spell):
+	equipped_spell2 = spell
+	state_machine.connect_state(spell)

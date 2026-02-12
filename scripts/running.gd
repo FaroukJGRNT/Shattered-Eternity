@@ -5,7 +5,10 @@ func enter():
 
 func update(delta):
 	player.initiate_ground_actions()
-	player.handle_horizontal_movement(player.RUN_SPEED, delta)
+	var speed = player.RUN_SPEED
+	if player.resonance_value >= 100:
+		speed += speed / 3	
+	player.handle_horizontal_movement(speed, delta)
 
 func exit():
 	pass

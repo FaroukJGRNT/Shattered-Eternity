@@ -4,6 +4,7 @@ class_name AerialHitBox
 @export var up_value := 0
 
 func on_hit():
+	super.on_hit()
 	if not life_used:
 		if owner.velocity.y < 0:
 			owner.velocity.y -= up_value / 2

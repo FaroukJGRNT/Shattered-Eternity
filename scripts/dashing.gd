@@ -17,6 +17,9 @@ func update(delta):
 	if abs(player.position.x - slide_start) < player.SLIDE_DIST:
 		player.velocity.x = slide_direction * player.SLIDE_SPEED * player.global_speed_scale
 	else:
+		if player.is_on_floor() and player.resonance_value >= 100:
+			transitioned.emit("running")
+			return
 		player.velocity.x = slide_direction * player.SLIDE_SPEED * player.global_speed_scale / 5
 		if not player.is_on_floor() and AnimPlayer.frame > 1:
 			transitioned.emit("airborne")

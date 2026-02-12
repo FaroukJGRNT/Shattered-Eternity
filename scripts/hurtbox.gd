@@ -6,7 +6,6 @@ var daddy : LivingEntity
 
 func _ready () -> void:
 	if owner is LivingEntity:
-		
 		daddy = owner
 	# Enemy hurtboxes need to be detected by the player
 	collision_layer = 0
@@ -34,6 +33,10 @@ func on_area_entered(area: Area2D) -> void:
 		if owner in area.affected_targets:
 			return
 
+		if disabled:
+			daddy.propagate_event(LivingEntity.Event.ATTACK_EVADED)
+			return
+
 		daddy.hit_listener.damage_taken(area)
 		area.affected_targets.append(owner)
 
@@ -48,5 +51,4 @@ func activate():
 	disabled = false
 
 func desactivate():
-	set_deferred("monitoring", false)
 	disabled = true

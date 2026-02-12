@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://lcalun41bn55"]
+[gd_scene load_steps=20 format=3 uid="uid://lcalun41bn55"]
 
 [ext_resource type="Script" uid="uid://ckkbj12ajssly" path="res://scripts/ingame_ui.gd" id="1_v3yap"]
 [ext_resource type="Texture2D" uid="uid://jn6qnqfr4t2q" path="res://assets/sprites/ui/health_bar_middle.png" id="2_i42rf"]
@@ -15,6 +15,32 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ehd4"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4ad5"]
+bg_color = Color(0.16784, 0.1344, 0.24, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wmlis"]
+bg_color = Color(0.184314, 0.796078, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_k4ad5"]
+colors = PackedColorArray(6.01634e-09, 6.01634e-09, 0.100855, 1, 0.105882, 0, 0.12549, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wmlis"]
+gradient = SubResource("Gradient_k4ad5")
+
+[sub_resource type="Gradient" id="Gradient_fjjdp"]
+offsets = PackedFloat32Array(0, 0.18239, 0.981132, 0.987421, 1)
+colors = PackedColorArray(0.462745, 1, 0.945098, 1, 0.538512, 0.918205, 0.952841, 1, 0.806667, 0.42, 1, 1, 0.314465, 0.314465, 0.314465, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_55lpn"]
+gradient = SubResource("Gradient_fjjdp")
+width = 208
 
 [node name="IngameUI" type="CanvasLayer" groups=["UI"]]
 script = ExtResource("1_v3yap")
@@ -49,9 +75,9 @@ position = Vector2(100, 8)
 texture = ExtResource("6_yrj12")
 
 [node name="LifeBar2" type="TextureProgressBar" parent="." groups=["PlayerHealthBar"]]
-offset_left = 10.0
+offset_left = 63.0
 offset_top = 8.0
-offset_right = 110.0
+offset_right = 163.0
 offset_bottom = 38.0
 scale = Vector2(2.2, 2.2)
 texture_under = ExtResource("7_k4ad5")
@@ -81,3 +107,24 @@ offset_bottom = 40.0
 max_value = 100.19
 value = 50.0
 texture_progress = ExtResource("12_70tcv")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 69.0
+offset_top = 54.0
+offset_right = 277.0
+offset_bottom = 64.0
+pivot_offset = Vector2(51, 109)
+theme_override_styles/background = SubResource("StyleBoxFlat_k4ad5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wmlis")
+value = 50.0
+show_percentage = false
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 69.0
+offset_top = 68.0
+offset_right = 277.0
+offset_bottom = 78.0
+value = 60.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture1D_wmlis")
+texture_progress = SubResource("GradientTexture1D_55lpn")

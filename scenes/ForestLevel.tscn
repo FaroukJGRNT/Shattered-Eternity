@@ -516,9 +516,9 @@ environment = SubResource("Environment_d6xuq")
 player = NodePath("../Player")
 
 [node name="Sign" parent="." instance=ExtResource("18_lkqwk")]
-offset_left = 10769.0
+offset_left = 10196.0
 offset_top = 264.0
-offset_right = 10769.0
+offset_right = 10196.0
 offset_bottom = 264.0
 text = "Move : WASD / Left joystick or D-Pad
 Jump : Space / Cross Button
@@ -575,7 +575,7 @@ GuardBreak beats Guard
 Attack beats GuardBreak"
 
 [node name="Dummy" parent="." instance=ExtResource("13_pf0y0")]
-position = Vector2(13682, 257)
+position = Vector2(10681, 259)
 
 [node name="TreeMan" parent="." instance=ExtResource("18_ei3w1")]
 position = Vector2(14666, 257)

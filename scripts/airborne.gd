@@ -47,8 +47,7 @@ func update(delta):
 			return
 
 	# when at peak height, reduce gravity, add horizontal speed
-	if abs(player.velocity.y) < 50 and player.state_machine.old_state.name.to_lower() != "wallsliding":
-		print("Low fall veloc")
+	if abs(player.velocity.y) < 50:
 		added_horiz_speed = 25.0
 		#AnimPlayer.play("jump_peak")
 		player.handle_vertical_movement((player.get_gravity().y) / 1.5 * delta)
@@ -59,7 +58,10 @@ func update(delta):
 	if player.velocity.y > 0 and AnimPlayer.animation != "fall":
 		AnimPlayer.play("fall")
 	player.initiate_slide()
-	player.handle_horizontal_movement(player.AERIAL_SPEED + added_horiz_speed, delta)
+	var spd = player.AERIAL_SPEED
+	if player.resonance_value >= 100:
+		spd += player.AERIAL_SPEED / 3
+	player.handle_horizontal_movement(spd + added_horiz_speed, delta)
 	if Input.is_action_just_pressed("attack") and not player.aerial_attack_used:
 		player.aerial_attack_used = false
 		match player.current_weapon:
@@ -69,6 +71,13 @@ func update(delta):
 				transitioned.emit("swordaerial1")
 			player.Weapons.HAMMER:
 				transitioned.emit("hammeraerial")
+
+	if Input.is_action_just_pressed("cast_spell1"):
+		if player.mana >= player.equipped_spell1.mana_cost:
+			player.state_machine.special_state_transition(player.equipped_spell1)
+	if Input.is_action_just_pressed("cast_spell2"):
+		if player.mana >= player.equipped_spell2.mana_cost:
+			player.state_machine.special_state_transition(player.equipped_spell2)
 	player.move_and_slide()
 
 func exit():

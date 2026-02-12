@@ -49,6 +49,8 @@ enum AttackType {
 @export var is_guard_break := false
 @export var is_phys_atk := true
 
+@export var is_spell := false
+
 # For projectiles, since you cant generate damage from them, they're detached
 # from their owmer
 var premade_dmg : DamageContainer = null
@@ -98,4 +100,13 @@ func desactivate():
 
 # Is called whenever the hitbox deals damage to a hurtbox
 func on_hit():
-	pass
+	if owner is LivingEntity:
+		owner.propagate_event(LivingEntity.Event.HIT_DEALT)
+	if owner is Player and not is_spell:
+		var mana_to_gain = motion_value / 4
+		for m in owner.mana_regen_multipliers:
+			mana_to_gain *= m
+
+		if owner.resonance_value >= 300:
+			mana_to_gain += mana_to_gain / 3
+		owner.mana += mana_to_gain

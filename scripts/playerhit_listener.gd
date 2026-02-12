@@ -16,6 +16,8 @@ func handle_guard(area : HitBox) -> GuardResult:
 				daddy.velocity.x = min(area.motion_value * parry_recoil, max_parry_speed)
 				daddy.velocity.x *= area.facing
 				daddy.hurtbox.desactivate()
+				daddy.propagate_event(LivingEntity.Event.PARRY)
+				print("Propagated parry")
 				return GuardResult.PARRY
 			daddy.velocity.x = min(area.motion_value * guard_recoil, max_guard_speed)
 			daddy.velocity.x *= area.facing

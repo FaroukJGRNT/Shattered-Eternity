@@ -4,6 +4,10 @@ class_name PlayerStateMachine
 @onready var player : Player = owner
 var old_state : PlayerState
 
+func connect_state(state : PlayerState):
+	state.transitioned.connect(on_state_transition)
+	state.AnimPlayer = AnimPlayer
+	state.player = player
 
 func _ready() -> void:
 	super._ready()
@@ -11,9 +15,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is PlayerState:
 			states[child.name.to_lower()] = child
-			child.transitioned.connect(on_state_transition)
-			child.AnimPlayer = AnimPlayer
-			child.player = player
+			connect_state(child)
 	current_state = states["idle"]
 	old_state = current_state
 
@@ -26,4 +28,11 @@ func on_state_transition(new_state_name):
 		old_state = current_state
 		current_state.exit()
 		current_state = states[new_state_name.to_lower()]
+		current_state.enter()
+
+func special_state_transition(new_state : State):
+	if current_state != new_state:
+		old_state = current_state
+		current_state.exit()
+		current_state = new_state
 		current_state.enter()

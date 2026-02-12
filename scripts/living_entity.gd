@@ -63,8 +63,19 @@ enum Poises {
 
 enum Event {
 	ENEMY_KILLED,
+	ENEMY_GUARD_BROKEN,
+	ENEMY_INTERRUPTED,
 	HIT_TAKEN,
-	PARRY
+	HIT_DEALT,
+	PARRY,
+	ATTACK_EVADED
+}
+
+enum SpecialStatus {
+	NONE,
+	THERMAL_SCHOK,
+	PLASMA_CHARGE,
+	CRYO_CHARGE
 }
 
 @export var poise_type := Poises.MEDIUM
@@ -77,7 +88,56 @@ enum Event {
 @export var fire_res := 2.0
 @export var ice_res := 2.0
 
-@export var max_mana := 0
+var fire_attack_multipliers : Array[float] = [] 
+var ice_attack_multipliers : Array[float] = [] 
+var thunder_attack_multipliers : Array[float] = [] 
+
+func get_fire_attack():
+	var value = fire_atk
+	for m in fire_attack_multipliers:
+		value *= m
+	return value
+
+func get_ice_attack():
+	var value = ice_atk
+	for m in ice_attack_multipliers:
+		value *= m
+	return value
+
+func get_thunder_attack():
+	var value = thunder_atk
+	for m in thunder_attack_multipliers:
+		value *= m
+	return value
+
+
+func get_fire_res():
+	var value = fire_res
+	for m in fire_res_multipliers:
+		value *= m
+	return value
+
+func get_ice_res():
+	var value = ice_res
+	for m in ice_res_multipliers:
+		value *= m
+	return value
+
+func get_thunder_res():
+	var value = thunder_res
+	for m in thunder_res_multipliers:
+		value *= m
+	return value
+
+var fire_res_multipliers : Array[float] = [] 
+var ice_res_multipliers : Array[float] = [] 
+var thunder_res_multipliers : Array[float] = [] 
+
+var active_special_status := SpecialStatus.NONE
+@export var special_status_duration := 5.0
+var special_status_timer := 0.0
+
+@export var max_mana := 100
 @export var mana := 0
 
 @export var max_posture := 100.0
@@ -142,9 +202,22 @@ func _ready() -> void:
 
 func _process(delta):
 	# Vider les barres d'accumulation progressivement
+	if mana > max_mana:
+		mana = max_mana
 	posture = max(posture - (posture_decay_rate * delta), 0)
 	for key in accum.keys():
 		accum[key] = max(accum[key] - accum_decay_rate * delta, 0)
+	if active_special_status != SpecialStatus.NONE:
+		special_status_timer -= delta
+		if special_status_timer <= 0:
+			match active_special_status:
+				SpecialStatus.THERMAL_SCHOK:
+					remove_thermal_shock()
+				SpecialStatus.PLASMA_CHARGE:
+					remove_plasma_charge()
+				SpecialStatus.CRYO_CHARGE:
+					remove_cryo_charge()
+
 	#_update_accum_bars()
 
 	# Appliquer les statuts actifs
@@ -163,11 +236,23 @@ func _process(delta):
 		_remove_status(status)
 
 	if active_status_effects.is_empty():
+		anim_player.modulate = Color(1,1,1,1)
 		return
 		
 	# --- Pulsation (effet couleur indiquant le malus de statut) avec delta ---
 	pulse_timer += delta
 	var t = sin(pulse_timer * 5.0) * 0.5 + 0.5  # multiplier pour ajuster la vitesse du pulse
+
+	if active_special_status == SpecialStatus.THERMAL_SCHOK:
+		anim_player.modulate = Color(0.4, 1.0, 0.9, 1) * t + Color(1,1,1,1) * (1-t)
+		return
+	elif active_special_status == SpecialStatus.PLASMA_CHARGE:
+		anim_player.modulate = Color(0.95, 0.65, 1.0, 1) * t + Color(1,1,1,1) * (1-t)
+		return
+	elif active_special_status == SpecialStatus.CRYO_CHARGE:
+		anim_player.modulate = Color(0.15, 0.25, 0.55, 1) * t + Color(1,1,1,1) * (1-t)
+
+		return
 
 	if "burn" in active_status_effects:
 		anim_player.modulate = Color(1, 0.5, 0, 1) * t + Color(1,1,1,1) * (1-t)
@@ -175,15 +260,13 @@ func _process(delta):
 		anim_player.modulate = Color(0.5, 0.8, 1, 1) * t + Color(1,1,1,1) * (1-t)
 	elif "shock" in active_status_effects:
 		anim_player.modulate = Color(1, 1, 0, 1) * t + Color(1,1,1,1) * (1-t)
-	else:
-		anim_player.modulate = Color(1,1,1,1)
 
 func take_damage(damage: DamageContainer) -> DamageContainer:
 	propagate_event(Event.HIT_TAKEN)
 	# Appliquer les résistances directement sur le DamageContainer
-	damage.fire_dmg *= 1.0 - fire_res / 100.0
-	damage.thunder_dmg *= 1.0 - thunder_res / 100.0
-	damage.ice_dmg *= 1.0 - ice_res / 100.0
+	damage.fire_dmg *= 1.0 - get_fire_res() / 100.0
+	damage.thunder_dmg *= 1.0 - get_thunder_res() / 100.0
+	damage.ice_dmg *= 1.0 - get_ice_res() / 100.0
 	damage.phys_dmg *= 1.0 - get_defense() / 100.0
 
 	if damage.is_crit:
@@ -221,9 +304,10 @@ func take_damage(damage: DamageContainer) -> DamageContainer:
 	if life <= 0 and not dead:
 		dead = true
 		life = 0
-		damage.daddy_ref.propagate_event(Event.ENEMY_KILLED)
+
+		if damage.daddy_ref:
+			damage.daddy_ref.propagate_event(Event.ENEMY_KILLED)
 		die()
-		
 
 	return damage
 
@@ -245,11 +329,11 @@ func deal_damage(motion_value: int, attack_type: String = "") -> DamageContainer
 				dmg.phys_dmg = raw_value * 0.5
 				match elem_mode:
 					ElemMode.FIRE:
-						dmg.fire_dmg = raw_value * 0.5 * (1.0 + fire_atk / 100.0)
+						dmg.fire_dmg = raw_value * 0.5 * (1.0 + get_fire_attack() / 100.0)
 					ElemMode.THUNDER:
-						dmg.thunder_dmg = raw_value * 0.5 * (1.0 + thunder_atk / 100.0)
+						dmg.thunder_dmg = raw_value * 0.5 * (1.0 + get_thunder_attack() / 100.0)
 					ElemMode.ICE:
-						dmg.ice_dmg = raw_value * 0.5 * (1.0 + ice_atk / 100.0)
+						dmg.ice_dmg = raw_value * 0.5 * (1.0 + get_attack() / 100.0)
 			else:
 				# 100% physique si aucun élément actif
 				dmg.phys_dmg = raw_value
@@ -279,6 +363,29 @@ func apply_status(status_name: String):
 			_apply_shock()
 		elif status_name == "freeze":
 			_apply_freeze()
+		
+		if active_special_status == SpecialStatus.NONE:
+			if len(active_status_effects.keys()) >= 2:
+				special_status_timer = special_status_duration
+				match active_status_effects.keys()[-2]:
+					"shock":
+						match status_name:
+							"burn":
+								apply_plasma_charge()
+							"freeze":
+								apply_cryo_charge()
+					"freeze":
+						match status_name:
+							"shock":
+								apply_cryo_charge()
+							"burn":
+								apply_thermal_shock()
+					"burn":
+						match status_name:
+							"shock":
+								apply_plasma_charge()
+							"freeze":
+								apply_thermal_shock()
 
 func _apply_burn(delta):
 	burn_damage_per_second = round(max_life * 0.02)
@@ -300,6 +407,38 @@ func _apply_freeze():
 	anim_player.speed_scale = freeze_speed_reduction
 	global_speed_scale *= 0.75
 
+@export var thermal_shock_fire_reduction := 0.5
+@export var thermal_shock_ice_reduction := 0.5
+@export var thermal_shock_thunder_reduction := 0.5
+
+func apply_thermal_shock():
+	fire_res_multipliers.append(thermal_shock_fire_reduction)
+	ice_res_multipliers.append(thermal_shock_ice_reduction)
+	thunder_res_multipliers.append(thermal_shock_thunder_reduction)
+	active_special_status = SpecialStatus.THERMAL_SCHOK
+	_show_status_label("thermal_shock")
+
+func remove_thermal_shock():
+	fire_res_multipliers.erase(thermal_shock_fire_reduction)
+	ice_res_multipliers.erase(thermal_shock_ice_reduction)
+	thunder_res_multipliers.erase(thermal_shock_thunder_reduction)
+	active_special_status = SpecialStatus.NONE
+
+func apply_plasma_charge():
+	active_special_status = SpecialStatus.PLASMA_CHARGE
+	_show_status_label("plasma_charge")
+
+func remove_plasma_charge():
+	active_special_status = SpecialStatus.NONE
+
+func apply_cryo_charge():
+	active_special_status = SpecialStatus.CRYO_CHARGE
+	_show_status_label("cryo_charge")
+
+func remove_cryo_charge():
+	active_special_status = SpecialStatus.NONE
+
+
 func _remove_status(status_name: String):
 	match status_name:
 		"burn":
@@ -310,7 +449,7 @@ func _remove_status(status_name: String):
 		"freeze":
 			global_speed_scale = 1.0
 			if anim_player:
-				anim_player.speed_scale = 1.0  # remettre normal
+				anim_player.speed_multipliers.append(freeze_speed_reduction)
 	active_status_effects.erase(status_name)
 
 func _show_status_label(status_name: String):
@@ -321,7 +460,12 @@ func _show_status_label(status_name: String):
 			hit_listener.create_label(Color.YELLOW, "SHOCKED!", 1.3)
 		"freeze":
 			hit_listener.create_label(Color.DEEP_SKY_BLUE, "FREEZED!", 1.3)
-
+		"thermal_shock":
+			hit_listener.create_label(Color.MEDIUM_SPRING_GREEN, "THERMAL SHOCK!", 1.4, 70)
+		"plasma_charge":
+			hit_listener.create_label(Color.WEB_PURPLE, "PLASMA CHARGE!", 1.4, 70)
+		"cryo_charge":
+			hit_listener.create_label(Color.MIDNIGHT_BLUE, "CRYO CHARGE!", 1.4, 70)
 #func _update_accum_bars():
 	#var index := 0
 	#for elem in accum.keys():

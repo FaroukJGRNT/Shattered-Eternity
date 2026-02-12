@@ -55,6 +55,8 @@ func handle_guard_break(area : HitBox, current_state : State):
 			daddy.Poises.LARGE:
 				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 		create_label(Color.ROYAL_BLUE, "GUARD BROKEN!", 1.3)
+		if area.owner is LivingEntity:
+			area.owner.propagate_event(LivingEntity.Event.ENEMY_GUARD_BROKEN)
 
 func _ready() -> void:
 	daddy = owner
@@ -82,8 +84,6 @@ func create_label(color : Color, text : String, scale : float = 1.0, y_offset : 
 		var dmg_text_instance = damage_label.instantiate()
 		dmg_text_instance.position = global_position - Vector2(0, 10)
 		dmg_text_instance.add_theme_color_override("font_color", color)
-		if special:
-			dmg_text_instance.add_theme_color_override("font_outline_color", Color.WHITE)
 		dmg_text_instance.scale = Vector2(scale, scale)
 		dmg_text_instance.text = text  # affiche la valeur
 		get_tree().get_first_node_in_group("Level").add_child(dmg_text_instance)
@@ -152,9 +152,13 @@ func damage_taken(area : HitBox) -> void:
 				daddy.Poises.LARGE:
 					daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
 			create_label(Color.MEDIUM_SLATE_BLUE, "INTERRUPTED!", 1.3)
+			if area.owner is LivingEntity:
+				area.owner.propagate_event(LivingEntity.Event.ENEMY_GUARD_BROKEN)
 
 	if daddy.get_state() != "staggered":
 		daddy.posture += area.motion_value / 2
+		if daddy.active_special_status == daddy.SpecialStatus.PLASMA_CHARGE:
+			daddy.posture += area.motion_value / 2
 	if daddy.posture >= daddy.max_posture:
 		daddy.posture = 0
 		if daddy.poise_type != daddy.Poises.PLAYER:
@@ -163,6 +167,13 @@ func damage_taken(area : HitBox) -> void:
 
 	dmg = area.generate_damage()
 	dmg = daddy.take_damage(dmg)
+	
+	if daddy.active_special_status == daddy.SpecialStatus.CRYO_CHARGE and dmg.phys_dmg > 0:
+		var tick_dmg = DamageContainer.new()
+		tick_dmg.phys_dmg = round(float(daddy.max_life) * 6.0 / 100.0)
+		
+		tick_dmg = daddy.take_damage(tick_dmg)
+		create_label(Color.ALICE_BLUE, str(tick_dmg.total_dmg), 1.0, 0)
 
 	# Call the hitbox side effect
 	area.on_hit()

@@ -19,3 +19,5 @@ func handle_guard_break(area : HitBox, current_state : State):
 		daddy.posture += daddy.max_posture
 		daddy.velocity.x += BIG_PUSHBACK * area.facing
 		create_label(Color.ROYAL_BLUE, "GUARD BROKEN!", 1.3)
+		if area.owner is LivingEntity:
+			area.owner.propagate_event(LivingEntity.Event.ENEMY_GUARD_BROKEN)

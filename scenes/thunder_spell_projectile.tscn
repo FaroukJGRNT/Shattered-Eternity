@@ -1,0 +1,120 @@
+[gd_scene load_steps=18 format=3 uid="uid://dysmtsskhgi65"]
+
+[ext_resource type="PackedScene" uid="uid://cutbi5dnu4dxn" path="res://scenes/enemy_projectile_template.tscn" id="1_swap5"]
+[ext_resource type="Script" uid="uid://dp517awf3tykq" path="res://scripts/thunder_spell_proj.gd" id="2_mn41i"]
+[ext_resource type="Texture2D" uid="uid://bd13vxkvqtnmc" path="res://assets/external_assets/ThunerSpellProto/Thunder projectile1 w blur.png" id="3_gtrnc"]
+[ext_resource type="Texture2D" uid="uid://d0cin2fq28dme" path="res://assets/external_assets/ThunerSpellProto/Thunder hit w blur.png" id="4_anwql"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qd85o"]
+atlas = ExtResource("3_gtrnc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8oglb"]
+atlas = ExtResource("3_gtrnc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_js73j"]
+atlas = ExtResource("3_gtrnc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3nvs"]
+atlas = ExtResource("3_gtrnc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8pa5"]
+atlas = ExtResource("3_gtrnc")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37be7"]
+atlas = ExtResource("4_anwql")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvsib"]
+atlas = ExtResource("4_anwql")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc8ye"]
+atlas = ExtResource("4_anwql")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kj178"]
+atlas = ExtResource("4_anwql")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j56ip"]
+atlas = ExtResource("4_anwql")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ewrb"]
+atlas = ExtResource("4_anwql")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q0xef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qd85o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8oglb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_js73j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3nvs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8pa5")
+}],
+"loop": true,
+"name": &"go",
+"speed": 17.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37be7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvsib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yc8ye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kj178")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j56ip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ewrb")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 11.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swap5"]
+size = Vector2(28, 8)
+
+[node name="ThunderSpellProjectile" groups=["AllyProjectile"] instance=ExtResource("1_swap5")]
+script = ExtResource("2_mn41i")
+speed = 400.0
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_q0xef")
+animation = &"go"
+autoplay = "go"
+frame_progress = 0.909205
+
+[node name="ProjectileHitBox" parent="." index="1"]
+motion_value = 30
+atk_type = "full_thunder"
+push_back = 2
+attack_type = 3
+is_phys_atk = false
+is_spell = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileHitBox" index="0"]
+shape = SubResource("RectangleShape2D_swap5")

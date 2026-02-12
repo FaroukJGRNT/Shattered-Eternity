@@ -1,0 +1,114 @@
+[gd_scene load_steps=16 format=3 uid="uid://b42v25h4twrrm"]
+
+[ext_resource type="PackedScene" uid="uid://cutbi5dnu4dxn" path="res://scenes/enemy_projectile_template.tscn" id="1_qdfwe"]
+[ext_resource type="Script" uid="uid://cbkvyscvb41xt" path="res://scripts/fire_spell_projectile.gd" id="2_p6pdj"]
+[ext_resource type="Texture2D" uid="uid://fktohxj6oukg" path="res://assets/external_assets/FireSpellProto/Firebolt SpriteSheet.png" id="3_kaavd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vf2b5"]
+atlas = ExtResource("3_kaavd")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0nsv"]
+atlas = ExtResource("3_kaavd")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w77sr"]
+atlas = ExtResource("3_kaavd")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ciu75"]
+atlas = ExtResource("3_kaavd")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k4p0"]
+atlas = ExtResource("3_kaavd")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vv1u"]
+atlas = ExtResource("3_kaavd")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rey3h"]
+atlas = ExtResource("3_kaavd")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr6yp"]
+atlas = ExtResource("3_kaavd")
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yk5fg"]
+atlas = ExtResource("3_kaavd")
+region = Rect2(432, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijg0m"]
+atlas = ExtResource("3_kaavd")
+region = Rect2(480, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_klxcl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vf2b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0nsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w77sr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ciu75")
+}],
+"loop": true,
+"name": &"go",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6k4p0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vv1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rey3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr6yp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yk5fg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijg0m")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 11.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jamvl"]
+size = Vector2(28, 11)
+
+[node name="FireSpellProjectile" groups=["AllyProjectile"] instance=ExtResource("1_qdfwe")]
+script = ExtResource("2_p6pdj")
+speed = 400.0
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_klxcl")
+animation = &"go"
+autoplay = "go"
+
+[node name="ProjectileHitBox" parent="." index="1"]
+motion_value = 30
+atk_type = "full_fire"
+multidirectional = true
+push_back = 2
+attack_type = 3
+impact = 2
+is_phys_atk = false
+is_spell = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileHitBox" index="0"]
+position = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_jamvl")

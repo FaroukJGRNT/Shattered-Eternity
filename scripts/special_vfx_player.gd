@@ -21,6 +21,7 @@ func on_animation_finished():
 	position.x = base_x
 	position.y = base_y
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

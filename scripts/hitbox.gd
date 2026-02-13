@@ -7,6 +7,8 @@ class_name HitBox
 # The elemental type of the attack
 @export var atk_type := ""
 
+var in_life := false
+
 enum Impact {
 	LIGHT,
 	NORMAL,
@@ -81,11 +83,13 @@ func _process(delta: float) -> void:
 		end_life()
 
 func start_life():
+	in_life = true
 	life_used = false
 	affected_targets = []
 	timer = life_duration
 
 func end_life():
+	in_life = false
 	affected_targets = []
 	if life_looping:
 		start_life()

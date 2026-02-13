@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://dissnb5nfrcg"]
+[gd_scene load_steps=45 format=4 uid="uid://dissnb5nfrcg"]
 
 [ext_resource type="Texture2D" uid="uid://be0cqx4puye83" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-1.png" id="1_7s4hh"]
 [ext_resource type="Texture2D" uid="uid://b1tei4kflmlh8" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-2.png" id="2_atu5g"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://clq1ba7ljb4ob" path="res://scenes/flying_golem.tscn" id="23_w1qkb"]
 [ext_resource type="PackedScene" uid="uid://n3pwaqy58kus" path="res://scenes/bat.tscn" id="24_imi2s"]
 [ext_resource type="PackedScene" uid="uid://bohmugldj6x0r" path="res://scenes/golemite.tscn" id="25_uikkn"]
+[ext_resource type="PackedScene" uid="uid://tavdgovcp0ce" path="res://scenes/small_bat.tscn" id="26_fh44m"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4mgxn"]
 blend_mode = 1
@@ -660,3 +661,6 @@ position = Vector2(1259, 252)
 
 [node name="Golemite5" parent="." instance=ExtResource("25_uikkn")]
 position = Vector2(817, 248)
+
+[node name="SmallBat" parent="." instance=ExtResource("26_fh44m")]
+position = Vector2(11280, 202)

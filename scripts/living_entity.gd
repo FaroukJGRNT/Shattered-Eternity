@@ -17,6 +17,7 @@ var facing : int = 1
 
 @export var status_vbox: VBoxContainer
 
+
 var global_speed_scale := 1.0
 var dead := false
 
@@ -41,6 +42,9 @@ var active_status_bars : Dictionary = {}
 
 var attack_multipliers : Array[float] = [] 
 var defense_multipliers : Array[float] = [] 
+
+var crit_chance := 8.0
+var crit_multipliers : Array[float] = [] 
 
 func get_attack() -> float:
 	var value = attack
@@ -68,7 +72,8 @@ enum Event {
 	HIT_TAKEN,
 	HIT_DEALT,
 	PARRY,
-	ATTACK_EVADED
+	ATTACK_EVADED,
+	ENEMY_STUNNED
 }
 
 enum SpecialStatus {
@@ -139,6 +144,9 @@ var special_status_timer := 0.0
 
 @export var max_mana := 100
 @export var mana := 0
+
+var mana_cons_multipliers : Array[float] = []
+var mana_regen_multipliers : Array[float] = []
 
 @export var max_posture := 100.0
 @export var posture := 0.0
@@ -499,8 +507,9 @@ func _show_status_label(status_name: String):
 				#active_status_bars[elem].queue_free()
 				#active_status_bars.erase(elem)
 
-func get_stunned(vel_x : float, duration : float):
-	pass
+func get_stunned(vel_x : float, duration : float, perpretator):
+	if perpretator is LivingEntity:
+		perpretator.propagate_event(Event.ENEMY_STUNNED, self)
 
 func get_staggered(vel_x : float = 0.0):
 	pass
@@ -511,6 +520,6 @@ func get_state():
 func change_state(new_state):
 	state_machine.on_state_transition(new_state)
 
-func propagate_event(event : Event):
+func propagate_event(event : Event, additional : Variant = null):
 	if buff_manager:
 		buff_manager.propagate_event(event)

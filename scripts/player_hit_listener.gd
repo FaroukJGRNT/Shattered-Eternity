@@ -49,11 +49,11 @@ func handle_guard_break(area : HitBox, current_state : State):
 				daddy.get_staggered()
 				daddy.velocity.x += MEDIUM_PUSHBACK * area.facing
 			daddy.Poises.SMALL:
-				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 			daddy.Poises.MEDIUM:
-				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 			daddy.Poises.LARGE:
-				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 		create_label(Color.ROYAL_BLUE, "GUARD BROKEN!", 1.3)
 		if area.owner is LivingEntity:
 			area.owner.propagate_event(LivingEntity.Event.ENEMY_GUARD_BROKEN)
@@ -146,11 +146,11 @@ func damage_taken(area : HitBox) -> void:
 					daddy.get_staggered()
 					daddy.velocity.x += BIG_PUSHBACK * area.facing
 				daddy.Poises.SMALL:
-					daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+					daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 				daddy.Poises.MEDIUM:
-					daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+					daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 				daddy.Poises.LARGE:
-					daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+					daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 			create_label(Color.MEDIUM_SLATE_BLUE, "INTERRUPTED!", 1.3)
 			if area.owner is LivingEntity:
 				area.owner.propagate_event(LivingEntity.Event.ENEMY_GUARD_BROKEN)
@@ -181,13 +181,13 @@ func damage_taken(area : HitBox) -> void:
 	if daddy.poise_type == daddy.Poises.PLAYER:
 		match area.push_back:
 			area.Pushback.TICK:
-				daddy.get_stunned(1 * area.facing, SMALL_PUSHBACK_DURATION)
+				daddy.get_stunned(1 * area.facing, SMALL_PUSHBACK_DURATION, area.owner)
 			area.Pushback.NORMAL:
-				daddy.get_stunned(2 * area.facing, SMALL_PUSHBACK_DURATION)
+				daddy.get_stunned(2 * area.facing, SMALL_PUSHBACK_DURATION, area.owner)
 			area.Pushback.STRONG:
-				daddy.get_stunned(2 * area.facing, SMALL_PUSHBACK_DURATION)
+				daddy.get_stunned(2 * area.facing, SMALL_PUSHBACK_DURATION, area.owner)
 			area.Pushback.GINORMOUS:
-				daddy.get_stunned(3 * area.facing, SMALL_PUSHBACK_DURATION)
+				daddy.get_stunned(3 * area.facing, SMALL_PUSHBACK_DURATION, area.owner)
 
 	if daddy.is_in_group("Enemy"):
 		if current_state is EnemyAttackState and current_state.option_type == EnemyAttackState.OptionType.DEFENSIVE:
@@ -197,24 +197,24 @@ func damage_taken(area : HitBox) -> void:
 				daddy.Poises.SMALL:
 					match area.push_back:
 						area.Pushback.NORMAL:
-							daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION)
+							daddy.get_stunned(SMALL_PUSHBACK * area.facing, SMALL_PUSHBACK_DURATION, area.owner)
 						area.Pushback.STRONG:
-							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 						area.Pushback.GINORMOUS:
-							daddy.get_stunned(MEDIUM_PUSHBACK * 2 * area.facing, MEDIUM_PUSHBACK_DURATION)
+							daddy.get_stunned(MEDIUM_PUSHBACK * 2 * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 				daddy.Poises.MEDIUM:
 					match area.push_back:
 						area.Pushback.NORMAL:
 							if daddy.velocity.x == 0:
 								daddy.velocity.x += (area.facing * SMALL_PUSHBACK)
 						area.Pushback.STRONG:
-							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 						area.Pushback.GINORMOUS:
-							daddy.get_stunned(MEDIUM_PUSHBACK * 2 * area.facing, MEDIUM_PUSHBACK_DURATION)
+							daddy.get_stunned(MEDIUM_PUSHBACK * 2 * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 				daddy.Poises.LARGE:
 					match area.push_back:
 						area.Pushback.GINORMOUS:
-							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+							daddy.get_stunned(MEDIUM_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 						_:
 							pass
 

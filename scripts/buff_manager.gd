@@ -14,23 +14,24 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Running cooldowns
 	for buff in active_buffs:
-		buff.timer -= delta
-		if buff.timer <= 0:
-			buff.desactivate()
-			active_buffs.erase(buff)
+		if buff.has_timer:
+			buff.timer -= delta
+			if buff.timer <= 0:
+				buff.desactivate()
+				active_buffs.erase(buff)
 
 # Is used to apply one shot buffs (potions, environment buffs)
-func apply_one_shot_buff(buff : Buff):
-	buff.activate()
+func apply_one_shot_buff(buff : Buff, additional : Variant = null):
+	buff.activate(additional)
 	active_buffs.push_back(buff)
 
 # Is used to activate occasional buffs =
-func propagate_event(event : LivingEntity.Event):
+func propagate_event(event : LivingEntity.Event, additional : Variant = null):
 	for key in buffs:
 		if buffs[key].trigger_event == event:
 			# TODO: Pay attention to reapplicable buffs. Some buffs must not be renewable while they are still active
 			if buffs[key] not in active_buffs:
-				buffs[key].activate()
+				buffs[key].activate(additional)
 				buffs[key].timer = buffs[key].timeout
 				active_buffs.push_back(buffs[key])
 

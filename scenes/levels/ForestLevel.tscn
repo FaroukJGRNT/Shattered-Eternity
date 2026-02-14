@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://cult7d4w48p2r"]
+[gd_scene load_steps=45 format=4 uid="uid://dissnb5nfrcg"]
 
 [ext_resource type="Texture2D" uid="uid://be0cqx4puye83" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-1.png" id="1_7s4hh"]
 [ext_resource type="Texture2D" uid="uid://b1tei4kflmlh8" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-2.png" id="2_atu5g"]
@@ -15,8 +15,16 @@
 [ext_resource type="Texture2D" uid="uid://bml6hjtvf5f7j" path="res://assets/sprites/environment/ForestScene/ForestZone-Tileset(new).png" id="12_y10bi"]
 [ext_resource type="PackedScene" uid="uid://d3kvl1e2ls3do" path="res://scenes/dummy.tscn" id="13_pf0y0"]
 [ext_resource type="PackedScene" uid="uid://lcalun41bn55" path="res://scenes/ingame_ui.tscn" id="14_vvr6j"]
+[ext_resource type="PackedScene" uid="uid://l4c0r8fp6n4c" path="res://scenes/tree_man.tscn" id="18_ei3w1"]
 [ext_resource type="PackedScene" uid="uid://u8xrklg5udr8" path="res://scenes/sign.tscn" id="18_lkqwk"]
+[ext_resource type="PackedScene" uid="uid://bb7tjs6gcrm6i" path="res://scenes/guarding_tree_man.tscn" id="18_q220v"]
+[ext_resource type="PackedScene" uid="uid://clblykkm6pbb5" path="res://scenes/huge_tree_man.tscn" id="19_620pj"]
 [ext_resource type="PackedScene" uid="uid://c835tnkc0eq4y" path="res://scenes/player_spawn_point.tscn" id="20_d6xuq"]
+[ext_resource type="PackedScene" uid="uid://gx5s2fc7d8dp" path="res://scenes/forest_spirit.tscn" id="21_uikkn"]
+[ext_resource type="PackedScene" uid="uid://dimdq1p3y55rx" path="res://scenes/boar.tscn" id="22_fh44m"]
+[ext_resource type="PackedScene" uid="uid://clq1ba7ljb4ob" path="res://scenes/flying_golem.tscn" id="23_w1qkb"]
+[ext_resource type="PackedScene" uid="uid://n3pwaqy58kus" path="res://scenes/bat.tscn" id="24_imi2s"]
+[ext_resource type="PackedScene" uid="uid://bohmugldj6x0r" path="res://scenes/golemite.tscn" id="25_uikkn"]
 [ext_resource type="PackedScene" uid="uid://tavdgovcp0ce" path="res://scenes/small_bat.tscn" id="26_fh44m"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4mgxn"]
@@ -570,11 +578,89 @@ Attack beats GuardBreak"
 [node name="Dummy" parent="." instance=ExtResource("13_pf0y0")]
 position = Vector2(10681, 259)
 
+[node name="TreeMan" parent="." instance=ExtResource("18_ei3w1")]
+position = Vector2(14666, 257)
+
+[node name="TreeMan5" parent="." instance=ExtResource("18_ei3w1")]
+position = Vector2(8326, 257)
+
+[node name="TreeMan2" parent="." instance=ExtResource("18_ei3w1")]
+position = Vector2(15309, 257)
+
+[node name="TreeMan4" parent="." instance=ExtResource("18_ei3w1")]
+position = Vector2(18651, 261)
+
+[node name="TreeMan3" parent="." instance=ExtResource("18_ei3w1")]
+position = Vector2(16032, 259)
+
+[node name="GuardingTreeMan" parent="." instance=ExtResource("18_q220v")]
+position = Vector2(17657, 264)
+
+[node name="GuardingTreeMan4" parent="." instance=ExtResource("18_q220v")]
+position = Vector2(4767, 252)
+
+[node name="GuardingTreeMan5" parent="." instance=ExtResource("18_q220v")]
+position = Vector2(5161, 263)
+
+[node name="GuardingTreeMan3" parent="." instance=ExtResource("18_q220v")]
+position = Vector2(18510, 260)
+
+[node name="GuardingTreeMan2" parent="." instance=ExtResource("18_q220v")]
+position = Vector2(17940, 261)
+
+[node name="HugeTreeMan" parent="." instance=ExtResource("19_620pj")]
+position = Vector2(20330, 234)
+
 [node name="Player" parent="." instance=ExtResource("2_qbdkf")]
 position = Vector2(10490, 6)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("20_d6xuq")]
 position = Vector2(12983, -618)
+
+[node name="ForestSpirit" parent="." instance=ExtResource("21_uikkn")]
+position = Vector2(9121, 168)
+
+[node name="ForestSpirit3" parent="." instance=ExtResource("21_uikkn")]
+position = Vector2(6190, 161)
+
+[node name="ForestSpirit2" parent="." instance=ExtResource("21_uikkn")]
+position = Vector2(8712, 164)
+
+[node name="Boar" parent="." instance=ExtResource("22_fh44m")]
+position = Vector2(7594, 246)
+
+[node name="Boar2" parent="." instance=ExtResource("22_fh44m")]
+position = Vector2(6335, 250)
+
+[node name="Boar3" parent="." instance=ExtResource("22_fh44m")]
+position = Vector2(5371, 246)
+
+[node name="FlyingGolem" parent="." instance=ExtResource("23_w1qkb")]
+position = Vector2(4225, 262)
+
+[node name="Bat" parent="." instance=ExtResource("24_imi2s")]
+position = Vector2(3742, 208)
+
+[node name="Bat2" parent="." instance=ExtResource("24_imi2s")]
+position = Vector2(3182, 204)
+
+[node name="Golemite" parent="." instance=ExtResource("25_uikkn")]
+position = Vector2(2348, 246)
+
+[node name="Golemite2" parent="." instance=ExtResource("25_uikkn")]
+position = Vector2(1960, 246)
+
+[node name="Golemite3" parent="." instance=ExtResource("25_uikkn")]
+position = Vector2(1546, 242)
+
+[node name="FlyingGolem" parent="Golemite3" instance=ExtResource("23_w1qkb")]
+position = Vector2(-539, 25)
+
+[node name="Golemite4" parent="." instance=ExtResource("25_uikkn")]
+position = Vector2(1259, 252)
+
+[node name="Golemite5" parent="." instance=ExtResource("25_uikkn")]
+position = Vector2(817, 248)
 
 [node name="SmallBat" parent="." instance=ExtResource("26_fh44m")]
 position = Vector2(11281, 214)

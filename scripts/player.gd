@@ -56,8 +56,6 @@ func _ready() -> void:
 	equip_spell_slot1(IceSpell.new())
 	equip_spell_slot2(ThunderSpell.new())
 
-@export var mana_regen_multipliers : Array[float] = []
-
 @export var base_reson_decay := 2.0
 @export var reson_decay_accel := 1.0
 var reson_decay := 2.0
@@ -70,7 +68,7 @@ var dodge_reson_boost := 25.0
 
 var hit_reson_loss := 75.0
 
-func propagate_event(event : Event):
+func propagate_event(event : Event, additional : Variant = null):
 	super.propagate_event(event)
 
 	match event:
@@ -102,7 +100,8 @@ func propagate_event(event : Event):
 		resonance_value = max_resonance_value
 	
 
-func get_stunned(vel_x : float, duration : float):
+func get_stunned(vel_x : float, duration : float, perpretator):
+	super.get_stunned(vel_x, duration, perpretator)
 	if dead:
 		return
 	if get_state() == "staggered":

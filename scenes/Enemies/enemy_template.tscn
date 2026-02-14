@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://7hi4ch3r5fbl"]
+[gd_scene load_steps=35 format=3 uid="uid://ovmt6ccp1x55"]
 
 [ext_resource type="Script" uid="uid://cx5ih5jiwvxep" path="res://scripts/enemy_template.gd" id="1_c7j3f"]
 [ext_resource type="Script" uid="uid://cudcd7wg184ea" path="res://scripts/animated_sprite_2d.gd" id="2_dlm18"]

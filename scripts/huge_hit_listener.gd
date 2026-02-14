@@ -14,11 +14,11 @@ func handle_guard_break(area : HitBox, current_state : State):
 				daddy.get_staggered()
 				daddy.velocity.x += BIG_PUSHBACK * area.facing
 			daddy.Poises.SMALL:
-				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 			daddy.Poises.MEDIUM:
-				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 			daddy.Poises.LARGE:
-				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION)
+				daddy.get_stunned(BIG_PUSHBACK * area.facing, MEDIUM_PUSHBACK_DURATION, area.owner)
 		create_label(Color.ROYAL_BLUE, "GUARD BROKEN!", 1.3)
 		if area.owner is LivingEntity:
 			area.owner.propagate_event(LivingEntity.Event.ENEMY_GUARD_BROKEN)

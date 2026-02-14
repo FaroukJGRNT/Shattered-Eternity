@@ -1,6 +1,6 @@
 extends EnemyAttackState
 
-@export var attack_duration = 0.5
+@export var attack_duration = 0.2
 
 var attack_timer := 0.0
 

@@ -24,7 +24,10 @@ var airborne_cast := false
 var down_pressed := false
 
 func spawn_proj():
-	player.mana -= mana_cost
+	var mana_to_spend = mana_cost
+	for m in player.mana_cons_multipliers:
+		mana_to_spend *= m
+	player.mana -= mana_to_spend
 	var proj = Toolbox.spawn_projectile(player, proj_to_spawn)
 	if spell_cat == SpellCategory.LIGHT:
 		if airborne_cast and down_pressed:

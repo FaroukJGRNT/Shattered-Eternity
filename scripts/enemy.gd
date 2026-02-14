@@ -46,7 +46,7 @@ func die():
 	$LifeBar.visible = false
 	$EnemyStateMachine.on_state_transition("death")
 
-func get_stunned(vel_x : float, duration : float):
+func get_stunned(vel_x : float, duration : float, perpretator):
 	if $EnemyStateMachine.current_state.name != "Death" and $EnemyStateMachine.current_state.name != "Staggered":
 		$EnemyStateMachine/Stun.push_back = vel_x
 		$EnemyStateMachine/Stun.timeout = duration

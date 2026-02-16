@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cult7d4w48p2r"]
+[gd_scene load_steps=35 format=4 uid="uid://cult7d4w48p2r"]
 
 [ext_resource type="Texture2D" uid="uid://be0cqx4puye83" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-1.png" id="1_7s4hh"]
 [ext_resource type="Texture2D" uid="uid://b1tei4kflmlh8" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-2.png" id="2_atu5g"]
@@ -19,16 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://dfkjfymrox1qs" path="res://assets/sprites/environment/ForestScene/LightStream.png" id="19_lkqwk"]
 [ext_resource type="PackedScene" uid="uid://c835tnkc0eq4y" path="res://scenes/player_spawn_point.tscn" id="20_d6xuq"]
 [ext_resource type="PackedScene" uid="uid://tavdgovcp0ce" path="res://scenes/small_bat.tscn" id="26_fh44m"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4mgxn"]
-blend_mode = 1
-
-[sub_resource type="Gradient" id="Gradient_l65lk"]
-colors = PackedColorArray(1, 1, 0.470588, 1, 1, 1, 0.470588, 0.294118)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_pf0y0"]
-gradient = SubResource("Gradient_l65lk")
-fill_to = Vector2(0, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vvr6j"]
 blend_mode = 3
@@ -346,25 +336,6 @@ glow_bloom = 0.2
 
 [node name="Node2D" type="Node2D" groups=["Level"]]
 
-[node name="LightEffects" type="Node2D" parent="."]
-visible = false
-z_index = 4
-
-[node name="Polygon2D" type="Polygon2D" parent="LightEffects"]
-material = SubResource("CanvasItemMaterial_4mgxn")
-position = Vector2(0, -11.0955)
-scale = Vector2(1, 0.97191)
-color = Color(1, 1, 1, 0.490196)
-texture = SubResource("GradientTexture2D_pf0y0")
-polygon = PackedVector2Array(332, -386, 369, -395, 567, 316, 469, 317)
-
-[node name="Polygon2D2" type="Polygon2D" parent="LightEffects"]
-material = SubResource("CanvasItemMaterial_4mgxn")
-position = Vector2(376, -1)
-color = Color(1, 1, 1, 0.490196)
-texture = SubResource("GradientTexture2D_pf0y0")
-polygon = PackedVector2Array(332, -386, 351, -385, 502, 299, 468, 299)
-
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = 4
 material = SubResource("CanvasItemMaterial_vvr6j")
@@ -436,10 +407,6 @@ motion_mirroring = Vector2(640, 0)
 texture = ExtResource("7_vvr6j")
 centered = false
 
-[node name="CanvasModulate" type="CanvasModulate" parent="ParallaxBackground"]
-visible = false
-color = Color(0.569966, 0.92948, 0.686976, 1)
-
 [node name="Trees4-ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.7, 1)
 
@@ -478,6 +445,90 @@ position = Vector2(256, -8)
 texture = SubResource("AtlasTexture_pf0y0")
 
 [node name="Sprite2D6" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer/Node2D"]
+position = Vector2(1083, 32)
+texture = SubResource("AtlasTexture_4mgxn")
+
+[node name="Trees4-ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.7, 1)
+
+[node name="Node2D" type="Node2D" parent="ParallaxBackground/Trees4-ParallaxLayer2"]
+position = Vector2(600, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer2/Node2D"]
+position = Vector2(157, 293)
+texture = SubResource("AtlasTexture_tcea8")
+
+[node name="Sprite2D7" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer2/Node2D"]
+position = Vector2(916, 293)
+texture = SubResource("AtlasTexture_tcea8")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer2/Node2D"]
+position = Vector2(403, 302)
+texture = SubResource("AtlasTexture_tcea8")
+
+[node name="Sprite2D8" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer2/Node2D"]
+position = Vector2(463, 27)
+texture = SubResource("AtlasTexture_4mgxn")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer2/Node2D"]
+position = Vector2(453, 293)
+texture = SubResource("AtlasTexture_l65lk")
+
+[node name="Sprite2D9" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer2/Node2D"]
+position = Vector2(712, 292)
+texture = SubResource("AtlasTexture_l65lk")
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer2/Node2D"]
+position = Vector2(522, -7)
+texture = SubResource("AtlasTexture_pf0y0")
+
+[node name="Sprite2D5" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer2/Node2D"]
+position = Vector2(256, -8)
+texture = SubResource("AtlasTexture_pf0y0")
+
+[node name="Sprite2D6" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer2/Node2D"]
+position = Vector2(1083, 32)
+texture = SubResource("AtlasTexture_4mgxn")
+
+[node name="Trees4-ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.7, 1)
+
+[node name="Node2D" type="Node2D" parent="ParallaxBackground/Trees4-ParallaxLayer3"]
+position = Vector2(1200, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer3/Node2D"]
+position = Vector2(157, 293)
+texture = SubResource("AtlasTexture_tcea8")
+
+[node name="Sprite2D7" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer3/Node2D"]
+position = Vector2(916, 293)
+texture = SubResource("AtlasTexture_tcea8")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer3/Node2D"]
+position = Vector2(403, 302)
+texture = SubResource("AtlasTexture_tcea8")
+
+[node name="Sprite2D8" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer3/Node2D"]
+position = Vector2(463, 27)
+texture = SubResource("AtlasTexture_4mgxn")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer3/Node2D"]
+position = Vector2(453, 293)
+texture = SubResource("AtlasTexture_l65lk")
+
+[node name="Sprite2D9" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer3/Node2D"]
+position = Vector2(712, 292)
+texture = SubResource("AtlasTexture_l65lk")
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer3/Node2D"]
+position = Vector2(522, -7)
+texture = SubResource("AtlasTexture_pf0y0")
+
+[node name="Sprite2D5" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer3/Node2D"]
+position = Vector2(256, -8)
+texture = SubResource("AtlasTexture_pf0y0")
+
+[node name="Sprite2D6" type="Sprite2D" parent="ParallaxBackground/Trees4-ParallaxLayer3/Node2D"]
 position = Vector2(1083, 32)
 texture = SubResource("AtlasTexture_4mgxn")
 
@@ -585,57 +636,171 @@ position = Vector2(11281, 214)
 z_index = 6
 
 [node name="Parallax2D" type="Parallax2D" parent="LightEffects2"]
-scroll_scale = Vector2(1.1, 1.1)
-repeat_size = Vector2(1300, 0)
+scroll_scale = Vector2(1.1, 1)
+repeat_size = Vector2(640, 0)
 
-[node name="PointLight2D5" type="PointLight2D" parent="LightEffects2/Parallax2D"]
-position = Vector2(731.522, 72.4695)
+[node name="Node2D" type="Node2D" parent="LightEffects2/Parallax2D"]
+
+[node name="PointLight2D5" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D"]
+position = Vector2(111.522, 129.469)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
 color = Color(1, 0.807843, 0.592157, 0.784314)
 texture = ExtResource("19_lkqwk")
 
-[node name="PointLight2D6" type="PointLight2D" parent="LightEffects2/Parallax2D"]
-position = Vector2(1118, 18)
+[node name="PointLight2D6" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D"]
+position = Vector2(498, 75)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
 color = Color(1, 0.807843, 0.592157, 0.784314)
 texture = ExtResource("19_lkqwk")
 
-[node name="PointLight2D8" type="PointLight2D" parent="LightEffects2/Parallax2D"]
-position = Vector2(1005.52, -0.530525)
+[node name="PointLight2D8" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D"]
+position = Vector2(385.52, 56.4694)
+rotation = -0.329867
+scale = Vector2(2.09884, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="Node2D2" type="Node2D" parent="LightEffects2/Parallax2D"]
+position = Vector2(640, 0)
+
+[node name="PointLight2D5" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D2"]
+position = Vector2(111.522, 129.469)
+rotation = -0.329867
+scale = Vector2(0.830774, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="PointLight2D6" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D2"]
+position = Vector2(498, 75)
+rotation = -0.329867
+scale = Vector2(0.830774, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="PointLight2D8" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D2"]
+position = Vector2(385.52, 56.4694)
+rotation = -0.329867
+scale = Vector2(2.09884, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="Node2D3" type="Node2D" parent="LightEffects2/Parallax2D"]
+position = Vector2(1280, 0)
+
+[node name="PointLight2D5" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D3"]
+position = Vector2(111.522, 129.469)
+rotation = -0.329867
+scale = Vector2(0.830774, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="PointLight2D6" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D3"]
+position = Vector2(498, 75)
+rotation = -0.329867
+scale = Vector2(0.830774, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="PointLight2D8" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D3"]
+position = Vector2(385.52, 56.4694)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
 color = Color(1, 0.807843, 0.592157, 0.784314)
 texture = ExtResource("19_lkqwk")
 
 [node name="Parallax2D2" type="Parallax2D" parent="LightEffects2"]
-scroll_scale = Vector2(1.2, 1.2)
-repeat_size = Vector2(2000, 0)
+scroll_scale = Vector2(1.2, 1)
+repeat_size = Vector2(640, 0)
 
-[node name="PointLight2D" type="PointLight2D" parent="LightEffects2/Parallax2D2"]
-position = Vector2(1051.68, 23.4695)
+[node name="Node2D" type="Node2D" parent="LightEffects2/Parallax2D2"]
+
+[node name="PointLight2D" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D"]
+position = Vector2(141, 66)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
 color = Color(1, 0.807843, 0.592157, 0.784314)
 texture = ExtResource("19_lkqwk")
 
-[node name="PointLight2D3" type="PointLight2D" parent="LightEffects2/Parallax2D2"]
-position = Vector2(819.7, 62.0105)
+[node name="PointLight2D3" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D"]
+position = Vector2(274, 69)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
 color = Color(1, 0.807843, 0.592157, 0.784314)
 texture = ExtResource("19_lkqwk")
 
-[node name="PointLight2D4" type="PointLight2D" parent="LightEffects2/Parallax2D2"]
-position = Vector2(1581.7, 27.0105)
+[node name="PointLight2D4" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D"]
+position = Vector2(382, 32)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
 color = Color(1, 0.807843, 0.592157, 0.784314)
 texture = ExtResource("19_lkqwk")
 
-[node name="PointLight2D2" type="PointLight2D" parent="LightEffects2/Parallax2D2"]
-position = Vector2(1182.7, 6.01051)
+[node name="PointLight2D2" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D"]
+position = Vector2(385, 39)
+rotation = -0.329867
+scale = Vector2(0.830774, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="Node2D2" type="Node2D" parent="LightEffects2/Parallax2D2"]
+position = Vector2(640, 0)
+
+[node name="PointLight2D" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D2"]
+position = Vector2(141, 66)
+rotation = -0.329867
+scale = Vector2(2.09884, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="PointLight2D3" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D2"]
+position = Vector2(274, 69)
+rotation = -0.329867
+scale = Vector2(2.09884, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="PointLight2D4" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D2"]
+position = Vector2(382, 32)
+rotation = -0.329867
+scale = Vector2(2.09884, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="PointLight2D2" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D2"]
+position = Vector2(385, 39)
+rotation = -0.329867
+scale = Vector2(0.830774, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="Node2D3" type="Node2D" parent="LightEffects2/Parallax2D2"]
+position = Vector2(1280, 0)
+
+[node name="PointLight2D" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D3"]
+position = Vector2(141, 66)
+rotation = -0.329867
+scale = Vector2(2.09884, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="PointLight2D3" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D3"]
+position = Vector2(274, 69)
+rotation = -0.329867
+scale = Vector2(2.09884, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="PointLight2D4" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D3"]
+position = Vector2(382, 32)
+rotation = -0.329867
+scale = Vector2(2.09884, 2.32831)
+color = Color(1, 0.807843, 0.592157, 0.784314)
+texture = ExtResource("19_lkqwk")
+
+[node name="PointLight2D2" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D3"]
+position = Vector2(385, 39)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
 color = Color(1, 0.807843, 0.592157, 0.784314)

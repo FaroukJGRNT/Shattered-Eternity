@@ -8,6 +8,9 @@ enum GameEvents  {
 	DUMMY_DEAD
 }
 
+func _ready() -> void:
+	load_all_buffs()
+
 func hit_freeze(duration := 0.08, scale := 0.1) -> void:
 	Engine.time_scale = scale
 	await get_tree().create_timer(duration, true).timeout
@@ -68,3 +71,85 @@ func handle_event(event : GameEvents, emitter : Node2D):
 			var dummy = dummy_scene.instantiate()
 			get_tree().get_first_node_in_group("Level").add_child(dummy)
 			dummy.position = emitter.position
+
+#### ------------------------ THIS PART RELATES TO GAMEPLAY INFOS ---------------------- ####
+
+# These variables are the chances to find a buff or a spell of a certain element
+var fire_elemental_affinity := 1.0  
+var ice_elemental_affinity := 1.0  
+var thunder_elemental_affinity := 1.0
+
+func roll_element() -> String:
+	var total_weight = fire_elemental_affinity \
+		+ ice_elemental_affinity \
+		+ thunder_elemental_affinity
+	
+	if total_weight <= 0:
+		return "none" # sécurité
+	
+	var roll = randf() * total_weight
+	
+	if roll < fire_elemental_affinity:
+		return "fire"
+	elif roll < fire_elemental_affinity + ice_elemental_affinity:
+		return "ice"
+	else:
+		return "thunder"
+
+var fire_spells : Array[Item] = [
+	FireSpellItem.new()
+]
+
+var ice_spells : Array[Item] = [
+	IceSpellItem.new()
+]
+
+var thunder_spells : Array[Item] = [
+	ThunderSpellItem.new()
+]
+
+var elemental_buffs : Array[Buff] = []
+var physical_buffs : Array[Buff] = []
+var situational_buffs : Array[Buff] = []
+
+
+func load_all_buffs():
+	var dir1 = DirAccess.open("res://scripts/buffs/Elemental")
+	var dir2 = DirAccess.open("res://scripts/buffs/Physical")
+	var dir3 = DirAccess.open("res://scripts/buffs/Situational")
+	
+	if dir1:
+		dir1.list_dir_begin()
+		var file_name = dir1.get_next()
+	
+		while file_name != "":
+			if file_name.ends_with(".gd"):
+				var script = load("res://scripts/buffs/Elemental/" + file_name)
+				print(script)
+				elemental_buffs.append(script.new())
+				
+			file_name = dir1.get_next()
+	if dir2:
+		dir2.list_dir_begin()
+		var file_name = dir2.get_next()
+	
+		while file_name != "":
+			if file_name.ends_with(".gd"):
+				var script = load("res://scripts/buffs/Physical/" + file_name)
+				print(script)
+				physical_buffs.append(script.new())
+
+			file_name = dir2.get_next()
+	if dir3:
+		dir3.list_dir_begin()
+		var file_name = dir3.get_next()
+	
+		while file_name != "":
+			if file_name.ends_with(".gd"):
+				var script = load("res://scripts/buffs/Situational/" + file_name)
+				print(script)
+				situational_buffs.append(script.new())
+				
+			file_name = dir3.get_next()
+	
+	print(elemental_buffs[0].buff_name)

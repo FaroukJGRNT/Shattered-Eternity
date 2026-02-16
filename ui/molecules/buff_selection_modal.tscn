@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://bex6qfafqbbn1"]
+
+[ext_resource type="PackedScene" uid="uid://bbgyoir5yjcr2" path="res://ui/molecules/vertical_multiple_choices_modal.tscn" id="1_dgruh"]
+
+[node name="BuffSelectionModal" instance=ExtResource("1_dgruh")]
+
+[node name="Panel" parent="Panel/VBoxContainer/HBoxContainer" index="0" node_paths=PackedStringArray("subheading", "desription")]
+subheading = NodePath("VBoxContainer/SubHeading")
+desription = NodePath("VBoxContainer/DescriptionText2")
+
+[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer" index="0"]
+text = "Elemental"
+
+[node name="Panel2" parent="Panel/VBoxContainer/HBoxContainer" index="1" node_paths=PackedStringArray("subheading", "desription")]
+subheading = NodePath("VBoxContainer2/SubHeading")
+desription = NodePath("../Panel/VBoxContainer/DescriptionText2")
+
+[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/Panel2/VBoxContainer2" index="0"]
+text = "Physical"
+
+[node name="Panel3" parent="Panel/VBoxContainer/HBoxContainer" index="2" node_paths=PackedStringArray("subheading", "desription")]
+subheading = NodePath("VBoxContainer/SubHeading")
+desription = NodePath("VBoxContainer/DescriptionText2")
+
+[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/Panel3/VBoxContainer" index="0"]
+text = "Situational"

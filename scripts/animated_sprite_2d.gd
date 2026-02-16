@@ -31,9 +31,9 @@ func _on_frame_changed() -> void:
 	var current_state = state_machine.get_current_state()
 	if current_state == null:
 		return
-	if current_state is EnemyAttackState or  current_state is AttackState:
+	if current_state is EnemyAttackState or current_state is AttackState:
 		if frame in current_state.active_frames and current_state.hitbox:
-			if frame == current_state.active_frames[0] and not current_state.hitbox.in_life:
+			if frame == current_state.active_frames[0]:
 				current_state.hitbox.start_life()
 			current_state.hitbox.activate()
 			active_hitboxes.append(current_state.hitbox)

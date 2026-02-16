@@ -1,7 +1,7 @@
 extends EnemyAttackState
 
 var has_hot := false
-var wave_scene : PackedScene = load("res://scenes/golemite_projectile.tscn")
+var wave_scene : PackedScene = load("res://scenes/projectiles/golemite_projectile.tscn")
 
 @export var front_gap := 30
 @export var vertical_gap := 8

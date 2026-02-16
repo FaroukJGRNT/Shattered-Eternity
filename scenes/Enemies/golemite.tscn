@@ -1,6 +1,6 @@
 [gd_scene load_steps=95 format=3 uid="uid://bohmugldj6x0r"]
 
-[ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/enemy_template.tscn" id="1_udkj3"]
+[ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/Enemies/enemy_template.tscn" id="1_udkj3"]
 [ext_resource type="Texture2D" uid="uid://clct1y4dbrpeu" path="res://assets/sprites/golemite/golemite_idle.png" id="2_mke8x"]
 [ext_resource type="Script" uid="uid://bmnt7dbvqnllc" path="res://scripts/golemite.gd" id="2_ruah2"]
 [ext_resource type="Texture2D" uid="uid://c32qwk6gufv2y" path="res://assets/sprites/golemite/backdash.png" id="2_tn1b4"]

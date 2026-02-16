@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://i0dxdimbmvdn"]
+
+[ext_resource type="Script" uid="uid://dshsq78h4c1j5" path="res://scripts/interactible_level_object_husk.gd" id="1_d7ukl"]
+[ext_resource type="PackedScene" uid="uid://bkyhlill7uscj" path="res://ui/atoms/help_overhead_text.tscn" id="2_bonf4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vsa1n"]
+radius = 65.3758
+
+[node name="InteractibleLevelObject" type="Node2D"]
+script = ExtResource("1_d7ukl")
+offset = Vector2(0, -50)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_vsa1n")
+
+[node name="HelpOverheadText" parent="." instance=ExtResource("2_bonf4")]
+offset_right = 0.0
+offset_bottom = 0.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

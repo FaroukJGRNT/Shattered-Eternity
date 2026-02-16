@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwo0q68vgsay6"]
+
+[ext_resource type="Script" uid="uid://cmi3wv8n7a403" path="res://scripts/base_modal.gd" id="1_fno1g"]
+[ext_resource type="Theme" uid="uid://du6ww74nmnyne" path="res://themes/default.tres" id="2_lolso"]
+[ext_resource type="PackedScene" uid="uid://ci4di3hc8b0ud" path="res://ui/atoms/subheading.tscn" id="3_gy0o1"]
+[ext_resource type="PackedScene" uid="uid://bt8bnex7yuv14" path="res://ui/atoms/icon_holder.tscn" id="4_3pcbl"]
+[ext_resource type="PackedScene" uid="uid://b5vd46yxc7dj8" path="res://ui/atoms/description_text.tscn" id="7_5l0fa"]
+[ext_resource type="PackedScene" uid="uid://d0qty0xik6ghi" path="res://ui/atoms/confirmation_button.tscn" id="8_4poch"]
+[ext_resource type="Script" uid="uid://c3bekiflhpd24" path="res://scripts/newconfirmation_button.gd" id="9_utymb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qyiw"]
+bg_color = Color(0, 0, 0.239216, 0.258824)
+
+[node name="NewItemModal" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_fno1g")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(380, 310)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -125.0
+offset_right = 180.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_lolso")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1qyiw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -199.0
+offset_top = -157.0
+offset_right = 199.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="SubHeading" parent="Panel/VBoxContainer" instance=ExtResource("3_gy0o1")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "You got"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 17
+
+[node name="SubHeading" parent="Panel/VBoxContainer/VBoxContainer2" instance=ExtResource("3_gy0o1")]
+layout_mode = 2
+text = "Endurance"
+
+[node name="IconHolder" parent="Panel/VBoxContainer/VBoxContainer2" instance=ExtResource("4_3pcbl")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="DescriptionText" parent="Panel/VBoxContainer/VBoxContainer2" instance=ExtResource("7_5l0fa")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Spell"
+
+[node name="DescriptionText2" parent="Panel/VBoxContainer/VBoxContainer2" instance=ExtResource("7_5l0fa")]
+layout_mode = 2
+text = "Grants +20% DEF
+on hit taken"
+
+[node name="ConfirmationButton" parent="Panel/VBoxContainer" instance=ExtResource("8_4poch")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+script = ExtResource("9_utymb")

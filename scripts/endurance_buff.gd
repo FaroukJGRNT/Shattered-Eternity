@@ -1,14 +1,17 @@
 extends Buff
+class_name EnduranceBuff
 
-var bonus_defense := 0.0
+var defense_mul := 0.2
 
 func _init() -> void:
+	buff_type = BuffType.SITUATIONAL
+	buff_name = "Endurance"
+	buff_description = "Increases physical defense by 20% on hit taken"
 	timeout = 7.0
 	trigger_event = LivingEntity.Event.HIT_TAKEN
 
-func activate():
-	bonus_defense = daddy.defense * 0.2
-	daddy.defense += bonus_defense
+func activate(additional : Variant = null):
+	daddy.defense_multipliers.append(defense_mul)
 
 func desactivate():
-	daddy.defense -= bonus_defense
+	daddy.defense_multipliers.erase(defense_mul)

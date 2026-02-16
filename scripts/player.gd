@@ -1,6 +1,11 @@
 extends LivingEntity
 class_name Player
 
+var inventory : Array[Item]
+
+func give_item(item : Item):
+	inventory.append(item)
+
 # Movement variables
 @export var RUN_SPEED = 400.0
 @export var AERIAL_SPEED = 150.0

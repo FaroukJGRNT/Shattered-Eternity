@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkyhlill7uscj"]
+
+[ext_resource type="Script" uid="uid://d170ia4mw6s2h" path="res://scripts/help_overhead_text.gd" id="1_e1h45"]
+[ext_resource type="Texture2D" uid="uid://brfrp6r0fiwl2" path="res://addons/_Godot-IDE_/icon.svg" id="2_dffh3"]
+[ext_resource type="PackedScene" uid="uid://b5vd46yxc7dj8" path="res://ui/atoms/description_text.tscn" id="3_svt2k"]
+
+[node name="HelpOverheadText" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -580.0
+offset_bottom = -370.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e1h45")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_dffh3")
+expand_mode = 3
+
+[node name="DescriptionText" parent="HBoxContainer" instance=ExtResource("3_svt2k")]
+layout_mode = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "Interact"

@@ -115,7 +115,9 @@ offset = Vector2(72, -38)
 [node name="HitBox" type="Area2D" parent="."]
 position = Vector2(0, -8)
 script = ExtResource("2_yhaq2")
+push_back = 2
 attack_type = 3
+impact = 3
 is_phys_atk = false
 metadata/_custom_type_script = "uid://ca7lo8315oxt"
 

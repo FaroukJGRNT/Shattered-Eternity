@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://p4w0proattic"]
+[gd_scene load_steps=13 format=3 uid="uid://p4w0proattic"]
 
 [ext_resource type="PackedScene" uid="uid://c1imgcb2kat6k" path="res://scenes/player.tscn" id="2_7lnj0"]
 [ext_resource type="PackedScene" uid="uid://cc3gbjxlqvcli" path="res://scenes/levels/world.tscn" id="2_ppgk2"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bb7tjs6gcrm6i" path="res://scenes/Enemies/guarding_tree_man.tscn" id="9_8iemx"]
 [ext_resource type="PackedScene" uid="uid://clblykkm6pbb5" path="res://scenes/Enemies/huge_tree_man.tscn" id="10_olg7q"]
 [ext_resource type="PackedScene" uid="uid://c835tnkc0eq4y" path="res://scenes/player_spawn_point.tscn" id="11_t1rx8"]
+[ext_resource type="PackedScene" uid="uid://bjxpxeg04tsat" path="res://scenes/levels/spell_giver.tscn" id="12_8iemx"]
 
 [node name="Level" type="Node2D" groups=["Level"]]
 
@@ -46,3 +47,7 @@ max_life = 100
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("11_t1rx8")]
 position = Vector2(627, 118)
+
+[node name="SpellGiver" parent="." instance=ExtResource("12_8iemx")]
+position = Vector2(591, 145)
+offset = Vector2(0, -20)

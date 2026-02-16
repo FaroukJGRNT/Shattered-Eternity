@@ -1,6 +1,6 @@
 [gd_scene load_steps=79 format=3 uid="uid://gx5s2fc7d8dp"]
 
-[ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/enemy_template.tscn" id="1_xi2v8"]
+[ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/Enemies/enemy_template.tscn" id="1_xi2v8"]
 [ext_resource type="Texture2D" uid="uid://bb812m8j5qvqe" path="res://assets/sprites/ForestSpirit/spit.png" id="2_1dokw"]
 [ext_resource type="Texture2D" uid="uid://bnn264k2fsutv" path="res://assets/sprites/ForestSpirit/death.png" id="3_egho6"]
 [ext_resource type="Texture2D" uid="uid://hjifrua4l1li" path="res://assets/sprites/ForestSpirit/stagstart.png" id="4_0cxfh"]

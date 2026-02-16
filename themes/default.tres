@@ -4,14 +4,15 @@
 [ext_resource type="StyleBox" uid="uid://bplwb375xct12" path="res://ui/atoms/icon_holder_res.tres" id="2_gnsgt"]
 
 [resource]
-Button/constants/outline_size = 6
-Button/font_sizes/font_size = 22
+Button/constants/outline_size = 4
+Button/font_sizes/font_size = 16
 Button/fonts/font = ExtResource("1_2g1ym")
 Button/styles/normal = null
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
-Label/constants/outline_size = 6
-Label/constants/shadow_offset_x = 2
-Label/constants/shadow_offset_y = 2
-Label/font_sizes/font_size = 22
+Label/constants/outline_size = 4
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 0
+Label/constants/shadow_outline_size = 0
+Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_2g1ym")
 Panel/styles/panel = ExtResource("2_gnsgt")

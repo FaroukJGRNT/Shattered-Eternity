@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://dissnb5nfrcg"]
+[gd_scene load_steps=47 format=4 uid="uid://cult7d4w48p2r"]
 
 [ext_resource type="Texture2D" uid="uid://be0cqx4puye83" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-1.png" id="1_7s4hh"]
 [ext_resource type="Texture2D" uid="uid://b1tei4kflmlh8" path="res://assets/sprites/environment/ForestScene/ForestZone-Sky-2.png" id="2_atu5g"]
@@ -15,17 +15,19 @@
 [ext_resource type="Texture2D" uid="uid://bml6hjtvf5f7j" path="res://assets/sprites/environment/ForestScene/ForestZone-Tileset(new).png" id="12_y10bi"]
 [ext_resource type="PackedScene" uid="uid://d3kvl1e2ls3do" path="res://scenes/dummy.tscn" id="13_pf0y0"]
 [ext_resource type="PackedScene" uid="uid://lcalun41bn55" path="res://scenes/ingame_ui.tscn" id="14_vvr6j"]
-[ext_resource type="PackedScene" uid="uid://l4c0r8fp6n4c" path="res://scenes/tree_man.tscn" id="18_ei3w1"]
+[ext_resource type="PackedScene" uid="uid://l4c0r8fp6n4c" path="res://scenes/Enemies/tree_man.tscn" id="18_ei3w1"]
 [ext_resource type="PackedScene" uid="uid://u8xrklg5udr8" path="res://scenes/sign.tscn" id="18_lkqwk"]
-[ext_resource type="PackedScene" uid="uid://bb7tjs6gcrm6i" path="res://scenes/guarding_tree_man.tscn" id="18_q220v"]
-[ext_resource type="PackedScene" uid="uid://clblykkm6pbb5" path="res://scenes/huge_tree_man.tscn" id="19_620pj"]
+[ext_resource type="PackedScene" uid="uid://bb7tjs6gcrm6i" path="res://scenes/Enemies/guarding_tree_man.tscn" id="18_q220v"]
+[ext_resource type="PackedScene" uid="uid://clblykkm6pbb5" path="res://scenes/Enemies/huge_tree_man.tscn" id="19_620pj"]
+[ext_resource type="PackedScene" uid="uid://bjxpxeg04tsat" path="res://scenes/levels/spell_giver.tscn" id="19_u73h8"]
 [ext_resource type="PackedScene" uid="uid://c835tnkc0eq4y" path="res://scenes/player_spawn_point.tscn" id="20_d6xuq"]
-[ext_resource type="PackedScene" uid="uid://gx5s2fc7d8dp" path="res://scenes/forest_spirit.tscn" id="21_uikkn"]
-[ext_resource type="PackedScene" uid="uid://dimdq1p3y55rx" path="res://scenes/boar.tscn" id="22_fh44m"]
-[ext_resource type="PackedScene" uid="uid://clq1ba7ljb4ob" path="res://scenes/flying_golem.tscn" id="23_w1qkb"]
-[ext_resource type="PackedScene" uid="uid://n3pwaqy58kus" path="res://scenes/bat.tscn" id="24_imi2s"]
-[ext_resource type="PackedScene" uid="uid://bohmugldj6x0r" path="res://scenes/golemite.tscn" id="25_uikkn"]
+[ext_resource type="PackedScene" uid="uid://gx5s2fc7d8dp" path="res://scenes/Enemies/forest_spirit.tscn" id="21_uikkn"]
+[ext_resource type="PackedScene" uid="uid://dimdq1p3y55rx" path="res://scenes/Enemies/boar.tscn" id="22_fh44m"]
+[ext_resource type="PackedScene" uid="uid://clq1ba7ljb4ob" path="res://scenes/Enemies/flying_golem.tscn" id="23_w1qkb"]
+[ext_resource type="PackedScene" uid="uid://n3pwaqy58kus" path="res://scenes/Enemies/bat.tscn" id="24_imi2s"]
+[ext_resource type="PackedScene" uid="uid://bohmugldj6x0r" path="res://scenes/Enemies/golemite.tscn" id="25_uikkn"]
 [ext_resource type="PackedScene" uid="uid://tavdgovcp0ce" path="res://scenes/small_bat.tscn" id="26_fh44m"]
+[ext_resource type="PackedScene" uid="uid://bytpxuqj075ac" path="res://scenes/levels/almana_tree.tscn" id="28_28eow"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4mgxn"]
 blend_mode = 1
@@ -664,3 +666,9 @@ position = Vector2(817, 248)
 
 [node name="SmallBat" parent="." instance=ExtResource("26_fh44m")]
 position = Vector2(11281, 214)
+
+[node name="AlmanaTree" parent="." instance=ExtResource("28_28eow")]
+position = Vector2(10890, 211)
+
+[node name="SpellGiver" parent="." instance=ExtResource("19_u73h8")]
+position = Vector2(10526, 247)

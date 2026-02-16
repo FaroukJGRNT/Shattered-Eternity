@@ -1,6 +1,6 @@
 [gd_scene load_steps=120 format=3 uid="uid://dimdq1p3y55rx"]
 
-[ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/enemy_template.tscn" id="1_tgiih"]
+[ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/Enemies/enemy_template.tscn" id="1_tgiih"]
 [ext_resource type="Script" uid="uid://b5hx1ku5p3xpg" path="res://scripts/boar.gd" id="2_fc1cp"]
 [ext_resource type="Texture2D" uid="uid://6anrg026ca2f" path="res://assets/sprites/NewBoar/new_boar_death.png" id="3_p1bql"]
 [ext_resource type="Texture2D" uid="uid://3c6bsl3uy7nn" path="res://assets/sprites/NewBoar/new_boar_idle.png" id="4_mneqp"]
@@ -855,6 +855,7 @@ metadata/_custom_type_script = "uid://dvclob6aaps4"
 script = ExtResource("14_p1bql")
 motion_value = 25
 life_duration = 1.5
+push_back = 3
 attack_type = 3
 impact = 3
 metadata/_custom_type_script = "uid://dass3u4ef3rdj"

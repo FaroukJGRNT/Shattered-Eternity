@@ -1,6 +1,6 @@
 extends EnemyAttackState
 
-var proj : PackedScene = load("res://scenes/spirit_spit.tscn")
+var proj : PackedScene = load("res://scenes/projectiles/spirit_spit.tscn")
 
 var has_shot : bool = false
 

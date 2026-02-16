@@ -35,73 +35,68 @@ grow_vertical = 2
 theme = ExtResource("1_lx8io")
 theme_override_styles/panel = SubResource("StyleBoxFlat_1qyiw")
 
-[node name="Heading" parent="." instance=ExtResource("2_uinyb")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
-anchors_preset = 5
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_left = -92.0
-offset_top = 47.0
-offset_right = 90.0
-offset_bottom = 186.0
-grow_vertical = 1
-text = "CHOOSE A BUFF"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 14
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -81.5
-offset_bottom = 123.5
+offset_left = -199.0
+offset_top = -157.0
+offset_right = 199.0
+offset_bottom = 157.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Heading" parent="Panel/VBoxContainer" instance=ExtResource("2_uinyb")]
+layout_mode = 2
+text = "CHOOSE A BUFF"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
 theme_override_constants/separation = 75
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 17
 
-[node name="SubHeading" parent="HBoxContainer/VBoxContainer" instance=ExtResource("3_0y0b3")]
+[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_0y0b3")]
 layout_mode = 2
 text = "Revenge"
 
-[node name="SelectableIconHolder" parent="HBoxContainer/VBoxContainer" instance=ExtResource("5_1qyiw")]
+[node name="SelectableIconHolder" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_1qyiw")]
 layout_mode = 2
 script = ExtResource("6_cbqbl")
 texture = ExtResource("5_n33tu")
 
-[node name="DescriptionText" parent="HBoxContainer/VBoxContainer" instance=ExtResource("5_cbqbl")]
+[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_cbqbl")]
 layout_mode = 2
 text = "Grants +20% ATK
 on hit taken"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 17
 
-[node name="SubHeading" parent="HBoxContainer/VBoxContainer2" instance=ExtResource("3_0y0b3")]
+[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_0y0b3")]
 layout_mode = 2
 text = "Endurance"
 
-[node name="SelectableIconHolder" parent="HBoxContainer/VBoxContainer2" instance=ExtResource("5_1qyiw")]
+[node name="SelectableIconHolder" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("5_1qyiw")]
 layout_mode = 2
 script = ExtResource("8_1qyiw")
 texture = ExtResource("7_cbqbl")
 
-[node name="DescriptionText" parent="HBoxContainer/VBoxContainer2" instance=ExtResource("5_cbqbl")]
+[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("5_cbqbl")]
 layout_mode = 2
 text = "Grants +20% DEF
 on hit taken"
 
-[node name="ConfirmationButton" parent="." instance=ExtResource("9_cbqbl")]
-layout_mode = 1
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -111.0
-offset_bottom = -78.0
-grow_vertical = 0
+[node name="ConfirmationButton" parent="Panel/VBoxContainer" instance=ExtResource("9_cbqbl")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 script = ExtResource("12_23cnq")

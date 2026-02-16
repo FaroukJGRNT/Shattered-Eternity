@@ -1,8 +1,12 @@
 extends Buff
+class_name KilledEnemyAtkBuff
 
 var bonus := 1.2
 
 func _init() -> void:
+	buff_type = BuffType.SITUATIONAL
+	buff_name = "Murder Boner"
+	buff_description = "Increases physical attack by 20% when an enemy is killed"
 	timeout = 7.0
 	trigger_event = LivingEntity.Event.ENEMY_KILLED
  

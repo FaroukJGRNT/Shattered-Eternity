@@ -1,0 +1,245 @@
+[gd_scene load_steps=29 format=3 uid="uid://bjxpxeg04tsat"]
+
+[ext_resource type="PackedScene" uid="uid://i0dxdimbmvdn" path="res://scenes/levels/interactible_level_object.tscn" id="1_d4n4a"]
+[ext_resource type="Texture2D" uid="uid://b8wv2avopdpgs" path="res://assets/sprites/environment/SpellCrystal/crystal_dark_32x32_24f_20d.png" id="2_bbtd6"]
+
+[sub_resource type="GDScript" id="GDScript_d4n4a"]
+resource_local_to_scene = true
+script/source = "extends InteractibleLevelObject
+
+var spell_to_give : Item
+
+func _ready() -> void:
+	# Randomly take a spell
+	# First choose what element
+	var elem = Toolbox.roll_element()
+	# Then choose which spell
+	if elem == \"fire\":
+		$AnimatedSprite2D.modulate = Color.hex(0xff6a00ff)
+		spell_to_give = Toolbox.fire_spells[randi_range(0, len(Toolbox.fire_spells) - 1)]
+	elif elem == \"ice\":
+		$AnimatedSprite2D.modulate = Color.hex(0x00eaffff)
+		spell_to_give = Toolbox.ice_spells[randi_range(0, len(Toolbox.ice_spells) - 1)]
+	elif elem == \"thunder\":
+		$AnimatedSprite2D.modulate = Color.hex(0xf2ff00ff)
+		spell_to_give = Toolbox.thunder_spells[randi_range(0, len(Toolbox.thunder_spells) - 1)]
+
+var info_modal : PackedScene = load(\"res://ui/molecules/new_item_modal.tscn\")
+
+func interact():
+	print(\"Spell giver interaction\")
+	if not interacted:
+		interacted = true
+		player_ref.give_item(spell_to_give)
+		print(\"Gave spell \", spell_to_give.item_name, \" to player\")
+		var modal = ui_manager.show_modal(info_modal)
+		modal.item = spell_to_give
+		modal.setup_labels()
+		$AnimatedSprite2D.play(\"destruction\")
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if $AnimatedSprite2D.animation == \"destruction\":
+		queue_free()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tmfw"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lva4t"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6ijw"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nd4b5"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pq1e"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nr72m"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7hdx"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o88us"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rq5uc"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ve666"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ordjl"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nd67t"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dweqa"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p41fg"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxw7c"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yt4bk"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(480, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4t7ky"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(512, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7r3m"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(544, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqpn1"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(576, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhx5y"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(608, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_824hg"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(640, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdmlu"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(672, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_415s0"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(704, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wkg3"]
+atlas = ExtResource("2_bbtd6")
+region = Rect2(736, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bh5bp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tmfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lva4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6ijw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nd4b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pq1e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nr72m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7hdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o88us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rq5uc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ve666")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ordjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nd67t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dweqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p41fg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxw7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yt4bk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4t7ky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7r3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqpn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhx5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_824hg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdmlu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_415s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wkg3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tmfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tmfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tmfw")
+}],
+"loop": false,
+"name": &"destruction",
+"speed": 5.0
+}]
+
+[node name="SpellGiver" instance=ExtResource("1_d4n4a")]
+script = SubResource("GDScript_d4n4a")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+modulate = Color(1, 0.415686, 0, 1)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_bh5bp")
+animation = &"destruction"
+autoplay = "default"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

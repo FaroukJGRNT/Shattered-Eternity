@@ -12,7 +12,7 @@ func connect_confirmation_button(node: Node = null):
 		node = self  # par défaut, commence par ce node
 
 	for child in node.get_children():
-		if child is SelectableIconHolder and not found_first:
+		if child is FocusableChoice and not found_first:
 			child.grab_focus()
 			found_first = true
 		if child is ConfirmationButton:
@@ -22,6 +22,6 @@ func connect_confirmation_button(node: Node = null):
 		connect_confirmation_button(child)
 
 func _on_button_pressed():
-	var focused_choice = get_viewport().gui_get_focus_owner() as SelectableIconHolder
+	var focused_choice = get_viewport().gui_get_focus_owner() as FocusableChoice
 	focused_choice.chosen()
 	confirm_btn.confirm()

@@ -1,6 +1,6 @@
 extends AttackState
 
-var projectile_scene : PackedScene = load("res://scenes/spear_projectile.tscn")
+var projectile_scene : PackedScene = load("res://scenes/projectiles/spear_projectile.tscn")
 var MAX_RANGE = 600
 var shot = false
 

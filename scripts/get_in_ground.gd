@@ -1,6 +1,6 @@
 extends EnemyAttackState
 
-var ground_wave_scene : PackedScene = load("res://scenes/golem_ground_wave.tscn")
+var ground_wave_scene : PackedScene = load("res://scenes/projectiles/golem_ground_wave.tscn")
 var has_shot := false
 
 func enter():

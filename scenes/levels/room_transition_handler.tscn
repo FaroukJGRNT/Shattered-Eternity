@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bap5pomri7qa6"]
+
+[ext_resource type="Script" uid="uid://bxdo1aib638bw" path="res://scripts/input_1.gd" id="1_iew8y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwgf8"]
+size = Vector2(20, 214)
+
+[node name="RoomTransitionHandler" type="Node2D" groups=["RoomTransitionHandler"]]
+
+[node name="Connector" type="Node2D" parent="."]
+script = ExtResource("1_iew8y")
+
+[node name="Area2D" type="Area2D" parent="Connector"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Connector/Area2D"]
+position = Vector2(0, 22.5)
+shape = SubResource("RectangleShape2D_wwgf8")

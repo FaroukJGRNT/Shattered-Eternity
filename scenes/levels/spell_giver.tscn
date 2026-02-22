@@ -27,11 +27,9 @@ func _ready() -> void:
 var info_modal : PackedScene = load(\"res://ui/molecules/new_item_modal.tscn\")
 
 func interact():
-	print(\"Spell giver interaction\")
 	if not interacted:
 		interacted = true
 		player_ref.give_item(spell_to_give)
-		print(\"Gave spell \", spell_to_give.item_name, \" to player\")
 		var modal = ui_manager.show_modal(info_modal)
 		modal.item = spell_to_give
 		modal.setup_labels()

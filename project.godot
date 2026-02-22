@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Shattered_Eternity"
-run/main_scene="uid://cult7d4w48p2r"
+run/main_scene="uid://venxctn8snvk"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -43,6 +43,8 @@ PlayerHealthBar=""
 EnemyProjectile=""
 AllyProjectile=""
 PlayerSpawnPoint=""
+TileMaps=""
+RoomTransitionHandler=""
 
 [input]
 

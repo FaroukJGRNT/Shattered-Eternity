@@ -2627,7 +2627,6 @@ position = Vector2(1, -2)
 shape = SubResource("CapsuleShape2D_gl8cc")
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
-offset = Vector2(0, -55)
 position_smoothing_enabled = true
 drag_vertical_offset = -1.0
 script = ExtResource("6_fjrip")

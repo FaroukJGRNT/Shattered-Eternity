@@ -60,6 +60,7 @@ func _ready() -> void:
 	ice_res = 10.0
 	equip_spell_slot1(IceSpell.new())
 	equip_spell_slot2(ThunderSpell.new())
+	
 
 @export var base_reson_decay := 2.0
 @export var reson_decay_accel := 1.0

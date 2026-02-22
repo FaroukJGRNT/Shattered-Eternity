@@ -36,6 +36,8 @@ Eveil des glaces:
 Eveil des eclairs:
 -
 
+Nerfs d'acier:
+vous n'etes plus stun quand vous prenez des coups en attaquant
 
 MAJOR SKILLS:
 Chaque run devrait commencer avec un major skill.

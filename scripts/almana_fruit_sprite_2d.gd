@@ -7,7 +7,6 @@ var time := 0.0
 
 func _ready():
 	base_y = position.y
-	print("Base y: ", base_y)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

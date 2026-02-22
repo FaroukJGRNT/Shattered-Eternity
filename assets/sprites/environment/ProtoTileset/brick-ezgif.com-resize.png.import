@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jg1e63mi4eab"
-path="res://.godot/imported/sprite.png-6b2f9042b243bc5c455314623fb31a81.ctex"
+uid="uid://ch4wxkmc4erdg"
+path="res://.godot/imported/brick-ezgif.com-resize.png-f566cce0023ec13d84e82792e648525d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/sprite.png"
-dest_files=["res://.godot/imported/sprite.png-6b2f9042b243bc5c455314623fb31a81.ctex"]
+source_file="res://assets/sprites/environment/ProtoTileset/brick-ezgif.com-resize.png"
+dest_files=["res://.godot/imported/brick-ezgif.com-resize.png-f566cce0023ec13d84e82792e648525d.ctex"]
 
 [params]
 

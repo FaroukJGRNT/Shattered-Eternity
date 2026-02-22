@@ -10,6 +10,15 @@ enum GameEvents  {
 
 func _ready() -> void:
 	load_all_buffs()
+	var world_root = get_tree().current_scene.get_node("WorldRoot")
+	if world_root:
+		call_deferred("generate_world")
+
+func _process(delta: float) -> void:
+	if transitioning:
+		trans_timer -= delta
+		if trans_timer <= 0:
+			transitioning = false
 
 func hit_freeze(duration := 0.08, scale := 0.1) -> void:
 	Engine.time_scale = scale
@@ -72,6 +81,106 @@ func handle_event(event : GameEvents, emitter : Node2D):
 			get_tree().get_first_node_in_group("Level").add_child(dummy)
 			dummy.position = emitter.position
 
+func remove_player_and_ui(level : Node2D):
+	# Supprime Player/UI par défaut du nouveau level
+	for child in level.get_children():
+		if child.is_in_group("Player") or child.is_in_group("UI"):
+			child.queue_free()
+	
+var transitioning := false
+var trans_cooldown := 3.0
+var trans_timer := 0.0
+
+func load_level(new_level: Node2D, output_position: Vector2):
+	print("TRANSITIONING to level : ", new_level)
+	transitioning = true
+
+	remove_player_and_ui(new_level)
+
+	var play = get_tree().get_first_node_in_group("Player")
+	print("Player grabbed: ", play)
+	var ui = get_tree().get_first_node_in_group("UI")
+	var world_root = get_tree().current_scene.get_node("WorldRoot")
+	print("World root grabbed: ", world_root)
+	
+	var current_level = get_tree().get_first_node_in_group("Level")
+	print("Current level: ", current_level)
+
+	# Retire l’ancienne room du tree (sans la détruire)
+	if current_level:
+		current_level.remove_child(play)
+		current_level.remove_child(ui)
+		world_root.remove_child(current_level)
+
+	# Ajoute la nouvelle si nécessaire
+	if new_level.get_parent() == null:
+		print("Adding new room to the world root: ", new_level)
+		world_root.add_child(new_level)
+
+	new_level.add_child(play)
+	print("Player added")
+	new_level.add_child(ui)
+
+	play.position = output_position
+
+	trans_timer = trans_cooldown
+	
+	var linked_scene = get_level_output_connectors(new_level)[0].linked_room
+	print("The room we just entered leads to: ", linked_scene)
+
+
+func get_level_input_connector(level : Node2D) -> Connector:
+	for c in level.get_children():
+		if c is Connector and c.connector_type == Connector.ConnectorType.INPUT:
+			return c
+	return null
+
+func get_level_output_connectors(level : Node2D) -> Array[Connector]:
+	var connectors : Array[Connector] = []
+	for c in level.get_children():
+		if c is Connector and c.connector_type == Connector.ConnectorType.OUTPUT:
+			connectors.append(c)
+	return connectors
+
+var start_level : PackedScene = load("res://scenes/levels/level_1.tscn")
+var world_length := 7
+
+var available_levels : Array [PackedScene] = [
+	load("res://scenes/levels/level_4.tscn"),
+	load("res://scenes/levels/level_3.tscn"),
+	load("res://scenes/levels/level_1.tscn"),
+	load("res://scenes/levels/level_2.tscn"),
+]
+
+func connect_outputs(level : Node2D, depth : int):
+	if depth <= 1:
+		return
+	for output in get_level_output_connectors(level):
+		# Instantiate the output room
+		var output_level_scene = available_levels[randi_range(0, len(available_levels) - 1)].instantiate()
+		print("Adding room: ", output_level_scene.name)
+		# Get the output room input
+		var output_room_entrance = get_level_input_connector(output_level_scene)
+		# Link the spawnpoints
+		output.output_position = output_room_entrance.input_spawn_point.position
+		output_room_entrance.output_position = output.input_spawn_point.position
+		# Link the room itself
+		output.linked_room = output_level_scene
+		output_room_entrance.linked_room = level
+		# Repeat the process for the newly created_room
+		connect_outputs(output_level_scene, depth - 1)
+
+func generate_world():
+	var start_level_scene = start_level.instantiate()
+	var world_root = get_tree().current_scene.get_node("WorldRoot")
+	world_root.add_child(start_level_scene)
+
+	connect_outputs(start_level_scene, world_length)
+	
+	var curr_scene : Node2D = start_level_scene
+	while get_level_output_connectors(curr_scene)[0].linked_room != null:
+		print("Room ", curr_scene, " leads to ", get_level_output_connectors(curr_scene)[0].linked_room)
+		curr_scene = get_level_output_connectors(curr_scene)[0].linked_room
 #### ------------------------ THIS PART RELATES TO GAMEPLAY INFOS ---------------------- ####
 
 # These variables are the chances to find a buff or a spell of a certain element
@@ -125,7 +234,6 @@ func load_all_buffs():
 		while file_name != "":
 			if file_name.ends_with(".gd"):
 				var script = load("res://scripts/buffs/Elemental/" + file_name)
-				print(script)
 				elemental_buffs.append(script.new())
 				
 			file_name = dir1.get_next()
@@ -136,7 +244,6 @@ func load_all_buffs():
 		while file_name != "":
 			if file_name.ends_with(".gd"):
 				var script = load("res://scripts/buffs/Physical/" + file_name)
-				print(script)
 				physical_buffs.append(script.new())
 
 			file_name = dir2.get_next()
@@ -147,9 +254,7 @@ func load_all_buffs():
 		while file_name != "":
 			if file_name.ends_with(".gd"):
 				var script = load("res://scripts/buffs/Situational/" + file_name)
-				print(script)
 				situational_buffs.append(script.new())
 				
 			file_name = dir3.get_next()
 	
-	print(elemental_buffs[0].buff_name)

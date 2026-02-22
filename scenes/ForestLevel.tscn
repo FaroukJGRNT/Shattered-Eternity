@@ -63,7 +63,7 @@ gradient = SubResource("Gradient_y10bi")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4mgxn"]
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(180000, 2000, 1)
+emission_box_extents = Vector3(1000, 1000, 1)
 spread = 20.0
 initial_velocity_min = 20.0
 initial_velocity_max = 80.0
@@ -342,7 +342,7 @@ material = SubResource("CanvasItemMaterial_vvr6j")
 offset_left = -58.0
 offset_top = -374.0
 offset_right = 29745.0
-offset_bottom = 490.0
+offset_bottom = 551.0
 texture = SubResource("GradientTexture2D_y10bi")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -542,11 +542,10 @@ process_material = SubResource("ParticleProcessMaterial_4mgxn")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_lkqwk")
-position = Vector2(88, -1359)
-amount = 100
+amount = 1000
 texture = ExtResource("11_fkkko")
 lifetime = 2.0
-visibility_rect = Rect2(-500, -200, 180000, 2000)
+visibility_rect = Rect2(0, -500, 5000, 1000)
 process_material = SubResource("ParticleProcessMaterial_4mgxn")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
@@ -645,21 +644,24 @@ repeat_size = Vector2(640, 0)
 position = Vector2(111.522, 129.469)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D6" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D"]
 position = Vector2(498, 75)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D8" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D"]
 position = Vector2(385.52, 56.4694)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="Node2D2" type="Node2D" parent="LightEffects2/Parallax2D"]
@@ -669,21 +671,24 @@ position = Vector2(640, 0)
 position = Vector2(111.522, 129.469)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D6" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D2"]
 position = Vector2(498, 75)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D8" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D2"]
 position = Vector2(385.52, 56.4694)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="Node2D3" type="Node2D" parent="LightEffects2/Parallax2D"]
@@ -693,21 +698,24 @@ position = Vector2(1280, 0)
 position = Vector2(111.522, 129.469)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D6" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D3"]
 position = Vector2(498, 75)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D8" type="PointLight2D" parent="LightEffects2/Parallax2D/Node2D3"]
 position = Vector2(385.52, 56.4694)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="Parallax2D2" type="Parallax2D" parent="LightEffects2"]
@@ -720,28 +728,32 @@ repeat_size = Vector2(640, 0)
 position = Vector2(141, 66)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D3" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D"]
 position = Vector2(274, 69)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D4" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D"]
 position = Vector2(382, 32)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D2" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D"]
 position = Vector2(385, 39)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="Node2D2" type="Node2D" parent="LightEffects2/Parallax2D2"]
@@ -751,28 +763,32 @@ position = Vector2(640, 0)
 position = Vector2(141, 66)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D3" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D2"]
 position = Vector2(274, 69)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D4" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D2"]
 position = Vector2(382, 32)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D2" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D2"]
 position = Vector2(385, 39)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="Node2D3" type="Node2D" parent="LightEffects2/Parallax2D2"]
@@ -782,26 +798,30 @@ position = Vector2(1280, 0)
 position = Vector2(141, 66)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D3" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D3"]
 position = Vector2(274, 69)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D4" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D3"]
 position = Vector2(382, 32)
 rotation = -0.329867
 scale = Vector2(2.09884, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")
 
 [node name="PointLight2D2" type="PointLight2D" parent="LightEffects2/Parallax2D2/Node2D3"]
 position = Vector2(385, 39)
 rotation = -0.329867
 scale = Vector2(0.830774, 2.32831)
-color = Color(1, 0.807843, 0.592157, 0.784314)
+color = Color(1, 0.807843, 0.592157, 1)
+energy = 0.75
 texture = ExtResource("19_lkqwk")

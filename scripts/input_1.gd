@@ -26,15 +26,9 @@ func _process(delta: float) -> void:
 		transition_zone.monitoring = true
 
 func body_entered(body: Node2D) -> void:
-	if connector_type == ConnectorType.INPUT:
-		print("Body in an input trans zone")
-	if connector_type == ConnectorType.OUTPUT:
-		print("Body in an output trans zone")
 	if body is Player:
 		if get_tree() == null:
 			return
 		if owner != get_tree().get_first_node_in_group("Level"):
 			return  # on est dans une vieille room, ignore
-		print("Connector ", self.name, " of Level ", owner," activated")
-		print("body is player, transition now")
 		transition_to_zone()

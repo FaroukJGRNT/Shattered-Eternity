@@ -21,6 +21,10 @@ var resonance_value = 0.0
 
 @export var specialVFXPlayer : SpecialVFXPlayer
 
+@onready var ledge_hit : RayCast2D = $LedgeHit
+@onready var ledge_miss : RayCast2D = $LedgeMiss
+@onready var wall_slide_raycast : RayCast2D = $RayCast2D
+
 var equipped_spell1 : Spell
 var equipped_spell2 : Spell
 
@@ -224,8 +228,12 @@ func direct_sprite():
 		$PlayerHurtBox.scale.x = -1
 		$HitBoxes.scale.x = -1
 		$RayCast2D.scale.x = -1
+		$LedgeHit.scale.x = -1
+		$LedgeMiss.scale.x = -1
 		facing = -1
 	if direction > 0:
+		$LedgeHit.scale.x = 1
+		$LedgeMiss.scale.x = 1
 		$AnimatedSprite2D.flip_h = false
 		$PlayerHurtBox.scale.x = 1
 		$HitBoxes.scale.x = 1

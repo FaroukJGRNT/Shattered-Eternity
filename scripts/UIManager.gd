@@ -13,6 +13,7 @@ func _ready():
 
 # Fonction pour afficher un modal
 func show_modal(modal_scene: PackedScene) -> Node:
+	canvas_root = get_tree().get_first_node_in_group("UI")
 	var modal = modal_scene.instantiate()
 	canvas_root.add_child(modal)
 	modal.set_z_index(1000) # Toujours devant

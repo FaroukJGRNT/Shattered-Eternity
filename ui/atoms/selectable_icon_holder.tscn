@@ -20,7 +20,7 @@ shadow_color = Color(0.102, 0.554767, 0.68, 0.490196)
 shadow_size = 10
 anti_aliasing = false
 
-[node name="SelectableIconHolder" type="Button"]
+[node name="SelectableIconHolder" type="Button" node_paths=PackedStringArray("text_rect")]
 custom_minimum_size = Vector2(70, 70)
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,6 +42,7 @@ theme_override_styles/hover = ExtResource("2_htm2u")
 theme_override_styles/pressed = ExtResource("2_htm2u")
 theme_override_styles/normal = ExtResource("2_htm2u")
 script = ExtResource("3_xf6mg")
+text_rect = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

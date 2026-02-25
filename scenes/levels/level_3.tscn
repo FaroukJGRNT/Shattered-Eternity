@@ -30,7 +30,7 @@ tile_set = SubResource("TileSet_6761a")
 position = Vector2(-394, -125)
 
 [node name="PlayerSpawnPoint3" parent="." instance=ExtResource("3_0ljxa")]
-position = Vector2(-444, -12)
+position = Vector2(-448, -27)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-558, -16)
@@ -40,7 +40,7 @@ position = Vector2(0, -110)
 shape = SubResource("RectangleShape2D_0qepi")
 
 [node name="PlayerSpawnPoint4" parent="." instance=ExtResource("3_0ljxa")]
-position = Vector2(909, -25)
+position = Vector2(917, -28)
 gizmo_extents = 0.0
 
 [node name="Area2D2" type="Area2D" parent="."]

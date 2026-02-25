@@ -1,0 +1,139 @@
+[gd_scene load_steps=7 format=3 uid="uid://donxxob3umgxy"]
+
+[ext_resource type="Theme" uid="uid://du6ww74nmnyne" path="res://themes/default.tres" id="1_5yoee"]
+[ext_resource type="PackedScene" uid="uid://dcyyjylp0vcye" path="res://ui/atoms/heading.tscn" id="2_ka2kj"]
+[ext_resource type="PackedScene" uid="uid://ci4di3hc8b0ud" path="res://ui/atoms/subheading.tscn" id="3_xqrof"]
+[ext_resource type="PackedScene" uid="uid://djj01l68q5mgl" path="res://ui/atoms/selectable_icon_holder.tscn" id="4_nhu3n"]
+[ext_resource type="PackedScene" uid="uid://b5vd46yxc7dj8" path="res://ui/atoms/description_text.tscn" id="5_760km"]
+[ext_resource type="PackedScene" uid="uid://d0qty0xik6ghi" path="res://ui/atoms/confirmation_button.tscn" id="6_afqig"]
+
+[node name="SpellEquip" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_5yoee")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(600, 340)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Heading" parent="Panel/VBoxContainer" instance=ExtResource("2_ka2kj")]
+layout_mode = 2
+text = "SPELLS"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_xqrof")]
+layout_mode = 2
+text = "SPELL 1"
+
+[node name="SelectableIconHolder" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_nhu3n")]
+layout_mode = 2
+
+[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_760km")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_xqrof")]
+layout_mode = 2
+text = "SPELL 2"
+
+[node name="SelectableIconHolder" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("4_nhu3n")]
+layout_mode = 2
+
+[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("5_760km")]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+alignment = 1
+
+[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer3" instance=ExtResource("3_xqrof")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer3" instance=ExtResource("5_760km")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "nega neibeobg fierhigfer
+nfierwongewr
+gergerg
+gregergegergergerggergger
+gergergerg"
+
+[node name="Panel" type="Panel" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(480, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -35.0
+offset_right = 225.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 6
+columns = 10
+
+[node name="SelectableIconHolder" parent="Panel/VBoxContainer/Panel/GridContainer" instance=ExtResource("4_nhu3n")]
+layout_mode = 2
+
+[node name="SelectableIconHolder2" parent="Panel/VBoxContainer/Panel/GridContainer" instance=ExtResource("4_nhu3n")]
+layout_mode = 2
+
+[node name="SelectableIconHolder3" parent="Panel/VBoxContainer/Panel/GridContainer" instance=ExtResource("4_nhu3n")]
+layout_mode = 2
+
+[node name="SelectableIconHolder4" parent="Panel/VBoxContainer/Panel/GridContainer" instance=ExtResource("4_nhu3n")]
+layout_mode = 2
+
+[node name="SelectableIconHolder5" parent="Panel/VBoxContainer/Panel/GridContainer" instance=ExtResource("4_nhu3n")]
+layout_mode = 2
+
+[node name="SelectableIconHolder6" parent="Panel/VBoxContainer/Panel/GridContainer" instance=ExtResource("4_nhu3n")]
+layout_mode = 2
+
+[node name="ConfirmationButton" parent="Panel/VBoxContainer" instance=ExtResource("6_afqig")]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4

@@ -29,8 +29,6 @@ Parade a la l'epee: Slash rapide qui vous met derriere l'ennemi
 Parade au marteau: mechant coup de pied qui repousse l'ennemi
 Parade a la lance: Slashs rapides qui vous font reculer
 
-PARADES SUCCESSIVES
-Parer plusieurs coups a la suite permet d'augmenter la puissance de la parade a suivre
 
 Brise-garde:
 Attaque speciale permettant de detruire une garde. Mais
@@ -51,8 +49,6 @@ le statut gele realentit l'ennemi
 Foudre + feu : Plasma-Surcharge : La barre de posture se remplit plus vite
 Feu + Glace : Choc Thermique : baisse toutes les defenses elementaires
 Foudre + Glace : Cryo-Chargé
-
-Chaque element a son type de particules sous hit
 
 Le joueur aura 3 skills:
 Chacun fait apparaitre une aureole d'element derriere sa tete
@@ -103,9 +99,11 @@ Edit de zinzin : En fait son professeur etait un grand sage. Et il avait predit 
 lisant les etoiles ou un machin du genre : Deux heros allaient se battre pour definir 
 l'avenir de la planete, et il lui a dit a peu pres ou ca allait se passer. Et du coup le voila
 
+CUT
 Un gang de bandits qu'on rencontrera un peu partout. Ils ont des haches,
 s'habillent en noir, et leur chef sera un perso interessant, hopefully
 
+CUT
 Une fée. Les fees seraient des etres qui ont quitte l'humanite depuis un moment deja
 a cause de leur mauvaise utilisation du mana. Mais autrefois
 elles aidaient les humains. On en trouvera une dans le jeu qui sentira que
@@ -129,7 +127,6 @@ Il est fort mais tu le bats, il sera utile au medecin, pour trouver eventuelleme
 contre l'infection
 
 Le grand tueur de geants, on le trouvera a la forge. Tout au fond, pour un combat incroyable.
-
 
 Un gars de l'est (un japonais avec un odachi) qui porte sur son dos un cercueil
 Ce sera un gars qui s'est ramene depuis tres loin dans le village parce qu'il a appris que
@@ -173,8 +170,6 @@ Il nous faut une battle de danse
 Il nous faut des "Appels" des invocations que certains persos te donnent et que tu peux utiliser
 pour utiliser leur competence speciale. Ce serait bien si chaque personnage te donnait son appel
 a un niveau donne de sa quete
-Jouer avec le zoom de la cam quand hurt ou bien quand coup mechant
-Ajouter du weapon spin sur les attaques chargees
 
 
 # IDEES GAME-DESIGN
@@ -198,11 +193,9 @@ Le joueur respawn sur des coeurs d'almana. Chaque zone en a un gros et des petit
 
 --> Avant le tout premier combat, le PNJ que le joueur rencontre avant la salle du boss explique au joueur que les attaques du boss sont imprégnées d'une magie qui annule l'immortalité Il dit au joueur que s'il perd contre le boss c'est donc définitif.
 
---> Idée de boss : Un personnage qui peut insufler (trouver comment) des âmes en insérant de l'almana dans des trucs (Il se balade sur un destrier squelette, il peut invoquer des squelettes mais plot twist il peut aussi insufler une âme dans des objets inanimés)(Idée de phase 2 : Il perd son destrier, il insuffle une âme à son arme et elle forme une sorte de boss duo en synergie avec lui)
 
 --> Idée de boss : Un boss qui manipule la gravité, il peut t'attirer vers lui juste avant de lancer une attaque, te repousser quand tu tentes de l'attaquer, te lancer des objets etc...En phase 2, il utilise toute sa force pour littéralement retourner l'arène 
 
---> TOUS LES CHARA DESIGNS DOIVENT ETRE UNIQUES. L'art style doit avoir qulque chose qui permet d'identifier le jeu direct, tout en restant beau
 
 --> On doit avoir des competences d'exploration qui permettent par exemple d'escalader une montagne ou de planer, ou de resister a un element
 Bro attends on peut faire un truc. Une sorte d'artefact super puissant qui permet de dompter les elements

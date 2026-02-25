@@ -37,7 +37,9 @@ func _process(delta: float) -> void:
 		offset = Vector2(randf_range(-shake_str, shake_str), randf_range(-shake_str, shake_str))
 	else:
 		offset = Vector2(0, 0)
-	
+
+	map = get_tree().get_first_node_in_group("TileMaps")
+	setup_cam_limits()
 	queue_redraw()
 	
 func _draw():

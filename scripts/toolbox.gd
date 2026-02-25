@@ -14,11 +14,18 @@ func _ready() -> void:
 	if world_root:
 		call_deferred("generate_world")
 
+var ui_mode = false
+var buff_section_scene : PackedScene = load("res://ui/molecules/buffs_section.tscn")
+
 func _process(delta: float) -> void:
 	if transitioning:
 		trans_timer -= delta
 		if trans_timer <= 0:
 			transitioning = false
+	if Input.is_action_just_pressed("inventory") and not ui_mode:
+		var modal : BuffSection = ui_manager.show_modal(buff_section_scene)
+		modal.setup_buffes(get_tree().get_first_node_in_group("Player"))
+		ui_mode = true
 
 func hit_freeze(duration := 0.08, scale := 0.1) -> void:
 	Engine.time_scale = scale
@@ -88,23 +95,19 @@ func remove_player_and_ui(level : Node2D):
 			child.queue_free()
 	
 var transitioning := false
-var trans_cooldown := 3.0
+var trans_cooldown := 0.8
 var trans_timer := 0.0
 
 func load_level(new_level: Node2D, output_position: Vector2):
-	print("TRANSITIONING to level : ", new_level)
 	transitioning = true
 
 	remove_player_and_ui(new_level)
 
 	var play = get_tree().get_first_node_in_group("Player")
-	print("Player grabbed: ", play)
 	var ui = get_tree().get_first_node_in_group("UI")
 	var world_root = get_tree().current_scene.get_node("WorldRoot")
-	print("World root grabbed: ", world_root)
 	
 	var current_level = get_tree().get_first_node_in_group("Level")
-	print("Current level: ", current_level)
 
 	# Retire l’ancienne room du tree (sans la détruire)
 	if current_level:
@@ -114,11 +117,9 @@ func load_level(new_level: Node2D, output_position: Vector2):
 
 	# Ajoute la nouvelle si nécessaire
 	if new_level.get_parent() == null:
-		print("Adding new room to the world root: ", new_level)
 		world_root.add_child(new_level)
 
 	new_level.add_child(play)
-	print("Player added")
 	new_level.add_child(ui)
 
 	play.position = output_position
@@ -126,7 +127,6 @@ func load_level(new_level: Node2D, output_position: Vector2):
 	trans_timer = trans_cooldown
 	
 	var linked_scene = get_level_output_connectors(new_level)[0].linked_room
-	print("The room we just entered leads to: ", linked_scene)
 
 
 func get_level_input_connector(level : Node2D) -> Connector:
@@ -158,7 +158,6 @@ func connect_outputs(level : Node2D, depth : int):
 	for output in get_level_output_connectors(level):
 		# Instantiate the output room
 		var output_level_scene = available_levels[randi_range(0, len(available_levels) - 1)].instantiate()
-		print("Adding room: ", output_level_scene.name)
 		# Get the output room input
 		var output_room_entrance = get_level_input_connector(output_level_scene)
 		# Link the spawnpoints
@@ -179,7 +178,6 @@ func generate_world():
 	
 	var curr_scene : Node2D = start_level_scene
 	while get_level_output_connectors(curr_scene)[0].linked_room != null:
-		print("Room ", curr_scene, " leads to ", get_level_output_connectors(curr_scene)[0].linked_room)
 		curr_scene = get_level_output_connectors(curr_scene)[0].linked_room
 #### ------------------------ THIS PART RELATES TO GAMEPLAY INFOS ---------------------- ####
 
@@ -221,40 +219,40 @@ var elemental_buffs : Array[Buff] = []
 var physical_buffs : Array[Buff] = []
 var situational_buffs : Array[Buff] = []
 
+func get_buffes_from_dir(dir: DirAccess, start_path: String, icon_path: String) -> Array[Buff]:
+	var buffes : Array[Buff] = []
+	
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name.ends_with(".gd"):
+				var script = load(start_path + file_name)
+				var new_instance : Buff = script.new()
+				# 🔹 Récupérer le nom sans extension
+				var buff_name = file_name.get_basename()
+				# 🔹 Construire le chemin de l'icône
+				var icon_file = icon_path + buff_name + ".png"
+				# 🔹 Vérifier si l'icône existe
+				if FileAccess.file_exists(icon_file):
+					new_instance.buff_icon = load(icon_file)
+				else:
+					print("Icon not found for buff:", buff_name)
+				buffes.append(new_instance)
+			file_name = dir.get_next()
+	return buffes
 
 func load_all_buffs():
 	var dir1 = DirAccess.open("res://scripts/buffs/Elemental")
 	var dir2 = DirAccess.open("res://scripts/buffs/Physical")
 	var dir3 = DirAccess.open("res://scripts/buffs/Situational")
 	
-	if dir1:
-		dir1.list_dir_begin()
-		var file_name = dir1.get_next()
+	var icon_dir = "res://assets/buff_icons/"
 	
-		while file_name != "":
-			if file_name.ends_with(".gd"):
-				var script = load("res://scripts/buffs/Elemental/" + file_name)
-				elemental_buffs.append(script.new())
-				
-			file_name = dir1.get_next()
-	if dir2:
-		dir2.list_dir_begin()
-		var file_name = dir2.get_next()
-	
-		while file_name != "":
-			if file_name.ends_with(".gd"):
-				var script = load("res://scripts/buffs/Physical/" + file_name)
-				physical_buffs.append(script.new())
+	elemental_buffs = get_buffes_from_dir(dir1, "res://scripts/buffs/Elemental/", icon_dir)
+	physical_buffs = get_buffes_from_dir(dir2, "res://scripts/buffs/Physical/", icon_dir)
+	situational_buffs = get_buffes_from_dir(dir3, "res://scripts/buffs/Situational/", icon_dir)
 
-			file_name = dir2.get_next()
-	if dir3:
-		dir3.list_dir_begin()
-		var file_name = dir3.get_next()
-	
-		while file_name != "":
-			if file_name.ends_with(".gd"):
-				var script = load("res://scripts/buffs/Situational/" + file_name)
-				situational_buffs.append(script.new())
-				
-			file_name = dir3.get_next()
-	
+	print(elemental_buffs)
+	print(physical_buffs)
+	print(situational_buffs)

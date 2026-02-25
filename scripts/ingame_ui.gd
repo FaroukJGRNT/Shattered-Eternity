@@ -25,6 +25,8 @@ func _ready() -> void:
 	rect.anchor_bottom = 0
 	add_child(rect)
 	
+	rect.visible = false
+	
 	dot = ColorRect.new()
 	dot.color = Color.RED
 	dot.size = Vector2(32 * scale_factor, 32 * scale_factor)

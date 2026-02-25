@@ -1,0 +1,127 @@
+[gd_scene load_steps=9 format=3 uid="uid://b3oqhd8twur6w"]
+
+[ext_resource type="Theme" uid="uid://du6ww74nmnyne" path="res://themes/default.tres" id="1_4fv2j"]
+[ext_resource type="PackedScene" uid="uid://dcyyjylp0vcye" path="res://ui/atoms/heading.tscn" id="2_8hhfd"]
+[ext_resource type="Script" uid="uid://cw7jxjs8xoycg" path="res://scripts/buffs_section.gd" id="2_m8f6j"]
+[ext_resource type="PackedScene" uid="uid://djj01l68q5mgl" path="res://ui/atoms/selectable_icon_holder.tscn" id="3_4fv2j"]
+[ext_resource type="PackedScene" uid="uid://ci4di3hc8b0ud" path="res://ui/atoms/subheading.tscn" id="4_le6om"]
+[ext_resource type="PackedScene" uid="uid://b5vd46yxc7dj8" path="res://ui/atoms/description_text.tscn" id="5_8pyip"]
+[ext_resource type="PackedScene" uid="uid://d0qty0xik6ghi" path="res://ui/atoms/confirmation_button.tscn" id="6_e36uo"]
+[ext_resource type="Script" uid="uid://koa3xd0ufnci" path="res://scripts/buff_section_btn.gd" id="8_m8f6j"]
+
+[node name="BuffsSection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4fv2j")
+script = ExtResource("2_m8f6j")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(600, 340)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Heading" parent="Panel/VBoxContainer" instance=ExtResource("2_8hhfd")]
+layout_mode = 2
+text = "ACTIVE BUFFS"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 50
+
+[node name="Panel" type="Panel" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(310, 180)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.5
+offset_top = -110.0
+offset_right = 147.5
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 4
+
+[node name="SelectableIconHolder" parent="Panel/VBoxContainer/HBoxContainer/Panel/GridContainer" instance=ExtResource("3_4fv2j")]
+layout_mode = 2
+
+[node name="SelectableIconHolder2" parent="Panel/VBoxContainer/HBoxContainer/Panel/GridContainer" instance=ExtResource("3_4fv2j")]
+layout_mode = 2
+
+[node name="SelectableIconHolder3" parent="Panel/VBoxContainer/HBoxContainer/Panel/GridContainer" instance=ExtResource("3_4fv2j")]
+layout_mode = 2
+
+[node name="SelectableIconHolder4" parent="Panel/VBoxContainer/HBoxContainer/Panel/GridContainer" instance=ExtResource("3_4fv2j")]
+layout_mode = 2
+
+[node name="SelectableIconHolder5" parent="Panel/VBoxContainer/HBoxContainer/Panel/GridContainer" instance=ExtResource("3_4fv2j")]
+layout_mode = 2
+
+[node name="SelectableIconHolder6" parent="Panel/VBoxContainer/HBoxContainer/Panel/GridContainer" instance=ExtResource("3_4fv2j")]
+layout_mode = 2
+
+[node name="SelectableIconHolder7" parent="Panel/VBoxContainer/HBoxContainer/Panel/GridContainer" instance=ExtResource("3_4fv2j")]
+layout_mode = 2
+
+[node name="SelectableIconHolder8" parent="Panel/VBoxContainer/HBoxContainer/Panel/GridContainer" instance=ExtResource("3_4fv2j")]
+layout_mode = 2
+
+[node name="SelectableIconHolder9" parent="Panel/VBoxContainer/HBoxContainer/Panel/GridContainer" instance=ExtResource("3_4fv2j")]
+layout_mode = 2
+
+[node name="SelectableIconHolder10" parent="Panel/VBoxContainer/HBoxContainer/Panel/GridContainer" instance=ExtResource("3_4fv2j")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_le6om")]
+layout_mode = 2
+
+[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_8pyip")]
+layout_mode = 2
+text = "Description of the
+buff selcted
+For example, gives you
+lowkey immprtality
+and rights of
+a white person"
+
+[node name="ConfirmationButton" parent="Panel/VBoxContainer" instance=ExtResource("6_e36uo")]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+script = ExtResource("8_m8f6j")

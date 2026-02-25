@@ -9,6 +9,7 @@ var trigger_event : LivingEntity.Event
 
 var buff_name := ""
 var buff_description := ""
+@export var buff_icon : Texture2D
 
 var is_one_shot := false
 

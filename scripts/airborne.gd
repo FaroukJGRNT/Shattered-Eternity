@@ -3,11 +3,19 @@ extends PlayerState
 var added_horiz_speed = 0.0
 var coyote_time = 0.12
 
+var tile_size := Vector2(32, 32)
+var on_ledge := false
+
 func enter():
 	AnimPlayer.play("jump")
 	coyote_time = 0.12
 
 func update(delta):
+	if player.ledge_hit.is_colliding() and not player.ledge_miss.is_colliding():
+		if not player.is_on_floor() and not player.direction == 0.0:
+			transitioned.emit("ledgegrab")
+			return
+	
 	if %RayCast2D.is_colliding():
 
 		var collider = %RayCast2D.get_collider()
@@ -17,11 +25,14 @@ func update(delta):
 
 			var tilemap: TileMapLayer = collider
 
-			# Position du point d'impact en coordonnées monde
 			var hit_pos = %RayCast2D.get_collision_point()
-
-			# Convertir en coordonnée de tuile (cellule)
-			var cell = tilemap.local_to_map(hit_pos)
+			var local_pos = tilemap.to_local(hit_pos)
+			var cell = tilemap.local_to_map(local_pos)
+			# Si cellule vide, essaie la cellule voisine dans la direction de la normale
+			if not tilemap.get_cell_tile_data(cell):
+				var normal = %RayCast2D.get_collision_normal()
+				var neighbor = cell + Vector2i(round(-normal.x), round(-normal.y))
+				cell = neighbor
 
 			# Récupérer les données de la tuile touchée
 			var tile_data = tilemap.get_cell_tile_data(cell)

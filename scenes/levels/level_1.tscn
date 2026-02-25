@@ -34,7 +34,7 @@ player = NodePath("../Player")
 position = Vector2(-370, 2)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("4_x42e6")]
-position = Vector2(-526, -12)
+position = Vector2(-526, -43)
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -43,7 +43,7 @@ position = Vector2(-617, -131)
 shape = SubResource("RectangleShape2D_6761a")
 
 [node name="PlayerSpawnPoint2" parent="." instance=ExtResource("4_x42e6")]
-position = Vector2(980, -14)
+position = Vector2(977, -40)
 
 [node name="Area2D2" type="Area2D" parent="."]
 position = Vector2(1690, -7)

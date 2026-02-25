@@ -51,7 +51,8 @@ func update(delta):
 	var index = 0
 	for frame in usable_mov_frames:
 		if AnimPlayer.frame == frame:
-			player.velocity += (usable_velocs[index]) * player.facing
+			player.velocity.x  += (usable_velocs[index].x) * player.facing
+			player.velocity.y  += (usable_velocs[index].y)
 			usable_mov_frames.pop_front()
 			usable_velocs.pop_front()
 			break

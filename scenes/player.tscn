@@ -1,4 +1,4 @@
-[gd_scene load_steps=413 format=3 uid="uid://c1imgcb2kat6k"]
+[gd_scene load_steps=419 format=3 uid="uid://c1imgcb2kat6k"]
 
 [ext_resource type="Script" uid="uid://b7ci1yuva3ok1" path="res://scripts/player.gd" id="1_le0q1"]
 [ext_resource type="Texture2D" uid="uid://bm7w2ao6eeavq" path="res://assets/sprites/player/SimpleCharacter2-Sheet.png" id="3_5h808"]
@@ -87,6 +87,8 @@
 [ext_resource type="Script" uid="uid://nkq76mulpq41" path="res://scripts/staggered_player.gd" id="65_lw0jh"]
 [ext_resource type="Script" uid="uid://d4l1ih7clndhf" path="res://scripts/hammer_aerial.gd" id="67_w5j5w"]
 [ext_resource type="Script" uid="uid://00i2uqcaxfp6" path="res://scripts/player_death.gd" id="71_qmsq4"]
+[ext_resource type="Script" uid="uid://dj7ow4rqwt7wo" path="res://scripts/ledge_climb.gd" id="72_2a33p"]
+[ext_resource type="Script" uid="uid://n4iyvuxmg7rj" path="res://scripts/real_ledge_climb.gd" id="73_reqs7"]
 [ext_resource type="Script" uid="uid://16jb0f75kgfp" path="res://scripts/hammer_parry_hb.gd" id="75_vx63k"]
 [ext_resource type="Script" uid="uid://digaj2k75uibf" path="res://scripts/sword_parry_hb.gd" id="76_lw0jh"]
 [ext_resource type="Script" uid="uid://baintj7h5x6b4" path="res://scripts/guard_break.gd" id="79_lw0jh"]
@@ -99,6 +101,7 @@
 [ext_resource type="Texture2D" uid="uid://bvdrhpv3ot3nr" path="res://assets/external_assets/Casts/ice_cast.png" id="92_2a33p"]
 [ext_resource type="Script" uid="uid://bpb8sud12vjj4" path="res://scripts/killed_enemy_atk_buff.gd" id="92_ljgr3"]
 [ext_resource type="Texture2D" uid="uid://cvk36gg8c6f4j" path="res://assets/external_assets/Casts/thunder_cast.png" id="93_reqs7"]
+[ext_resource type="Texture2D" uid="uid://ce21n2s5njype" path="res://assets/buff_icons/counter_attck.png" id="102_2yjfb"]
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_26nec"]
 output_port_for_preview = 0
@@ -572,6 +575,18 @@ region = Rect2(0, 0, 480, 384)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5lhw1"]
 atlas = ExtResource("5_vx63k")
 region = Rect2(2880, 0, 480, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8vec"]
+atlas = ExtResource("5_ur7pv")
+region = Rect2(0, 256, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35qov"]
+atlas = ExtResource("5_ur7pv")
+region = Rect2(288, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1qry"]
+atlas = ExtResource("5_ur7pv")
+region = Rect2(384, 128, 96, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uukdq"]
 atlas = ExtResource("5_ur7pv")
@@ -1629,6 +1644,25 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_s8vec")
+}],
+"loop": false,
+"name": &"ledge_climb",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35qov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1qry")
+}],
+"loop": false,
+"name": &"ledge_grab",
+"speed": 40.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_uukdq")
 }],
 "loop": true,
@@ -2596,6 +2630,7 @@ point_count = 2
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("specialVFXPlayer", "anim_player", "hurtbox", "hitboxes", "state_machine", "hit_listener", "buff_manager") groups=["Player"]]
 z_index = 5
+scale = Vector2(1.2, 1.2)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_le0q1")
@@ -2612,23 +2647,20 @@ poise_type = 0
 material = SubResource("ShaderMaterial_wnwbv")
 position = Vector2(2, -8)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"simple_cast"
+animation = &"fall"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 script = ExtResource("5_fjrip")
 hurtbox = NodePath("../PlayerHurtBox")
 hitboxes = NodePath("../HitBoxes")
 state_machine = NodePath("../PlayerStateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(1, -2)
 shape = SubResource("CapsuleShape2D_gl8cc")
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
 position_smoothing_enabled = true
-drag_vertical_offset = -1.0
+drag_vertical_offset = -0.7
 script = ExtResource("6_fjrip")
 
 [node name="PlayerHurtBox" type="Area2D" parent="."]
@@ -2925,6 +2957,19 @@ hitbox = NodePath("../../HitBoxes/HammerAerial")
 script = ExtResource("71_qmsq4")
 metadata/_custom_type_script = "uid://b51fdna2jgrw0"
 
+[node name="LedgeGrab" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("72_2a33p")
+anim_name = "ledge_grab"
+deceleration = 0
+metadata/_custom_type_script = "uid://b51fdna2jgrw0"
+
+[node name="LedgeClimb" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("73_reqs7")
+x_move = 30
+y_move = -55
+anim_name = "ledge_climb"
+metadata/_custom_type_script = "uid://b51fdna2jgrw0"
+
 [node name="HitBoxes" type="Node2D" parent="."]
 visible = false
 
@@ -3195,7 +3240,7 @@ script = ExtResource("54_apa73")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-2, -7)
-target_position = Vector2(18, 0)
+target_position = Vector2(15, 0)
 collision_mask = 128
 
 [node name="BuffManager" type="Node" parent="."]
@@ -3203,4 +3248,16 @@ script = ExtResource("91_4vfid")
 
 [node name="KilledEnemyAtkBuff" type="Node" parent="BuffManager"]
 script = ExtResource("92_ljgr3")
+buff_icon = ExtResource("102_2yjfb")
 metadata/_custom_type_script = "uid://dioqaxwj02s7r"
+
+[node name="LedgeMiss" type="RayCast2D" parent="."]
+position = Vector2(0, -27.5)
+target_position = Vector2(23.3333, 0)
+collision_mask = 128
+
+[node name="LedgeHit" type="RayCast2D" parent="."]
+position = Vector2(0, -22.5)
+target_position = Vector2(23.3333, 0)
+collision_mask = 128
+hit_from_inside = true

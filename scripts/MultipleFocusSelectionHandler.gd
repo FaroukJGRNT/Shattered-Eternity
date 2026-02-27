@@ -15,9 +15,6 @@ func connect_confirmation_button(node: Node = null):
 
 	for child in node.get_children():
 		if child is FocusableChoice or child is SelectableIconHolder and not found_first:
-			print("Found first selec")
-			print(child)
-			print(child.name)
 			child.grab_click_focus()
 			found_first = true
 		if child is ConfirmationButton:
@@ -29,5 +26,6 @@ func connect_confirmation_button(node: Node = null):
 # What to do when the confirm btn is pressed
 func _on_button_pressed():
 	var focused_choice = get_viewport().gui_get_focus_owner()
-	focused_choice.chosen()
+	if focused_choice:
+		focused_choice.chosen()
 	confirm_btn.confirm()

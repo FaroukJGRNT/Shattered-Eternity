@@ -18,6 +18,7 @@ enum SpellCategory {
 @export var mana_cost := 0
 @export var spell_type : SpellType
 @export var spell_cat : SpellCategory
+var item_ref : SpellItem
 
 @export var proj_to_spawn : PackedScene
 var airborne_cast := false

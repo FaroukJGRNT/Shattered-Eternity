@@ -5,7 +5,7 @@ var active := false
 var player_ref : Player
 var interacted := false
 
-@export var offset := Vector2(0, -20)
+@export var offset := Vector2(0, -50)
 @export var interaction_action := "interact"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

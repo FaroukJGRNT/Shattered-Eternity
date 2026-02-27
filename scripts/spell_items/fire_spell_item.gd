@@ -1,10 +1,10 @@
-extends Item
+extends SpellItem
 class_name FireSpellItem
 
-var spell_action_class = FireSpell
-
 func _init() -> void:
-	type = ItemType.SPELL
+	super._init()
+	spell_type = SpellType.FIRE
+	spell_action_class = FireSpell
 	item_name = "Fire Proto Spell"
 	item_description = "Shoots a lame ahh
 	fireball."

@@ -40,7 +40,18 @@ grow_vertical = 2
 theme_override_constants/separation = 5
 alignment = 1
 
-[node name="Heading" parent="Panel/VBoxContainer" instance=ExtResource("2_8hhfd")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Spells"
+
+[node name="Heading" parent="Panel/VBoxContainer/HBoxContainer2" instance=ExtResource("2_8hhfd")]
 layout_mode = 2
 text = "ACTIVE BUFFS"
 

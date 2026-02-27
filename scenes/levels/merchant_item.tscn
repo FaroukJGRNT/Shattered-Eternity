@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://ovk57mxbicfc"]
+
+[ext_resource type="Script" uid="uid://2fghwwg1g174" path="res://scripts/merchant_item.gd" id="1_udeqp"]
+[ext_resource type="Script" uid="uid://d07ojv1sa45v3" path="res://scripts/merch_item_sprite_2d.gd" id="2_w7afw"]
+[ext_resource type="PackedScene" uid="uid://bkyhlill7uscj" path="res://ui/atoms/help_overhead_text.tscn" id="2_xyeju"]
+[ext_resource type="Theme" uid="uid://du6ww74nmnyne" path="res://themes/default.tres" id="4_kpv5a"]
+[ext_resource type="PackedScene" uid="uid://ci4di3hc8b0ud" path="res://ui/atoms/subheading.tscn" id="5_foph2"]
+[ext_resource type="Script" uid="uid://nxylhyy0ykjb" path="res://scripts/merch_panel.gd" id="5_vky8q"]
+[ext_resource type="PackedScene" uid="uid://b5vd46yxc7dj8" path="res://ui/atoms/description_text.tscn" id="6_vky8q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vsa1n"]
+radius = 65.3758
+
+[node name="MerchantItem" type="Node2D"]
+script = ExtResource("1_udeqp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+script = ExtResource("2_w7afw")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_vsa1n")
+
+[node name="HelpOverheadText" parent="." instance=ExtResource("2_xyeju")]
+offset_right = 0.0
+offset_bottom = 0.0
+the_text = "Buy"
+
+[node name="Label" type="Label" parent="."]
+offset_left = -17.0
+offset_top = -53.0
+offset_right = 23.0
+offset_bottom = -30.0
+theme = ExtResource("4_kpv5a")
+text = "10000"
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(120, 80)
+offset_left = -59.0
+offset_top = -149.0
+offset_right = 61.0
+offset_bottom = -69.0
+theme = ExtResource("4_kpv5a")
+script = ExtResource("5_vky8q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="SubHeading" parent="Panel/VBoxContainer" instance=ExtResource("5_foph2")]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 16
+
+[node name="SubHeading2" parent="Panel/VBoxContainer" instance=ExtResource("5_foph2")]
+layout_mode = 2
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 10
+
+[node name="DescriptionText" parent="Panel/VBoxContainer" instance=ExtResource("6_vky8q")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

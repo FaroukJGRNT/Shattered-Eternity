@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://lcalun41bn55"]
+[gd_scene load_steps=21 format=3 uid="uid://lcalun41bn55"]
 
 [ext_resource type="Script" uid="uid://ckkbj12ajssly" path="res://scripts/ingame_ui.gd" id="1_v3yap"]
 [ext_resource type="Texture2D" uid="uid://jn6qnqfr4t2q" path="res://assets/sprites/ui/health_bar_middle.png" id="2_i42rf"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bj88iin24h2ld" path="res://assets/sprites/ui/player_bar_effect.png" id="10_55lpn"]
 [ext_resource type="Script" uid="uid://d0tuemj4x3ujj" path="res://scripts/player_damage_bar.gd" id="11_hahea"]
 [ext_resource type="Texture2D" uid="uid://bi26ushl24ou5" path="res://assets/sprites/ui/player_bar_progress.png" id="12_70tcv"]
+[ext_resource type="Theme" uid="uid://du6ww74nmnyne" path="res://themes/default.tres" id="13_wmlis"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ehd4"]
 bg_color = Color(1, 1, 1, 1)
@@ -128,3 +129,21 @@ value = 60.0
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture1D_wmlis")
 texture_progress = SubResource("GradientTexture1D_55lpn")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -37.0
+offset_right = -15.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("13_wmlis")
+theme_override_colors/font_color = Color(0.62, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.157167, 0.41, 1)
+text = "Mana echoes"

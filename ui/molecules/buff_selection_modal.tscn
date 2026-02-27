@@ -4,23 +4,26 @@
 
 [node name="BuffSelectionModal" instance=ExtResource("1_dgruh")]
 
-[node name="Panel" parent="Panel/VBoxContainer/HBoxContainer" index="0" node_paths=PackedStringArray("subheading", "desription")]
+[node name="Panel" parent="Panel/VBoxContainer/HBoxContainer" index="0" node_paths=PackedStringArray("subheading", "desription", "icon_holder")]
 subheading = NodePath("VBoxContainer/SubHeading")
 desription = NodePath("VBoxContainer/DescriptionText2")
+icon_holder = NodePath("VBoxContainer/IconHolder")
 
 [node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer" index="0"]
 text = "Elemental"
 
-[node name="Panel2" parent="Panel/VBoxContainer/HBoxContainer" index="1" node_paths=PackedStringArray("subheading", "desription")]
+[node name="Panel2" parent="Panel/VBoxContainer/HBoxContainer" index="1" node_paths=PackedStringArray("subheading", "desription", "icon_holder")]
 subheading = NodePath("VBoxContainer2/SubHeading")
 desription = NodePath("../Panel/VBoxContainer/DescriptionText2")
+icon_holder = NodePath("VBoxContainer2/IconHolder")
 
 [node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/Panel2/VBoxContainer2" index="0"]
 text = "Physical"
 
-[node name="Panel3" parent="Panel/VBoxContainer/HBoxContainer" index="2" node_paths=PackedStringArray("subheading", "desription")]
+[node name="Panel3" parent="Panel/VBoxContainer/HBoxContainer" index="2" node_paths=PackedStringArray("subheading", "desription", "icon_holder")]
 subheading = NodePath("VBoxContainer/SubHeading")
 desription = NodePath("VBoxContainer/DescriptionText2")
+icon_holder = NodePath("VBoxContainer/IconHolder")
 
 [node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/Panel3/VBoxContainer" index="0"]
 text = "Situational"

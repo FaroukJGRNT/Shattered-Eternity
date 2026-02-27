@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://assets/buff_icons/Blaze.png"
+source_file="res://assets/item_icons/Blaze.png"
 dest_files=["res://.godot/imported/Blaze.png-473c73a35c7fb5e1bba53af48eeb6a97.ctex"]
 
 [params]

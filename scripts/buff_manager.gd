@@ -38,3 +38,5 @@ func propagate_event(event : LivingEntity.Event, additional : Variant = null):
 func add_new_buff(buff : Buff, name : String):
 	buffs[name] = buff
 	buff.daddy = owner
+	if buff.is_one_shot:
+		apply_one_shot_buff(buff)

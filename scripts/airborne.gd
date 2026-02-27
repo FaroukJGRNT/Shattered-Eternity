@@ -83,10 +83,10 @@ func update(delta):
 			player.Weapons.HAMMER:
 				transitioned.emit("hammeraerial")
 
-	if Input.is_action_just_pressed("cast_spell1"):
+	if Input.is_action_just_pressed("cast_spell1") and player.equipped_spell1:
 		if player.mana >= player.equipped_spell1.mana_cost:
 			player.state_machine.special_state_transition(player.equipped_spell1)
-	if Input.is_action_just_pressed("cast_spell2"):
+	if Input.is_action_just_pressed("cast_spell2") and player.equipped_spell2:
 		if player.mana >= player.equipped_spell2.mana_cost:
 			player.state_machine.special_state_transition(player.equipped_spell2)
 	player.move_and_slide()

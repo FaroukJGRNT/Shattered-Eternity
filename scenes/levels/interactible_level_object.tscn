@@ -8,7 +8,6 @@ radius = 65.3758
 
 [node name="InteractibleLevelObject" type="Node2D"]
 script = ExtResource("1_d7ukl")
-offset = Vector2(0, -50)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 

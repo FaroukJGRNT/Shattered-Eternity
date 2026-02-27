@@ -1,10 +1,20 @@
 extends LivingEntity
 class_name Player
 
-var inventory : Array[Item]
+var spells : Array[SpellItem] = []
 
-func give_item(item : Item):
-	inventory.append(item)
+var item_modal : PackedScene = load("res://ui/molecules/new_item_modal.tscn")
+
+func give_item(item : Item, with_modal := false):
+	if with_modal:
+		var mod = ui_manager.show_modal(item_modal)
+		mod.item = item
+		mod.setup_labels()
+
+	if item is SpellItem:
+		spells.append(item)
+	elif item is Buff:
+		buff_manager.add_new_buff(item, item.item_name)
 
 # Movement variables
 @export var RUN_SPEED = 400.0
@@ -24,9 +34,12 @@ var resonance_value = 0.0
 @onready var ledge_hit : RayCast2D = $LedgeHit
 @onready var ledge_miss : RayCast2D = $LedgeMiss
 @onready var wall_slide_raycast : RayCast2D = $RayCast2D
+@onready var wall_hanger_raycast : RayCast2D = $WallHanger
 
 var equipped_spell1 : Spell
 var equipped_spell2 : Spell
+
+var mana_echoes := 2500
 
 var current_state : PlayerState
 
@@ -54,7 +67,6 @@ func _ready() -> void:
 	super._ready()
 	mana = 100
 	poise_type = Poises.PLAYER
-	position.x += 200
 	max_life = 200
 	life = max_life
 	attack = 10
@@ -62,9 +74,7 @@ func _ready() -> void:
 	thunder_res = 10.0
 	fire_res = 10.0
 	ice_res = 10.0
-	equip_spell_slot1(IceSpell.new())
-	equip_spell_slot2(ThunderSpell.new())
-	
+
 
 @export var base_reson_decay := 2.0
 @export var reson_decay_accel := 1.0
@@ -230,8 +240,10 @@ func direct_sprite():
 		$RayCast2D.scale.x = -1
 		$LedgeHit.scale.x = -1
 		$LedgeMiss.scale.x = -1
+		$WallHanger.scale.x = -1
 		facing = -1
 	if direction > 0:
+		$WallHanger.scale.x = 1
 		$LedgeHit.scale.x = 1
 		$LedgeMiss.scale.x = 1
 		$AnimatedSprite2D.flip_h = false
@@ -293,17 +305,19 @@ func initiate_ground_actions():
 		return
 	initiate_slide()
 	
-	if Input.is_action_just_pressed("cast_spell1"):
+	if Input.is_action_just_pressed("cast_spell1") and equipped_spell1:
 		if mana >= equipped_spell1.mana_cost:
 			state_machine.special_state_transition(equipped_spell1)
-	if Input.is_action_just_pressed("cast_spell2"):
+	if Input.is_action_just_pressed("cast_spell2") and equipped_spell2:
 		if mana >= equipped_spell2.mana_cost:
 			state_machine.special_state_transition(equipped_spell2)
 
-func equip_spell_slot1(spell : Spell):
-	equipped_spell1 = spell
-	state_machine.connect_state(spell)
+func equip_spell_slot1(spell : SpellItem):
+	equipped_spell1 = spell.spell_action_class.new()
+	equipped_spell1.item_ref = spell
+	state_machine.connect_state(equipped_spell1)
 
-func equip_spell_slot2(spell : Spell):
-	equipped_spell2 = spell
-	state_machine.connect_state(spell)
+func equip_spell_slot2(spell : SpellItem):
+	equipped_spell2 = spell.spell_action_class.new()
+	equipped_spell2.item_ref = spell
+	state_machine.connect_state(equipped_spell2)

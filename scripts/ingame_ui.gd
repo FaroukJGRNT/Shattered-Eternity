@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 		$ProgressBar.max_value = player.max_mana
 		$TextureProgressBar.max_value = player.max_resonance_value
 		$TextureProgressBar.value = player.resonance_value
+		$Label.text = str(player.mana_echoes)
 
 	if not camera:
 		return

@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://assets/buff_icons/counter_attack.png"
+source_file="res://assets/item_icons/counter_attack.png"
 dest_files=["res://.godot/imported/counter_attack.png-126f684b8f1a2adf0db11e47fdd97cd6.ctex"]
 
 [params]

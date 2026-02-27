@@ -5,11 +5,13 @@ var dummy_scene : PackedScene = load("res://scenes/dummy.tscn")
 
 enum GameEvents  {
 	PLAYER_DEAD,
-	DUMMY_DEAD
+	DUMMY_DEAD,
+	CHECKPOINT_REACHED
 }
 
 func _ready() -> void:
 	load_all_buffs()
+	load_all_spells()
 	var world_root = get_tree().current_scene.get_node("WorldRoot")
 	if world_root:
 		call_deferred("generate_world")
@@ -24,7 +26,6 @@ func _process(delta: float) -> void:
 			transitioning = false
 	if Input.is_action_just_pressed("inventory") and not ui_mode:
 		var modal : BuffSection = ui_manager.show_modal(buff_section_scene)
-		modal.setup_buffes(get_tree().get_first_node_in_group("Player"))
 		ui_mode = true
 
 func hit_freeze(duration := 0.08, scale := 0.1) -> void:
@@ -45,6 +46,12 @@ func spawn_vfx(spawner : Node2D, animation : String, offset : Vector2 = Vector2.
 	get_tree().get_first_node_in_group("Level").add_child(vfx_instance)
 	vfx_instance.play(animation)
 	return vfx_instance
+
+func spawn_anything(spawner : Node2D, scene_to_spawn : PackedScene, offset : Vector2 = Vector2.ZERO):
+	var instance = scene_to_spawn.instantiate()
+	instance.position = spawner.global_position + offset
+	get_tree().get_first_node_in_group("Level").add_child(instance)
+	return instance
 
 func get_nearest_from_group(group_name: String, source : Node2D) -> Node2D:
 	var nearest = null
@@ -68,25 +75,34 @@ func get_child_by_name(parent, name: String):
 			return c
 	return null
 
+var last_check_room : Node2D
+var last_check_pos : Vector2
+
+func return_to_checkpoint():
+	if not last_check_pos or not last_check_pos:
+		return
+	load_level(last_check_room, last_check_pos)
+
 func handle_event(event : GameEvents, emitter : Node2D):
 	match event:
 		GameEvents.PLAYER_DEAD:
-			# Find nearest checkpoint
-			var nearest_cp = get_nearest_from_group("PlayerSpawnPoint", emitter)
-			# Move the player
-			emitter.global_position = nearest_cp.global_position
+			return_to_checkpoint()
 			# Put him full life
 			emitter.life = emitter.max_life
 			emitter.dead = false
 			emitter.change_state("idle")
 			var health_bar = get_child_by_name(get_tree().get_first_node_in_group("UI"), "LifeBar2")
 			health_bar.update_health_bar(0)
-		
+
 		GameEvents.DUMMY_DEAD:
 			# Instantiate a new one at the same place
 			var dummy = dummy_scene.instantiate()
 			get_tree().get_first_node_in_group("Level").add_child(dummy)
 			dummy.position = emitter.position
+
+		GameEvents.CHECKPOINT_REACHED:
+			last_check_room = get_tree().get_first_node_in_group("Level")
+			last_check_pos = get_tree().get_first_node_in_group("Player").global_position
 
 func remove_player_and_ui(level : Node2D):
 	# Supprime Player/UI par défaut du nouveau level
@@ -97,6 +113,7 @@ func remove_player_and_ui(level : Node2D):
 var transitioning := false
 var trans_cooldown := 0.8
 var trans_timer := 0.0
+
 
 func load_level(new_level: Node2D, output_position: Vector2):
 	transitioning = true
@@ -125,8 +142,6 @@ func load_level(new_level: Node2D, output_position: Vector2):
 	play.position = output_position
 
 	trans_timer = trans_cooldown
-	
-	var linked_scene = get_level_output_connectors(new_level)[0].linked_room
 
 
 func get_level_input_connector(level : Node2D) -> Connector:
@@ -142,22 +157,57 @@ func get_level_output_connectors(level : Node2D) -> Array[Connector]:
 			connectors.append(c)
 	return connectors
 
-var start_level : PackedScene = load("res://scenes/levels/level_1.tscn")
-var world_length := 7
+var start_level : PackedScene = load("res://scenes/levels/start_room.tscn")
+var end_level : PackedScene = load("res://scenes/levels/end_room.tscn")
+var rest_room : PackedScene = load("res://scenes/levels/rest_room.tscn")
+var merchant_room : PackedScene = load("res://scenes/levels/merchant_room.tscn")
 
-var available_levels : Array [PackedScene] = [
-	load("res://scenes/levels/level_4.tscn"),
-	load("res://scenes/levels/level_3.tscn"),
-	load("res://scenes/levels/level_1.tscn"),
-	load("res://scenes/levels/level_2.tscn"),
-]
+var easy_levels : Array[PackedScene] = []
+var medium_levels : Array[PackedScene] = []
+var hard_levels : Array[PackedScene] = []
+
+var lap_length := 4
+
+func load_scenes_from_dir(path: String) -> Array[PackedScene]:
+	var scenes : Array[PackedScene] = []
+	
+	var dir := DirAccess.open(path)
+	if dir == null:
+		push_error("Cannot open directory: " + path)
+		return scenes
+	
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.ends_with(".tscn"):
+			var full_path = path + "/" + file_name
+			var scene := load(full_path) as PackedScene
+			
+			if scene:
+				scenes.append(scene)
+			else:
+				push_warning("Failed to load scene: " + full_path)
+		
+		file_name = dir.get_next()
+	
+	dir.list_dir_end()
+	return scenes
 
 func connect_outputs(level : Node2D, depth : int):
-	if depth <= 1:
-		return
+	var output_level_scene
+	if depth < 1:
+		return level
 	for output in get_level_output_connectors(level):
 		# Instantiate the output room
-		var output_level_scene = available_levels[randi_range(0, len(available_levels) - 1)].instantiate()
+		if depth >= 3:
+			output_level_scene = easy_levels[randi_range(0, len(easy_levels) - 1)].instantiate()
+		elif depth == 2:
+			output_level_scene = medium_levels[randi_range(0, len(medium_levels) - 1)].instantiate()
+		elif depth == 1:
+			output_level_scene = hard_levels[randi_range(0, len(hard_levels) - 1)].instantiate()
+		else:
+			print("No depth matching")
 		# Get the output room input
 		var output_room_entrance = get_level_input_connector(output_level_scene)
 		# Link the spawnpoints
@@ -167,18 +217,46 @@ func connect_outputs(level : Node2D, depth : int):
 		output.linked_room = output_level_scene
 		output_room_entrance.linked_room = level
 		# Repeat the process for the newly created_room
-		connect_outputs(output_level_scene, depth - 1)
+		output_level_scene = connect_outputs(output_level_scene, depth - 1)
+
+	return output_level_scene
+
+func link_rooms(room1 : Node2D, room2 : Node2D):
+	var room1_exit = get_level_output_connectors(room1)[0]
+	var room2_entrance = get_level_input_connector(room2)
+	# Link the spawnpoints
+	room1_exit.output_position = room2_entrance.input_spawn_point.position
+	room2_entrance.output_position = room1_exit.input_spawn_point.position
+	# Link the room itself
+	room1_exit.linked_room = room2
+	room2_entrance.linked_room = room1
 
 func generate_world():
+	easy_levels = load_scenes_from_dir("res://scenes/levels/easy_rooms")
+	medium_levels = load_scenes_from_dir("res://scenes/levels/medium_rooms")
+	hard_levels = load_scenes_from_dir("res://scenes/levels/hard_rooms")
+
 	var start_level_scene = start_level.instantiate()
 	var world_root = get_tree().current_scene.get_node("WorldRoot")
 	world_root.add_child(start_level_scene)
 
-	connect_outputs(start_level_scene, world_length)
-	
-	var curr_scene : Node2D = start_level_scene
-	while get_level_output_connectors(curr_scene)[0].linked_room != null:
-		curr_scene = get_level_output_connectors(curr_scene)[0].linked_room
+	# Lap 1
+	var last_level = connect_outputs(start_level_scene, lap_length)
+	var rest_level = rest_room.instantiate()
+	link_rooms(last_level, rest_level)
+	# Lap 2
+	last_level = connect_outputs(rest_level, lap_length)
+	rest_level = merchant_room.instantiate()
+	link_rooms(last_level, rest_level)
+	# Lap 3
+	last_level = connect_outputs(rest_level, lap_length)
+	rest_level = rest_room.instantiate()
+	link_rooms(last_level, rest_level)
+	# Lap 4
+	last_level = connect_outputs(rest_level, lap_length)
+	rest_level = end_level.instantiate()
+	link_rooms(last_level, rest_level)
+
 #### ------------------------ THIS PART RELATES TO GAMEPLAY INFOS ---------------------- ####
 
 # These variables are the chances to find a buff or a spell of a certain element
@@ -203,17 +281,42 @@ func roll_element() -> String:
 	else:
 		return "thunder"
 
-var fire_spells : Array[Item] = [
-	FireSpellItem.new()
-]
+var fire_spells : Array[Item] = []
 
-var ice_spells : Array[Item] = [
-	IceSpellItem.new()
-]
+var ice_spells : Array[Item] = []
 
-var thunder_spells : Array[Item] = [
-	ThunderSpellItem.new()
-]
+var thunder_spells : Array[Item] = []
+
+func load_all_spells():
+	var icon_path = "res://assets/spell_item_icons/"
+	var start_path = "res://scripts/spell_items/"
+	var dir = DirAccess.open("res://scripts/spell_items")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name.ends_with(".gd"):
+				var script = load(start_path + file_name)
+				var new_instance : SpellItem = script.new()
+				# 🔹 Récupérer le nom sans extension
+				var item_name = file_name.get_basename()
+				# 🔹 Construire le chemin de l'icône
+				var icon_file = icon_path + item_name + ".png"
+				print(file_name)
+				print(icon_file)
+				# 🔹 Vérifier si l'icône existe
+				if FileAccess.file_exists(icon_file):
+					new_instance.item_icon = load(icon_file)
+				else:
+					print("Icon not found for spell:", item_name)
+				if new_instance.spell_type == SpellItem.SpellType.FIRE:
+					fire_spells.append(new_instance)
+				if new_instance.spell_type == SpellItem.SpellType.ICE:
+					ice_spells.append(new_instance)
+				if new_instance.spell_type == SpellItem.SpellType.THUNDER:
+					thunder_spells.append(new_instance)
+
+			file_name = dir.get_next()
 
 var elemental_buffs : Array[Buff] = []
 var physical_buffs : Array[Buff] = []
@@ -230,14 +333,16 @@ func get_buffes_from_dir(dir: DirAccess, start_path: String, icon_path: String) 
 				var script = load(start_path + file_name)
 				var new_instance : Buff = script.new()
 				# 🔹 Récupérer le nom sans extension
-				var buff_name = file_name.get_basename()
+				var item_name = file_name.get_basename()
 				# 🔹 Construire le chemin de l'icône
-				var icon_file = icon_path + buff_name + ".png"
+				var icon_file = icon_path + item_name + ".png"
+				print(file_name)
+				print(icon_file)
 				# 🔹 Vérifier si l'icône existe
 				if FileAccess.file_exists(icon_file):
-					new_instance.buff_icon = load(icon_file)
+					new_instance.item_icon = load(icon_file)
 				else:
-					print("Icon not found for buff:", buff_name)
+					print("Icon not found for buff:", item_name)
 				buffes.append(new_instance)
 			file_name = dir.get_next()
 	return buffes
@@ -252,7 +357,3 @@ func load_all_buffs():
 	elemental_buffs = get_buffes_from_dir(dir1, "res://scripts/buffs/Elemental/", icon_dir)
 	physical_buffs = get_buffes_from_dir(dir2, "res://scripts/buffs/Physical/", icon_dir)
 	situational_buffs = get_buffes_from_dir(dir3, "res://scripts/buffs/Situational/", icon_dir)
-
-	print(elemental_buffs)
-	print(physical_buffs)
-	print(situational_buffs)

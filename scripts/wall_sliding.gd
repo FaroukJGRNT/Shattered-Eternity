@@ -26,7 +26,7 @@ func update(delta):
 		transitioned.emit("walljumping")
 		return
 	player.handle_vertical_movement(player.get_gravity().y * delta)
-	if player.is_on_floor():
+	if player.is_on_floor() or not player.wall_hanger_raycast.is_colliding():
 		transitioned.emit("idle")
 	player.friction = friction
 	player.move_and_slide()

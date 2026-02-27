@@ -1,18 +1,20 @@
-[gd_scene load_steps=10 format=4 uid="uid://dmw57vl2joig5"]
+[gd_scene load_steps=12 format=4 uid="uid://dmw57vl2joig5"]
 
 [ext_resource type="Texture2D" uid="uid://ch4wxkmc4erdg" path="res://assets/sprites/environment/ProtoTileset/brick-ezgif.com-resize.png" id="1_5k3o6"]
 [ext_resource type="Texture2D" uid="uid://bagi56mikemxk" path="res://assets/sprites/environment/ProtoTileset/alternative.png" id="2_gofp7"]
 [ext_resource type="PackedScene" uid="uid://c1imgcb2kat6k" path="res://scenes/player.tscn" id="3_vsnwv"]
 [ext_resource type="PackedScene" uid="uid://c835tnkc0eq4y" path="res://scenes/player_spawn_point.tscn" id="4_gaqts"]
 [ext_resource type="Script" uid="uid://bxdo1aib638bw" path="res://scripts/input_1.gd" id="5_21ftu"]
+[ext_resource type="PackedScene" uid="uid://blpxpy71bbov7" path="res://scenes/levels/check_point.tscn" id="6_gofp7"]
+[ext_resource type="PackedScene" uid="uid://lcalun41bn55" path="res://scenes/ingame_ui.tscn" id="7_vsnwv"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x42e6"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5k3o6"]
 texture = ExtResource("1_5k3o6")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l37oo"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gofp7"]
 texture = ExtResource("2_gofp7")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -48,8 +50,8 @@ custom_data_layer_0/name = "WallSlideFacingRight"
 custom_data_layer_0/type = 1
 custom_data_layer_1/name = "WallSlideFacingLeft"
 custom_data_layer_1/type = 1
-sources/0 = SubResource("TileSetAtlasSource_x42e6")
-sources/3 = SubResource("TileSetAtlasSource_l37oo")
+sources/0 = SubResource("TileSetAtlasSource_5k3o6")
+sources/3 = SubResource("TileSetAtlasSource_gofp7")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l37oo"]
 size = Vector2(43, 257)
@@ -61,6 +63,7 @@ tile_map_data = PackedByteArray("AADv/wcAAAAAAAAAAADv/wgAAAAAAAAAAADv/wkAAAAAAAA
 tile_set = SubResource("TileSet_6761a")
 
 [node name="Player" parent="." instance=ExtResource("3_vsnwv")]
+position = Vector2(-238, 6)
 
 [node name="PlayerSpawnPoint2" parent="." instance=ExtResource("4_gaqts")]
 position = Vector2(344, 201)
@@ -78,3 +81,9 @@ script = ExtResource("5_21ftu")
 input_spawn_point = NodePath("../PlayerSpawnPoint2")
 transition_zone = NodePath("../Area2D2")
 metadata/_custom_type_script = "uid://bxdo1aib638bw"
+
+[node name="CheckPoint" parent="." instance=ExtResource("6_gofp7")]
+position = Vector2(126, 184)
+
+[node name="IngameUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_vsnwv")]
+player = NodePath("../Player")

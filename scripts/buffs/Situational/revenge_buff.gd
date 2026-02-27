@@ -4,9 +4,10 @@ class_name RevengeBuff
 var attack_mul := 1.2
 
 func _init() -> void:
+	super._init()
 	buff_type = BuffType.SITUATIONAL
-	buff_name = "Revenge"
-	buff_description = "Increases all offensive stats by 20% on hit taken"
+	item_name = "Revenge"
+	item_description = "Increases all offensive stats by 20% on hit taken"
 	timeout = 7.0
 	trigger_event = LivingEntity.Event.HIT_TAKEN
 

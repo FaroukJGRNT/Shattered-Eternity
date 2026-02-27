@@ -4,13 +4,13 @@ var buff : Buff
 
 @export var subheading : Label
 @export var desription : Label
+@export var icon_holder : Panel
 
 func chosen():
 	var player : Player = get_tree().get_first_node_in_group("Player")
-	player.buff_manager.add_new_buff(buff, buff.buff_name)
-	if buff.is_one_shot:
-		player.buff_manager.apply_one_shot_buff(buff)
+	player.give_item(buff, true)
 
 func setup_labels():
-	subheading.text = buff.buff_name
-	desription.text = buff.buff_description
+	subheading.text = buff.item_name
+	desription.text = buff.item_description
+	icon_holder.texture = buff.item_icon

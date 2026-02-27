@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://donxxob3umgxy"]
+[gd_scene load_steps=10 format=3 uid="uid://donxxob3umgxy"]
 
 [ext_resource type="Theme" uid="uid://du6ww74nmnyne" path="res://themes/default.tres" id="1_5yoee"]
 [ext_resource type="PackedScene" uid="uid://dcyyjylp0vcye" path="res://ui/atoms/heading.tscn" id="2_ka2kj"]
+[ext_resource type="Script" uid="uid://cew3kowx1rrsg" path="res://scripts/spell_equip.gd" id="2_xqrof"]
 [ext_resource type="PackedScene" uid="uid://ci4di3hc8b0ud" path="res://ui/atoms/subheading.tscn" id="3_xqrof"]
 [ext_resource type="PackedScene" uid="uid://djj01l68q5mgl" path="res://ui/atoms/selectable_icon_holder.tscn" id="4_nhu3n"]
+[ext_resource type="Script" uid="uid://bwn7xe30wm1nm" path="res://scripts/slot.gd" id="4_xqrof"]
 [ext_resource type="PackedScene" uid="uid://b5vd46yxc7dj8" path="res://ui/atoms/description_text.tscn" id="5_760km"]
 [ext_resource type="PackedScene" uid="uid://d0qty0xik6ghi" path="res://ui/atoms/confirmation_button.tscn" id="6_afqig"]
+[ext_resource type="Script" uid="uid://bvbv1cie1spct" path="res://scripts/spells_confirmation_button.gd" id="9_nhu3n"]
 
 [node name="SpellEquip" type="Control"]
 layout_mode = 3
@@ -15,6 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_5yoee")
+script = ExtResource("2_xqrof")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(600, 340)
@@ -40,9 +44,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="Heading" parent="Panel/VBoxContainer" instance=ExtResource("2_ka2kj")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Heading" parent="Panel/VBoxContainer/HBoxContainer2" instance=ExtResource("2_ka2kj")]
 layout_mode = 2
 text = "SPELLS"
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Buffs"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -50,31 +64,39 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 18
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="Slot1" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("desription", "icon_holder")]
 layout_mode = 2
+script = ExtResource("4_xqrof")
+desription = NodePath("DescriptionText")
+icon_holder = NodePath("SelectableIconHolder")
 
-[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_xqrof")]
+[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/Slot1" instance=ExtResource("3_xqrof")]
 layout_mode = 2
 text = "SPELL 1"
 
-[node name="SelectableIconHolder" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_nhu3n")]
+[node name="SelectableIconHolder" parent="Panel/VBoxContainer/HBoxContainer/Slot1" instance=ExtResource("4_nhu3n")]
 layout_mode = 2
 
-[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_760km")]
+[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/Slot1" instance=ExtResource("5_760km")]
 layout_mode = 2
+text = "Empty"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="Slot2" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("desription", "icon_holder")]
 layout_mode = 2
+script = ExtResource("4_xqrof")
+desription = NodePath("DescriptionText")
+icon_holder = NodePath("SelectableIconHolder")
 
-[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_xqrof")]
+[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/Slot2" instance=ExtResource("3_xqrof")]
 layout_mode = 2
 text = "SPELL 2"
 
-[node name="SelectableIconHolder" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("4_nhu3n")]
+[node name="SelectableIconHolder" parent="Panel/VBoxContainer/HBoxContainer/Slot2" instance=ExtResource("4_nhu3n")]
 layout_mode = 2
 
-[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("5_760km")]
+[node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/Slot2" instance=ExtResource("5_760km")]
 layout_mode = 2
+text = "Empty"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -84,15 +106,14 @@ alignment = 1
 [node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer3" instance=ExtResource("3_xqrof")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
+text = "Spell"
 
 [node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer3" instance=ExtResource("5_760km")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "nega neibeobg fierhigfer
-nfierwongewr
-gergerg
-gregergegergergerggergger
-gergergerg"
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 10
+text = "Equip spells and use them to shred
+your foes"
 
 [node name="Panel" type="Panel" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(480, 100)
@@ -120,6 +141,7 @@ layout_mode = 2
 
 [node name="SelectableIconHolder2" parent="Panel/VBoxContainer/Panel/GridContainer" instance=ExtResource("4_nhu3n")]
 layout_mode = 2
+focus_mode = 1
 
 [node name="SelectableIconHolder3" parent="Panel/VBoxContainer/Panel/GridContainer" instance=ExtResource("4_nhu3n")]
 layout_mode = 2
@@ -137,3 +159,4 @@ layout_mode = 2
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+script = ExtResource("9_nhu3n")

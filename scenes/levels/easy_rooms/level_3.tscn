@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=4 uid="uid://bx0dxr1ie40is"]
+[gd_scene load_steps=11 format=4 uid="uid://bx0dxr1ie40is"]
 
 [ext_resource type="Texture2D" uid="uid://ch4wxkmc4erdg" path="res://assets/sprites/environment/ProtoTileset/brick-ezgif.com-resize.png" id="1_44gv1"]
 [ext_resource type="PackedScene" uid="uid://c1imgcb2kat6k" path="res://scenes/player.tscn" id="2_0ljxa"]
 [ext_resource type="PackedScene" uid="uid://c835tnkc0eq4y" path="res://scenes/player_spawn_point.tscn" id="3_0ljxa"]
+[ext_resource type="PackedScene" uid="uid://dimdq1p3y55rx" path="res://scenes/Enemies/boar.tscn" id="5_6oxdg"]
 [ext_resource type="Script" uid="uid://bxdo1aib638bw" path="res://scripts/input_1.gd" id="5_ftfob"]
+[ext_resource type="PackedScene" uid="uid://tavdgovcp0ce" path="res://scenes/small_bat.tscn" id="6_pcjpj"]
+[ext_resource type="PackedScene" uid="uid://l4c0r8fp6n4c" path="res://scenes/Enemies/tree_man.tscn" id="7_37jl7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x42e6"]
 texture = ExtResource("1_44gv1")
@@ -62,3 +65,17 @@ script = ExtResource("5_ftfob")
 input_spawn_point = NodePath("../PlayerSpawnPoint4")
 transition_zone = NodePath("../Area2D2")
 metadata/_custom_type_script = "uid://bxdo1aib638bw"
+
+[node name="Boar" parent="." instance=ExtResource("5_6oxdg")]
+position = Vector2(347, 118)
+
+[node name="SmallBat" parent="." instance=ExtResource("6_pcjpj")]
+position = Vector2(169, 88)
+
+[node name="TreeMan" parent="." instance=ExtResource("7_37jl7")]
+
+[node name="TreeMan2" parent="." instance=ExtResource("7_37jl7")]
+position = Vector2(301, -37)
+
+[node name="TreeMan3" parent="." instance=ExtResource("7_37jl7")]
+position = Vector2(579, -7)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgjiirrjedtoj"]
+
+[ext_resource type="Script" uid="uid://d0pm81j521on5" path="res://scripts/simple_fading_label.gd" id="1_qvtg3"]
+[ext_resource type="Theme" uid="uid://du6ww74nmnyne" path="res://themes/default.tres" id="1_twc7u"]
+
+[node name="SimpleFadingLabel" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme = ExtResource("1_twc7u")
+text = "Negga"
+script = ExtResource("1_qvtg3")

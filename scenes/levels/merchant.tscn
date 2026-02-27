@@ -1,0 +1,142 @@
+[gd_scene load_steps=21 format=3 uid="uid://dahgx2lo1b8tf"]
+
+[ext_resource type="Texture2D" uid="uid://cojvynm145a5g" path="res://assets/sprites/environment/Merchant/Dialogue.png" id="1_ju45j"]
+[ext_resource type="Theme" uid="uid://du6ww74nmnyne" path="res://themes/default.tres" id="2_snyfm"]
+[ext_resource type="Script" uid="uid://dxc0gap6qdcp3" path="res://scripts/random_label.gd" id="3_ptot1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l04q"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_af0vs"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdstj"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l15w8"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4mxw"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8bdc"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0jqj"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbg10"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tq3ii"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0o83"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsb0u"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u8yh"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(1408, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y786t"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(1536, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouq8p"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(1664, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8yry"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(1792, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c323g"]
+atlas = ExtResource("1_ju45j")
+region = Rect2(1920, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e2xuy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3l04q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_af0vs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdstj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l15w8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4mxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8bdc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0jqj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbg10")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_tq3ii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0o83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsb0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0u8yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y786t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouq8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8yry")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_c323g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Merchant" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, -25)
+sprite_frames = SubResource("SpriteFrames_e2xuy")
+autoplay = "default"
+frame_progress = 0.135056
+
+[node name="Label" type="Label" parent="."]
+offset_left = -28.0
+offset_top = -69.6881
+offset_right = 26.0
+offset_bottom = -46.6881
+theme = ExtResource("2_snyfm")
+text = "Buy shi !"
+script = ExtResource("3_ptot1")

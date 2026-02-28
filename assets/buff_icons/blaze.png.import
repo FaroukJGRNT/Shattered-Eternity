@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqn7pvthi4ma0"
-path="res://.godot/imported/blaze.png-431df33ee9606aed3869a56ef3c9ff13.ctex"
+uid="uid://df4npygeqta13"
+path="res://.godot/imported/Blaze.png-473c73a35c7fb5e1bba53af48eeb6a97.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/buff_icons/blaze.png"
-dest_files=["res://.godot/imported/blaze.png-431df33ee9606aed3869a56ef3c9ff13.ctex"]
+source_file="res://assets/item_icons/Blaze.png"
+dest_files=["res://.godot/imported/Blaze.png-473c73a35c7fb5e1bba53af48eeb6a97.ctex"]
 
 [params]
 

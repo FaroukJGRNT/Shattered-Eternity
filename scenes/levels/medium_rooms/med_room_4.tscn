@@ -1,11 +1,16 @@
-[gd_scene load_steps=11 format=4 uid="uid://xgc14qdaotp8"]
+[gd_scene load_steps=16 format=4 uid="uid://xgc14qdaotp8"]
 
 [ext_resource type="Texture2D" uid="uid://ch4wxkmc4erdg" path="res://assets/sprites/environment/ProtoTileset/brick-ezgif.com-resize.png" id="1_ajylv"]
 [ext_resource type="Texture2D" uid="uid://bagi56mikemxk" path="res://assets/sprites/environment/ProtoTileset/alternative.png" id="2_1dj8q"]
 [ext_resource type="PackedScene" uid="uid://c1imgcb2kat6k" path="res://scenes/player.tscn" id="3_j4wwu"]
 [ext_resource type="PackedScene" uid="uid://c835tnkc0eq4y" path="res://scenes/player_spawn_point.tscn" id="4_kkw5l"]
 [ext_resource type="Script" uid="uid://bxdo1aib638bw" path="res://scripts/input_1.gd" id="5_betcj"]
-[ext_resource type="PackedScene" uid="uid://bytpxuqj075ac" path="res://scenes/levels/almana_tree.tscn" id="6_1dj8q"]
+[ext_resource type="PackedScene" uid="uid://dimdq1p3y55rx" path="res://scenes/Enemies/boar.tscn" id="7_dndbm"]
+[ext_resource type="PackedScene" uid="uid://tavdgovcp0ce" path="res://scenes/small_bat.tscn" id="8_f16ql"]
+[ext_resource type="PackedScene" uid="uid://l4c0r8fp6n4c" path="res://scenes/Enemies/tree_man.tscn" id="9_jevjd"]
+[ext_resource type="PackedScene" uid="uid://bb7tjs6gcrm6i" path="res://scenes/Enemies/guarding_tree_man.tscn" id="10_yppjb"]
+[ext_resource type="PackedScene" uid="uid://c2bky0b4fs84p" path="res://scenes/levels/booster.tscn" id="11_dndbm"]
+[ext_resource type="PackedScene" uid="uid://gx5s2fc7d8dp" path="res://scenes/Enemies/forest_spirit.tscn" id="11_f1m40"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_580r8"]
 texture = ExtResource("1_ajylv")
@@ -98,5 +103,26 @@ input_spawn_point = NodePath("../PlayerSpawnPoint3")
 transition_zone = NodePath("../Area2D3")
 metadata/_custom_type_script = "uid://bxdo1aib638bw"
 
-[node name="AlmanaTree" parent="." instance=ExtResource("6_1dj8q")]
-position = Vector2(1949, -241)
+[node name="Boar" parent="." instance=ExtResource("7_dndbm")]
+position = Vector2(-224, 116)
+
+[node name="SmallBat2" parent="." instance=ExtResource("8_f16ql")]
+position = Vector2(-56, 41)
+
+[node name="TreeMan" parent="." instance=ExtResource("9_jevjd")]
+position = Vector2(268, 50)
+
+[node name="GuardingTreeMan" parent="." instance=ExtResource("10_yppjb")]
+position = Vector2(781, -65)
+
+[node name="ForestSpirit2" parent="." instance=ExtResource("11_f1m40")]
+position = Vector2(1419, -222)
+
+[node name="TreeMan3" parent="." instance=ExtResource("9_jevjd")]
+position = Vector2(1707, -133)
+
+[node name="TreeMan4" parent="." instance=ExtResource("9_jevjd")]
+position = Vector2(1499, -128)
+
+[node name="Booster" parent="." instance=ExtResource("11_dndbm")]
+position = Vector2(1930, -223)

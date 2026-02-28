@@ -13,4 +13,6 @@ func chosen():
 func setup_labels():
 	subheading.text = buff.item_name
 	desription.text = buff.item_description
+	print("Setting up the middle label of ", self.name, " to ", desription.text)
+	print($"../Panel2/VBoxContainer2/DescriptionText2".text)
 	icon_holder.texture = buff.item_icon

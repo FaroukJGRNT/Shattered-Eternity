@@ -1,6 +1,6 @@
 [gd_scene load_steps=144 format=3 uid="uid://clblykkm6pbb5"]
 
-[ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/enemy_template.tscn" id="1_6wcm8"]
+[ext_resource type="PackedScene" uid="uid://ovmt6ccp1x55" path="res://scenes/Enemies/enemy_template.tscn" id="1_6wcm8"]
 [ext_resource type="Texture2D" uid="uid://dfd63b6ortn8k" path="res://assets/sprites/HugeTreeMan/huge_tree_death.png" id="2_ar82n"]
 [ext_resource type="Script" uid="uid://bsob55to4biir" path="res://scripts/huge_tree_man.gd" id="2_ywi2u"]
 [ext_resource type="Texture2D" uid="uid://r2kufturts72" path="res://assets/sprites/HugeTreeMan/huge_tree_guard_mid.png" id="3_fjeip"]
@@ -1025,7 +1025,7 @@ size = Vector2(72, 40)
 
 [node name="HugeTreeMan" instance=ExtResource("1_6wcm8")]
 script = ExtResource("2_ywi2u")
-max_life = 400
+max_life = 250
 
 [node name="EnemyAnimPlayer" parent="." index="0"]
 material = SubResource("ShaderMaterial_sb7sn")

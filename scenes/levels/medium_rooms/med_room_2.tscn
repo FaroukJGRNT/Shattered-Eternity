@@ -1,11 +1,13 @@
-[gd_scene load_steps=11 format=4 uid="uid://bjhfdmudmtshh"]
+[gd_scene load_steps=13 format=4 uid="uid://bjhfdmudmtshh"]
 
 [ext_resource type="Texture2D" uid="uid://ch4wxkmc4erdg" path="res://assets/sprites/environment/ProtoTileset/brick-ezgif.com-resize.png" id="1_h5bos"]
 [ext_resource type="Texture2D" uid="uid://bagi56mikemxk" path="res://assets/sprites/environment/ProtoTileset/alternative.png" id="2_kxnwe"]
 [ext_resource type="PackedScene" uid="uid://c1imgcb2kat6k" path="res://scenes/player.tscn" id="3_gaqrl"]
 [ext_resource type="PackedScene" uid="uid://c835tnkc0eq4y" path="res://scenes/player_spawn_point.tscn" id="4_v5bdn"]
 [ext_resource type="Script" uid="uid://bxdo1aib638bw" path="res://scripts/input_1.gd" id="5_oi757"]
-[ext_resource type="PackedScene" uid="uid://bytpxuqj075ac" path="res://scenes/levels/almana_tree.tscn" id="6_kxnwe"]
+[ext_resource type="PackedScene" uid="uid://gx5s2fc7d8dp" path="res://scenes/Enemies/forest_spirit.tscn" id="7_uun7j"]
+[ext_resource type="PackedScene" uid="uid://c2bky0b4fs84p" path="res://scenes/levels/booster.tscn" id="8_26rd7"]
+[ext_resource type="PackedScene" uid="uid://l4c0r8fp6n4c" path="res://scenes/Enemies/tree_man.tscn" id="9_mryxs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hmh8s"]
 texture = ExtResource("1_h5bos")
@@ -103,5 +105,20 @@ input_spawn_point = NodePath("../PlayerSpawnPoint3")
 transition_zone = NodePath("../Area2D3")
 metadata/_custom_type_script = "uid://bxdo1aib638bw"
 
-[node name="AlmanaTree" parent="." instance=ExtResource("6_kxnwe")]
-position = Vector2(391, -305)
+[node name="ForestSpirit" parent="." instance=ExtResource("7_uun7j")]
+position = Vector2(-169, 162)
+
+[node name="ForestSpirit2" parent="." instance=ExtResource("7_uun7j")]
+position = Vector2(-42, 133)
+
+[node name="ForestSpirit3" parent="." instance=ExtResource("7_uun7j")]
+position = Vector2(-541, -185)
+
+[node name="TreeMan3" parent="." instance=ExtResource("9_mryxs")]
+position = Vector2(-414, -97)
+
+[node name="TreeMan4" parent="." instance=ExtResource("9_mryxs")]
+position = Vector2(205, -232)
+
+[node name="Booster" parent="." instance=ExtResource("8_26rd7")]
+position = Vector2(441, -268)

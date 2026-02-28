@@ -18,3 +18,4 @@ theme = ExtResource("1_rcl1j")
 text = "Description Text"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2

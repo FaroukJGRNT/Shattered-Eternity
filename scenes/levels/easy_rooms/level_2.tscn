@@ -103,14 +103,8 @@ metadata/_custom_type_script = "uid://bxdo1aib638bw"
 [node name="TreeMan" parent="." instance=ExtResource("6_fo867")]
 position = Vector2(301, 149)
 
-[node name="TreeMan2" parent="." instance=ExtResource("6_fo867")]
-position = Vector2(179, 153)
-
 [node name="GuardingTreeMan" parent="." instance=ExtResource("7_xgpvb")]
 position = Vector2(-46, 149)
-
-[node name="GuardingTreeMan2" parent="." instance=ExtResource("7_xgpvb")]
-position = Vector2(582, 61)
 
 [node name="SmallBat" parent="." instance=ExtResource("8_vxc8r")]
 position = Vector2(664, -303)

@@ -16,17 +16,35 @@ func _ready() -> void:
 	if world_root:
 		call_deferred("generate_world")
 
+func set_active_recursive(node: Node, active: bool):
+	node.set_process(active)
+	node.set_physics_process(active)
+
+	node.set_process_input(active)
+	node.set_process_unhandled_input(active)
+	
+	for child in node.get_children():
+		set_active_recursive(child, active)
+
 var ui_mode = false
-var buff_section_scene : PackedScene = load("res://ui/molecules/buffs_section.tscn")
+var spell_equip_scene : PackedScene = load("res://ui/molecules/spell_equip.tscn")
 
 func _process(delta: float) -> void:
 	if transitioning:
 		trans_timer -= delta
 		if trans_timer <= 0:
 			transitioning = false
-	if Input.is_action_just_pressed("inventory") and not ui_mode:
-		var modal : BuffSection = ui_manager.show_modal(buff_section_scene)
-		ui_mode = true
+
+	#var player = get_tree().get_first_node_in_group("Player")
+#
+	#if Input.is_action_just_pressed("inventory") and not ui_mode:
+		#var modal = ui_manager.show_modal(spell_equip_scene)
+		#ui_mode = true
+	#if ui_mode and player:
+		#print("Blocked")
+		#set_active_recursive(player, false)
+	#elif not ui_mode and player:
+		#set_active_recursive(player, true)
 
 func hit_freeze(duration := 0.08, scale := 0.1) -> void:
 	Engine.time_scale = scale
@@ -246,7 +264,7 @@ func generate_world():
 	link_rooms(last_level, rest_level)
 	# Lap 2
 	last_level = connect_outputs(rest_level, lap_length)
-	rest_level = merchant_room.instantiate()
+	rest_level = rest_room.instantiate()
 	link_rooms(last_level, rest_level)
 	# Lap 3
 	last_level = connect_outputs(rest_level, lap_length)

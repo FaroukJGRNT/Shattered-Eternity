@@ -1,154 +1,105 @@
-[gd_scene load_steps=29 format=3 uid="uid://bjxpxeg04tsat"]
+[gd_scene load_steps=29 format=3 uid="uid://c2bky0b4fs84p"]
 
-[ext_resource type="PackedScene" uid="uid://i0dxdimbmvdn" path="res://scenes/levels/interactible_level_object.tscn" id="1_d4n4a"]
-[ext_resource type="Texture2D" uid="uid://b8wv2avopdpgs" path="res://assets/sprites/environment/SpellCrystal/crystal_dark_32x32_24f_20d.png" id="2_bbtd6"]
-
-[sub_resource type="GDScript" id="GDScript_d4n4a"]
-resource_local_to_scene = true
-script/source = "extends InteractibleLevelObject
-
-var spell_to_give : SpellItem
-var released := false
-
-func _ready() -> void:
-	modulate.a = 0.4
-	$HelpOverheadText.the_text = \"Kill all enemies first!\"
-	# Randomly take a spell
-	# First choose what element
-	var elem = Toolbox.roll_element()
-	# Then choose which spell
-	if elem == \"fire\":
-		$AnimatedSprite2D.modulate = Color.hex(0xff6a00ff)
-		spell_to_give = Toolbox.fire_spells[randi_range(0, len(Toolbox.fire_spells) - 1)]
-	elif elem == \"ice\":
-		$AnimatedSprite2D.modulate = Color.hex(0x00eaffff)
-		spell_to_give = Toolbox.ice_spells[randi_range(0, len(Toolbox.ice_spells) - 1)]
-	elif elem == \"thunder\":
-		$AnimatedSprite2D.modulate = Color.hex(0xf2ff00ff)
-		spell_to_give = Toolbox.thunder_spells[randi_range(0, len(Toolbox.thunder_spells) - 1)]
-
-func _process(delta: float) -> void:
-	if active:
-		$HelpOverheadText.global_position = player_ref.global_position + offset
-		if Input.is_action_just_pressed(interaction_action):
-			interact()
-	
-	if len(get_tree().get_nodes_in_group(\"Enemy\")) == 0:
-		released = true
-		$HelpOverheadText.the_text = \"Interact\"
-		modulate.a = 1.0
-
-var info_modal : PackedScene = load(\"res://ui/molecules/new_item_modal.tscn\")
-
-
-func interact():
-	if not interacted and released:
-		interacted = true
-		player_ref.give_item(spell_to_give, true)
-		$AnimatedSprite2D.play(\"destruction\")
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if $AnimatedSprite2D.animation == \"destruction\":
-		queue_free()
-"
+[ext_resource type="Script" uid="uid://m7uj3eaof2br" path="res://scripts/booster.gd" id="1_rqnlb"]
+[ext_resource type="Texture2D" uid="uid://b8wv2avopdpgs" path="res://assets/sprites/environment/SpellCrystal/crystal_dark_32x32_24f_20d.png" id="2_123qj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7tmfw"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lva4t"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b6ijw"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nd4b5"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1pq1e"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nr72m"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t7hdx"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o88us"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(224, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rq5uc"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(256, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ve666"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(288, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ordjl"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(320, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nd67t"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(352, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dweqa"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(384, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p41fg"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(416, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bxw7c"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(448, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yt4bk"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(480, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4t7ky"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(512, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7r3m"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(544, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqpn1"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(576, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mhx5y"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(608, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_824hg"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(640, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tdmlu"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(672, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_415s0"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(704, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0wkg3"]
-atlas = ExtResource("2_bbtd6")
+atlas = ExtResource("2_123qj")
 region = Rect2(736, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_bh5bp"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ckwfl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -225,30 +176,27 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7tmfw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7tmfw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7tmfw")
-}],
-"loop": false,
-"name": &"destruction",
 "speed": 5.0
 }]
 
-[node name="SpellGiver" instance=ExtResource("1_d4n4a")]
-script = SubResource("GDScript_d4n4a")
+[sub_resource type="CircleShape2D" id="CircleShape2D_vsa1n"]
+radius = 65.3758
 
-[node name="AnimatedSprite2D" parent="." index="0"]
-modulate = Color(1, 0.415686, 0, 1)
-scale = Vector2(2.5, 2.5)
-sprite_frames = SubResource("SpriteFrames_bh5bp")
+[node name="Booster" type="Node2D"]
+script = ExtResource("1_rqnlb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_ckwfl")
 autoplay = "default"
+frame_progress = 0.509485
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_vsa1n")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

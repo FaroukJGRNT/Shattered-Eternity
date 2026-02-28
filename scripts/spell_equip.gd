@@ -113,13 +113,13 @@ func _process(delta: float) -> void:
 		if focused_choice == $Panel/VBoxContainer/HBoxContainer/Slot1/SelectableIconHolder:
 			var spell = player_ref.equipped_spell1
 			if spell:
-				$Panel/VBoxContainer/HBoxContainer/VBoxContainer3/SubHeading.text = spell.item_name
-				$Panel/VBoxContainer/HBoxContainer/VBoxContainer3/DescriptionText.text = spell.item_description
+				$Panel/VBoxContainer/HBoxContainer/VBoxContainer3/SubHeading.text = spell.item_ref.item_name
+				$Panel/VBoxContainer/HBoxContainer/VBoxContainer3/DescriptionText.text = spell.item_ref.item_description
 		elif focused_choice == $Panel/VBoxContainer/HBoxContainer/Slot2/SelectableIconHolder:
 			var spell = player_ref.equipped_spell2
 			if spell:
-				$Panel/VBoxContainer/HBoxContainer/VBoxContainer3/SubHeading.text = spell.item_name
-				$Panel/VBoxContainer/HBoxContainer/VBoxContainer3/DescriptionText.text = spell.item_description
+				$Panel/VBoxContainer/HBoxContainer/VBoxContainer3/SubHeading.text = spell.item_ref.item_name
+				$Panel/VBoxContainer/HBoxContainer/VBoxContainer3/DescriptionText.text = spell.item_ref.item_description
 		else:
 			var spell : SpellItem = available_spells[icons.find(focused_choice)]
 			if spell:

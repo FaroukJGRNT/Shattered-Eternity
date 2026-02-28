@@ -122,13 +122,10 @@ size_flags_horizontal = 4
 layout_mode = 2
 
 [node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_8pyip")]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-text = "Description of the
-buff selcted
-For example, gives you
-lowkey immprtality
-and rights of
-a white person"
+text = "
+This game is actually lowkey fire"
 
 [node name="ConfirmationButton" parent="Panel/VBoxContainer" instance=ExtResource("6_e36uo")]
 custom_minimum_size = Vector2(150, 0)

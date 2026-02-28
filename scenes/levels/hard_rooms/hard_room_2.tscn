@@ -1,14 +1,12 @@
-[gd_scene load_steps=17 format=4 uid="uid://b0qux0oty0660"]
+[gd_scene load_steps=15 format=4 uid="uid://b0qux0oty0660"]
 
 [ext_resource type="Texture2D" uid="uid://ch4wxkmc4erdg" path="res://assets/sprites/environment/ProtoTileset/brick-ezgif.com-resize.png" id="1_bw3lt"]
 [ext_resource type="Texture2D" uid="uid://bagi56mikemxk" path="res://assets/sprites/environment/ProtoTileset/alternative.png" id="2_oq4n6"]
 [ext_resource type="PackedScene" uid="uid://c1imgcb2kat6k" path="res://scenes/player.tscn" id="3_2af34"]
 [ext_resource type="PackedScene" uid="uid://c835tnkc0eq4y" path="res://scenes/player_spawn_point.tscn" id="4_3sr6v"]
 [ext_resource type="Script" uid="uid://bxdo1aib638bw" path="res://scripts/input_1.gd" id="5_qphv0"]
-[ext_resource type="PackedScene" uid="uid://bytpxuqj075ac" path="res://scenes/levels/almana_tree.tscn" id="6_2af34"]
-[ext_resource type="PackedScene" uid="uid://bjxpxeg04tsat" path="res://scenes/levels/spell_giver.tscn" id="7_3sr6v"]
-[ext_resource type="PackedScene" uid="uid://clblykkm6pbb5" path="res://scenes/Enemies/huge_tree_man.tscn" id="8_nfjaa"]
 [ext_resource type="PackedScene" uid="uid://bb7tjs6gcrm6i" path="res://scenes/Enemies/guarding_tree_man.tscn" id="9_u8kmk"]
+[ext_resource type="PackedScene" uid="uid://c2bky0b4fs84p" path="res://scenes/levels/booster.tscn" id="10_hiucv"]
 [ext_resource type="PackedScene" uid="uid://dimdq1p3y55rx" path="res://scenes/Enemies/boar.tscn" id="10_i8f4k"]
 [ext_resource type="PackedScene" uid="uid://tavdgovcp0ce" path="res://scenes/small_bat.tscn" id="11_6x4j4"]
 [ext_resource type="PackedScene" uid="uid://l4c0r8fp6n4c" path="res://scenes/Enemies/tree_man.tscn" id="12_2ykdf"]
@@ -105,23 +103,11 @@ input_spawn_point = NodePath("../PlayerSpawnPoint3")
 transition_zone = NodePath("../Area2D3")
 metadata/_custom_type_script = "uid://bxdo1aib638bw"
 
-[node name="AlmanaTree" parent="." instance=ExtResource("6_2af34")]
-position = Vector2(-417, -176)
-
-[node name="SpellGiver" parent="." instance=ExtResource("7_3sr6v")]
-position = Vector2(1711, -90)
-
-[node name="HugeTreeMan" parent="." instance=ExtResource("8_nfjaa")]
-position = Vector2(991, -156)
-
 [node name="GuardingTreeMan" parent="." instance=ExtResource("9_u8kmk")]
 position = Vector2(822, -129)
 
 [node name="GuardingTreeMan2" parent="." instance=ExtResource("9_u8kmk")]
 position = Vector2(1155, -130)
-
-[node name="Boar" parent="." instance=ExtResource("10_i8f4k")]
-position = Vector2(315, 182)
 
 [node name="Boar2" parent="." instance=ExtResource("10_i8f4k")]
 position = Vector2(-175, 183)
@@ -132,9 +118,6 @@ position = Vector2(-81, -137)
 [node name="SmallBat2" parent="." instance=ExtResource("11_6x4j4")]
 position = Vector2(378, -110)
 
-[node name="TreeMan" parent="." instance=ExtResource("12_2ykdf")]
-position = Vector2(1689, 58)
-
 [node name="TreeMan2" parent="." instance=ExtResource("12_2ykdf")]
 position = Vector2(1947, 58)
 
@@ -143,3 +126,6 @@ position = Vector2(873, -180)
 
 [node name="SmallBat4" parent="." instance=ExtResource("11_6x4j4")]
 position = Vector2(1123, -183)
+
+[node name="Booster" parent="." instance=ExtResource("10_hiucv")]
+position = Vector2(1709, -64)

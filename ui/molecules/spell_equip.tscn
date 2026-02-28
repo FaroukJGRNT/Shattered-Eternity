@@ -109,6 +109,7 @@ theme_override_font_sizes/font_size = 20
 text = "Spell"
 
 [node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/VBoxContainer3" instance=ExtResource("5_760km")]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 10

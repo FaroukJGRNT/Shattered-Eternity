@@ -9,21 +9,57 @@ subheading = NodePath("VBoxContainer/SubHeading")
 desription = NodePath("VBoxContainer/DescriptionText2")
 icon_holder = NodePath("VBoxContainer/IconHolder")
 
+[node name="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer/Panel" index="0"]
+theme_override_constants/separation = 12
+alignment = 1
+
 [node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer" index="0"]
 text = "Elemental"
 
+[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer" index="1"]
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+
+[node name="DescriptionText2" parent="Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer" index="3"]
+custom_minimum_size = Vector2(80, 60)
+theme_override_font_sizes/font_size = 12
+
 [node name="Panel2" parent="Panel/VBoxContainer/HBoxContainer" index="1" node_paths=PackedStringArray("subheading", "desription", "icon_holder")]
 subheading = NodePath("VBoxContainer2/SubHeading")
-desription = NodePath("../Panel/VBoxContainer/DescriptionText2")
+desription = NodePath("VBoxContainer2/DescriptionText2")
 icon_holder = NodePath("VBoxContainer2/IconHolder")
+
+[node name="VBoxContainer2" parent="Panel/VBoxContainer/HBoxContainer/Panel2" index="0"]
+theme_override_constants/separation = 12
+alignment = 1
 
 [node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/Panel2/VBoxContainer2" index="0"]
 text = "Physical"
+
+[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/Panel2/VBoxContainer2" index="1"]
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+
+[node name="DescriptionText2" parent="Panel/VBoxContainer/HBoxContainer/Panel2/VBoxContainer2" index="3"]
+custom_minimum_size = Vector2(80, 60)
+theme_override_font_sizes/font_size = 12
 
 [node name="Panel3" parent="Panel/VBoxContainer/HBoxContainer" index="2" node_paths=PackedStringArray("subheading", "desription", "icon_holder")]
 subheading = NodePath("VBoxContainer/SubHeading")
 desription = NodePath("VBoxContainer/DescriptionText2")
 icon_holder = NodePath("VBoxContainer/IconHolder")
 
+[node name="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer/Panel3" index="0"]
+theme_override_constants/separation = 12
+alignment = 1
+
 [node name="DescriptionText" parent="Panel/VBoxContainer/HBoxContainer/Panel3/VBoxContainer" index="0"]
 text = "Situational"
+
+[node name="SubHeading" parent="Panel/VBoxContainer/HBoxContainer/Panel3/VBoxContainer" index="1"]
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+
+[node name="DescriptionText2" parent="Panel/VBoxContainer/HBoxContainer/Panel3/VBoxContainer" index="3"]
+custom_minimum_size = Vector2(80, 60)
+theme_override_font_sizes/font_size = 12

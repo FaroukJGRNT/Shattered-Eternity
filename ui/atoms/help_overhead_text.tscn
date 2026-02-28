@@ -34,3 +34,4 @@ theme_override_constants/shadow_offset_x = 0
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 12
 text = "Interact"
+autowrap_mode = 0

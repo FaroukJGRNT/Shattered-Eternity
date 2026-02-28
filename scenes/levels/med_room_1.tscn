@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://d17cwnstq47k2"]
+[gd_scene load_steps=11 format=4 uid="uid://ds87w80dwpkn0"]
 
 [ext_resource type="Texture2D" uid="uid://ch4wxkmc4erdg" path="res://assets/sprites/environment/ProtoTileset/brick-ezgif.com-resize.png" id="1_215in"]
 [ext_resource type="Texture2D" uid="uid://bagi56mikemxk" path="res://assets/sprites/environment/ProtoTileset/alternative.png" id="2_lfvvv"]

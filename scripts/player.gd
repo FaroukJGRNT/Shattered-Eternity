@@ -69,7 +69,7 @@ func _ready() -> void:
 	poise_type = Poises.PLAYER
 	max_life = 200
 	life = max_life
-	attack = 10
+	attack = 16
 	defense = 10
 	thunder_res = 10.0
 	fire_res = 10.0
@@ -79,12 +79,12 @@ func _ready() -> void:
 @export var base_reson_decay := 2.0
 @export var reson_decay_accel := 1.0
 var reson_decay := 2.0
-var attack_reson_boost := 5.0
-var kill_reson_boost := 50.0
-var parry_reson_boost := 80.0
-var guard_break_reson_boost := 80.0
-var interruption_reson_boost := 80.0
-var dodge_reson_boost := 25.0
+var attack_reson_boost := 3.0
+var kill_reson_boost := 20.0
+var parry_reson_boost := 40.0
+var guard_break_reson_boost := 40.0
+var interruption_reson_boost := 40.0
+var dodge_reson_boost := 12.0
 
 var hit_reson_loss := 75.0
 
@@ -149,6 +149,11 @@ func die():
 func run_cooldowns(delta):
 	reson_decay += reson_decay_accel * delta
 	resonance_value = max(0, resonance_value - reson_decay * delta)
+	
+	if resonance_value >= 100:
+		$Sprite2D.visible = true
+	else:
+		$Sprite2D.visible = false
 
 	if on_dash_cooldown:
 		dash_cooldown -= delta
@@ -199,11 +204,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		change_state("airborne")
 
-	if Input.is_action_just_pressed("change_weapon") and change_weapon_timer <= 0:
-		change_weapon_timer = change_weapon_cooldown
-		specialVFXPlayer.play_vfx("weapon_change")
-		specialVFXPlayer.rotation_degrees = randf_range(0, 360)
-		current_weapon = (int(current_weapon) + 1) % 3
+	#if Input.is_action_just_pressed("change_weapon") and change_weapon_timer <= 0:
+		#change_weapon_timer = change_weapon_cooldown
+		#specialVFXPlayer.play_vfx("weapon_change")
+		#specialVFXPlayer.rotation_degrees = randf_range(0, 360)
+		#current_weapon = (int(current_weapon) + 1) % 3
 
 	move_and_slide()
 
